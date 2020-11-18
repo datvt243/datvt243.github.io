@@ -98,4 +98,7 @@ export default {
 <style lang="sass" scoped>
 .personal-skills
   margin-bottom: 60px
+@media (max-width: 320px)
+  hr
+    margin: 10px 0
 </style>

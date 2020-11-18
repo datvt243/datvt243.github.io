@@ -43,7 +43,11 @@ export default {
       margin-bottom: 30px
       padding-bottom: 30px
       border-bottom: 1px solid rgba(255,255,255,.1)
-  @media (max-width: 991px)
+  @media (max-width: 576px)
     &-wrapper
-      width: 270px
+      width: 240px
+  @media (max-width: 320px)
+    &-wrapper
+      width: 200px
+      padding: 10px 0
 </style>

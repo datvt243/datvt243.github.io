@@ -80,4 +80,7 @@ export default {
     right: 0
     transform: translateY(-50%)
     color: #000
+  @media (max-width: 576px)
+    .inner
+      width: 90%
 </style>

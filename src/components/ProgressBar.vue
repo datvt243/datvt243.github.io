@@ -38,6 +38,7 @@ export default {
     font-weight: 700
     color: #fff
     letter-spacing: .05em
+    line-height: 1.4
     text-transform: lowercase
   .line
     position: relative

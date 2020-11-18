@@ -23,4 +23,7 @@ export default {
   display: inline-block
   color: #888
   padding: 10px
+@media (max-width: 480px)
+  .download-cv
+    font-size: 10px
 </style>

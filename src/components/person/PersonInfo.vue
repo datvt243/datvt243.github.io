@@ -78,4 +78,7 @@ export default {
         font-size: 24px
       .job
         font-size: 16px
+  @media (max-width: 320px)
+    &-info
+      width: 90%
 </style>

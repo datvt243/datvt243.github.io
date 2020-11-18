@@ -57,4 +57,8 @@ export default {
         transform: scale(1.2)
       &:hover
         opacity: 1
+  @media (max-width: 320px)
+    &-link
+      .icon-svg
+        font-size: 22px
 </style>

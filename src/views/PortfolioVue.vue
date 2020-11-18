@@ -20,7 +20,7 @@
                     <span>
                       {{ item.heading }}
                     </span>
-                    <span>
+                    <span class="ico">
                       <BaseIconExternalLink />
                     </span>
                   </div>
@@ -47,3 +47,11 @@ export default {
   name: "PortfolioVue"
 };
 </script>
+
+<style lang="sass" scoped>
+.ico
+  line-height: 0
+.portfolio-card
+  &:not(:last-child)
+      margin-bottom: 10px
+</style>

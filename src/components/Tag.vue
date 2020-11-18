@@ -38,4 +38,7 @@ export default {
   .icon, .text
     display: inline-block
     vertical-align: middle
+  @media (max-width: 576px)
+    font-size: 12px
+    padding: 4px 10px
 </style>
