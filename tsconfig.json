@@ -1,0 +1,13 @@
+{
+    // https://nuxt.com/docs/guide/concepts/typescript
+    "extends": "./.nuxt/tsconfig.json",
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2017",
+        "types": ["@vue/runtime-core"]
+        /* "baseUrl": ".",
+        "paths": {
+            "#app": ["./node_modules/nuxt/dist/app"]
+        } */
+    }
+}
