@@ -12,6 +12,34 @@ const menu = [
         page: 'Contact',
         link: '/contact',
     },
+    {
+        page: 'Static',
+        link: '/static',
+    },
+    {
+        page: 'SSR',
+        link: '/ssr',
+    },
+    {
+        page: 'SSR false',
+        link: '/ssr-false',
+    },
+    {
+        page: 'SWR',
+        link: '/swr',
+    },
+    {
+        page: 'SWR 3000',
+        link: '/swr-3000',
+    },
+    {
+        page: 'ISR',
+        link: '/isr',
+    },
+    {
+        page: 'ISR 3000',
+        link: '/isr-3000',
+    },
 ];
 </script>
 

@@ -38,5 +38,28 @@ export default defineNuxtConfig({
         '/': { prerender: true },
         '/blogs': { isr: 60 },
         '/blogs/**': { isr: true },
+
+        '/static': {
+            static: true,
+        },
+        '/ssr': {
+            ssr: true,
+        },
+        '/ssr-false': {
+            ssr: false,
+        },
+
+        '/swr': {
+            swr: true,
+        },
+        '/swr-3000': {
+            swr: 10,
+        },
+        '/isr': {
+            isr: true,
+        },
+        '/isr-3000': {
+            isr: 10,
+        },
     },
 });
