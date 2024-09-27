@@ -29,9 +29,14 @@ export default defineNuxtConfig({
         typeCheck: true,
     },
 
-    nitro: {
+    /* nitro: {
         prerender: {
             routes: ['/'],
         },
+    }, */
+    routeRules: {
+        '/': { prerender: true },
+        '/blogs': { isr: 60 },
+        '/blogs/**': { isr: true },
     },
 });

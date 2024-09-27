@@ -6,5 +6,5 @@ export interface APIFormatResponse<T> {
     status: boolean;
     message: string;
     errors: string[];
-    data: T[] | null;
+    data: T | null;
 }

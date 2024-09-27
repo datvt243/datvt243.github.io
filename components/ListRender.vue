@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
     status: 'idle' | 'pending' | 'success' | 'error';
-    data: Record<string, any>[];
+    data: Record<string, any>[] | null;
     message?: string;
 }>();
 </script>
@@ -12,7 +12,7 @@ const props = defineProps<{
             <p>loading ...</p>
         </template>
         <template v-else>
-            <ul v-if="props.data.length" class="list">
+            <ul v-if="props.data?.length" class="list">
                 <slot></slot>
             </ul>
             <div v-else class="no-data">

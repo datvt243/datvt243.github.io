@@ -5,9 +5,9 @@ definePageMeta({
     layout: 'default',
 });
 
-const { data, error, status } = useFetch<APIFormatResponse<Post>>('/api/blogs/posts');
+const { data, error, status } = useFetch<APIFormatResponse<Post[]>>('/api/blogs/posts');
 
-const blogs = computed<Post[]>(() => data.value?.data || []);
+const blogs = computed(() => data.value?.data || null);
 </script>
 
 <template>

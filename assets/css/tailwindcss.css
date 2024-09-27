@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.post-content {
+    position: relative;
+}
+.post-content > * {
+    margin-bottom: 1rem;
+}
