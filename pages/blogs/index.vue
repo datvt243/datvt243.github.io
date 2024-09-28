@@ -27,6 +27,11 @@ const blogs = computed(() => data.value?.data || null);
                     </NuxtLink>
                 </li>
             </template>
+            <template #loading>
+                <li v-for="i in 3" :key="i">
+                    <PostLoading />
+                </li>
+            </template>
         </ListRender>
     </div>
 </template>
