@@ -2,6 +2,8 @@
 definePageMeta({
     layout: 'default',
 });
+
+throw new Error('nice error');
 </script>
 
 <template>

@@ -13,7 +13,7 @@ const fullName = computed(() => {
 <template>
     <div class="resume-information mb-8">
         <div class="flex gap-8 items-center">
-            <NuxtImg src="Avatar.png" width="250" />
+            <!-- <NuxtImg src="Avatar.png" width="250" /> -->
             <div class="clearfix">
                 <h1 class="text-3xl font-bold underline uppercase">Hello world!</h1>
                 <p>Resume Information</p>
