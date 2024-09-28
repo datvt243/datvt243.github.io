@@ -36,10 +36,11 @@ export default defineNuxtConfig({
     }, */
     routeRules: {
         '/': { prerender: true },
+        '/contact': { prerender: true },
         '/blogs': { isr: 60 },
         '/blogs/**': { isr: true },
 
-        '/static': {
+        /* '/static': {
             static: true,
         },
         '/ssr': {
@@ -60,6 +61,6 @@ export default defineNuxtConfig({
         },
         '/isr-3000': {
             isr: 10,
-        },
+        }, */
     },
 });

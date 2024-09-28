@@ -14,7 +14,11 @@ export default {
             center: true,
             padding: '10px',
         },
-        extend: {},
+        extend: {
+            colors: {
+                pink: '#ec4899',
+            },
+        },
     },
     plugins: [],
 };

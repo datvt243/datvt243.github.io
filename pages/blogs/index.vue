@@ -2,7 +2,7 @@
 import type { APIFormatResponse, Post } from '@/types/index';
 
 definePageMeta({
-    layout: 'default',
+    layout: 'blog',
 });
 
 const { data, error, status } = useFetch<APIFormatResponse<Post[]>>('/api/blogs/posts');
@@ -12,13 +12,18 @@ const blogs = computed(() => data.value?.data || null);
 
 <template>
     <div class="container">
-        <h1 class="text-3xl font-bold underline">Page Blogs</h1>
+        <div class="page-head">
+            <BaseHeading :text="'Blog'" />
+            <p>Articles, tutorials, snippets, rants, and everything else.</p>
+        </div>
+        <hr class="my-4" />
 
         <ListRender :status="status" :data="blogs">
             <template #default>
-                <li v-for="post in blogs" :key="post._id" class="p-4 my-2 border rounded-lg">
+                <li v-for="post in blogs" :key="post._id" class="p-4 my-4 border rounded-lg">
                     <NuxtLink :to="`blogs/${post._id}`">
-                        {{ post.title }}
+                        <!-- {{ post.title }} -->
+                        <PostItem :model-value="post" />
                     </NuxtLink>
                 </li>
             </template>

@@ -12,20 +12,8 @@ definePageMeta({
     },
 });
 
-const { data } = await useFetch<APIFormatResponse<Post>>(
-    `/api/blogs/detail/${id}`,
-    /* {
-        params: { id: id},
-        watch: [id]
-    } */
-);
+const { data } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id}`);
 
-/* const { data, status, error } = await useAsyncFetchncData<APIFormatResponse<Post>>(
-    `post-detail-${id}`,
-    () => $fetch(`/api/blogs/detail/${id}`),
-    
-   
-); */
 const postDetail = computed<Post>(() => {
     return data.value?.data as Post;
 });
@@ -33,10 +21,7 @@ const postDetail = computed<Post>(() => {
 
 <template>
     <div class="container">
-        <PostContent :model-value="postDetail" />
-
-        <PostAuthor />
-
+        <PostDetail :model-value="postDetail" />
         <PostCommentForm />
     </div>
 </template>

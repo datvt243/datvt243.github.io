@@ -1,46 +1,5 @@
 <script setup lang="ts">
-const menu = [
-    {
-        page: 'Resume',
-        link: '/',
-    },
-    {
-        page: 'Blogs',
-        link: '/blogs',
-    },
-    {
-        page: 'Contact',
-        link: '/contact',
-    },
-    {
-        page: 'Static',
-        link: '/static',
-    },
-    {
-        page: 'SSR',
-        link: '/ssr',
-    },
-    {
-        page: 'SSR false',
-        link: '/ssr-false',
-    },
-    {
-        page: 'SWR',
-        link: '/swr',
-    },
-    {
-        page: 'SWR 3000',
-        link: '/swr-3000',
-    },
-    {
-        page: 'ISR',
-        link: '/isr',
-    },
-    {
-        page: 'ISR 3000',
-        link: '/isr-3000',
-    },
-];
+const { AppHeading, menu = [] } = useAppConfig();
 </script>
 
 <template>
@@ -50,16 +9,12 @@ const menu = [
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <NuxtLink to="/" class="flex items-center">
                         <span class="text-white self-center text-xl font-semibold whitespace-nowrap">
-                            Hello World
+                            {{ AppHeading }}
                         </span>
                     </NuxtLink>
                     <div class="col-right flex items-center justify-end">
                         <div class="flex items-center lg:order-2">
-                            <a
-                                href="#"
-                                class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 bg-blue-600"
-                                >Log in</a
-                            >
+                            <a href="#" class="btn"> Log in </a>
 
                             <button
                                 data-collapse-toggle="mobile-menu-2"

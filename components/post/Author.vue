@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 my-8 border rounded-md">
+    <div class="p-4 border rounded-md">
         <address class="flex items-center m-0 not-italic">
             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                 <img
