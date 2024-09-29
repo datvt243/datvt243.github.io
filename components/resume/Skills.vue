@@ -63,7 +63,7 @@ const SupSkills = defineComponent(
             <ul class="list items-center space-y-4">
                 <li class="flex" v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`">
                     <span class="font-bold pr-2 capitalize">{{ _key }}: </span>
-                    <ul class="flex">
+                    <ul class="flex flex-wrap">
                         <li v-for="(val, i) of _val" :key="`sub-skill-${i}`" class="pr-2">
                             <SupSkills :model-value="val" />
                         </li>

@@ -9,6 +9,8 @@ export default defineNuxtConfig({
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
         },
+        layoutTransition: { name: 'layout', mode: 'out-in' },
+        pageTransition: { name: 'page', mode: 'out-in' },
     },
 
     postcss: {
@@ -19,7 +21,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {},
 
-    css: ['~/assets/css/tailwindcss.css'],
+    css: ['~/assets/css/tailwindcss.css', '~/assets/css/styles.css'],
     modules: ['@nuxt/image', '@pinia/nuxt', 'nuxt-feather-icons'],
     typescript: {
         typeCheck: true,

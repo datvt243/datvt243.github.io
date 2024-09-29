@@ -21,6 +21,10 @@ export const useResumeStore = defineStore('resume', {
                 introduction,
             };
         },
+        contact({ resume }) {
+            const { phone, email, address } = resume;
+            return { phone, email, address };
+        },
         generalInformation({ resume: { generalInformation } }) {
             return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation;
         },

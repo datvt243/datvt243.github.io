@@ -8,8 +8,8 @@ const educations = computed(() => store.educations);
 </script>
 
 <template>
-    <section class="section-educations">
-        <div class="container-block !pt-0">
+    <section class="section-educations bg-opacity-5 bg-green-700">
+        <div class="container-block">
             <BaseHeading text="Học vấn" />
             <ul class="list">
                 <li v-for="(el, index) in educations" :key="el._id || index">

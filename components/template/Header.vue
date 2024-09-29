@@ -8,9 +8,10 @@ const route = useRoute();
         <div class="mx-auto max-w-screen-lg px-3 py-6">
             <nav class="border-gray-200 rounded-lg">
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <NuxtLink to="/" class="flex items-center">
+                    <NuxtLink to="/" class="flex items-center space-x-3">
+                        <NuxtImg src="logo.png" :title="AppHeading" width="30" />
                         <span
-                            class="text-white self-center text-3xl font-bold tracking-wide whitespace-nowrap uppercase"
+                            class="text-white hover:text-pink transition-colors self-center text-xl font-bold tracking-wide whitespace-nowrap uppercase"
                         >
                             {{ AppHeading }}
                         </span>
@@ -18,7 +19,7 @@ const route = useRoute();
                     <div class="col-right flex items-center justify-end">
                         <div class="flex items-center lg:order-2">
                             <template v-if="['/blogs'].includes(route.path)">
-                                <a href="#" class="btn"> Log in </a>
+                                <a href="#" class="btn btn-primary"> Log in </a>
                             </template>
 
                             <button
@@ -63,7 +64,7 @@ const route = useRoute();
                                 <li v-for="(route, index) in menuPrimary" :key="`route-${index}`">
                                     <NuxtLink
                                         :to="route.link"
-                                        class="inline-block uppercase tracking-wide py-2 px-2 text-white font-semibold rounded hover:text-pink transition-colors"
+                                        class="inline-block uppercase tracking-widest py-2 px-2 text-white font-semibold rounded hover:text-pink transition-colors"
                                     >
                                         <span>{{ route.page }}</span>
                                     </NuxtLink>

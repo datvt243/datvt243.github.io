@@ -23,7 +23,7 @@ watch(isLoading, () => {
             <p v-else class="p-8">loading ...</p>
         </template>
         <template v-else>
-            <ul v-if="props.data?.length" class="list">
+            <ul v-if="props.data?.length" class="list space-y-5">
                 <slot></slot>
             </ul>
             <div v-else class="no-data">

@@ -12,11 +12,12 @@ export default {
     theme: {
         container: {
             center: true,
-            padding: '10px',
+            // padding: '10px',
         },
         extend: {
             colors: {
                 pink: '#ec4899',
+                darkness: '#333333',
             },
             container: {
                 block: {},

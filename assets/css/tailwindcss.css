@@ -2,15 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.post-content {
-    position: relative;
-}
-.post-content > * {
-    margin-bottom: 1rem;
+.btn {
+    @apply inline-block transition-colors only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2 tracking-widest font-bold;
 }
 
-.btn {
-    @apply inline-block transition-colors bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2;
+.btn-base {
+    @apply bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md;
+}
+
+.btn-primary {
+    @apply bg-pink text-white hover:bg-opacity-70 rounded-full;
 }
 
 .btn-2 {

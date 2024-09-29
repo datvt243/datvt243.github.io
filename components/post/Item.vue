@@ -19,7 +19,7 @@ const formatDate = computed<string>(() => {
 <template>
     <article class="flex flex-col space-y-2 xl:space-y-0">
         <dl class="flex items-center text-base font-medium text-gray-500 dark:text-gray-400 mb-2">
-            <dt class="pr-1"><CalendarIcon size="1x" /></dt>
+            <dt class="pr-1"></dt>
             <dd class="leading-6">
                 <time :datetime="formatDate">
                     {{ formatDate }}
@@ -27,14 +27,16 @@ const formatDate = computed<string>(() => {
             </dd>
         </dl>
         <div class="space-y-3">
-            <div>
-                <p class="text-2xl mb-2 font-bold capitalize leading-8 tracking-tight">
+            <div class="clearfix">
+                <p
+                    class="text-2xl mb-2 font-bold capitalize leading-8 tracking-tight hover:text-pink transition-colors"
+                >
                     <NuxtLink :to="`blogs/${modelValue._id}`">
                         {{ modelValue.title }}
                     </NuxtLink>
                 </p>
                 <ul class="flex flex-wrap">
-                    <li v-for="(tag, i) in ['next-js', 'js', 'feature']" :key="`tag-${i}`">
+                    <li v-for="(tag, i) in ['tag', 'tag', 'tag']" :key="`tag-${i}`">
                         <NuxtLink
                             :to="`blogs/${modelValue._id}`"
                             class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-blue-500 text-pink transition"
@@ -45,8 +47,8 @@ const formatDate = computed<string>(() => {
                 </ul>
             </div>
             <div class="prose max-w-none text-gray-500 dark:text-gray-400">
-                Release of Tailwind Nextjs Starter Blog template v2.0, refactored with Nextjs App directory and React
-                Server Components setup.Discover the new features and how to migrate from V1.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, quia? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Iure, quia?
             </div>
         </div>
     </article>

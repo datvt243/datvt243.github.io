@@ -12,15 +12,14 @@ const blogs = computed(() => data.value?.data || null);
 
 <template>
     <div class="clearfix">
-        <div class="page-head">
-            <BaseHeading :text="'Blog'" />
+        <div class="page-head mb-8">
+            <BaseHeading :text="'_blog'" />
             <p>Articles, tutorials, snippets, rants, and everything else.</p>
         </div>
-        <hr class="my-4" />
 
         <ListRender :status="status" :data="blogs">
             <template #default>
-                <li v-for="post in blogs" :key="post._id" class="p-4 my-4 border rounded-lg">
+                <li v-for="post in blogs" :key="post._id" class="p-4 border border-slate-700 rounded-lg">
                     <!-- {{ post.title }} -->
                     <PostItem :model-value="post" />
                 </li>

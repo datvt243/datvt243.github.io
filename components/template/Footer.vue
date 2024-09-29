@@ -29,8 +29,6 @@ const socialMedia = [
                             :href="social.link"
                             class="hover:underline me-4 md:me-6 text-pink capitalize flex items-center space-x-1"
                         >
-                            <GithubIcon size="1.5x" v-if="social.name === 'github'" />
-                            <LinkedinIcon size="1.5x" v-else />
                             <span class="capitalize">{{ social.name }}</span>
                         </a>
                     </li>

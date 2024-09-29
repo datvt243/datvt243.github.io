@@ -5,7 +5,7 @@ const props = defineProps<{
     modelValue: Resume;
 }>();
 
-const information = computed<Information>(() => {
+/* const information = computed<Information>(() => {
     const {
         email = '',
         position = '',
@@ -36,7 +36,7 @@ const information = computed<Information>(() => {
         marital,
         socialMedia,
     };
-});
+}); */
 const educations = computed<Education[]>(() => {
     return props.modelValue?.educations || [];
 });
@@ -54,9 +54,9 @@ const groups = computed(() => {
 <template>
     <div class="resume-wrapper">
         <ResumeHero />
-
+        <ResumeAboutMe />
         <ResumeSkills :model-value="skills" :groups="groups" />
-        <ResumeExperiences :model-value="experiences" />
-        <ResumeEducations :model-value="educations" />
+        <ResumeExperiences />
+        <ResumeEducations />
     </div>
 </template>

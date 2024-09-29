@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import type { Experience } from '@/types/index';
-/* const props = defineProps({
-    modelValue: { type: Array as PropType<Experience[]>, default: () => [] },
-}); */
-
 const store = useResumeStore();
 const experiences = computed(() => store.experiences);
 </script>
@@ -12,8 +7,8 @@ const experiences = computed(() => store.experiences);
     <section class="section-experiences">
         <div class="container-block">
             <BaseHeading text="Kinh nghiệm làm việc" />
-            <ul class="list">
-                <li v-for="(el, index) in experiences" :key="el._id || index" class="mb-5 last:mb-0">
+            <ul class="list space-y-12">
+                <li v-for="(el, index) in experiences" :key="el._id || index">
                     <BlockItem
                         :title="el.position"
                         prefix-position="Công ty"
