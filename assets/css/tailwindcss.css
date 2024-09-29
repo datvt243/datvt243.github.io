@@ -10,9 +10,13 @@
 }
 
 .btn {
-    @apply bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2;
+    @apply inline-block transition-colors bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2;
 }
 
 .btn-2 {
     @apply text-white hover:bg-blue-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 bg-blue-600;
+}
+
+.container-block {
+    @apply mx-auto max-w-screen-lg px-3 py-28;
 }

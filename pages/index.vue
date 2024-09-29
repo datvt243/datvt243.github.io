@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import type { Resume } from '@/types/resume-document';
 
+const resumeStore = useResumeStore();
+
 definePageMeta({
     layout: 'default',
 });
 
-/* const { SERVICE_RESUME } = useRuntimeConfig(); */
+const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData());
 
-/* const { data, error } = await useAsyncData<Resume>('users', async () => {
-    const { success = false, resume } = await $fetch<{ success: boolean; resume: Record<string, any> }>(`/api/resume`);
-    return resume as Resume;
-}); */
-
-const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/api/resume`);
+/* const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/api/resume`); */
 
 /* useSeoMeta({
     title: `Resume ${data.value?.firstName} ${data.value?.lastName}`,
@@ -22,6 +19,8 @@ const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/a
     ogImage: '',
     twitterCard: 'summary_large_image',
 }); */
+
+const isValid = computed(() => !!data && Object.keys(data).length);
 </script>
 
 <template>
@@ -29,8 +28,9 @@ const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/a
         <Head>
             <Title>Võ Tấn CV</Title>
         </Head>
+
         <template v-if="!error">
-            <Resume v-if="data" :model-value="data.resume" />
+            <Resume v-if="isValid && data" :model-value="data" />
         </template>
         <template v-else>
             {{ error }}

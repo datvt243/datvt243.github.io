@@ -18,7 +18,11 @@ export default {
             colors: {
                 pink: '#ec4899',
             },
+            container: {
+                block: {},
+            },
         },
     },
     plugins: [],
+    extend: {},
 };

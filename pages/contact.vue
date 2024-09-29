@@ -18,7 +18,10 @@ useSeoMeta({
 
 <template>
     <section class="mb-0">
-        <div id="map" class="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat grayscale bg-gray-700">
+        <div
+            id="map"
+            class="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat grayscale bg-gray-700 pointer-events-none"
+        >
             <iframe
                 :src="contact.google_map"
                 width="100%"
@@ -28,27 +31,25 @@ useSeoMeta({
                 referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
         </div>
-        <div class="container px-6 md:px-12">
-            <div
-                class="block rounded-lg bg-white dark:bg-black px-6 py-12 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]"
-            >
-                <p class="text-4xl mb-8 uppercase">Get in touch</p>
-                <hr class="mb-8" />
-                <div class="grid grid-rows-2 grid-flow-col gap-6">
-                    <div class="">
-                        <ContactItem title="Phone/Zalo" :content="contact.phone">
+        <div class="mx-auto max-w-screen-lg px-3">
+            <div class="block rounded-lg dark:bg-black px-6 py-12 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
+                <p class="text-4xl font-bold mb-8 uppercase tracking-widest">Get in touch</p>
+                <hr class="mb-8 border-pink" />
+                <div class="block items-center gap-6 space-y-8">
+                    <div class="w-full">
+                        <ContactItem title="Phone/Zalo" :content="contact.phone" type="phone">
                             <template #icon><IconsEmail /></template>
                         </ContactItem>
                     </div>
-                    <div class="">
-                        <ContactItem title="Email" :content="contact.email"
-                            ><template #icon><IconsEmail /></template
-                        ></ContactItem>
+                    <div class="w-full">
+                        <ContactItem title="Email" :content="contact.email" type="email">
+                            <template #icon><IconsEmail /></template>
+                        </ContactItem>
                     </div>
-                    <div class="">
-                        <ContactItem title="Address" :content="contact.address"
-                            ><template #icon><IconsEmail /></template
-                        ></ContactItem>
+                    <div class="w-full">
+                        <ContactItem title="Address" :content="contact.address">
+                            <template #icon><IconsEmail /></template>
+                        </ContactItem>
                     </div>
                 </div>
             </div>

@@ -1,21 +1,23 @@
 export default defineAppConfig({
     AppHeading: 'Hello world',
-    MY_EMAIL: 'votan.it@gmail.com',
-    API_RESUME: 'https://nodejs-resume-api-ts.onrender.com',
-    SERVICE_RESUME: 'api/resume',
-    menu: [
+
+    myEmail: 'votan.it@gmail.com',
+    nodeAPI: 'https://nodejs-resume-api-ts.onrender.com',
+
+    menuPrimary: [
         {
             page: 'Resume',
             link: '/',
         },
         {
-            page: 'Blogs',
-            link: '/blogs',
-        },
-        {
             page: 'Contact',
             link: '/contact',
         },
+        {
+            page: 'Blogs',
+            link: '/blogs',
+        },
+
         /* {
             page: 'Static',
             link: '/static',

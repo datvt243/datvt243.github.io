@@ -1,20 +1,25 @@
 <script setup lang="ts">
-const { AppHeading, menu = [] } = useAppConfig();
+const { AppHeading, menuPrimary = [] } = useAppConfig();
+const route = useRoute();
 </script>
 
 <template>
-    <header>
-        <div class="container">
-            <nav class="bg-slate-900 border-gray-200 rounded-lg px-4 my-4 lg:px-6 py-2.5 dark:bg-gray-800">
+    <header class="bg-opacity-5 bg-pink">
+        <div class="mx-auto max-w-screen-lg px-3 py-6">
+            <nav class="border-gray-200 rounded-lg">
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <NuxtLink to="/" class="flex items-center">
-                        <span class="text-white self-center text-xl font-semibold whitespace-nowrap">
+                        <span
+                            class="text-white self-center text-3xl font-bold tracking-wide whitespace-nowrap uppercase"
+                        >
                             {{ AppHeading }}
                         </span>
                     </NuxtLink>
                     <div class="col-right flex items-center justify-end">
                         <div class="flex items-center lg:order-2">
-                            <a href="#" class="btn"> Log in </a>
+                            <template v-if="['/blogs'].includes(route.path)">
+                                <a href="#" class="btn"> Log in </a>
+                            </template>
 
                             <button
                                 data-collapse-toggle="mobile-menu-2"
@@ -54,11 +59,11 @@ const { AppHeading, menu = [] } = useAppConfig();
                             class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 mr-4"
                             id="mobile-menu-2"
                         >
-                            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                                <li v-for="(route, index) in menu" :key="`route-${index}`">
+                            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-4 lg:mt-0">
+                                <li v-for="(route, index) in menuPrimary" :key="`route-${index}`">
                                     <NuxtLink
                                         :to="route.link"
-                                        class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                                        class="inline-block uppercase tracking-wide py-2 px-2 text-white font-semibold rounded hover:text-pink transition-colors"
                                     >
                                         <span>{{ route.page }}</span>
                                     </NuxtLink>

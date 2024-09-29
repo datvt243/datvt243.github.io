@@ -1,9 +1,20 @@
-import type { ResumeAPIResponse } from '@/types';
+import type { ResumeAPIResponse, GeneralInformation } from '@/types';
 
 export default defineCachedEventHandler(
     async (event) => {
-        const { API_RESUME, MY_EMAIL } = useAppConfig();
-        const { success = false, data = null } = await $fetch<ResumeAPIResponse>(`${API_RESUME}/api/me/${MY_EMAIL}`);
+        const query = getQuery(event);
+        console.log({ query });
+
+        const { nodeAPI, myEmail } = useAppConfig();
+
+        const { success = false, data = {} } = await $fetch<ResumeAPIResponse>(`${nodeAPI}/api/me/${myEmail}`);
+
+        if (data) {
+            data.generalInformation = ((generalInformation: GeneralInformation[]) => {
+                if (!generalInformation.length) return {};
+                return generalInformation[0];
+            })(data?.generalInformation || []);
+        }
 
         return {
             success,
@@ -13,8 +24,8 @@ export default defineCachedEventHandler(
     {
         name: 'api-resume',
         getKey() {
-            const { MY_EMAIL } = useAppConfig();
-            return `api-resume-${MY_EMAIL}`;
+            const { myEmail } = useAppConfig();
+            return `api-resume-${myEmail}`;
         },
         maxAge: 60 * 60 * 24 * 12,
     },

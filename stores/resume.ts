@@ -1,15 +1,68 @@
-export const useResumeStore = defineStore('resumeStore', () => {
-    const email = ref('votan.it@gmail.com');
-    const resume = ref({});
+import type { Resume, SocialMedia, Education, Experience } from '@/types';
 
-    const getResume = computed(() => resume.value);
+export const useResumeStore = defineStore('resume', {
+    state: () => ({
+        resume: {} as Resume,
+    }),
+    actions: {
+        async fetchData(): Promise<Resume> {
+            const { success, resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume');
+            const _data = resume ? resume : ({} as Resume);
+            this.resume = _data;
+            return _data;
+        },
+    },
+    getters: {
+        hero({ resume = {} }) {
+            const { firstName = '', lastName = '', introduction = '' } = resume;
+            return {
+                firstName,
+                lastName,
+                introduction,
+            };
+        },
+        generalInformation({ resume: { generalInformation } }) {
+            return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation;
+        },
+        social({ resume: { socialMedia } }): SocialMedia | Record<string, never> {
+            return socialMedia;
+        },
+        experiences({ resume: { experiences } }): Experience[] {
+            return experiences;
+        },
+        educations({ resume: { educations } }): Education[] {
+            return educations;
+        },
+    },
+});
 
-    async function fetchResume() {
-        resume.value = await $fetch(`https://nodejs-resume-api-ts.onrender.com/api/me/${email.value}`);
+/* export const useResumeStore = defineStore('resume', async () => {
+    const resume = ref<Resume>({} as Resume);
+
+    async function fetchData() {
+        const _result = await $fetch<Resume>('/api/resume');
+        const _data = _result ? _result : ({} as Resume);
+        resume.value = _data;
+        return _data;
     }
 
+    const hero = computed(() => {
+        const { firstName, lastName, introduction } = resume.value;
+        return {
+            firstName,
+            lastName,
+            introduction,
+        };
+    });
+    const educations = computed(() => resume.value.educations || []);
+    const experiences = computed(() => resume.value.experiences || []);
+
     return {
-        fetchResume,
-        getResume,
+        resume,
+        fetchData,
+
+        hero,
+        educations,
+        experiences,
     };
-});
+}); */

@@ -18,10 +18,10 @@ const formatDate = computed<string>(() => {
 
 <template>
     <article class="flex flex-col space-y-2 xl:space-y-0">
-        <dl>
-            <dt class="sr-only">Published on</dt>
-            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                <time datetime="2023-08-05T00:00:00.000Z">
+        <dl class="flex items-center text-base font-medium text-gray-500 dark:text-gray-400 mb-2">
+            <dt class="pr-1"><CalendarIcon size="1x" /></dt>
+            <dd class="leading-6">
+                <time :datetime="formatDate">
                     {{ formatDate }}
                 </time>
             </dd>
@@ -29,29 +29,20 @@ const formatDate = computed<string>(() => {
         <div class="space-y-3">
             <div>
                 <p class="text-2xl mb-2 font-bold capitalize leading-8 tracking-tight">
-                    <NuxtLink :to="`blogs/${modelValue._id}`" class="text-gray-900 dark:text-gray-100">
+                    <NuxtLink :to="`blogs/${modelValue._id}`">
                         {{ modelValue.title }}
                     </NuxtLink>
                 </p>
-                <div class="flex flex-wrap">
-                    <a
-                        class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-pink"
-                        href="/tags/next-js"
-                        >next-js</a
-                    ><a
-                        class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-pink"
-                        href="/tags/tailwind"
-                        >tailwind</a
-                    ><a
-                        class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-pink"
-                        href="/tags/guide"
-                        >guide</a
-                    ><a
-                        class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-pink"
-                        href="/tags/feature"
-                        >feature</a
-                    >
-                </div>
+                <ul class="flex flex-wrap">
+                    <li v-for="(tag, i) in ['next-js', 'js', 'feature']" :key="`tag-${i}`">
+                        <NuxtLink
+                            :to="`blogs/${modelValue._id}`"
+                            class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-blue-500 text-pink transition"
+                        >
+                            {{ tag }}
+                        </NuxtLink>
+                    </li>
+                </ul>
             </div>
             <div class="prose max-w-none text-gray-500 dark:text-gray-400">
                 Release of Tailwind Nextjs Starter Blog template v2.0, refactored with Nextjs App directory and React

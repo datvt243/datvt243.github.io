@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Resume, Education, Experience, Information } from '@/types/resume-document';
+import type { Resume, Education, Experience, Information, ProfessionalSkill } from '@/types/resume-document';
 
 const props = defineProps<{
     modelValue: Resume;
@@ -43,11 +43,19 @@ const educations = computed<Education[]>(() => {
 const experiences = computed<Experience[]>(() => {
     return props.modelValue?.experiences || [];
 });
+const skills = computed(() => {
+    return props.modelValue.generalInformation.professionalSkills;
+});
+const groups = computed(() => {
+    return props.modelValue.generalInformation.professionalSkillsGroup;
+});
 </script>
 
 <template>
     <div class="resume-wrapper">
-        <ResumeInformation :model-value="information" />
+        <ResumeHero />
+
+        <ResumeSkills :model-value="skills" :groups="groups" />
         <ResumeExperiences :model-value="experiences" />
         <ResumeEducations :model-value="educations" />
     </div>

@@ -1,4 +1,4 @@
-interface ProfessionalSkill {
+export interface ProfessionalSkill {
     name: string;
     exp: number;
     group: string;

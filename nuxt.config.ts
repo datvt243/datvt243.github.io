@@ -17,23 +17,17 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
-    runtimeConfig: {
-        /* MY_EMAIL: process.env.MY_EMAIL,
-        API_RESUME: process.env.RESUME_API,
-        SERVICE_RESUME: 'api/resume', */
-    },
+    runtimeConfig: {},
 
     css: ['~/assets/css/tailwindcss.css'],
-    modules: ['@nuxt/image', '@pinia/nuxt'],
+    modules: ['@nuxt/image', '@pinia/nuxt', 'nuxt-feather-icons'],
     typescript: {
         typeCheck: true,
     },
+    pinia: {
+        storesDirs: ['./stores/**'],
+    },
 
-    /* nitro: {
-        prerender: {
-            routes: ['/'],
-        },
-    }, */
     routeRules: {
         '/': { prerender: true },
         '/contact': { prerender: true },

@@ -11,7 +11,7 @@ const blogs = computed(() => data.value?.data || null);
 </script>
 
 <template>
-    <div class="container">
+    <div class="clearfix">
         <div class="page-head">
             <BaseHeading :text="'Blog'" />
             <p>Articles, tutorials, snippets, rants, and everything else.</p>
@@ -21,10 +21,8 @@ const blogs = computed(() => data.value?.data || null);
         <ListRender :status="status" :data="blogs">
             <template #default>
                 <li v-for="post in blogs" :key="post._id" class="p-4 my-4 border rounded-lg">
-                    <NuxtLink :to="`blogs/${post._id}`">
-                        <!-- {{ post.title }} -->
-                        <PostItem :model-value="post" />
-                    </NuxtLink>
+                    <!-- {{ post.title }} -->
+                    <PostItem :model-value="post" />
                 </li>
             </template>
             <template #loading>
