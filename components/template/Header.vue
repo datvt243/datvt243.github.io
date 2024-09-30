@@ -1,11 +1,13 @@
 <script setup lang="ts">
 const { AppHeading, menuPrimary = [] } = useAppConfig();
 const route = useRoute();
+
+const isOpen = ref(false);
 </script>
 
 <template>
-    <header class="bg-opacity-5 bg-pink">
-        <div class="mx-auto max-w-screen-lg px-3 py-6">
+    <header class="bg-opacity-5 bg-pink border-b-2 border-slate-700">
+        <UContainer :ui="{ constrained: 'py-2 md:py-4 lg:py-6' }">
             <nav class="border-gray-200 rounded-lg">
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <NuxtLink to="/" class="flex items-center space-x-3">
@@ -22,39 +24,41 @@ const route = useRoute();
                                 <a href="#" class="btn btn-primary"> Log in </a>
                             </template>
 
-                            <button
-                                data-collapse-toggle="mobile-menu-2"
-                                type="button"
-                                class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                aria-controls="mobile-menu-2"
-                                aria-expanded="false"
-                            >
-                                <span class="sr-only">Open main menu</span>
-                                <svg
-                                    class="w-6 h-6"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clip-rule="evenodd"
-                                    ></path>
-                                </svg>
-                                <svg
-                                    class="hidden w-6 h-6"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"
-                                    ></path>
-                                </svg>
-                            </button>
+                            <div class="inline-flex items-center p-2 ml-1 rounded-lg lg:hidden">
+                                <UButton
+                                    icon="fe:bar"
+                                    size="sm"
+                                    color="primary"
+                                    variant="solid"
+                                    label=""
+                                    @click="isOpen = true"
+                                />
+
+                                <USlideover v-model="isOpen">
+                                    <div class="p-4 flex-1">
+                                        <UButton
+                                            color="gray"
+                                            variant="ghost"
+                                            size="sm"
+                                            icon="fe:close"
+                                            class="flex lg:hidden absolute end-5 top-5 z-10"
+                                            square
+                                            padded
+                                            @click="isOpen = false"
+                                        />
+                                        <ul class="space-y-y pt-14">
+                                            <li v-for="(route, index) in menuPrimary" :key="`route-${index}`">
+                                                <NuxtLink
+                                                    :to="route.link"
+                                                    class="block uppercase tracking-widest text-center py-2 px-2 text-white font-semibold rounded hover:text-pink transition-colors"
+                                                >
+                                                    <span>{{ route.page }}</span>
+                                                </NuxtLink>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </USlideover>
+                            </div>
                         </div>
                         <div
                             class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 mr-4"
@@ -74,6 +78,6 @@ const route = useRoute();
                     </div>
                 </div>
             </nav>
-        </div>
+        </UContainer>
     </header>
 </template>

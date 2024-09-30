@@ -20,7 +20,7 @@ const postDetail = computed<Post>(() => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container-block !pt-0">
         <PostDetail :model-value="postDetail" />
         <PostCommentForm />
     </div>

@@ -57,6 +57,8 @@ const groups = computed(() => {
         <ResumeAboutMe />
         <ResumeSkills :model-value="skills" :groups="groups" />
         <ResumeExperiences />
+        <ResumeProjects />
         <ResumeEducations />
+        <ResumeLanguages />
     </div>
 </template>

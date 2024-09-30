@@ -24,7 +24,7 @@ const isValid = computed(() => !!data && Object.keys(data).length);
 </script>
 
 <template>
-    <div class="container mx-auto">
+    <div class="page-index mx-auto">
         <Head>
             <Title>Võ Tấn CV</Title>
         </Head>

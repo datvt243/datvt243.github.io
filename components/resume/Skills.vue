@@ -58,8 +58,8 @@ const SupSkills = defineComponent(
 
 <template>
     <section class="resume-professional-skills bg-opacity-5 bg-white">
-        <div class="container-block">
-            <BaseHeading text="Professional Skills" />
+        <UContainer>
+            <BaseHeading text="Kỹ năng <span class='hidden md:inline'>chuyên môn</span>" />
             <ul class="list items-center space-y-4">
                 <li class="flex" v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`">
                     <span class="font-bold pr-2 capitalize">{{ _key }}: </span>
@@ -70,6 +70,6 @@ const SupSkills = defineComponent(
                     </ul>
                 </li>
             </ul>
-        </div>
+        </UContainer>
     </section>
 </template>

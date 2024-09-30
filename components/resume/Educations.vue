@@ -9,7 +9,7 @@ const educations = computed(() => store.educations);
 
 <template>
     <section class="section-educations bg-opacity-5 bg-green-700">
-        <div class="container-block">
+        <UContainer>
             <BaseHeading text="Học vấn" />
             <ul class="list">
                 <li v-for="(el, index) in educations" :key="el._id || index">
@@ -23,6 +23,6 @@ const educations = computed(() => store.educations);
                     />
                 </li>
             </ul>
-        </div>
+        </UContainer>
     </section>
 </template>

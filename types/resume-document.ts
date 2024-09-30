@@ -4,7 +4,7 @@ export interface ProfessionalSkill {
     group: string;
 }
 
-interface ForeignLanguage {
+export interface ForeignLanguage {
     language: string;
     level: string;
 }

@@ -5,8 +5,8 @@ const experiences = computed(() => store.experiences);
 
 <template>
     <section class="section-experiences">
-        <div class="container-block">
-            <BaseHeading text="Kinh nghiệm làm việc" />
+        <UContainer>
+            <BaseHeading text="Kinh nghiệm <span class='hidden md:inline'>làm việc</span>" />
             <ul class="list space-y-12">
                 <li v-for="(el, index) in experiences" :key="el._id || index">
                     <BlockItem
@@ -20,6 +20,6 @@ const experiences = computed(() => store.experiences);
                     />
                 </li>
             </ul>
-        </div>
+        </UContainer>
     </section>
 </template>

@@ -26,12 +26,19 @@ const getPosition = computed(() => {
 <template>
     <div class="block-item space-y-4">
         <div class="heading">
-            <p class="text-3xl tracking-wide font-bold text-white">{{ title }}</p>
-            <div class="flex justify-between">
-                <p class="position text-slate-400 text-lg" v-html="getPosition"></p>
+            <p
+                class="heading-title text-xl sm:text-2xl md:text-3xl tracking-wide font-bold text-white capitalize"
+                v-html="title"
+            ></p>
+            <template v-if="$slots.body">
+                <slot name="body"></slot>
+            </template>
+            <div v-else class="block md:flex justify-between">
+                <p class="position text-slate-400 text-sm md:text-lg" v-html="getPosition"></p>
                 <p class="text-sm font-italic tracking-widest">
-                    <span class="inline-block px-4 py-1 date bg-pink text-white leading-4">
-                        {{ getDate }}
+                    <span class="flex items-center space-x-2 px-4 py-1 date md:bg-pink text-white leading-normal">
+                        <UIcon name="fe:clock" class="w-5 h-5" />
+                        <span>{{ getDate }}</span>
                     </span>
                 </p>
             </div>
@@ -43,9 +50,17 @@ const getPosition = computed(() => {
 <style scoped lang="scss">
 .description {
     position: relative;
+    :deep(> *) {
+        margin-bottom: 1rem;
+    }
     :deep(> ul, > ol) {
         list-style-type: disc;
         padding-left: 1.5rem;
+        ul,
+        ol {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
     }
 }
 

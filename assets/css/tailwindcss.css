@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    @font-face {
+        font-family: 'BarlowMedium';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/Barlow/BarlowMedium.ttf') format('ttf');
+    }
+}
+
+/* @layer base {
+    html {
+        font-family: 'BarlowMedium', system-ui, sans-serif;
+    }
+} */
+
 .btn {
     @apply inline-block transition-colors only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2 tracking-widest font-bold;
 }
@@ -20,4 +36,8 @@
 
 .container-block {
     @apply mx-auto max-w-screen-lg px-3 py-28;
+}
+
+.router-link-exact-active {
+    @apply text-pink;
 }

@@ -1,14 +1,11 @@
 <template>
-    <div class="p-4 border rounded-md">
+    <div class="p-4 border border-slate-700 rounded-md">
         <address class="flex items-center m-0 not-italic">
-            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                <img
-                    class="mr-4 w-16 h-16 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                    alt="David"
-                />
+            <div class="flex items-center space-x-2">
+                <UAvatar src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Avatar" size="lg" />
+
                 <div>
-                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-black"> Author Name </a>
+                    <a href="#" rel="author" class="text-xl font-bold"> Author Name </a>
                     <p class="text-base text-gray-500 dark:text-gray-400">Author Job</p>
                 </div>
             </div>

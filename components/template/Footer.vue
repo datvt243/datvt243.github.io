@@ -3,20 +3,20 @@ const currentYear = new Date().getFullYear();
 const socialMedia = [
     {
         name: 'github',
-        img: '',
+        icon: 'grommet-icons:github',
         link: 'https://github.com/datvt243',
     },
     {
         name: 'linkedin',
-        img: '',
+        icon: 'grommet-icons:linkedin',
         link: 'https://www.linkedin.com/in/datvt243/',
     },
 ];
 </script>
 
 <template>
-    <footer class="border-t">
-        <div class="mx-auto max-w-screen-lg px-3 py-6">
+    <footer class="border-slate-700 border-t-2">
+        <UContainer :ui="{ constrained: 'py-2 md:py-4 lg:py-6' }">
             <div class="md:flex md:items-center md:justify-between">
                 <p class="">
                     &copy; {{ currentYear }}
@@ -27,13 +27,15 @@ const socialMedia = [
                     <li v-for="social in socialMedia" :key="social.name">
                         <a
                             :href="social.link"
+                            target="_blank"
                             class="hover:underline me-4 md:me-6 text-pink capitalize flex items-center space-x-1"
                         >
+                            <UIcon v-if="social.icon" :name="social.icon" class="w-5 h-5" />
                             <span class="capitalize">{{ social.name }}</span>
                         </a>
                     </li>
                 </ul>
             </div>
-        </div>
+        </UContainer>
     </footer>
 </template>

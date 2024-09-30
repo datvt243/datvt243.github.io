@@ -1,3 +1,5 @@
+import { PostDetail } from '#build/components';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
@@ -9,8 +11,8 @@ export default defineNuxtConfig({
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
         },
-        layoutTransition: { name: 'layout', mode: 'out-in' },
-        pageTransition: { name: 'page', mode: 'out-in' },
+        layoutTransition: { name: 'transition-opacity', mode: 'out-in' },
+        pageTransition: { name: 'transition-opacity', mode: 'out-in' },
     },
 
     postcss: {
@@ -21,8 +23,8 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {},
 
-    css: ['~/assets/css/tailwindcss.css', '~/assets/css/styles.css'],
-    modules: ['@nuxt/image', '@pinia/nuxt', 'nuxt-feather-icons'],
+    css: ['~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
+    modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui'],
     typescript: {
         typeCheck: true,
     },
@@ -58,5 +60,13 @@ export default defineNuxtConfig({
         '/isr-3000': {
             isr: 10,
         }, */
+    },
+
+    $development: {
+        nitro: {
+            storage: {
+                PostDetail: { driver: 'fs', base: '/cache' },
+            },
+        },
     },
 });

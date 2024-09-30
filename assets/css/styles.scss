@@ -1,0 +1,47 @@
+.transition {
+    &-opacity {
+        &-enter {
+            &-active {
+                transition: all 0.4s;
+            }
+            &-from {
+                opacity: 0;
+                filter: blur(1rem);
+            }
+        }
+        &-leave {
+            &-active {
+                transition: all 0.4s;
+            }
+            &-to {
+                opacity: 0;
+                filter: blur(1rem);
+            }
+        }
+    }
+    &-filter {
+        &-enter {
+            &-active {
+                transition: all 0.4s;
+            }
+            &-from {
+                filter: grayscale(1);
+            }
+        }
+        &-leave {
+            &-active {
+                transition: all 0.4s;
+            }
+            &-to {
+                filter: grayscale(1);
+            }
+        }
+    }
+}
+
+.post-content {
+    position: relative;
+    > * {
+        margin-bottom: 1rem;
+    }
+}

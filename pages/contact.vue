@@ -32,7 +32,7 @@ useSeoMeta({
             ></iframe>
         </div>
         <div class="mx-auto max-w-screen-lg px-3">
-            <div class="block rounded-lg dark:bg-black px-6 py-12 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
+            <div class="block rounded-lg px-6 py-12 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
                 <p class="text-4xl font-bold mb-8 uppercase tracking-widest">Get in touch</p>
                 <hr class="mb-8 border-pink" />
                 <div class="block items-center gap-6 space-y-8">

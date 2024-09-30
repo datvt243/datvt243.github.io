@@ -1,4 +1,4 @@
-import type { Resume, SocialMedia, Education, Experience } from '@/types';
+import type { Resume, SocialMedia, Education, Experience, GeneralInformation, ForeignLanguage, Project } from '@/types';
 
 export const useResumeStore = defineStore('resume', {
     state: () => ({
@@ -13,11 +13,17 @@ export const useResumeStore = defineStore('resume', {
         },
     },
     getters: {
+        generalInformation({ resume: { generalInformation } }): GeneralInformation {
+            return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation;
+        },
+
         hero({ resume = {} }) {
             const { firstName = '', lastName = '', introduction = '' } = resume;
+            const { positionDesired = 'A frontend developer' } = this.generalInformation as GeneralInformation;
             return {
                 firstName,
                 lastName,
+                positionDesired,
                 introduction,
             };
         },
@@ -25,9 +31,7 @@ export const useResumeStore = defineStore('resume', {
             const { phone, email, address } = resume;
             return { phone, email, address };
         },
-        generalInformation({ resume: { generalInformation } }) {
-            return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation;
-        },
+
         social({ resume: { socialMedia } }): SocialMedia | Record<string, never> {
             return socialMedia;
         },
@@ -36,6 +40,12 @@ export const useResumeStore = defineStore('resume', {
         },
         educations({ resume: { educations } }): Education[] {
             return educations;
+        },
+        projects({ resume: { projects } }): Project[] {
+            return projects;
+        },
+        foreignLanguages({ resume: { generalInformation } }): ForeignLanguage[] {
+            return generalInformation.foreignLanguages || ([] as ForeignLanguage[]);
         },
     },
 });
