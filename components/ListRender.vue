@@ -6,17 +6,24 @@ const props = defineProps<{
 }>();
 
 const isLoading = ref(false);
-const loadingAfterMillisecond = 1500;
-watch(isLoading, () => {
-    setTimeout(() => {
-        isLoading.value = true;
-    }, loadingAfterMillisecond);
-});
+const loadingAfterMillisecond = 500;
+watch(
+    isLoading,
+    () => {
+        setTimeout(() => {
+            isLoading.value = true;
+        }, loadingAfterMillisecond);
+    },
+    {
+        immediate: true,
+    },
+);
 </script>
 
 <template>
     <div class="list-render">
-        <template v-if="props.status === 'pending'">
+        {{ isLoading }}
+        <template v-if="props.status !== 'success'">
             <template v-if="$slots.loading">
                 <slot v-if="isLoading" name="loading"></slot>
             </template>

@@ -16,7 +16,7 @@ const blogs = computed(() => data.value?.data || null);
             <BaseHeading :text="'_blog'" />
             <p>Articles, tutorials, snippets, rants, and everything else.</p>
         </div>
-
+        {{ status }}
         <ListRender :status="status" :data="blogs">
             <template #default>
                 <li v-for="post in blogs" :key="post._id" class="p-4 border border-slate-700 rounded-lg">
