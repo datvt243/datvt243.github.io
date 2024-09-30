@@ -2,12 +2,13 @@
 export default {
     darkMode: ['selector'],
     content: [
-        './components/**/*.{js,vue,ts}',
+        './components/**/*.{js,vue,ts,jsx}',
         './layouts/**/*.vue',
         './pages/**/*.vue',
         './plugins/**/*.{js,ts}',
         './app.vue',
         './error.vue',
+        './server/plugins/*.{js,ts}',
     ],
     theme: {
         container: {
