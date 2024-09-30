@@ -22,7 +22,6 @@ watch(
 
 <template>
     <div class="list-render">
-        {{ isLoading }}
         <template v-if="props.status !== 'success'">
             <template v-if="$slots.loading">
                 <slot v-if="isLoading" name="loading"></slot>
