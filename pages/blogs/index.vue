@@ -5,7 +5,7 @@ definePageMeta({
     layout: 'blog',
 });
 
-const { data, error, status } = useFetch<APIFormatResponse<Post[]>>('/api/blogs/posts');
+const { data, status } = useFetch<APIFormatResponse<Post[]>>('/api/blogs/posts');
 
 const blogs = computed(() => data.value?.data || null);
 </script>
@@ -24,9 +24,11 @@ const blogs = computed(() => data.value?.data || null);
                 </li>
             </template>
             <template #loading>
-                <li v-for="i in 3" :key="i">
-                    <PostLoading />
-                </li>
+                <ul class="list space-y-5">
+                    <li v-for="i in 3" :key="i" class="p-4 border border-slate-700 rounded-lg">
+                        <PostLoading />
+                    </li>
+                </ul>
             </template>
         </ListRender>
     </div>

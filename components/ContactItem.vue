@@ -5,6 +5,7 @@ const props = defineProps<{
     type?: 'phone' | 'email' | '';
 }>();
 </script>
+
 <template>
     <div class="flex items-start">
         <div class="shrink-0 relative">

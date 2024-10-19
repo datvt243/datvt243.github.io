@@ -50,12 +50,15 @@ const getPosition = computed(() => {
 <style scoped lang="scss">
 .description {
     position: relative;
+
     :deep(> *) {
         margin-bottom: 1rem;
     }
+
     :deep(> ul, > ol) {
         list-style-type: disc;
         padding-left: 1.5rem;
+
         ul,
         ol {
             list-style-type: disc;
@@ -67,6 +70,7 @@ const getPosition = computed(() => {
 .block-item {
     position: relative;
     padding-left: 1.5rem;
+
     &:before {
         content: '';
         position: absolute;
