@@ -1,7 +1,7 @@
 export default [
-    {
-        rules: {
-            'vue/no-v-for-template-key': 'off',
-        },
-    },
-];
+	{
+		rules: {
+			'vue/no-v-for-template-key': 'off',
+		},
+	},
+]
