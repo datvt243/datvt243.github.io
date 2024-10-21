@@ -23,16 +23,14 @@ function handleError() {
 					<div class="status-code text-8xl font-bold">
 						<span>{{ props.error.statusCode }}</span>
 					</div>
-					<div class="clearfix">
+					<div class="clearfix my-6">
 						<div class="">
-							<h1 class="my-2 text-gray-800 font-bold text-2xl">
+							<h1 class="my-2 font-bold text-2xl">
 								Looks like you've found the doorway to the great nothing
 							</h1>
-							<p class="my-2 text-gray-800">
-								Sorry about that! Please visit our Homepage to get where you need to go.
-							</p>
+							<p class="my-3">Sorry about that! Please visit our Homepage to get where you need to go.</p>
 							<button
-								class="sm:w-full lg:w-auto my-2 border rounded md py-3 px-8 text-center bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+								class="sm:w-full lg:w-auto my-2 border rounded md py-3 px-8 text-center bg-pink-500 text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
 								@click="handleError"
 							>
 								Take me there!

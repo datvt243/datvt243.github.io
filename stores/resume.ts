@@ -1,54 +1,69 @@
-import type { Resume, SocialMedia, Education, Experience, GeneralInformation, ForeignLanguage, Project } from '@/types';
+import type {
+	Resume,
+	SocialMedia,
+	Education,
+	Experience,
+	GeneralInformation,
+	ForeignLanguage,
+	Project,
+	ProfessionalSkill,
+} from '@/types'
 
 export const useResumeStore = defineStore('resume', {
-    state: () => ({
-        resume: {} as Resume,
-    }),
-    actions: {
-        async fetchData(): Promise<Resume> {
-            const { success, resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume');
-            const _data = resume ? resume : ({} as Resume);
-            this.resume = _data;
-            return _data;
-        },
-    },
-    getters: {
-        generalInformation({ resume: { generalInformation } }): GeneralInformation {
-            return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation;
-        },
+	state: () => ({
+		resume: {} as Resume,
+	}),
+	actions: {
+		async fetchData(): Promise<Resume> {
+			const { success, resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume')
+			const _data = resume ? resume : ({} as Resume)
+			this.resume = _data
+			return _data
+		},
+	},
+	getters: {
+		generalInformation({ resume: { generalInformation } }): GeneralInformation {
+			return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation
+		},
 
-        hero({ resume = {} }) {
-            const { firstName = '', lastName = '', introduction = '' } = resume;
-            const { positionDesired = 'A frontend developer' } = this.generalInformation as GeneralInformation;
-            return {
-                firstName,
-                lastName,
-                positionDesired,
-                introduction,
-            };
-        },
-        contact({ resume }) {
-            const { phone, email, address } = resume;
-            return { phone, email, address };
-        },
+		hero({ resume = {} }) {
+			const { firstName = '', lastName = '', introduction = '' } = resume
+			const { positionDesired = 'A frontend developer' } = this.generalInformation as GeneralInformation
+			return {
+				firstName,
+				lastName,
+				positionDesired,
+				introduction,
+			}
+		},
+		contact({ resume }) {
+			const { phone, email, address } = resume
+			return { phone, email, address }
+		},
 
-        social({ resume: { socialMedia } }): SocialMedia | Record<string, never> {
-            return socialMedia;
-        },
-        experiences({ resume: { experiences } }): Experience[] {
-            return experiences;
-        },
-        educations({ resume: { educations } }): Education[] {
-            return educations;
-        },
-        projects({ resume: { projects } }): Project[] {
-            return projects;
-        },
-        foreignLanguages({ resume: { generalInformation } }): ForeignLanguage[] {
-            return generalInformation.foreignLanguages || ([] as ForeignLanguage[]);
-        },
-    },
-});
+		social({ resume: { socialMedia } }): SocialMedia | Record<string, never> {
+			return socialMedia
+		},
+		experiences({ resume: { experiences } }): Experience[] {
+			return experiences
+		},
+		educations({ resume: { educations } }): Education[] {
+			return educations
+		},
+		projects({ resume: { projects } }): Project[] {
+			return projects
+		},
+		foreignLanguages({ resume: { generalInformation } }): ForeignLanguage[] {
+			return generalInformation.foreignLanguages || ([] as ForeignLanguage[])
+		},
+		skills({ resume: { generalInformation } }): ProfessionalSkill[] {
+			return generalInformation.professionalSkills || []
+		},
+		groups({ resume: { generalInformation } }): string[] {
+			return generalInformation.professionalSkillsGroup || []
+		},
+	},
+})
 
 /* export const useResumeStore = defineStore('resume', async () => {
     const resume = ref<Resume>({} as Resume);

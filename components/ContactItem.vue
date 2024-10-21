@@ -1,15 +1,15 @@
 <script setup lang="ts">
 const props = defineProps<{
-	title: string;
-	content: string;
-	type?: 'phone' | 'email' | '';
-}>();
+	title: string
+	content: string
+	type?: 'phone' | 'email' | ''
+}>()
 </script>
 
 <template>
 	<div class="flex items-start">
 		<div class="shrink-0 relative">
-			<div class="absolute inline-block rounded-md bg-pink bg-opacity-20 p-4 text-primary w-10 h-10">
+			<div class="absolute inline-block rounded-md bg-sky-500 bg-opacity-20 p-4 w-10 h-10">
 				<!-- <slot name="icon"></slot> -->
 			</div>
 		</div>

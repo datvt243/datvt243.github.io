@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { Resume } from '@/types/resume-document';
+import type { Resume } from '@/types/resume-document'
 
-const resumeStore = useResumeStore();
+const resumeStore = useResumeStore()
 
 definePageMeta({
-    layout: 'default',
-});
+	layout: 'default',
+})
 
-const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData());
+const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData())
 
 /* const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/api/resume`); */
 
@@ -20,22 +20,25 @@ const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => awa
     twitterCard: 'summary_large_image',
 }); */
 
-const isValid = computed(() => !!data && Object.keys(data).length);
+const isValid = computed(() => !!data && Object.keys(data).length)
 </script>
 
 <template>
-    <div class="page-index mx-auto">
-        <Head>
-            <Title>Võ Tấn CV</Title>
-        </Head>
+	<div class="page-index mx-auto">
+		<Head>
+			<Title>Võ Tấn CV</Title>
+		</Head>
 
-        <template v-if="!error">
-            <Resume v-if="isValid && data" :model-value="data" />
-        </template>
-        <template v-else>
-            {{ error }}
-        </template>
-    </div>
+		<template v-if="!error">
+			<UContainer v-if="isValid && data">
+				<ResumeObject />
+			</UContainer>
+			<!-- <Resume v-if="isValid && data" :model-value="data" /> -->
+		</template>
+		<template v-else>
+			{{ error }}
+		</template>
+	</div>
 </template>
 
 <style scoped></style>

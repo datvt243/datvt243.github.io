@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    @font-face {
-        font-family: 'BarlowMedium';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('/fonts/Barlow/BarlowMedium.ttf') format('ttf');
-    }
-}
+/* @layer base { */
+/* 	@font-face { */
+/* 		font-family: 'BarlowMedium'; */
+/* 		font-style: normal; */
+/* 		font-weight: 400; */
+/* 		font-display: swap; */
+/* 		src: url('/fonts/Barlow/BarlowMedium.ttf') format('ttf'); */
+/* 	} */
+/* } */
 
 /* @layer base {
     html {
@@ -19,25 +19,25 @@
 } */
 
 .btn {
-    @apply inline-block transition-colors only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2 tracking-widest font-bold;
+	@apply inline-block transition-colors only:sm:text-sm px-4 py-2 lg:px-4 lg:py-2 tracking-widest font-bold;
 }
 
 .btn-base {
-    @apply bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md;
+	@apply bg-blue-500 text-white hover:bg-blue-800 transform outline-none rounded-md;
 }
 
 .btn-primary {
-    @apply bg-pink text-white hover:bg-opacity-70 rounded-full;
+	@apply bg-pink-500 text-white hover:bg-opacity-70 rounded-full;
 }
 
 .btn-2 {
-    @apply text-white hover:bg-blue-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 bg-blue-600;
+	@apply text-white hover:bg-blue-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 bg-blue-600;
 }
 
 .container-block {
-    @apply mx-auto max-w-screen-lg px-3 py-28;
+	@apply mx-auto max-w-screen-lg px-3 py-28;
 }
 
 .router-link-exact-active {
-    @apply text-pink;
+	@apply text-pink-500;
 }

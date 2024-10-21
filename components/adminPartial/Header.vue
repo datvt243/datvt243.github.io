@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const darkMode = ref(false)
 const dropdownOpen = ref(false)
-const test = 'sayhello'
 const items = [
 	[
 		{
@@ -49,10 +48,7 @@ const items = [
 			</div>
 			<div class="hidden sm:block">
 				<UFormGroup>
-					<UInput
-						placeholder="search ..."
-						icon="fe:search"
-					/>
+					<UInput placeholder="search ..." icon="fe:search" />
 				</UFormGroup>
 			</div>
 
@@ -63,33 +59,19 @@ const items = [
 					</li>
 					<li>
 						<UChip color="green">
-							<UButton
-								icon="fe:bell"
-								color="gray"
-							/>
+							<UButton icon="fe:bell" color="gray" />
 						</UChip>
 					</li>
 					<li>
 						<UChip color="green">
-							<UButton
-								icon="fe:commenting"
-								color="gray"
-							/>
+							<UButton icon="fe:commenting" color="gray" />
 						</UChip>
 					</li>
 				</ul>
 
 				<!-- User Area -->
-				<div
-					class="relative"
-					x-data="{ dropdownOpen: false }"
-					@click.outside="dropdownOpen = false"
-				>
-					<a
-						class="flex items-center gap-5"
-						href="#"
-						@click.prevent="dropdownOpen = !dropdownOpen"
-					>
+				<div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
+					<a class="flex items-center gap-5" href="#" @click.prevent="dropdownOpen = !dropdownOpen">
 						<span class="hidden text-right lg:block">
 							<span class="block text-sm font-medium text-black dark:text-white">Thomas Anree</span>
 							<span class="block text-xs font-light">UX Designer</span>
@@ -100,10 +82,7 @@ const items = [
 								:ui="{ item: { disabled: 'cursor-text select-text' } }"
 								:popper="{ placement: 'bottom-start' }"
 							>
-								<UAvatar
-									src="https://avatars.githubusercontent.com/u/739984?v=4"
-									size="md"
-								/>
+								<UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="md" />
 
 								<template #account="{ item }">
 									<div class="text-left">
