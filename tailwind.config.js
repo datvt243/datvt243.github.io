@@ -13,7 +13,7 @@ const generateColorScale = (baseColor) => {
 	for (let i = 1; i <= 9; i++) {
 		const ratio = (i - 5) * 10 // Điều chỉnh độ sáng/tối
 		const color = tinycolor(baseColor).lighten(ratio).toHexString()
-		scale[`${i * 100}`] = color // Ví dụ: '100', '200', ..., '900'
+		scale[`${i * 100}`] = color // '100', '200', ..., '900'
 	}
 	return scale
 }
@@ -33,7 +33,7 @@ export default {
 		fontFamily: {
 			barlow: ['BarlowMedium', defaultTheme.fontFamily.sans],
 		},
-		colors: {
+		/* colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
 			white: '#ffffff',
@@ -46,7 +46,7 @@ export default {
 			violet: generateColorScale('#18315a'),
 			dark: generateColorScale('#333333'),
 			orange: generateColorScale('#C66828'),
-		},
+		}, */
 		container: {
 			center: true,
 			// padding: '10px',
@@ -58,8 +58,9 @@ export default {
 				opensans: ['Open Sans', defaultTheme.fontFamily.sans],
 			},
 			colors: {
-				// pink: generateColorScale('#ec4899'),
-				// darkness: generateColorScale('#333333',
+				darkness: '#23272d',
+				pink: generateColorScale('#ec4899'),
+				dark: generateColorScale('#333333'),
 			},
 			container: {
 				block: {},

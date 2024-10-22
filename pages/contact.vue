@@ -57,4 +57,3 @@ useSeoMeta({
 	</section>
 </template>
 
-<style scoped></style>

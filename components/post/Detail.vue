@@ -62,7 +62,7 @@ const props = defineProps<{
 						aria-label="Back to the blog"
 					>
 						<span class="flex items-center space-x-2">
-							<UIcon name="fe:backward" class="w-5 h-5" />
+							<!-- <UIcon name="fe:backward" class="w-5 h-5" /> -->
 							<span class="uppercase">Back to the blog</span>
 						</span>
 					</NuxtLink>

@@ -32,13 +32,13 @@ const getPosition = computed(() => {
 			</template>
 			<div v-else class="flex mb-4">
 				<p class="position text-sm md:text-lg" :class="{ 'flex items-center space-x-2': !!iconPosition }">
-					<UIcon v-if="iconPosition" :name="iconPosition" class="w-5 h-5" />
+					<!-- <UIcon v-if="iconPosition" :name="iconPosition" class="w-5 h-5" /> -->
 					<span v-if="prefixPosition">{{ `${prefixPosition}: ` }}</span>
 					<span class="font-bold text-violet-800">{{ position }}</span>
 				</p>
 				<p class="text-sm font-italic tracking-widest">
 					<span class="flex items-center space-x-2 px-4 py-1 date md:bg-pink text-white leading-normal">
-						<UIcon name="fe:clock" class="w-5 h-5" />
+						<!-- <UIcon name="fe:clock" class="w-5 h-5" /> -->
 						<span>{{ getDate }}</span>
 					</span>
 				</p>
