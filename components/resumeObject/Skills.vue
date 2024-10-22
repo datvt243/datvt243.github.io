@@ -44,8 +44,8 @@ const SupSkills = defineComponent(
 
 <template>
 	<ResumeObjectLayout title="Kỹ năng chuyên môn" size="xl">
-		<ul class="list items-center space-y-4 my-3">
-			<li class="flex" v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`">
+		<ul class="list items-center space-y-4 my-2 md:my-3">
+			<li class="block md:flex" v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`">
 				<span class="font-bold pr-2 capitalize text-pink-500">{{ _key }}: </span>
 				<ul class="flex flex-wrap">
 					<li v-for="(val, i) of _val" :key="`sub-skill-${i}`" class="pr-2">
@@ -55,19 +55,5 @@ const SupSkills = defineComponent(
 			</li>
 		</ul>
 	</ResumeObjectLayout>
-	<!-- <section class="resume-professional-skills bg-opacity-5 bg-white"> -->
-	<!--     <UContainer> -->
-	<!--         <BaseHeading text="Kỹ năng <span class='hidden md:inline'>chuyên môn</span>" /> -->
-	<!--         <ul class="list items-center space-y-4"> -->
-	<!--             <li class="flex" v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`"> -->
-	<!--                 <span class="font-bold pr-2 capitalize">{{ _key }}: </span> -->
-	<!--                 <ul class="flex flex-wrap"> -->
-	<!--                     <li v-for="(val, i) of _val" :key="`sub-skill-${i}`" class="pr-2"> -->
-	<!--                         <SupSkills :model-value="val" /> -->
-	<!--                     </li> -->
-	<!--                 </ul> -->
-	<!--             </li> -->
-	<!--         </ul> -->
-	<!--     </UContainer> -->
-	<!-- </section> -->
+	
 </template>

@@ -37,7 +37,7 @@ const getPosition = computed(() => {
                 <p class="position text-slate-400 text-sm md:text-lg" v-html="getPosition"></p>
                 <p class="text-sm font-italic tracking-widest">
                     <span class="flex items-center space-x-2 px-4 py-1 date md:bg-pink text-white leading-normal">
-                        <!-- <UIcon name="fe:clock" class="w-5 h-5" /> -->
+                        <UIcon name="fe:clock" class="w-5 h-5" />
                         <span>{{ getDate }}</span>
                     </span>
                 </p>

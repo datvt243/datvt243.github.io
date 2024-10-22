@@ -6,8 +6,11 @@ const social = computed(() => store.social)
 
 <template>
 	<ResumeObjectLayout title="About me" size="xl">
-		<p v-html="hero.introduction" class="mb-4"></p>
-
+		<ClientOnly>
+			<!-- v-html chỉ chạy ở client, server ko render ra đc -> tạm thời xài clientOnly -->
+			<p v-html="hero.introduction" class="mb-4"></p>
+		</ClientOnly>
+		
 		<!-- <ResumeObjectLayout title="Contact"> -->
 		<!-- 	<p v-for="[key, value] in Object.entries(social)" :key="key" class="text-sm"> -->
 		<!-- 		<span>{{ key }}:</span> -->
@@ -31,6 +34,6 @@ const social = computed(() => store.social)
 </template>
 <style scoped>
 :deep(strong) {
-	color: var(--color-pink);
+	color: var(--color-green);
 }
 </style>

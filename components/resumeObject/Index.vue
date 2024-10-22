@@ -10,7 +10,7 @@ const getFullName = computed(() => `${hero.value.firstName} ${hero.value.lastNam
 		<p class="text-violet-800 text-lg mb-6">Hi there! I am _</p>
 		<ResumeObjectLayout
 			:title="getFullName"
-			title-size="text-8xl"
+			title-size="text-5xl md:text-6xl lg:text-8xl"
 			size="xxl"
 			title-style="font-bold italic !text-pink-500 uppercase text-barlow !font-barlow"
 		>

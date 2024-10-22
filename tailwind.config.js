@@ -71,6 +71,7 @@ export default {
 		function ({ addBase, theme }) {
 			addBase({
 				':root': {
+					'--color-green': theme('colors.green[500]'),
 					'--color-pink': theme('colors.pink[500]'),
 				},
 			})
