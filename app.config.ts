@@ -10,6 +10,10 @@ export default defineAppConfig({
 			link: '/',
 		},
 		{
+			page: 'Github',
+			link: '/github',
+		},
+		{
 			page: 'Contact',
 			link: '/contact',
 		},

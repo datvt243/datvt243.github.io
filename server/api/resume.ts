@@ -2,8 +2,8 @@ import type { ResumeAPIResponse, GeneralInformation } from '@/types';
 
 export default defineCachedEventHandler(
     async (event) => {
-        const query = getQuery(event);
-        console.log({ query });
+        /* const query = getQuery(event);
+        console.log({ query }); */
 
         const { nodeAPI, myEmail } = useAppConfig();
 
