@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import type { GitUser } from '@/types/github'
-const URL = 'https://api.github.com/users/datvt243'
-const { data, status } = await useFetch<GitUser>(URL)
+
+const { github } = useAppConfig()
+
+const { data, status } = await useGithubAPI<GitUser>({
+	user: github.user,
+	token: github.personalAccessTokens,
+	type: 'user',
+})
 </script>
 <template>
-	<div v-if="status === 'success' && data" class="git-user">
-		<div>
+	<div class="git-user min-w-60">
+		<!-- {{ status }}
+		{{ data }}
+		{{}} -->
+
+		<div v-if="status === 'success' && data">
 			<NuxtImg :src="data.avatar_url" class="w-40 h-40 rounded-full mb-4" />
 			<p class="space-x-1 flex items-center">
 				<a :href="data.html_url" class="font-bold text-pink-500 text-lg hover:opacity-50 transition-all">{{
@@ -15,8 +25,10 @@ const { data, status } = await useFetch<GitUser>(URL)
 			</p>
 			<p class="font-italic text-violet-400">{{ data.login }}</p>
 		</div>
-		<p class="px-4 py-1 my-2 border-l-4 border-pink-500 italic">{{ data.bio }}</p>
-		<div class="flex items-center space-x-2">
+		<ClientOnly>
+			<p class="px-4 py-1 my-2 border-l-4 border-pink-500 italic" v-html="data.bio"></p>
+		</ClientOnly>
+		<div class="flex flex-wrap items-center space-x-2">
 			<div class="opacity-50"><UIcon name="fe:users" class="w-5 h-5" /></div>
 			<div class="followers">{{ data.followers }} <span class="opacity-50">followers</span></div>
 			<div class="following">{{ data.following }} <span class="opacity-50">following</span></div>

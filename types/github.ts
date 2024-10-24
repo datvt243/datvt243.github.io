@@ -114,6 +114,9 @@ export interface GitRepos {
 	open_issues: number
 	watchers: number
 	default_branch: string
+	temp_clone_token?: any
+	network_count?: number
+	subscribers_count?: number
 }
 
 export interface Owner {

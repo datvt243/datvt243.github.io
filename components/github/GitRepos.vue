@@ -1,58 +1,78 @@
 <script setup lang="ts">
+import { debouncedRef } from '@/customs/refs/debounceRef'
 import type { GitRepos } from '@/types/github'
-const URL = 'https://api.github.com/users/datvt243/repos'
-const { data, status } = await useFetch<GitRepos[]>(URL)
+const { github } = useAppConfig()
+
+const { data, status } = await useGithubAPI<GitRepos[]>({
+	user: github.user,
+	token: github.personalAccessTokens,
+	type: 'repos',
+})
+
+/* const data = await $fetch<GitRepos[]>(`https://api.github.com/users/${github.user}/repos`, {
+	headers: {
+		Authorization: github.personalAccessTokens,
+	},
+}) */
+
+const search = debouncedRef<string>('', 500)
+const language = debouncedRef<string>('', 500)
+
+const getLanguages = computed(() => {
+	return new Set(
+		toValue(data)
+			.filter((e: { language: string }) => !!e.language)
+			.map((e: { language: string }) => e.language),
+	)
+})
+const getRepos = computed(() => {
+	let resule = toValue(data)
+
+	if (search.value) {
+		resule = resule.filter((e: GitRepos) => e?.name.includes(search.value))
+	}
+	if (language.value) {
+		resule = resule.filter((e: GitRepos) => e.language === language.value)
+	}
+
+	return resule
+})
 </script>
 
 <template>
 	<div class="git-repos">
+		<ul class="list inline-flex items-center space-x-3 mb-2">
+			<li v-for="lang in getLanguages" :key="lang">
+				<a
+					@click="
+						() => {
+							language ? (language = '') : (language = lang)
+						}
+					"
+					href="javascript:void(0)"
+				>
+					<UBadge :label="lang" :variant="language === lang ? 'solid' : 'outline'" />
+				</a>
+			</li>
+		</ul>
 		<div class="search">
-			<UInput color="primary" variant="outline" placeholder="Search..." />
+			<UInput
+				v-model="search"
+				size="xl"
+				icon="fe:search"
+				color="primary"
+				variant="outline"
+				placeholder="Search..."
+			/>
 		</div>
 		<UDivider class="border-violet-500" />
 		<div v-if="data" class="clearfix overflow-hidden">
-			<ul class="list">
-				<li v-for="res in data" :key="res.id" class="border-b border-violet-500 py-4">
-					<div class="flex justify-between">
-						<p class="space-x-3">
-							<a
-								:href="res.url"
-								class="text-green-500 font-jetbrains font-bold text-lg hover:text-sky-500 transition-all"
-								>{{ res.name }}</a
-							>
-							<span class="text-sm opacity-50 text-gray-300 font-barlow">{{ res.visibility }}</span>
-						</p>
-						<div>
-							<div class="flex gap-2">
-								<p>
-									<a :href="res.git_url" class="text-pink-500 hover:opacity-50 transition-all">
-										<UIcon name="fe:github" class="w-5 h-5" />
-									</a>
-								</p>
-								<p>
-									<a :href="res.git_url" class="text-violet-500 hover:opacity-50 transition-all">
-										<UIcon name="fe:eye" class="w-5 h-5" />
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<p>
-						<span class="text-sm font-opensans text-orange-300">Language: {{ res.language }}</span>
-					</p>
-					<p class="space-x-2 my-2">
-						<span
-							v-for="t in res.topics"
-							:key="t"
-							class="inline-block px-3 py-0.5 border border-gray-500 rounded-full text-gray-500 text-sm leading-none text-nowrap"
-							>{{ t }}</span
-						>
-						<!-- <UBadge v-for="t in res.topics" :key="t">{{ t }}</UBadge> -->
-					</p>
-					<p>{{ res.description }}</p>
-					<p class="mt-3 text-sm text-gray-500">{{ res.created_at }}</p>
+			<TransitionGroup name="transition-group" tag="ul" class="list">
+				<li v-for="res in getRepos" :key="res.id" class="border-b border-violet-500 py-4">
+					<GithubPartItem :model-value="res" />
 				</li>
-			</ul>
+			</TransitionGroup>
+
 			<!-- <div class="w-100 overflow-hidden">
 				<pre>{{ data[1] }}</pre>
 			</div> -->
