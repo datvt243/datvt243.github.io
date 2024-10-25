@@ -15,8 +15,6 @@ export const useGithub = defineStore('github', {
 	}),
 	actions: {
 		async fetchDataUser(): Promise<GitUser> {
-			console.log({ token: this.token, u: this.userName })
-
 			let data: GitUser = {} as GitUser
 			if (!this.user || !Object.keys(this.user).length) {
 				data = await $fetch<GitUser>(`https://api.github.com/users/${this.userName}`, {
@@ -43,6 +41,8 @@ export const useGithub = defineStore('github', {
 	},
 	getters: {
 		getUser({ user }) {
+			/* if (!Object.keys(user).length) {
+			} */
 			return user
 		},
 		getRepos({ repos }) {

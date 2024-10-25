@@ -5,15 +5,27 @@
  * Description:
  */
 
-import { useGithub } from '@/stores/github'
+import type { GitRepos, GitUser } from '~/types/github'
+
+/* import { useGithub } from '@/stores/github'
+
 const store = useGithub()
 store.fetchDataUser()
 store.fetchDataRepos()
-
 const user = computed(() => store.getUser)
-const repos = computed(() => store.getRepos)
+const repos = computed(() => store.getRepos) */
 
-//const data = await $fetch('/api/github')
+/* const { GITHUB_TOKEN, GITHUB_USER } = useRuntimeConfig().public */
+const user: GitUser = await $fetch('https://api.github.com/users/datvt243', {
+	/* headers: {
+		Authorization: `token ${GITHUB_TOKEN}`,
+	}, */
+})
+const repos: GitRepos[] = await $fetch('https://api.github.com/users/datvt243/repos', {
+	/* headers: {
+		Authorization: `token ${GITHUB_TOKEN}`,
+	}, */
+})
 </script>
 
 <template>

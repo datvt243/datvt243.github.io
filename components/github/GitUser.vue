@@ -13,9 +13,11 @@ const props = defineProps<{
 </script>
 <template>
 	<div class="git-user min-w-60">
-		<div v-if="props.user">
+		<div v-if="props.user || Object.keys(props.user).length">
 			<div>
-				<NuxtImg :src="props.user.avatar_url" class="w-40 h-40 rounded-full mb-4" />
+				<template v-if="props.user.avatar_url">
+					<NuxtImg :src="props.user.avatar_url" class="w-40 h-40 rounded-full mb-4" />
+				</template>
 				<p class="space-x-1 flex items-center">
 					<a
 						:href="props.user.html_url"

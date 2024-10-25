@@ -20,7 +20,7 @@ export const cacheGetPosts = defineCachedFunction(
 	},
 	{
 		maxAge: 60 * 60,
-		name: 'cachePosts',
-		getKey: () => 'post',
+		name: 'posts',
+		getKey: () => 'posts',
 	},
 )
