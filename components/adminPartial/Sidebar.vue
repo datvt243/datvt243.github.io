@@ -1,14 +1,20 @@
 <script setup lang="ts">
-const sidebarToggle = ref(false);
-const selected = ref('Dashboard');
-const page = ref('');
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
+const sidebarToggle = ref(false)
+const selected = ref('Dashboard')
+const page = ref('')
 </script>
 
 <template>
 	<aside
 		:class="sidebarToggle ? 'translate-x-0' : '-translate-x-full'"
 		class="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-slate-800 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 border-l border-pink"
-		@click.outside="sidebarToggle = false"
+		@click="sidebarToggle = false"
 	>
 		<!-- SIDEBAR HEADER -->
 		<div class="clearfix">

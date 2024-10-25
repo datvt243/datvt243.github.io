@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 import { convertNumberToDate } from '@/utils/index'
 
 const props = defineProps<{
@@ -70,7 +76,6 @@ const getPosition = computed(() => {
 			list-style-type: disc;
 			padding-left: 1rem;
 			line-height: 1.5em;
-			
 		}
 	}
 }

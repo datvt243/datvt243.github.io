@@ -1,4 +1,10 @@
 /**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
+/**
  * @param obj - [TODO:description]
  * @returns Object | Array | string ...
  * */

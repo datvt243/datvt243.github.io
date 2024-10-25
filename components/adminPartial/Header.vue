@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 const darkMode = ref(false)
 const dropdownOpen = ref(false)
 const items = [
@@ -70,7 +76,7 @@ const items = [
 				</ul>
 
 				<!-- User Area -->
-				<div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
+				<div class="relative" x-data="{ dropdownOpen: false }" @click="dropdownOpen = false">
 					<a class="flex items-center gap-5" href="#" @click.prevent="dropdownOpen = !dropdownOpen">
 						<span class="hidden text-right lg:block">
 							<span class="block text-sm font-medium text-black dark:text-white">Thomas Anree</span>

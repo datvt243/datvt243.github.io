@@ -4,10 +4,11 @@ const props = defineProps<{
 }>()
 
 const { github } = useAppConfig()
+const nuxtConfig = useRuntimeConfig()
 
 async function getLanguage() {
 	return await $fetch(props.url, {
-		headers: { Authorization: `token ${github.personalAccessTokens}` },
+		headers: { Authorization: `token ${nuxtConfig.gitToken}` },
 	})
 }
 
@@ -30,14 +31,6 @@ const getMax = computed<number>((): number => {
 
 	return _result
 })
-/* watch(
-	() => props.url,
-	async () => {
-		console.log('run')
-
-		data.value = await getLanguage()
-	},
-) */
 </script>
 
 <template>

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
 import type { Post } from '@/types/index'
 
 const props = defineProps<{

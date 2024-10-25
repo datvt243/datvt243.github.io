@@ -1,3 +1,9 @@
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 import { customRef } from 'vue'
 
 export function debouncedRef<T>(value: T, delay: number = 200) {

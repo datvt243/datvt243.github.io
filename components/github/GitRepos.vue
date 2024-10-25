@@ -1,32 +1,30 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 import { debouncedRef } from '@/customs/refs/debounceRef'
 import type { GitRepos } from '@/types/github'
-const { github } = useAppConfig()
 
-const { data, status } = await useGithubAPI<GitRepos[]>({
-	user: github.user,
-	token: github.personalAccessTokens,
-	type: 'repos',
-})
+const props = defineProps<{
+	repos: GitRepos[]
+}>()
 
-/* const data = await $fetch<GitRepos[]>(`https://api.github.com/users/${github.user}/repos`, {
-	headers: {
-		Authorization: github.personalAccessTokens,
-	},
-}) */
-
+// Filter
 const search = debouncedRef<string>('', 500)
 const language = debouncedRef<string>('', 500)
 
 const getLanguages = computed(() => {
 	return new Set(
-		toValue(data)
+		toValue(props.repos)
 			.filter((e: { language: string }) => !!e.language)
 			.map((e: { language: string }) => e.language),
 	)
 })
 const getRepos = computed(() => {
-	let resule = toValue(data)
+	let resule = toValue(props.repos)
 
 	if (search.value) {
 		resule = resule.filter((e: GitRepos) => e?.name.includes(search.value))
@@ -62,20 +60,16 @@ const getRepos = computed(() => {
 				icon="fe:search"
 				color="primary"
 				variant="outline"
-				placeholder="Search..."
+				placeholder="Search repos name..."
 			/>
 		</div>
 		<UDivider class="border-violet-500" />
-		<div v-if="data" class="clearfix overflow-hidden">
+		<div v-if="props.repos" class="clearfix overflow-hidden">
 			<TransitionGroup name="transition-group" tag="ul" class="list">
 				<li v-for="res in getRepos" :key="res.id" class="border-b border-violet-500 py-4">
 					<GithubPartItem :model-value="res" />
 				</li>
 			</TransitionGroup>
-
-			<!-- <div class="w-100 overflow-hidden">
-				<pre>{{ data[1] }}</pre>
-			</div> -->
 		</div>
 	</div>
 </template>

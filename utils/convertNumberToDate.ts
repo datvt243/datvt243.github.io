@@ -1,4 +1,10 @@
 /**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
+/**
  * @param number - [TODO:description]
  * @returns string, format Date
  */

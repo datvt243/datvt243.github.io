@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 import type { APIFormatResponse, Post } from '@/types/index'
 
 definePageMeta({

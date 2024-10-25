@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
@@ -10,7 +16,7 @@ const social = computed(() => store.social)
 			<!-- v-html chỉ chạy ở client, server ko render ra đc -> tạm thời xài clientOnly -->
 			<p v-html="hero.introduction" class="mb-4"></p>
 		</ClientOnly>
-		
+
 		<!-- <ResumeObjectLayout title="Contact"> -->
 		<!-- 	<p v-for="[key, value] in Object.entries(social)" :key="key" class="text-sm"> -->
 		<!-- 		<span>{{ key }}:</span> -->

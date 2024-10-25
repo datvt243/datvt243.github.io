@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
 import type { ProfessionalSkill } from '@/types/resume-document'
 interface ObjectRender {
 	[key: string]: ProfessionalSkill[]

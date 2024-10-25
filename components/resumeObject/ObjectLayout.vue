@@ -1,5 +1,11 @@
 <script setup lang="ts">
-type Size = 'sm' | 'lg' | 'xl' | 'xxl';
+/**
+ * Author: Đạt Võ - https://github.com/datvt243
+ * Date: `--/--`
+ * Description:
+ */
+
+type Size = 'sm' | 'lg' | 'xl' | 'xxl'
 const props = defineProps({
 	title: { type: String, default: 'Object Title' },
 	titleStyle: { type: String, default: '' },
@@ -18,12 +24,12 @@ const obj = {
 const getSize = computed(() => {
 	if (props.titleSize) return props.titleSize
 	if (!props.size) return ''
-	const key: Size = props.size;
+	const key: Size = props.size
 	return `${obj[key].size}`
 })
 const getPadding = computed(() => {
 	if (!props.size) return 'pl-8'
-	const key: Size = props.size;
+	const key: Size = props.size
 	return `${obj[key].padding}`
 })
 </script>
