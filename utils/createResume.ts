@@ -16,19 +16,19 @@ const _log = console.log.bind(console)
 
 export const createCV = async (data: Record<string, any>) => {
 	try {
-		/* const platform = os.platform();
-        let executablePath = '';
+		const platform = os.platform()
+		let executablePath = ''
 
-        if (platform === 'win32') {
-            executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-        } else if (platform === 'darwin') {
-            executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-        } else if (platform === 'linux') {
-            executablePath = '/usr/bin/chromium-browser';
-        } else {
-            _log('Hệ điều hành không được hỗ trợ.');
-            process.exit(1);
-        } */
+		if (platform === 'win32') {
+			executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+		} else if (platform === 'darwin') {
+			executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+		} else if (platform === 'linux') {
+			executablePath = '/usr/bin/chromium-browser'
+		} else {
+			_log('Hệ điều hành không được hỗ trợ.')
+			process.exit(1)
+		}
 
 		const otp = {
 			/* executablePath, */
