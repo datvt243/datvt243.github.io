@@ -20,11 +20,15 @@ const user: GitUser = await $fetch('https://api.github.com/users/datvt243', {
 	/* headers: {
 		Authorization: `token ${GITHUB_TOKEN}`,
 	}, */
+	retry: 3,
+	retryDelay: 300,
 })
 const repos: GitRepos[] = await $fetch('https://api.github.com/users/datvt243/repos', {
 	/* headers: {
 		Authorization: `token ${GITHUB_TOKEN}`,
 	}, */
+	retry: 3,
+	retryDelay: 300,
 })
 </script>
 

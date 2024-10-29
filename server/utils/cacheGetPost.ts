@@ -13,7 +13,10 @@ export const cacheGetPosts = defineCachedFunction(
 			data = null,
 			errors = [],
 			message = '',
-		} = await $fetch<APIFormatResponse<Post[]>>(`https://blog-api-nodejs-express.onrender.com/api/v1/post/`)
+		} = await $fetch<APIFormatResponse<Post[]>>(`https://blog-api-nodejs-express.onrender.com/api/v1/post/`, {
+			retry: 3,
+			retryDelay: 300,
+		})
 
 		if (!status) return []
 		return !data ? [] : data

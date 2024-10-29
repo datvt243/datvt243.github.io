@@ -13,7 +13,7 @@ const isOpen = ref(false)
 
 <template>
 	<header class="bg-opacity-5 bg-pink border-b-2 border-green-500">
-		<UContainer>
+		<UContainer :ui="{ constrained: 'py-2 md:py-4 lg:py-6' }">
 			<nav class="rounded-lg">
 				<div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
 					<NuxtLink to="/" class="flex items-center space-x-3">
