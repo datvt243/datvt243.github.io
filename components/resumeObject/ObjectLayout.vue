@@ -15,10 +15,10 @@ const props = defineProps({
 })
 
 const obj = {
-	sm: { size: 'text-sm', padding: 'pl-3 md:pl-6 lg:pl-7 xl:pl-8' },
-	lg: { size: 'text-xl', padding: 'pl-3 md:pl-12 lg:pl-14 xl:pl-16' },
-	xl: { size: 'text-3xl md:text-xl lg:text-4xl', padding: 'pl-3 md:pl-14 lg:pl-20 xl:pl-24' },
-	xxl: { size: 'text-md md:text-2xl lg:text-6xl', padding: 'pl-3 md:pl-16 lg:pl-30 xl:pl-32' },
+	sm: { size: 'text-sm', padding: 'pl-3 sm:pl-4 md:pl-6 lg:pl-7 xl:pl-8' },
+	lg: { size: 'text-xl', padding: 'pl-3 sm:pl-10 md:pl-12 lg:pl-14 xl:pl-16' },
+	xl: { size: 'text-3xl md:text-xl lg:text-4xl', padding: 'pl-3 sm:pl-10 md:pl-14 lg:pl-20 xl:pl-24' },
+	xxl: { size: 'text-md md:text-2xl lg:text-6xl', padding: 'pl-3 sm:pl-12 md:pl-16 lg:pl-30 xl:pl-32' },
 }
 
 const getSize = computed(() => {

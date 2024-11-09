@@ -23,7 +23,7 @@ const fullName = computed(() => {
 							👋
 						</p>
 						<p class="capitalize font-semibold tracking-wider text-2xl text-sky-500">
-							{{ hero.positionDesired }}
+							{{ hero?.positionDesired }}
 						</p>
 					</div>
 					<ul class="flex items-center space-x-6 mt-4">

@@ -4,6 +4,7 @@
  * Date: `--/--`
  * Description:
  */
+import { formatDate } from '~/utils'
 import type { Post } from '@/types/index'
 
 const props = defineProps<{
@@ -15,28 +16,28 @@ const props = defineProps<{
 	<article
 		class="mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mb-8 pb-4 border-b"
 	>
-		<header class="pt-6 xl:pb-6">
+		<header class="py-5 md:py-8 lg:py-12">
 			<div class="space-y-1 text-center">
 				<dl class="space-y-10">
 					<div>
 						<dt class="sr-only">Published on</dt>
 						<dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
 							<time datetime="2023-08-05T00:00:00.000Z">
-								{{ new Date(modelValue.createdAt).toUTCString() }}
+								{{ formatDate(modelValue.createdAt) }}
 							</time>
 						</dd>
 					</div>
 				</dl>
 				<div>
 					<h1
-						class="text-pink-500 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+						class="text-pink-500 text-3xl font-bold leading-9 tracking-wide sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
 					>
 						{{ modelValue.title }}
 					</h1>
 				</div>
 			</div>
 		</header>
-		<hr class="hidden md:my-4" />
+		<hr class="hidden md:my-8" />
 		<div
 			class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
 		>
@@ -44,7 +45,7 @@ const props = defineProps<{
 				<PostAuthor />
 			</div>
 
-			<div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0 lg:pt-4">
+			<div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0 lg:py-12 xl:py-4">
 				<div class="post-content" v-html="modelValue.content"></div>
 			</div>
 			<footer>

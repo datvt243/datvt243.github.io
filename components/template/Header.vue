@@ -26,9 +26,7 @@ const isOpen = ref(false)
 					</NuxtLink>
 					<div class="col-right flex items-center justify-end">
 						<div class="flex items-center lg:order-2">
-							<template v-if="['/blogs'].includes(route.path)">
-								<a href="#" class="btn btn-primary"> Log in </a>
-							</template>
+
 
 							<div class="inline-flex items-center p-2 ml-1 rounded-lg lg:hidden">
 								<UButton

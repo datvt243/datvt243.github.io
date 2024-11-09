@@ -39,20 +39,31 @@ const getRepos = computed(() => {
 
 <template>
 	<div class="git-repos">
-		<ul class="list inline-flex items-center space-x-3 mb-2">
-			<li v-for="lang in getLanguages" :key="lang">
-				<a
-					@click="
+		<div class="flex items-center justify-between">
+			<div>
+				<ul class="list inline-flex items-center space-x-3 mb-2">
+					<li v-for="lang in getLanguages" :key="lang">
+						<a
+							@click="
 						() => {
-							language ? (language = '') : (language = lang)
+							language === lang ? (language = '') : (language = lang)
 						}
 					"
-					href="javascript:void(0)"
-				>
-					<UBadge :label="lang" :variant="language === lang ? 'solid' : 'outline'" />
-				</a>
-			</li>
-		</ul>
+							href="javascript:void(0)"
+						>
+							<UBadge :label="lang" :variant="language === lang ? 'solid' : 'outline'" />
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<span v-if="language" @click="() => language = ''">
+					<UTooltip text="Clear filter">
+						<UIcon name="fe:close" class="w-5 h-5 text-red-500" />
+					</UTooltip>
+				</span>
+			</div>
+		</div>
 		<div class="search">
 			<UInput
 				v-model="search"

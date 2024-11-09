@@ -17,16 +17,51 @@ useSeoMeta({
 	ogDescription: '',
 })
 
-const { data, status } = useFetch<APIFormatResponse<Post[]>>('/api/blogs/posts')
+const query = inject<{ category: Ref<string>, page: Ref<number>, perPage: Ref<number> }>('query');
+const category = toRef(query?.category || '')
+const page = toRef(query?.page || 1)
+const perPage = toRef(query?.perPage || 20)
 
-const blogs = computed(() => data.value?.data || null)
+// const params = computed(() => {
+// 	let p = `?page=${page.value}&perPage=${perPage.value}`;
+// 	if (category.value) {
+// 		p += `&category=${category.value}`;
+// 	}
+// 	return p
+// })
+
+interface GetPosts {
+	data: Post[],
+	total: number,
+	page: number,
+	perPage: number
+}
+const { data, status } = useFetch<APIFormatResponse<GetPosts>>(`/api/blogs/posts`, {
+	query: {
+		page: page,
+		perPage: perPage,
+		category: category,
+	}
+})
+const blogs = computed(() => data.value?.data?.data || null)
+const total = computed(() => data.value?.data?.total || 0)
 </script>
 
 <template>
 	<div class="clearfix">
-		<div class="page-head mb-8">
+		<div class="page-head mb-4">
 			<BaseHeading :text="'_blog'" />
-			<p>Articles, tutorials, snippets, rants, and everything else.</p>
+		</div>
+		<div class="mb-4 flex justify-between items-center px-2 space-x-4">
+			<div>
+				<p>Articles, tutorials, snippets, rants, and everything else.</p>
+			</div>
+			<div class="">
+				<div class="flex items-center space-x-4 border border-slate-700 rounded pl-3">
+					<div class="leading-none text-sm">Show:</div>
+					<USelect v-model="perPage" :options="[10, 20, 30, 40, 50]"  variant="none" />
+				</div>
+			</div>
 		</div>
 		<ListRender :status="status" :data="blogs">
 			<template #default>
@@ -43,6 +78,10 @@ const blogs = computed(() => data.value?.data || null)
 				</ul>
 			</template>
 		</ListRender>
+		<div class="mt-4 flex justify-center">
+			<UPagination v-model="page" :page-count="perPage" :total="total" />
+		</div>
+
 	</div>
 </template>
 

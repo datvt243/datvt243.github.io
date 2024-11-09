@@ -27,8 +27,8 @@ export default defineCachedEventHandler(
 	{
 		name: 'api-resume',
 		getKey() {
-			const { myEmail } = useAppConfig()
-			return `api-resume-${myEmail}`
+			const { MY_EMAIL } = useRuntimeConfig().public
+			return `api-resume-${MY_EMAIL}`
 		},
 		maxAge: 60 * 60 * 24 * 12,
 	},

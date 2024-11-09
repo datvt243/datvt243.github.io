@@ -29,7 +29,9 @@ export const useResumeStore = defineStore('resume', {
 	},
 	getters: {
 		generalInformation({ resume: { generalInformation } }): GeneralInformation {
-			return Array.isArray(generalInformation) ? generalInformation?.[0] || {} : generalInformation
+			return Array.isArray(generalInformation)
+				? generalInformation?.[0] || ({} as GeneralInformation)
+				: generalInformation
 		},
 
 		hero({ resume = {} }) {

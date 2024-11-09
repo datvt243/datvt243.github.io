@@ -13,5 +13,7 @@ export interface Post {
 	authorId: string
 	createdAt: string
 	updatedAt?: string
-	tags?: string[]
+	tags?: string[],
+	excerpt: string,
+	categoryIds?: string[]
 }

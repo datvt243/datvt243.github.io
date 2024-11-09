@@ -8,7 +8,9 @@ import type { Post } from '@/types'
 import { cacheGetPosts } from '~/server/utils/cacheGetPost'
 
 export default defineEventHandler(async (event) => {
-	const posts: Post[] | [] = await cacheGetPosts()
+	const query = getQuery(event)
+
+	const posts: Post[] | [] = await cacheGetPosts(query)
 
 	return {
 		status: true,
