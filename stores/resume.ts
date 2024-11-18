@@ -35,11 +35,12 @@ export const useResumeStore = defineStore('resume', {
 		},
 
 		hero({ resume = {} }) {
-			const { firstName = '', lastName = '', introduction = '' } = resume
+			const { firstName = '', lastName = '', introduction = '', email = '' } = resume
 			const { positionDesired = 'A frontend developer' } = this.generalInformation as GeneralInformation
 			return {
 				firstName,
 				lastName,
+				email,
 				positionDesired,
 				introduction,
 			}

@@ -8,6 +8,23 @@
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
+
+
+async function downloadResume() {
+		/* const pdf = await $fetch('/api/generate-pdf')
+		if (pdf) {
+			return pdf
+		} */
+
+		const response = await fetch('/api/generate-pdf');
+		const blob = await response.blob();
+		const link = document.createElement('a');
+
+
+		link.href = URL.createObjectURL(blob);
+		link.download = `${hero.value.email || 'download'}.pdf`;
+		link.click();
+}
 </script>
 
 <template>
@@ -16,7 +33,7 @@ const social = computed(() => store.social)
 			<!-- v-html chỉ chạy ở client, server ko render ra đc -> tạm thời xài clientOnly -->
 			<p v-html="hero.introduction" class="mb-4"></p>
 		</ClientOnly>
-
+	
 		<!-- <ResumeObjectLayout title="Contact"> -->
 		<!-- 	<p v-for="[key, value] in Object.entries(social)" :key="key" class="text-sm"> -->
 		<!-- 		<span>{{ key }}:</span> -->
@@ -36,6 +53,11 @@ const social = computed(() => store.social)
 				</a>
 			</li>
 		</ul>
+
+		<p class="mt-4">
+			<UButton @click="downloadResume()" color="pink" variant="solid" size="lg">Download CV</UButton>
+		</p>
+
 	</ResumeObjectLayout>
 </template>
 <style scoped>
