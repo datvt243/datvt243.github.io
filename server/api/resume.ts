@@ -12,13 +12,6 @@ export default defineCachedEventHandler(
 
 		const { success = false, data = {} } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
 
-		if (data) {
-			data.generalInformation = ((generalInformation: GeneralInformation[]) => {
-				if (!generalInformation.length) return {}
-				return generalInformation[0]
-			})(data?.generalInformation || [])
-		}
-
 		return {
 			success,
 			resume: data,

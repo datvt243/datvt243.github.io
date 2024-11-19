@@ -1,4 +1,6 @@
-import puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer-core'
+import os from 'os'
+// import chromium from 'npm i chrome-aws-lambda'
 import type { ResumeAPIResponse, GeneralInformation } from '@/types'
 
 import { pageRender } from '~/server/utils/createPDF'
@@ -18,9 +20,25 @@ export default defineEventHandler(async (event) => {
 	const { email, html: contentHTML } = pageRender(data)
 
 	// Khởi tạo Puppeteer và tạo PDF
+	const getExecutablePath = (() => {
+		// return '/usr/bin/google-chrome'
+
+		const platform = os.platform()
+		let executablePath = ''
+
+		if (platform === 'win32') {
+			executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+		} else if (platform === 'darwin') {
+			executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+		} else if (platform === 'linux') {
+			executablePath = '/usr/bin/chromium-browser'
+		}
+		return executablePath
+	})()
+
 	const browser = await puppeteer.launch({
-		headless: true,
-		args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		executablePath: getExecutablePath, // Đường dẫn đến trình duyệt Chrome (nếu đã cài)
+		args: ['--no-sandbox', '--disable-setuid-sandbox'], // Thêm các cờ nếu cần
 	})
 	const page = await browser.newPage()
 
