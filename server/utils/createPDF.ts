@@ -11,7 +11,7 @@ import type {
 
 const _log = console.log.bind(console)
 
-export const pageRender = (RECORD: Record<string, any>) => {
+export const pageRenger = (RECORD: Record<string, any>) => {
 	/**
 	 * get data format
 	 */
