@@ -11,7 +11,7 @@ import type {
 
 const _log = console.log.bind(console)
 
-export const pageRenger = (RECORD: Record<string, any>) => {
+export const pageRender = (RECORD: Record<string, any>) => {
 	/**
 	 * get data format
 	 */
@@ -267,15 +267,7 @@ const _helper = () => {
 
 			const _content = list
 				.map((el) => {
-					const {
-						company: subTitle,
-						position: title,
-						startDate,
-						endDate,
-						description,
-						isCurrent,
-						skills,
-					} = el
+					const { company: subTitle, position: title, startDate, endDate, description, isCurrent, skills } = el
 					return _layoutItem({
 						title,
 						subTitle: `${subTitle}`,
