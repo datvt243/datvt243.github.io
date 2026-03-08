@@ -41,8 +41,8 @@ export default defineNuxtConfig({
 	},
 
 	routeRules: {
-		'/': { prerender: true },
-		'/github': { prerender: true },
+		'/': { isr: 60 },
+		'/github': { isr: 60 },
 		'/contact': { prerender: true },
 		'/blogs': { isr: 60 },
 		'/blogs/**': { isr: true },
