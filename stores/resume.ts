@@ -4,16 +4,7 @@
  * Description:
  */
 
-import type {
-	Resume,
-	SocialMedia,
-	Education,
-	Experience,
-	GeneralInformation,
-	ForeignLanguage,
-	Project,
-	ProfessionalSkill,
-} from '@/types'
+import type { Resume, SocialMedia, Education, Experience, GeneralInformation, ForeignLanguage, Project, ProfessionalSkill } from '@/types'
 
 export const useResumeStore = defineStore('resume', {
 	state: () => ({
@@ -29,9 +20,7 @@ export const useResumeStore = defineStore('resume', {
 	},
 	getters: {
 		generalInformation({ resume: { generalInformation } }): GeneralInformation {
-			return Array.isArray(generalInformation)
-				? generalInformation?.[0] || ({} as GeneralInformation)
-				: generalInformation
+			return Array.isArray(generalInformation) ? generalInformation?.[0] || ({} as GeneralInformation) : generalInformation
 		},
 
 		hero({ resume = {} }) {
@@ -54,7 +43,7 @@ export const useResumeStore = defineStore('resume', {
 			return socialMedia
 		},
 		experiences({ resume: { experiences } }): Experience[] {
-			return experiences
+			return experiences.sort((a, b) => b.startDate - a.startDate)
 		},
 		educations({ resume: { educations } }): Education[] {
 			return educations
