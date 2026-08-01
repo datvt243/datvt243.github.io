@@ -6,16 +6,16 @@
  */
 
 definePageMeta({
-	layout: 'default',
+  layout: 'default',
 })
 useSeoMeta({
-	title: 'Github',
-	ogTitle: 'Github',
-	description: '',
-	ogDescription: '',
+  title: 'Github',
+  ogTitle: 'Github',
+  description: '',
+  ogDescription: '',
 })
 </script>
 
 <template>
-	<Github></Github>
+  <Github/>
 </template>

@@ -19,39 +19,39 @@ const props = defineProps<{
 }>()
 
 const getDate = computed(() => {
-	const _s = convertNumberToDate(props.startDate)
-	const _e = convertNumberToDate(props.endDate)
-	return `${_s} - ${_e}`
+  const _s = convertNumberToDate(props.startDate)
+  const _e = convertNumberToDate(props.endDate)
+  return `${_s} - ${_e}`
 })
 const getPosition = computed(() => {
-	let _str = ''
-	props.prefixPosition && (_str += `${props.prefixPosition}: `)
-	return `<span class="text-sm">${_str}</span> <span class="font-bold tracking-widest">${props.position.toUpperCase()}</span>`
+  let _str = ''
+  props.prefixPosition && (_str += `${props.prefixPosition}: `)
+  return `<span class="text-sm">${_str}</span> <span class="font-bold tracking-widest">${props.position.toUpperCase()}</span>`
 })
 </script>
 
 <template>
-	<div class="block-item space-y-2 md:space-y-3">
-		<ResumeObjectLayout :title="`${title}`" title-color="text-orange-500" size="lg">
-			<template v-if="$slots.body">
-				<slot name="body"></slot>
-			</template>
-			<div v-else class="block sm:flex items-center space-y-2 sm:space-x-4 mb-4">
-				<p class="text-sm md:text-lg" :class="{ 'flex items-center space-x-2': !!iconPosition }">
-					<UIcon v-if="iconPosition" :name="iconPosition" class="w-5 h-5" />
-					<span v-if="prefixPosition">{{ `${prefixPosition}: ` }}</span>
-					<span class="font-bold text-violet-400">{{ position }}</span>
-				</p>
-				<p class="text-sm font-italic tracking-widest !mt-0">
-					<span class="flex items-center space-x-2 leading-normal">
-						<UIcon name="fe:clock" class="w-5 h-5" />
-						<span>{{ getDate }}</span>
-					</span>
-				</p>
-			</div>
-			<div class="description" v-html="description"></div>
-		</ResumeObjectLayout>
-	</div>
+  <div class="block-item space-y-2 md:space-y-3">
+    <ResumeObjectLayout :title="`${title}`" title-color="text-orange-500" size="lg">
+      <template v-if="$slots.body">
+        <slot name="body"/>
+      </template>
+      <div v-else class="block sm:flex items-center space-y-2 sm:space-x-4 mb-4">
+        <p class="text-sm md:text-lg" :class="{ 'flex items-center space-x-2': !!iconPosition }">
+          <UIcon v-if="iconPosition" :name="iconPosition" class="w-5 h-5" />
+          <span v-if="prefixPosition">{{ `${prefixPosition}: ` }}</span>
+          <span class="font-bold text-violet-400">{{ position }}</span>
+        </p>
+        <p class="text-sm font-italic tracking-widest !mt-0">
+          <span class="flex items-center space-x-2 leading-normal">
+            <UIcon name="fe:clock" class="w-5 h-5" />
+            <span>{{ getDate }}</span>
+          </span>
+        </p>
+      </div>
+      <div class="description" v-html="description"/>
+    </ResumeObjectLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">

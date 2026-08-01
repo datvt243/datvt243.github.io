@@ -8,32 +8,32 @@ import defaultTheme from 'tailwindcss/defaultTheme'
  * @returns colors[]
  */
 const generateColorScale = (baseColor) => {
-	const scale = {}
-	// Các mức độ màu từ 100 đến 900 (thêm sáng hoặc tối)
-	for (let i = 1; i <= 9; i++) {
-		const ratio = (i - 5) * 10 // Điều chỉnh độ sáng/tối
-		const color = tinycolor(baseColor).lighten(ratio).toHexString()
-		scale[`${i * 100}`] = color // '100', '200', ..., '900'
-	}
-	return scale
+  const scale = {}
+  // Các mức độ màu từ 100 đến 900 (thêm sáng hoặc tối)
+  for (let i = 1; i <= 9; i++) {
+    const ratio = (i - 5) * 10 // Điều chỉnh độ sáng/tối
+    const color = tinycolor(baseColor).lighten(ratio).toHexString()
+    scale[`${i * 100}`] = color // '100', '200', ..., '900'
+  }
+  return scale
 }
 
 export default {
-	darkMode: ['selector'],
-	content: [
-		'./components/**/*.{js,vue,ts,jsx}',
-		'./layouts/**/*.vue',
-		'./pages/**/*.vue',
-		'./plugins/**/*.{js,ts}',
-		'./app.vue',
-		'./error.vue',
-		'./server/plugins/*.{js,ts}',
-	],
-	theme: {
-		fontFamily: {
-			barlow: ['BarlowMedium', defaultTheme.fontFamily.sans],
-		},
-		/* colors: {
+  darkMode: ['selector'],
+  content: [
+    './components/**/*.{js,vue,ts,jsx}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './app.vue',
+    './error.vue',
+    './server/plugins/*.{js,ts}',
+  ],
+  theme: {
+    fontFamily: {
+      barlow: ['BarlowMedium', defaultTheme.fontFamily.sans],
+    },
+    /* colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
 			white: '#ffffff',
@@ -47,35 +47,35 @@ export default {
 			dark: generateColorScale('#333333'),
 			orange: generateColorScale('#C66828'),
 		}, */
-		container: {
-			center: true,
-			// padding: '10px',
-		},
-		extend: {
-			fontFamily: {
-				barlow: ['Barlow', defaultTheme.fontFamily.sans],
-				jetbrains: ['JetBrains Mono', defaultTheme.fontFamily.sans],
-				opensans: ['Open Sans', defaultTheme.fontFamily.sans],
-			},
-			colors: {
-				darkness: '#23272d',
-				pink: generateColorScale('#ec4899'),
-				dark: generateColorScale('#333333'),
-			},
-			container: {
-				block: {},
-			},
-		},
-	},
-	plugins: [
-		function ({ addBase, theme }) {
-			addBase({
-				':root': {
-					'--color-green': theme('colors.green[500]'),
-					'--color-pink': theme('colors.pink[500]'),
-				},
-			})
-		},
-	],
-	extend: {},
+    container: {
+      center: true,
+      // padding: '10px',
+    },
+    extend: {
+      fontFamily: {
+        barlow: ['Barlow', defaultTheme.fontFamily.sans],
+        jetbrains: ['JetBrains Mono', defaultTheme.fontFamily.sans],
+        opensans: ['Open Sans', defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        darkness: '#23272d',
+        pink: generateColorScale('#ec4899'),
+        dark: generateColorScale('#333333'),
+      },
+      container: {
+        block: {},
+      },
+    },
+  },
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--color-green': theme('colors.green[500]'),
+          '--color-pink': theme('colors.pink[500]'),
+        },
+      })
+    },
+  ],
+  extend: {},
 }

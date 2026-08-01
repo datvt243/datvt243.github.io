@@ -38,27 +38,27 @@ const props = defineProps<{
     };
 }); */
 const educations = computed<Education[]>(() => {
-    return props.modelValue?.educations || [];
+  return props.modelValue?.educations || [];
 });
 const experiences = computed<Experience[]>(() => {
-    return props.modelValue?.experiences || [];
+  return props.modelValue?.experiences || [];
 });
 const skills = computed(() => {
-    return props.modelValue.generalInformation.professionalSkills;
+  return props.modelValue.generalInformation.professionalSkills;
 });
 const groups = computed(() => {
-    return props.modelValue.generalInformation.professionalSkillsGroup;
+  return props.modelValue.generalInformation.professionalSkillsGroup;
 });
 </script>
 
 <template>
-    <div class="resume-wrapper">
-        <ResumeHero />
-        <ResumeAboutMe />
-        <ResumeSkills :model-value="skills" :groups="groups" />
-        <ResumeExperiences />
-        <ResumeProjects />
-        <ResumeEducations />
-        <ResumeLanguages />
-    </div>
+  <div class="resume-wrapper">
+    <ResumeHero />
+    <ResumeAboutMe />
+    <ResumeSkills :model-value="skills" :groups="groups" />
+    <ResumeExperiences />
+    <ResumeProjects />
+    <ResumeEducations />
+    <ResumeLanguages />
+  </div>
 </template>
