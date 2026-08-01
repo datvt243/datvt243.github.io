@@ -23,10 +23,10 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     public: {
       MY_EMAIL: process.env.MY_EMAIL,
       NODE_API: process.env.NODE_API,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
       GITHUB_USER: process.env.GITHUB_USER,
     },
   },
