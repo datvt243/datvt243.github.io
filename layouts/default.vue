@@ -2,7 +2,7 @@
 </script>
 
 <template>
-	<main class="grow p-0">
-		<slot></slot>
-	</main>
+  <main class="grow p-0">
+    <slot/>
+  </main>
 </template>

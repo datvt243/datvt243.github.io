@@ -10,7 +10,7 @@ import type { Resume } from '@/types/resume-document'
 const resumeStore = useResumeStore()
 
 definePageMeta({
-	layout: 'default',
+  layout: 'default',
 })
 
 const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData())
@@ -30,21 +30,21 @@ const isValid = computed(() => !!data && Object.keys(data).length)
 </script>
 
 <template>
-	<div class="page-index mx-auto">
-		<Head>
-			<Title>Võ Tấn CV</Title>
-		</Head>
+  <div class="page-index mx-auto">
+    <Head>
+      <Title>Võ Tấn CV</Title>
+    </Head>
 
-		<template v-if="!error">
-			<UContainer v-if="isValid && data">
-				<ResumeObject />
-			</UContainer>
-			<!-- <Resume v-if="isValid && data" :model-value="data" /> -->
-		</template>
-		<template v-else>
-			{{ error }}
-		</template>
-	</div>
+    <template v-if="!error">
+      <UContainer v-if="isValid && data">
+        <ResumeObject />
+      </UContainer>
+      <!-- <Resume v-if="isValid && data" :model-value="data" /> -->
+    </template>
+    <template v-else>
+      {{ error }}
+    </template>
+  </div>
 </template>
 
 <style scoped></style>

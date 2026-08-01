@@ -7,40 +7,21 @@
 
 import type { GitRepos, GitUser } from '~/types/github'
 
-/* import { useGithub } from '@/stores/github'
+const { data } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>('/api/github')
 
-const store = useGithub()
-store.fetchDataUser()
-store.fetchDataRepos()
-const user = computed(() => store.getUser)
-const repos = computed(() => store.getRepos) */
-
-/* const { GITHUB_TOKEN, GITHUB_USER } = useRuntimeConfig().public */
-const user: GitUser = await $fetch('https://api.github.com/users/datvt243', {
-	/* headers: {
-		Authorization: `token ${GITHUB_TOKEN}`,
-	}, */
-	retry: 3,
-	retryDelay: 300,
-})
-const repos: GitRepos[] = await $fetch('https://api.github.com/users/datvt243/repos', {
-	/* headers: {
-		Authorization: `token ${GITHUB_TOKEN}`,
-	}, */
-	retry: 3,
-	retryDelay: 300,
-})
+const user = computed(() => data.value?.data.user as GitUser)
+const repos = computed(() => data.value?.data.repos as GitRepos[])
 </script>
 
 <template>
-	<UContainer>
-		<div class="block md:flex md:flex-row gap-8">
-			<div class="hidden md:block md:basis-2/5 lg:basis-1/3">
-				<GithubGitUser :user="user" />
-			</div>
-			<div class="md:basic-3/5 lg:basis-2/3">
-				<GithubGitRepos :repos="repos" />
-			</div>
-		</div>
-	</UContainer>
+  <UContainer>
+    <div class="block md:flex md:flex-row gap-8">
+      <div class="hidden md:block md:basis-2/5 lg:basis-1/3">
+        <GithubGitUser :user="user" />
+      </div>
+      <div class="md:basic-3/5 lg:basis-2/3">
+        <GithubGitRepos :repos="repos" />
+      </div>
+    </div>
+  </UContainer>
 </template>
