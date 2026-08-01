@@ -13,8 +13,8 @@ const _log = console.log.bind(console)
 
 export const pageRender = (RECORD: Record<string, any>) => {
   /**
-	 * get data format
-	 */
+   * get data format
+   */
   const {
     candidate,
     generalInformation,
@@ -27,8 +27,8 @@ export const pageRender = (RECORD: Record<string, any>) => {
   } = getDataCandidate(RECORD)
 
   /**
-	 * render HTML
-	 */
+   * render HTML
+   */
   let _content = ''
   const _ = _helper()
 
@@ -201,10 +201,10 @@ const _helper = () => {
                 </div>`
     },
     renderSkills: function (generalInformation: {
-			personalSkills: Skill[]
-			professionalSkills: Skill[]
-			professionalSkillsGroup: string[]
-		}) {
+      personalSkills: Skill[]
+      professionalSkills: Skill[]
+      professionalSkillsGroup: string[]
+    }) {
       function getContent(title = '', skills: Skill[] = []) {
         if (!skills.length) return ''
         return `<li>${title}: ${skills.map((e) => e.name).join(', ')}</li>`
@@ -287,15 +287,7 @@ const _helper = () => {
 
       const _content = list
         .map((el) => {
-          const {
-            name: title,
-            position: subTitle,
-            startDate,
-            endDate,
-            description,
-            isWorking: isCurrent,
-            technology: skills,
-          } = el
+          const { name: title, position: subTitle, startDate, endDate, description, isWorking: isCurrent, technology: skills } = el
           return _layoutItem({
             title,
             subTitle: `${subTitle}`,
@@ -351,14 +343,7 @@ const _helper = () => {
 
       const _content = list
         .map((el: Certificate) => {
-          const {
-            organization: subTitle,
-            name: title,
-            startDate,
-            endDate = +new Date(),
-            description = '',
-            isNoExpiration: isCurrent,
-          } = el
+          const { organization: subTitle, name: title, startDate, endDate = +new Date(), description = '', isNoExpiration: isCurrent } = el
           return _layoutItem({
             title,
             subTitle: `Nơi cấp: ${subTitle}`,

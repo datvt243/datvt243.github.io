@@ -7,15 +7,12 @@ import type { APIFormatResponse } from '~/types'
 
 export default defineCachedEventHandler(
   async (event) => {
-
     const {
       status = false,
       data = null,
       errors = [],
       message = '',
-    } = await $fetch<APIFormatResponse<string[]>>(
-      `https://blog-api-nodejs-express.onrender.com/api/v1/categories`,
-    )
+    } = await $fetch<APIFormatResponse<string[]>>(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`)
 
     return status ? data : []
   },

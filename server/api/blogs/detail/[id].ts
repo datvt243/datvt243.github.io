@@ -23,9 +23,7 @@ export default defineCachedEventHandler(
       data = null,
       errors = [],
       message = '',
-    } = await $fetch<APIFormatResponse<Post>>(
-      `https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`,
-    )
+    } = await $fetch<APIFormatResponse<Post>>(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`)
 
     return {
       status,

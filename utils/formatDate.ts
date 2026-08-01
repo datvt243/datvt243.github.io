@@ -5,5 +5,4 @@ export function formatDate(date: string): string {
   _d = _d < 10 ? `0${_d}` : _d
   _m = _m < 10 ? `0${_m}` : _m
   return `${_d}/${_m}/${_date.getFullYear()}`
-
 }
