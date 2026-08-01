@@ -28,6 +28,5 @@ const postDetail = computed<Post>(() => {
 <template>
   <div class="container-block !pt-0">
     <PostDetail :model-value="postDetail" />
-    <PostCommentForm />
   </div>
 </template>

@@ -3,8 +3,6 @@
  * Date: `--/--`
  * Description:
  */
-import { ar } from 'cronstrue/dist/i18n/locales/ar'
-
 /* import { convertNumberToDate } from '@/utils/index'; */
 import { formatDate } from '~/utils'
 import type { Post } from '~/types'
