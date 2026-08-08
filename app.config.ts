@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  AppHeading: 'Hello world',
+  AppHeading: 'Đạt Võ',
 
   menuPrimary: [
     {
