@@ -5,29 +5,39 @@
  * Description:
  */
 
-const store = useResumeStore()
-const hero = computed(() => store.hero)
-
-const getFullName = computed(() => `${hero.value.firstName} ${hero.value.lastName}`)
+const sections = [
+  { key: 'about-me', label: 'about-me' },
+  { key: 'skills', label: 'skills' },
+  { key: 'experience', label: 'experience' },
+  { key: 'education', label: 'education' },
+  { key: 'languages', label: 'languages' },
+]
+const active = ref(sections[0].key)
 </script>
 
 <template>
   <div class="clearfix font-opensans">
-    <p class="text-violet-800 text-lg mb-6">Hi there! I am _</p>
-    <ResumeObjectLayout
-      :title="getFullName"
-      title-size="text-5xl md:text-6xl lg:text-8xl"
-      size="xxl"
-      title-style="font-bold italic !text-pink-500 uppercase text-barlow !font-barlow"
-      no-guide-line
-    >
-      <ResumeObjectHero />
-      <ResumeObjectAboutMe />
-      <ResumeObjectSkills />
-      <ResumeObjectExperiences />
-      <ResumeObjectProjects />
-      <ResumeObjectEducations />
-      <ResumeObjectLanguages />
-    </ResumeObjectLayout>
+    <ResumeObjectHero />
+
+    <div class="mt-4">
+      <EditorPanel>
+        <template #sidebar>
+          <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains">personal-info</p>
+          <ul class="space-y-1">
+            <li v-for="s in sections" :key="s.key">
+              <EditorNavItem :active="active === s.key" @click="active = s.key">
+                {{ s.label }}
+              </EditorNavItem>
+            </li>
+          </ul>
+        </template>
+
+        <ResumeObjectAboutMe v-show="active === 'about-me'" />
+        <ResumeObjectSkills v-show="active === 'skills'" />
+        <ResumeObjectExperiences v-show="active === 'experience'" />
+        <ResumeObjectEducations v-show="active === 'education'" />
+        <ResumeObjectLanguages v-show="active === 'languages'" />
+      </EditorPanel>
+    </div>
   </div>
 </template>

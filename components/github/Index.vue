@@ -14,14 +14,12 @@ const repos = computed(() => data.value?.data.repos as GitRepos[])
 </script>
 
 <template>
-  <UContainer>
-    <div class="block md:flex md:flex-row gap-8">
-      <div class="hidden md:block md:basis-2/5 lg:basis-1/3">
+  <UContainer class="py-6">
+    <EditorPanel>
+      <template #sidebar>
         <GithubGitUser :user="user" />
-      </div>
-      <div class="md:basic-3/5 lg:basis-2/3">
-        <GithubGitRepos :repos="repos" />
-      </div>
-    </div>
+      </template>
+      <GithubGitRepos :repos="repos" />
+    </EditorPanel>
   </UContainer>
 </template>

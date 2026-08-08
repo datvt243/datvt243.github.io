@@ -30,16 +30,14 @@ const expLabel = (val: ProfessionalSkill) => (val.exp ? `${val.exp}+ years` : un
 </script>
 
 <template>
-  <ResumeObjectLayout title="Kỹ năng chuyên môn" size="xl">
-    <ul class="space-y-4 my-2 md:my-3">
-      <li v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`" class="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span class="font-bold capitalize text-pink-500 shrink-0">{{ _key }}:</span>
-        <span class="flex flex-wrap gap-2">
-          <UTooltip v-for="(val, i) of _val" :key="`sub-skill-${i}`" :text="expLabel(val)">
-            <UBadge :label="val.name" variant="outline" />
-          </UTooltip>
-        </span>
-      </li>
-    </ul>
-  </ResumeObjectLayout>
+  <ul class="space-y-4">
+    <li v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`" class="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <span class="font-bold capitalize text-orange-400 shrink-0">{{ _key }}:</span>
+      <span class="flex flex-wrap gap-2">
+        <UTooltip v-for="(val, i) of _val" :key="`sub-skill-${i}`" :text="expLabel(val)">
+          <UBadge :label="val.name" variant="outline" />
+        </UTooltip>
+      </span>
+    </li>
+  </ul>
 </template>

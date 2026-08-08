@@ -25,8 +25,8 @@ const getURL = computed(() => {
 </script>
 
 <template>
-  <article class="flex flex-col space-y-2 xl:space-y-0">
-    <dl class="flex items-center text-base font-medium text-gray-500 dark:text-gray-400 mb-2">
+  <article class="flex flex-col space-y-2 xl:space-y-0 font-jetbrains">
+    <dl class="flex items-center text-base font-medium text-slate-500 mb-2">
       <dt class="pr-1"/>
       <dd class="leading-6">
         <time :datetime="formatDate(modelValue.createdAt)" class="text-sm">
@@ -39,7 +39,7 @@ const getURL = computed(() => {
         <p
           class="text-2xl mb-2 font-bold capitalize leading-8 tracking-tight"
         >
-          <NuxtLink :to="getURL" class="text-sky-500 hover:text-pink-500 transition-all">
+          <NuxtLink :to="getURL" class="text-white hover:text-orange-400 transition-all">
             {{ modelValue.title }}
           </NuxtLink>
         </p>
@@ -51,11 +51,11 @@ const getURL = computed(() => {
           </li>
         </ul>
       </div>
-      <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+      <div class="prose max-w-none text-slate-400">
         {{ getExcerpt }}
       </div>
       <p>
-        <NuxtLink :to="getURL" class="text-pink-500 text-sm">
+        <NuxtLink :to="getURL" class="text-orange-400 hover:text-orange-300 text-sm">
           Read more ...
         </NuxtLink>
       </p>
