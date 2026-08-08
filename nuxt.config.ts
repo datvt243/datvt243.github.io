@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    PUPPETEER_EXECUTABLE_PATH: process.env.PUPPETEER_EXECUTABLE_PATH,
     public: {
       MY_EMAIL: process.env.MY_EMAIL,
       NODE_API: process.env.NODE_API,

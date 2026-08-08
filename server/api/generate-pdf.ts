@@ -24,9 +24,12 @@ export default defineEventHandler(async (event) => {
   const { email, html: contentHTML } = pageRender(data)
 
   // Khởi tạo Puppeteer và tạo PDF
-  const getExecutablePath = (() => {
-    // return '/usr/bin/google-chrome'
+  const { PUPPETEER_EXECUTABLE_PATH } = useRuntimeConfig()
 
+  const getExecutablePath = (() => {
+    if (PUPPETEER_EXECUTABLE_PATH) return PUPPETEER_EXECUTABLE_PATH
+
+    // Local-dev fallback only; production must set PUPPETEER_EXECUTABLE_PATH.
     const platform = os.platform()
     let executablePath = ''
 
