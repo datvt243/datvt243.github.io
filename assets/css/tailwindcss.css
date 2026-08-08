@@ -37,7 +37,3 @@
 .container-block {
 	@apply mx-auto max-w-screen-lg px-3 py-28;
 }
-
-.router-link-exact-active {
-	@apply text-pink-500;
-}

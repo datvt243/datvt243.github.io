@@ -30,18 +30,11 @@ async function downloadResume() {
 </script>
 
 <template>
-  <ResumeObjectLayout title="About me" size="xl">
+  <div>
     <ClientOnly>
       <!-- v-html chỉ chạy ở client, server ko render ra đc -> tạm thời xài clientOnly -->
       <p class="mb-4" v-html="hero.introduction"/>
     </ClientOnly>
-
-    <!-- <ResumeObjectLayout title="Contact"> -->
-    <!-- 	<p v-for="[key, value] in Object.entries(social)" :key="key" class="text-sm"> -->
-    <!-- 		<span>{{ key }}:</span> -->
-    <!-- 		{{ value }} -->
-    <!-- 	</p> -->
-    <!-- </ResumeObjectLayout> -->
 
     <ul v-if="social" class="flex gap-1 space-x-4">
       <li v-for="[name, link] in Object.entries(social)" :key="name">
@@ -61,7 +54,7 @@ async function downloadResume() {
         Download CV
       </UButton>
     </p>
-  </ResumeObjectLayout>
+  </div>
 </template>
 <style scoped>
 :deep(strong) {
