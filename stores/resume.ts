@@ -20,7 +20,8 @@ export const useResumeStore = defineStore('resume', {
   },
   getters: {
     generalInformation({ resume: { generalInformation } }): GeneralInformation {
-      return Array.isArray(generalInformation) ? generalInformation?.[0] || ({} as GeneralInformation) : generalInformation
+      if (Array.isArray(generalInformation)) return generalInformation[0] || ({} as GeneralInformation)
+      return generalInformation || ({} as GeneralInformation)
     },
 
     hero({ resume = {} }) {
@@ -43,7 +44,7 @@ export const useResumeStore = defineStore('resume', {
       return socialMedia
     },
     experiences({ resume: { experiences } }): Experience[] {
-      return experiences.sort((a, b) => b.startDate - a.startDate)
+      return [...experiences].sort((a, b) => b.startDate - a.startDate)
     },
     educations({ resume: { educations } }): Education[] {
       return educations
@@ -51,14 +52,14 @@ export const useResumeStore = defineStore('resume', {
     projects({ resume: { projects } }): Project[] {
       return projects
     },
-    foreignLanguages({ resume: { generalInformation } }): ForeignLanguage[] {
-      return generalInformation.foreignLanguages || ([] as ForeignLanguage[])
+    foreignLanguages(): ForeignLanguage[] {
+      return (this.generalInformation as GeneralInformation).foreignLanguages || ([] as ForeignLanguage[])
     },
-    skills({ resume: { generalInformation } }): ProfessionalSkill[] {
-      return generalInformation.professionalSkills || []
+    skills(): ProfessionalSkill[] {
+      return (this.generalInformation as GeneralInformation).professionalSkills || []
     },
-    groups({ resume: { generalInformation } }): string[] {
-      return generalInformation.professionalSkillsGroup || []
+    groups(): string[] {
+      return (this.generalInformation as GeneralInformation).professionalSkillsGroup || []
     },
   },
 })
