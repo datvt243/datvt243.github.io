@@ -26,7 +26,7 @@ const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => awa
     twitterCard: 'summary_large_image',
 }); */
 
-const isValid = computed(() => !!data && Object.keys(data).length)
+const isValid = computed(() => !!data.value && Object.keys(data.value).length)
 </script>
 
 <template>
