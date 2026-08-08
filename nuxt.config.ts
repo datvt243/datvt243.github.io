@@ -25,6 +25,18 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Silences the "legacy-js-api" deprecation warning Dart Sass
+          // prints on every dev/build - opts into sass-embedded's newer API.
+          api: 'modern-compiler',
+        },
+      },
+    },
+  },
   runtimeConfig: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     PUPPETEER_EXECUTABLE_PATH: process.env.PUPPETEER_EXECUTABLE_PATH,
