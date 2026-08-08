@@ -21,21 +21,21 @@ const category = toRef(query?.category || '')
 </script>
 
 <template>
-  <div class="px-4 py-4">
-    {{ error }}
-    <h3 class="font-bold text-2xl uppercase text-pink-500 mb-4 tracking-widest">Categories</h3>
-    <ul v-if="data?.length" class="list pl-1 space-y-4">
-      <li v-for="cate in data" :key="cate._id" class="">
+  <div class="font-jetbrains">
+    <p v-if="error" class="text-red-400 text-sm">{{ error }}</p>
+    <p class="text-xs uppercase tracking-widest text-slate-500 mb-3">categories</p>
+    <ul v-if="data?.length" class="space-y-1">
+      <li v-for="cate in data" :key="cate._id">
         <NuxtLink
           :to="`/blogs?category=${cate.slug}`"
-          aria-label="View posts tagged next-js"
-          class="px-3 py-2 text-sm font-medium uppercase hover:text-sky-500 transition-colors tracking-wider"
-          :class="[category === cate.slug ? '!text-sky-500' : 'text-pink-500']"
+          :aria-label="`View posts tagged ${cate.name}`"
+          class="block w-full px-2 py-1.5 rounded text-sm transition-colors"
+          :class="category === cate.slug ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
         >
-          _ {{ cate.name }}
+          _{{ cate.name }}
         </NuxtLink>
       </li>
     </ul>
-    <p v-else class="p-2 bg-dark-400 text-center rounded-md">No Data</p>
+    <p v-else class="text-slate-500 text-sm">No categories</p>
   </div>
 </template>

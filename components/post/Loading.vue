@@ -13,9 +13,9 @@
       <div>
         <USkeleton class="h-6 bg-gray-400 w-80 mb-4" />
         <div class="flex space-x-3">
-          <USkeleton class="h-4 bg-pink w-20 opacity-50" />
-          <USkeleton class="h-4 bg-pink w-20 opacity-50" />
-          <USkeleton class="h-4 bg-pink w-20 opacity-50" />
+          <USkeleton class="h-4 bg-orange-400 w-20 opacity-50" />
+          <USkeleton class="h-4 bg-orange-400 w-20 opacity-50" />
+          <USkeleton class="h-4 bg-orange-400 w-20 opacity-50" />
         </div>
       </div>
       <div class="flex-1 space-y-4 py-1">

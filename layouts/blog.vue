@@ -26,17 +26,13 @@ provide('query', {
 
 <template>
   <main class="grow p-0 layout-blog pt-4">
-    <div class="container-block !pt-0">
-      <div class="flex sm:space-x-16 md:space-x-20 lg:space-x-24">
-        <div class="grow">
-          <slot/>
-        </div>
-        <div
-          class="hidden lg:block max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-white bg-opacity-5 h-auto mt-6"
-        >
+    <UContainer class="!pt-0 pb-10">
+      <EditorPanel>
+        <template #sidebar>
           <PostCategories />
-        </div>
-      </div>
-    </div>
+        </template>
+        <slot/>
+      </EditorPanel>
+    </UContainer>
   </main>
 </template>

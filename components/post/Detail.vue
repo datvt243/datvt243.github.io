@@ -14,14 +14,14 @@ const props = defineProps<{
 
 <template>
   <article
-    class="mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mb-8 pb-4 border-b"
+    class="mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mb-8 pb-4 border-b border-slate-800 font-jetbrains"
   >
     <header class="py-5 md:py-8 lg:py-12">
       <div class="space-y-1 text-center">
         <dl class="space-y-10">
           <div>
             <dt class="sr-only">Published on</dt>
-            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+            <dd class="text-base font-medium leading-6 text-slate-500">
               <time datetime="2023-08-05T00:00:00.000Z">
                 {{ formatDate(modelValue.createdAt) }}
               </time>
@@ -30,32 +30,32 @@ const props = defineProps<{
         </dl>
         <div>
           <h1
-            class="text-pink-500 text-3xl font-bold leading-9 tracking-wide sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+            class="text-orange-400 text-3xl font-bold leading-9 tracking-wide sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
           >
             {{ modelValue.title }}
           </h1>
         </div>
       </div>
     </header>
-    <hr class="hidden md:my-8" />
+    <hr class="hidden md:my-8 border-slate-800" />
     <div
-      class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+      class="grid-rows-[auto_1fr] divide-y divide-slate-800 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
     >
       <div class="my-6 md:my-6 lg:my-4 xl:my-0 p-0">
         <PostAuthor />
       </div>
 
-      <div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0 lg:py-12 xl:py-4">
-        <div class="post-content" v-html="modelValue.content"/>
+      <div class="divide-y divide-slate-800 xl:col-span-3 xl:row-span-2 xl:pb-0 lg:py-12 xl:py-4">
+        <div class="post-content text-slate-300" v-html="modelValue.content"/>
       </div>
       <footer>
         <div
-          class="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y"
+          class="divide-slate-800 text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
         >
           <div class="py-4 xl:py-8">
-            <h2 class="text-lg text-bold uppercase tracking-wide text-pink-500 pb-2 mb-2 border-b">Tags</h2>
+            <h2 class="text-lg text-bold uppercase tracking-wide text-orange-400 pb-2 mb-2 border-b border-slate-800">Tags</h2>
             <div class="flex flex-wrap space-x-4">
-              <NuxtLink to="'/blogs'" class="link text-sm font-medium lowercase hover:text-pink-500">
+              <NuxtLink to="'/blogs'" class="link text-sm font-medium lowercase text-slate-400 hover:text-orange-400">
                 #tag
               </NuxtLink>
             </div>
@@ -64,7 +64,7 @@ const props = defineProps<{
         <div class="pt-4 xl:pt-8">
           <NuxtLink
             to="/blogs"
-            class="btn border-pink-500 border rounded-md p-4 text-pink hover:bg-pink hover:text-white transition-all"
+            class="btn border-orange-400 border rounded-md p-4 text-orange-400 hover:bg-orange-400 hover:text-slate-950 transition-all"
             aria-label="Back to the blog"
           >
             <span class="flex items-center space-x-2">
