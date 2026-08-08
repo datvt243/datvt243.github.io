@@ -41,22 +41,33 @@ useSeoMeta({
       <div class="block rounded-lg px-6 py-12 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
         <p class="text-4xl font-bold mb-8 uppercase tracking-widest">Get in touch</p>
         <hr class="mb-8 border-pink-500" />
-        <div class="block items-center gap-6 space-y-8">
-          <div class="w-full">
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div class="rounded-lg border border-white/10 bg-white/5 p-6">
             <ContactItem title="Phone/Zalo" :content="contact.phone" type="phone">
               <template #icon><UIcon name="fe:phone" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
-          <div class="w-full">
+          <div class="rounded-lg border border-white/10 bg-white/5 p-6">
             <ContactItem title="Email" :content="contact.email" type="email">
               <template #icon><UIcon name="fe:mail" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
-          <div class="w-full">
+          <div class="rounded-lg border border-white/10 bg-white/5 p-6">
             <ContactItem title="Address" :content="contact.address">
               <template #icon><UIcon name="fe:location" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
+        </div>
+
+        <div class="mt-10 rounded-lg border border-white/10 bg-white/5 p-6">
+          <p class="text-sm font-bold uppercase tracking-widest text-pink-500 mb-4">Connect</p>
+          <ul class="flex items-center gap-4">
+            <li v-for="[name, link] in Object.entries(contact.social)" :key="name">
+              <a :href="link" target="_blank" class="flex items-center justify-center w-11 h-11 rounded-lg border border-white/10 bg-white/5 transition-colors hover:border-pink-500/50 hover:bg-white/10">
+                <UIcon :name="`grommet-icons:${name.toLowerCase() === 'website' ? 'globe' : name}`" class="w-5 h-5" />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

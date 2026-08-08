@@ -31,16 +31,17 @@ const props = defineProps<{
       <ClientOnly>
         <p class="px-4 py-1 my-2 border-l-4 border-pink-500 italic" v-html="props.user.bio"/>
       </ClientOnly>
-      <div class="flex flex-wrap items-center space-x-2">
-        <div class="opacity-50"><UIcon name="fe:users" class="w-5 h-5" /></div>
-        <div class="followers">{{ props.user.followers }} <span class="opacity-50">followers</span></div>
-        <div class="following">{{ props.user.following }} <span class="opacity-50">following</span></div>
-      </div>
-      <div class="contact text-sm mt-4">
+      <div class="contact text-sm mt-2">
         <p v-if="props.user.location" class="flex items-center space-x-2">
-          <UIcon name="fe:location" />
+          <UIcon name="fe:location" class="opacity-50" />
           <span>{{ props.user.location }}</span>
         </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-1 mt-2 text-xs text-gray-400">
+        <UIcon name="fe:users" class="w-4 h-4 opacity-50" />
+        <span>{{ props.user.followers }} followers</span>
+        <span class="opacity-50">·</span>
+        <span>{{ props.user.following }} following</span>
       </div>
     </div>
     <p v-else>NO data</p>
