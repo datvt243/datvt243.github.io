@@ -43,13 +43,10 @@ const getURL = computed(() => {
             {{ modelValue.title }}
           </NuxtLink>
         </p>
-        <ul class="flex flex-wrap">
+        <ul class="flex flex-wrap gap-2">
           <li v-for="(tag, i) in (modelValue.tags || [])" :key="`tag-${i}`">
-            <NuxtLink
-              :to="getURL"
-              class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-blue-500 text-pink-500 transition"
-            >
-              {{ tag }}
+            <NuxtLink :to="getURL">
+              <UBadge :label="tag" variant="outline" />
             </NuxtLink>
           </li>
         </ul>

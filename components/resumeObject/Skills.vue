@@ -26,40 +26,20 @@ function getObjectRender(skills: ProfessionalSkill[], groups: string[]) {
   }
 }
 
-const SupSkills = defineComponent(
-  (props: { modelValue: ProfessionalSkill }) => {
-    const { name, exp } = props.modelValue
-    return () => {
-      return h(
-        'p',
-        {
-          attrs: { 'data-exp': exp },
-        },
-        name,
-      )
-      /* return `<p data-exp="${props.modelValue.exp}">${props.modelValue.name}</p>`; */
-    }
-  },
-  {
-    props: {
-      modelValue: { type: Object as PropType<ProfessionalSkill>, default: () => ({}) },
-    },
-  },
-)
+const expLabel = (val: ProfessionalSkill) => (val.exp ? `${val.exp}+ years` : undefined)
 </script>
 
 <template>
   <ResumeObjectLayout title="Kỹ năng chuyên môn" size="xl">
-    <ul class="list items-center space-y-4 my-2 md:my-3">
-      <li v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`" class="block md:flex">
-        <span class="font-bold pr-2 capitalize text-pink-500">{{ _key }}: </span>
-        <ul class="flex flex-wrap">
-          <li v-for="(val, i) of _val" :key="`sub-skill-${i}`" class="pr-2">
-            <SupSkills :model-value="val" />
-          </li>
-        </ul>
+    <ul class="space-y-4 my-2 md:my-3">
+      <li v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`" class="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <span class="font-bold capitalize text-pink-500 shrink-0">{{ _key }}:</span>
+        <span class="flex flex-wrap gap-2">
+          <UTooltip v-for="(val, i) of _val" :key="`sub-skill-${i}`" :text="expLabel(val)">
+            <UBadge :label="val.name" variant="outline" />
+          </UTooltip>
+        </span>
       </li>
     </ul>
   </ResumeObjectLayout>
-	
 </template>
