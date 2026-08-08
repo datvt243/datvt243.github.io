@@ -5,68 +5,76 @@ import type { ResumeAPIResponse, GeneralInformation } from '@/types'
 
 import { pageRender } from '~/server/utils/createPDF'
 
-export default defineEventHandler(async (event) => {
-  const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
+export default defineCachedEventHandler(
+  async () => {
+    const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
 
-  const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
+    const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
 
-  if (!success || !data) {
-    throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
-  }
-
-  if (data) {
-    data.generalInformation = ((generalInformation: GeneralInformation[]) => {
-      if (!generalInformation.length) return {}
-      return generalInformation[0]
-    })(data?.generalInformation || [])
-  }
-
-  const { email, html: contentHTML } = pageRender(data)
-
-  // Khởi tạo Puppeteer và tạo PDF
-  const { PUPPETEER_EXECUTABLE_PATH } = useRuntimeConfig()
-
-  const getExecutablePath = (() => {
-    if (PUPPETEER_EXECUTABLE_PATH) return PUPPETEER_EXECUTABLE_PATH
-
-    // Local-dev fallback only; production must set PUPPETEER_EXECUTABLE_PATH.
-    const platform = os.platform()
-    let executablePath = ''
-
-    if (platform === 'win32') {
-      executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-    } else if (platform === 'darwin') {
-      executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-    } else if (platform === 'linux') {
-      executablePath = '/usr/bin/chromium-browser'
+    if (!success || !data) {
+      throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
     }
-    return executablePath
-  })()
 
-  const browser = await puppeteer.launch({
-    executablePath: getExecutablePath, // Đường dẫn đến trình duyệt Chrome (nếu đã cài)
-    args: ['--no-sandbox', '--disable-setuid-sandbox'], // Thêm các cờ nếu cần
-  })
-  const page = await browser.newPage()
+    if (data) {
+      data.generalInformation = ((generalInformation: GeneralInformation[]) => {
+        if (!generalInformation.length) return {}
+        return generalInformation[0]
+      })(data?.generalInformation || [])
+    }
 
-  // Đặt nội dung HTML vào trang
-  await page.setContent(contentHTML)
+    const { email, html: contentHTML } = pageRender(data)
 
-  // Tạo PDF
-  const pdfBuffer = await page.pdf({
-    format: 'A4',
-    printBackground: true,
-  })
+    // Khởi tạo Puppeteer và tạo PDF
+    const { PUPPETEER_EXECUTABLE_PATH } = useRuntimeConfig()
 
-  await browser.close()
+    const getExecutablePath = (() => {
+      if (PUPPETEER_EXECUTABLE_PATH) return PUPPETEER_EXECUTABLE_PATH
 
-  // Trả file PDF cho client
-  const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_')
+      // Local-dev fallback only; production must set PUPPETEER_EXECUTABLE_PATH.
+      const platform = os.platform()
+      let executablePath = ''
 
-  return new Response(pdfBuffer, {
-    headers: {
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="${safeFilename}.pdf"`,
-    },
-  })
-})
+      if (platform === 'win32') {
+        executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+      } else if (platform === 'darwin') {
+        executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      } else if (platform === 'linux') {
+        executablePath = '/usr/bin/chromium-browser'
+      }
+      return executablePath
+    })()
+
+    const browser = await puppeteer.launch({
+      executablePath: getExecutablePath, // Đường dẫn đến trình duyệt Chrome (nếu đã cài)
+      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Thêm các cờ nếu cần
+    })
+    const page = await browser.newPage()
+
+    // Đặt nội dung HTML vào trang
+    await page.setContent(contentHTML)
+
+    // Tạo PDF
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+    })
+
+    await browser.close()
+
+    const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_')
+
+    // Trả file PDF cho client
+    return new Response(pdfBuffer, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${safeFilename}.pdf"`,
+      },
+    })
+  },
+  {
+    name: 'generate-pdf',
+    // Resume data changes rarely; caching bounds how often a full headless
+    // Chrome launch can be triggered (each launch is expensive).
+    maxAge: 60 * 60 * 24,
+  },
+)
