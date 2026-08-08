@@ -9,6 +9,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'vi',
+      },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
