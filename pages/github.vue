@@ -11,8 +11,8 @@ definePageMeta({
 useSeoMeta({
   title: 'Github',
   ogTitle: 'Github',
-  description: '',
-  ogDescription: '',
+  description: 'GitHub profile and repositories of Võ Tấn Đạt (datvt243).',
+  ogDescription: 'GitHub profile and repositories of Võ Tấn Đạt (datvt243).',
 })
 </script>
 
