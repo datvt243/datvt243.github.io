@@ -6,6 +6,7 @@
  */
 
 import type { Resume } from '@/types/resume-document'
+import { removeHtmlTags } from '@/utils/removeHtmlTags'
 
 const resumeStore = useResumeStore()
 
@@ -17,24 +18,25 @@ const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => awa
 
 /* const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/api/resume`); */
 
-/* useSeoMeta({
-    title: `Resume ${data.value?.firstName} ${data.value?.lastName}`,
-    ogTitle: `Resume ${data.value?.firstName} ${data.value?.lastName}`,
-    description: data.value?.introduction,
-    ogDescription: data.value?.introduction,
-    ogImage: '',
-    twitterCard: 'summary_large_image',
-}); */
+const seoTitle = computed(() => {
+  const { firstName = '', lastName = '' } = data.value || {}
+  return firstName || lastName ? `Resume ${firstName} ${lastName}`.trim() : 'Võ Tấn CV'
+})
+const seoDescription = computed(() => removeHtmlTags(data.value?.introduction || ''))
+
+useSeoMeta({
+  title: seoTitle,
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
+  twitterCard: 'summary_large_image',
+})
 
 const isValid = computed(() => !!data.value && Object.keys(data.value).length)
 </script>
 
 <template>
   <div class="page-index mx-auto">
-    <Head>
-      <Title>Võ Tấn CV</Title>
-    </Head>
-
     <template v-if="!error">
       <UContainer v-if="isValid && data">
         <ResumeObject />
