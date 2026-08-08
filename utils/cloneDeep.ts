@@ -5,7 +5,7 @@
  */
 
 /**
- * @param obj - [TODO:description]
+ * @param obj - value to deep clone (objects and arrays are copied recursively; other values are returned as-is)
  * @returns Object | Array | string ...
  * */
 export function cloneDeep(obj: any) {

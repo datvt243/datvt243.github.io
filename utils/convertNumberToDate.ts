@@ -5,7 +5,7 @@
  */
 
 /**
- * @param number - [TODO:description]
+ * @param number - epoch timestamp in milliseconds
  * @returns string, format Date
  */
 export function convertNumberToDate(number: number) {
