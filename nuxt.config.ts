@@ -38,7 +38,14 @@ export default defineNuxtConfig({
   css: ['~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
   modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui', '@nuxt/icon', '@nuxt/eslint'],
   typescript: {
-    typeCheck: true,
+    // The integrated dev/build vue-tsc check runs against the root tsconfig
+    // only, whose generated `include` pulls in server/**/*.ts but doesn't
+    // exclude it - so every server/ file fails with false "Cannot find
+    // name 'defineEventHandler'" etc. errors (Nitro's server-only globals
+    // aren't in scope there). server/tsconfig.json already type-checks
+    // that directory correctly via editor tooling; disable the integrated
+    // check rather than have it report 24 false positives every dev start.
+    typeCheck: false,
   },
   pinia: {
     storesDirs: ['./stores/**'],
