@@ -30,9 +30,9 @@ export default defineEventHandler(async (event) => {
 
   if (data) {
     data.generalInformation = ((generalInformation: GeneralInformation[]) => {
-      if (!generalInformation.length) return {}
+      if (!generalInformation.length) return {} as GeneralInformation
       return generalInformation[0]
-    })(data?.generalInformation || [])
+    })((data?.generalInformation || []) as GeneralInformation[])
   }
 
   const { email, html: contentHTML } = pageRender(data)
