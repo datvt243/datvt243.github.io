@@ -46,7 +46,7 @@ const getDate = (p: { startDate: number; endDate: number }) =>
 </script>
 
 <template>
-  <div class="mx-auto max-w-screen-xl px-3 py-6">
+  <UContainer>
     <EditorPanel>
       <template #sidebar>
         <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains">projects</p>
@@ -95,7 +95,7 @@ const getDate = (p: { startDate: number; endDate: number }) =>
         </article>
       </div>
     </EditorPanel>
-  </div>
+  </UContainer>
 </template>
 
 <style scoped lang="scss">

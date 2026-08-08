@@ -23,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <section class="mx-auto max-w-screen-xl px-3 py-6">
+  <UContainer>
     <EditorPanel>
       <template #sidebar>
         <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains">contacts</p>
@@ -68,5 +68,5 @@ useSeoMeta({
   <span class="text-slate-500">return</span> <span class="text-slate-300">`Hey </span><span class="text-orange-300">${</span><span class="text-slate-300">contact.email</span><span class="text-orange-300">}</span><span class="text-slate-300">, let's talk!`</span>
 <span class="text-slate-500">}</span></code></pre>
     </EditorPanel>
-  </section>
+  </UContainer>
 </template>
