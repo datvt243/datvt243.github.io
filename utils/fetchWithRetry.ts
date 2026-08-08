@@ -4,7 +4,7 @@ export const fetchWithRetry = async (url: string = '', opts: { retries: number; 
       const res: any = await $fetch(url)
       return res
     } catch (e) {
-      if (i === opts.retries) {
+      if (i === opts.retries - 1) {
         throw e
       }
       await new Promise((resolve) => setTimeout(resolve, opts.delay))
