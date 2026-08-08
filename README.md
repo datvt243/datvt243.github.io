@@ -33,10 +33,11 @@ Visit: [https://datvt243.github.io](https://datvt243.github.io)
 Copy `.env.example` to `.env` and fill in the values:
 
 ```env
-MY_EMAIL=       # Email used to fetch resume data
-NODE_API=       # Base URL of the resume API
-GITHUB_TOKEN=   # GitHub personal access token
-GITHUB_USER=    # GitHub username
+MY_EMAIL=                    # Email used to fetch resume data
+NODE_API=                    # Base URL of the resume API
+GITHUB_TOKEN=                # GitHub personal access token
+GITHUB_USER=                 # GitHub username
+PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
 ```
 
 ---
@@ -66,4 +67,4 @@ npm run preview
 
 - **Resume API** — `${NODE_API}/api/me/${MY_EMAIL}`
 - **Blog API** — `https://blog-api-nodejs-express.onrender.com/api/v1/`
-- **GitHub API** — `https://api.github.com/users/datvt243`
+- **GitHub API** — `https://api.github.com/users/${GITHUB_USER}`
