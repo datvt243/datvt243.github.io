@@ -12,7 +12,7 @@ const socialMedia = [
 </script>
 
 <template>
-  <footer class="border-t border-slate-800 bg-slate-900 font-jetbrains text-xs text-slate-400">
+  <footer class="border-t-2 border-orange-400 bg-slate-900 font-jetbrains text-xs text-slate-400">
     <div class="mx-auto max-w-screen-xl px-4 py-2.5 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <span class="hidden sm:inline">find me in:</span>
