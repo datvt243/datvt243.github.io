@@ -16,8 +16,6 @@ definePageMeta({
 
 const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData())
 
-/* const { data, error } = await useFetch<{ success: boolean; resume: Resume }>(`/api/resume`); */
-
 const seoTitle = computed(() => {
   const { firstName = '', lastName = '' } = data.value || {}
   return firstName || lastName ? `Resume ${firstName} ${lastName}`.trim() : 'Võ Tấn CV'
@@ -41,7 +39,6 @@ const isValid = computed(() => !!data.value && Object.keys(data.value).length)
       <UContainer v-if="isValid && data">
         <ResumeObject />
       </UContainer>
-      <!-- <Resume v-if="isValid && data" :model-value="data" /> -->
     </template>
     <template v-else>
       {{ error }}

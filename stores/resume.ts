@@ -63,34 +63,3 @@ export const useResumeStore = defineStore('resume', {
     },
   },
 })
-
-/* export const useResumeStore = defineStore('resume', async () => {
-    const resume = ref<Resume>({} as Resume);
-
-    async function fetchData() {
-        const _result = await $fetch<Resume>('/api/resume');
-        const _data = _result ? _result : ({} as Resume);
-        resume.value = _data;
-        return _data;
-    }
-
-    const hero = computed(() => {
-        const { firstName, lastName, introduction } = resume.value;
-        return {
-            firstName,
-            lastName,
-            introduction,
-        };
-    });
-    const educations = computed(() => resume.value.educations || []);
-    const experiences = computed(() => resume.value.experiences || []);
-
-    return {
-        resume,
-        fetchData,
-
-        hero,
-        educations,
-        experiences,
-    };
-}); */
