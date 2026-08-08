@@ -28,14 +28,14 @@ npm run preview   # preview build
 | Route | Cache | Data source |
 |---|---|---|
 | `/` | ISR 60s | `/api/resume` |
-| `/github` | ISR 60s | GitHub API (direct in component) |
+| `/github` | ISR 60s | `/api/github` |
 | `/contact` | prerender | `app.config.ts` |
 | `/blogs` | ISR 60s | `/api/blogs/posts` |
 | `/blogs/[id]` | ISR true | `/api/blogs/detail/[id]` |
 
 ### Server API (`server/api/`)
 
-All handlers use `defineCachedEventHandler` (maxAge 12 days) except `/api/blogs/posts` (1h, keyed by page/perPage/category).
+All handlers use `defineCachedEventHandler` (maxAge 12 days) except `/api/blogs/posts` (1h, keyed by page/perPage/category) and `/api/generate-pdf` (plain handler with a module-level in-memory cache, 1 day - `defineCachedEventHandler` doesn't correctly cache its binary PDF body).
 
 External APIs:
 - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
@@ -45,7 +45,6 @@ External APIs:
 ### Components
 
 - `components/resumeObject/` — active CV UI (JSON object-notation style). This is what renders on `/`.
-- `components/resume/` — old unused CV components, kept but fully commented out.
 - `components/github/` — GitUser, GitRepos (debounced search + language filter), part/Item.
 - `components/post/` — Author, Detail, Item, Loading, RelatedArticles.
 - `components/template/` — Header (mobile slideover), Footer.
@@ -54,7 +53,6 @@ External APIs:
 ### State (Pinia)
 
 - `useResumeStore` — fetches `/api/resume`, exposes getters: `hero`, `contact`, `social`, `experiences`, `educations`, `projects`, `foreignLanguages`, `skills`, `groups`.
-- `useGithub` — exists but unused; `github/Index.vue` calls GitHub API directly.
 
 ### Layouts
 
@@ -74,7 +72,4 @@ PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (r
 
 ## Known Issues
 
-- `post/Item.vue` has an unused `import { ar } from 'cronstrue/...'` — dead import.
-- `server/utils/createPDF.ts` has a malformed HTML tag: `<link rel="icon" href="/>`.
-- `useRouterQuery.ts` composable is unused; blog layout uses `provide/inject` instead.
 - GitHub API calls fall back to unauthenticated requests if `GITHUB_TOKEN` is unset or rejected (see `server/api/github.ts`).
