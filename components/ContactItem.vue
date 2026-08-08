@@ -15,8 +15,8 @@ const props = defineProps<{
 <template>
   <div class="flex items-start">
     <div class="shrink-0 relative">
-      <div class="absolute inline-block rounded-md bg-sky-500 bg-opacity-20 p-4 w-10 h-10">
-        <!-- <slot name="icon"></slot> -->
+      <div class="absolute inline-flex items-center justify-center rounded-md bg-sky-500 bg-opacity-20 p-2 w-10 h-10 text-sky-400">
+        <slot name="icon" />
       </div>
     </div>
     <div class="grow z-10 ml-5 mt-2">
