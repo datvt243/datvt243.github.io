@@ -3,20 +3,24 @@ export default defineAppConfig({
 
   menuPrimary: [
     {
-      page: 'Resume',
+      page: '_resume',
       link: '/',
     },
     {
-      page: 'Github',
+      page: '_projects',
+      link: '/projects',
+    },
+    {
+      page: '_github',
       link: '/github',
     },
     {
-      page: 'Contact',
-      link: '/contact',
+      page: '_blogs',
+      link: '/blogs',
     },
     {
-      page: 'Blogs',
-      link: '/blogs',
+      page: '_contact',
+      link: '/contact',
     },
   ],
   contact: {
