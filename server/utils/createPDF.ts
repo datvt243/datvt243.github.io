@@ -144,9 +144,9 @@ const _helper = () => {
       return `${_start} - ${_end}`
     })(startDate, endDate, isCurrent)
 
-    const getSkills = ((skills = []) => {
-      return !skills.length ? `<div class="skills">${skills.join(', ')}</div>` : ''
-    })()
+    const getSkills = ((skillList: string[] = []) => {
+      return skillList.length ? `<div class="skills">${skillList.map((s) => escapeHtml(s)).join(', ')}</div>` : ''
+    })(skills)
     return `
         <div class="item">
             <div class="header">
