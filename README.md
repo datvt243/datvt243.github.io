@@ -21,6 +21,7 @@ Visit: [https://resume-nuxt-vert.vercel.app](https://resume-nuxt-vert.vercel.app
 | Route | Description |
 |---|---|
 | `/` | Resume / CV |
+| `/projects` | Projects, filterable by technology |
 | `/github` | GitHub profile & repositories |
 | `/contact` | Contact information |
 | `/blogs` | Blog list with category filter |
@@ -68,3 +69,13 @@ npm run preview
 - **Resume API** — `${NODE_API}/api/me/${MY_EMAIL}`
 - **Blog API** — `https://blog-api-nodejs-express.onrender.com/api/v1/`
 - **GitHub API** — `https://api.github.com/users/${GITHUB_USER}`
+
+---
+
+## Credits
+
+The "code editor" UI theme (tab-bar navigation, sidebar file-tree, status bar) is inspired by
+[developer-portfolio-v2](https://github.com/alexdeploy/developer-portfolio-v2), designed by
+[@darelova](https://www.behance.net/darelova) and developed by
+[@alexdeploy](https://github.com/alexdeploy). This project reimplements the visual concept from
+scratch against its own data/API layer — no code was copied from the reference repo.
