@@ -10,7 +10,7 @@ export default defineCachedEventHandler(
   async (event) => {
     const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
 
-    const { success = false, data = {} } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
+    const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
 
     return {
       success,
