@@ -12,6 +12,7 @@ const props = defineProps({
   titleSize: { type: String, default: '' },
   titleColor: { type: String, default: 'text-sky-500' },
   size: { type: String as PropType<'' | Size>, default: '' },
+  noGuideLine: { type: Boolean, default: false },
 })
 
 const obj = {
@@ -35,7 +36,7 @@ const getPadding = computed(() => {
 </script>
 
 <template>
-  <div class="object-layout my-4 md:my-8 lg:my-12">
+  <div class="object-layout my-4 md:my-8 lg:my-12" :class="{ 'no-guide-line': noGuideLine }">
     <p :class="[getSize, 'capitalize font-bold']">
       <span :class="[titleStyle, titleColor]" class="tracking-wider font-jetbrains uppercase">{{ title }}</span>
       <span class="icon pl-4">&#123;</span>
@@ -63,5 +64,8 @@ const getPadding = computed(() => {
 	width: 1px;
 	background: white;
 	opacity: 0.1;
+}
+.object-layout.no-guide-line::before {
+	display: none;
 }
 </style>
