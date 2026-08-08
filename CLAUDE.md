@@ -40,14 +40,14 @@ All handlers use `defineCachedEventHandler` (maxAge 12 days) except `/api/blogs/
 External APIs:
 - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
 - Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`
-- GitHub: `https://api.github.com/users/datvt243`
+- GitHub: `https://api.github.com/users/${GITHUB_USER}`
 
 ### Components
 
 - `components/resumeObject/` — active CV UI (JSON object-notation style). This is what renders on `/`.
 - `components/resume/` — old unused CV components, kept but fully commented out.
 - `components/github/` — GitUser, GitRepos (debounced search + language filter), part/Item.
-- `components/post/` — Detail, Item, Loading. Comment & CommentForm are placeholder UI only (no backend).
+- `components/post/` — Author, Detail, Item, Loading, RelatedArticles.
 - `components/template/` — Header (mobile slideover), Footer.
 - `components/PostCategories.vue` — blog sidebar, fetches via `fetchWithRetry`.
 
@@ -65,10 +65,11 @@ External APIs:
 ## Environment Variables
 
 ```env
-MY_EMAIL=       # Owner email, used as resume API key
-NODE_API=       # Resume backend base URL
-GITHUB_TOKEN=   # GitHub token (currently commented out in code)
-GITHUB_USER=    # GitHub username (currently hardcoded as 'datvt243')
+MY_EMAIL=                    # Owner email, used as resume API key
+NODE_API=                    # Resume backend base URL
+GITHUB_TOKEN=                # GitHub token; falls back to unauthenticated requests if unset/rejected
+GITHUB_USER=                 # GitHub username
+PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
 ```
 
 ## Known Issues
@@ -76,5 +77,4 @@ GITHUB_USER=    # GitHub username (currently hardcoded as 'datvt243')
 - `post/Item.vue` has an unused `import { ar } from 'cronstrue/...'` — dead import.
 - `server/utils/createPDF.ts` has a malformed HTML tag: `<link rel="icon" href="/>`.
 - `useRouterQuery.ts` composable is unused; blog layout uses `provide/inject` instead.
-- Comment system is UI-only (no API wired up).
-- GitHub token is commented out everywhere — API calls are unauthenticated (rate-limit risk).
+- GitHub API calls fall back to unauthenticated requests if `GITHUB_TOKEN` is unset or rejected (see `server/api/github.ts`).
