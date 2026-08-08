@@ -23,16 +23,20 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
           to="/"
           class="flex shrink-0 items-center border-r border-slate-800 pr-4 py-3 text-slate-400 hover:text-slate-200 transition-colors"
         >
-          đạt-võ
+          <label class="text-bold">_datvt243</label>
         </NuxtLink>
 
-        <nav class="hidden lg:flex items-stretch grow overflow-x-auto">
+        <nav class="hidden lg:flex items-stretch grow">
           <NuxtLink
             v-for="route_ in mainTabs"
             :key="route_.link"
             :to="route_.link"
             class="flex items-center border-r border-slate-800 px-5 py-3 whitespace-nowrap transition-colors"
-            :class="isActive(route_.link) ? 'text-white border-b-2 border-b-orange-400 -mb-px bg-slate-800/40' : 'text-slate-400 hover:text-slate-200'"
+            :class="
+              isActive(route_.link)
+                ? 'text-white border-b-2 border-b-orange-400 -mb-px bg-slate-800/40'
+                : 'text-slate-400 hover:text-slate-200'
+            "
           >
             {{ route_.page }}
           </NuxtLink>
@@ -41,7 +45,11 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
             v-if="contactTab"
             :to="contactTab.link"
             class="flex items-center border-l border-slate-800 px-5 py-3 whitespace-nowrap transition-colors"
-            :class="isActive(contactTab.link) ? 'text-white border-b-2 border-b-orange-400 -mb-px bg-slate-800/40' : 'text-slate-400 hover:text-slate-200'"
+            :class="
+              isActive(contactTab.link)
+                ? 'text-white border-b-2 border-b-orange-400 -mb-px bg-slate-800/40'
+                : 'text-slate-400 hover:text-slate-200'
+            "
           >
             {{ contactTab.page }}
           </NuxtLink>
@@ -49,11 +57,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
 
         <div class="grow lg:hidden" />
 
-        <button
-          class="lg:hidden flex items-center px-4 text-slate-300 hover:text-white"
-          aria-label="Open menu"
-          @click="isOpen = true"
-        >
+        <button class="lg:hidden flex items-center px-4 text-slate-300 hover:text-white" aria-label="Open menu" @click="isOpen = true">
           <UIcon name="fe:bar" class="w-5 h-5" />
         </button>
 

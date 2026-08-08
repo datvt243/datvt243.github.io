@@ -41,8 +41,7 @@ const filtered = computed(() => {
   return projects.value.filter((p) => (p.technology || []).some((t) => selected.value.includes(t)))
 })
 
-const getDate = (p: { startDate: number; endDate: number }) =>
-  `${convertNumberToDate(p.startDate)} - ${convertNumberToDate(p.endDate)}`
+const getDate = (p: { startDate: number; endDate: number }) => `${convertNumberToDate(p.startDate)} - ${convertNumberToDate(p.endDate)}`
 </script>
 
 <template>
@@ -66,7 +65,7 @@ const getDate = (p: { startDate: number; endDate: number }) =>
       </template>
 
       <p v-if="!filtered.length" class="text-slate-500 font-jetbrains">No projects match the selected filters.</p>
-      <div v-else class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div v-else class="grid gap-6 sm:grid-cols-1 xl:grid-cols-1">
         <article
           v-for="(p, i) in filtered"
           :key="p._id || i"
@@ -100,12 +99,12 @@ const getDate = (p: { startDate: number; endDate: number }) =>
 
 <style scoped lang="scss">
 .description {
-	:deep(> *) {
-		margin-bottom: 0.5rem;
-	}
-	:deep(ul, ol) {
-		list-style-type: disc;
-		padding-left: 1rem;
-	}
+  :deep(> *) {
+    margin-bottom: 0.5rem;
+  }
+  :deep(ul, ol) {
+    list-style-type: disc;
+    padding-left: 1rem;
+  }
 }
 </style>
