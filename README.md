@@ -2,7 +2,7 @@
 
 Personal portfolio & blog site of **Võ Tấn Đạt**.
 
-Visit: [https://datvt243.github.io](https://datvt243.github.io)
+Visit: [https://resume-nuxt-vert.vercel.app](https://resume-nuxt-vert.vercel.app)
 
 ---
 
