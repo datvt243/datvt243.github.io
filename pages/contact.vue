@@ -44,17 +44,17 @@ useSeoMeta({
         <div class="block items-center gap-6 space-y-8">
           <div class="w-full">
             <ContactItem title="Phone/Zalo" :content="contact.phone" type="phone">
-              <template #icon><IconsEmail /></template>
+              <template #icon><UIcon name="fe:phone" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
           <div class="w-full">
             <ContactItem title="Email" :content="contact.email" type="email">
-              <template #icon><IconsEmail /></template>
+              <template #icon><UIcon name="fe:mail" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
           <div class="w-full">
             <ContactItem title="Address" :content="contact.address">
-              <template #icon><IconsEmail /></template>
+              <template #icon><UIcon name="fe:location" class="w-6 h-6" /></template>
             </ContactItem>
           </div>
         </div>
