@@ -5,7 +5,6 @@
  * Description:
  */
 
-import { debouncedRef } from '@/customs/refs/debounceRef'
 import type { GitRepos } from '@/types/github'
 
 const props = defineProps<{
