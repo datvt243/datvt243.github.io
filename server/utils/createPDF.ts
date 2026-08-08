@@ -11,6 +11,18 @@ import type {
 
 const _log = console.log.bind(console)
 
+// Note: `description`/`introduction` are intentionally left unescaped — they are
+// rich-text HTML by design elsewhere in the app (rendered via v-html).
+const escapeHtml = (value: unknown): string => {
+  if (value === null || value === undefined) return ''
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 export const pageRender = (RECORD: Record<string, any>) => {
   /**
    * get data format
@@ -139,13 +151,13 @@ const _helper = () => {
         <div class="item">
             <div class="header">
                 <div class="d-flex between bg-gray mb-0">
-                    <div class="title">${title}</div>
-                    <div class="time">${getTime}</div>
+                    <div class="title">${escapeHtml(title)}</div>
+                    <div class="time">${escapeHtml(getTime)}</div>
                 </div>
             </div>
             <div class="body">
-                <p class="sub-title">${subTitle}</p>
-                <div class="description"> 
+                <p class="sub-title">${escapeHtml(subTitle)}</p>
+                <div class="description">
                     ${description}
                 </div>
                 ${getSkills}
@@ -156,7 +168,7 @@ const _helper = () => {
   const _boxContent = (title = '', content = '') => {
     return `
             <div class="box">
-                <div class="heading">${title.toUpperCase()}</div>
+                <div class="heading">${escapeHtml(title.toUpperCase())}</div>
                 <div class="clear" style="padding-left: 1rem">
                     ${content}
                 </div>
@@ -177,23 +189,23 @@ const _helper = () => {
 
       const getInfo = (phone: string, email: string, address: string) => {
         let _result = ''
-        address && (_result += address)
-        email && (_result += ` - <a href="mailto:${email}">${email}</a>`)
-        phone && (_result += ` - <a href="tel:${phone}">${phone}</a>`)
+        address && (_result += escapeHtml(address))
+        email && (_result += ` - <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`)
+        phone && (_result += ` - <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a>`)
         return _result
       }
       const getWebsite = (github: string = '', linkedin: string = '', website: string = '') => {
         let _result = ''
-        github && (_result += `<a href="${github}">${github}</a>`)
-        linkedin && (_result += ` - <a href="${linkedin}">${linkedin}</a>`)
-        website && (_result += ` - <a href="${website}">${website}</a>`)
+        github && (_result += `<a href="${escapeHtml(github)}">${escapeHtml(github)}</a>`)
+        linkedin && (_result += ` - <a href="${escapeHtml(linkedin)}">${escapeHtml(linkedin)}</a>`)
+        website && (_result += ` - <a href="${escapeHtml(website)}">${escapeHtml(website)}</a>`)
         return _result
       }
 
       return `
                 <div class="box">
                     <div class="text-center" style="margin-bottom: 10px">
-                        <div class="full-name">${firstName} ${lastName}</div>
+                        <div class="full-name">${escapeHtml(firstName)} ${escapeHtml(lastName)}</div>
                         <div class="info mb-0">${getInfo(phone, email, address)}</div>
                         <div class="website">${getWebsite(github, linkedin, website)}</div>
                     </div>
@@ -207,7 +219,7 @@ const _helper = () => {
     }) {
       function getContent(title = '', skills: Skill[] = []) {
         if (!skills.length) return ''
-        return `<li>${title}: ${skills.map((e) => e.name).join(', ')}</li>`
+        return `<li>${escapeHtml(title)}: ${skills.map((e) => escapeHtml(e.name)).join(', ')}</li>`
       }
       function getProfessionalSkills(skills: Skill[], groups: string[]) {
         if (!groups.length) return getContent('Kỹ năng chuyên môn', skills)
@@ -222,7 +234,7 @@ const _helper = () => {
 
           let str = ''
           for (const { name, skills } of _groups) {
-            skills.length && (str += `<li>${name}: ${skills.map((i) => i.name).join(', ')}</li>`)
+            skills.length && (str += `<li>${escapeHtml(name)}: ${skills.map((i) => escapeHtml(i.name)).join(', ')}</li>`)
           }
 
           return str
@@ -311,7 +323,7 @@ const _helper = () => {
     .map((el) => {
       return `
                                 <li style="padding-right: 20px; text-transform: capitalize">
-                                    ${el.language} (${el.level})
+                                    ${escapeHtml(el.language)} (${escapeHtml(el.level)})
                                 </li>`
     })
     .join('')}
@@ -327,10 +339,10 @@ const _helper = () => {
     .map((e: Reference) => {
       return `
                                 <li class="col-6">
-                                    <p>${e.fullName.toLocaleUpperCase()}</p>
-                                    <p>Công ty: ${e.company}</p>
-                                    <p>Chức vụ: ${e.position}</p>
-                                    <p>Tel: ${e.phone} </p>
+                                    <p>${escapeHtml(e.fullName.toLocaleUpperCase())}</p>
+                                    <p>Công ty: ${escapeHtml(e.company)}</p>
+                                    <p>Chức vụ: ${escapeHtml(e.position)}</p>
+                                    <p>Tel: ${escapeHtml(e.phone)} </p>
                                 </li>
                             `
     })

@@ -10,6 +10,10 @@ export default defineEventHandler(async (event) => {
 
   const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
 
+  if (!success || !data) {
+    throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
+  }
+
   if (data) {
     data.generalInformation = ((generalInformation: GeneralInformation[]) => {
       if (!generalInformation.length) return {}
@@ -54,10 +58,12 @@ export default defineEventHandler(async (event) => {
   await browser.close()
 
   // Trả file PDF cho client
+  const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_')
+
   return new Response(pdfBuffer, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="${email}.pdf"`,
+      'Content-Disposition': `attachment; filename="${safeFilename}.pdf"`,
     },
   })
 })
