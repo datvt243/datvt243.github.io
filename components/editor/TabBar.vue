@@ -17,7 +17,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
 
 <template>
   <header class="border-b border-slate-800 bg-slate-900 font-jetbrains text-sm">
-    <UContainer>
+    <UContainer :ui="{ constrained: 'mx-auto max-w-screen-lg px-3 py-0 md:py-0 lg:py-0' }">
       <div class="flex items-stretch">
         <NuxtLink
           to="/"
