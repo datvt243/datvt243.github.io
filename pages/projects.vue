@@ -30,14 +30,6 @@ const allTech = computed(() => {
 })
 
 const selected = ref<string[]>([])
-function toggle(tech: string) {
-  const i = selected.value.indexOf(tech)
-  if (i === -1) selected.value.push(tech)
-  else selected.value.splice(i, 1)
-}
-function clearFilters() {
-  selected.value = []
-}
 
 const filtered = computed(() => {
   if (!selected.value.length) return projects.value
@@ -53,35 +45,7 @@ const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').repla
   <UContainer>
     <EditorPanel>
       <template #sidebar>
-        <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains">projects</p>
-        <ul class="space-y-1 font-jetbrains text-sm mb-4">
-          <li v-for="tech in allTech" :key="tech">
-            <label class="flex items-center gap-2 px-2 py-1.5 rounded cursor-pointer transition-colors hover:bg-slate-800/50">
-              <input
-                type="checkbox"
-                class="rounded border-slate-600 bg-slate-800 text-orange-400 focus:ring-orange-400/50"
-                :checked="selected.includes(tech)"
-                @change="toggle(tech)"
-              />
-              <UIcon name="fe:hash" class="w-3.5 h-3.5 opacity-40 shrink-0" />
-              <span :class="selected.includes(tech) ? 'text-white' : 'text-slate-400'">{{ tech }}</span>
-            </label>
-          </li>
-        </ul>
-
-        <div class="flex items-center gap-2 text-xs font-jetbrains text-slate-500 border-t border-slate-800 pt-3">
-          <span v-if="!selected.length">all;</span>
-          <span v-else class="text-slate-300 truncate">{{ selected.join(', ') }};</span>
-          <button
-            v-if="selected.length"
-            type="button"
-            class="shrink-0 text-slate-500 hover:text-orange-400 transition-colors"
-            aria-label="Clear filters"
-            @click="clearFilters"
-          >
-            <UIcon name="fe:close" class="w-3.5 h-3.5" />
-          </button>
-        </div>
+        <EditorFilterFolder v-model="selected" label="projects" :items="allTech" />
       </template>
 
       <p v-if="!filtered.length" class="text-slate-500 font-jetbrains">No projects match the selected filters.</p>
