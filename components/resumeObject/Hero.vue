@@ -36,13 +36,9 @@ const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', '
     </div>
 
     <div class="hidden lg:block">
-      <div class="relative rounded-xl border border-slate-700 bg-slate-900 p-3">
-        <span class="absolute -top-1 -left-1 w-2 h-2 rounded-full border border-slate-600 bg-slate-900" />
-        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-slate-600 bg-slate-900" />
-        <span class="absolute -bottom-1 -left-1 w-2 h-2 rounded-full border border-slate-600 bg-slate-900" />
-        <span class="absolute -bottom-1 -right-1 w-2 h-2 rounded-full border border-slate-600 bg-slate-900" />
+      <EditorCornerFrame>
         <NuxtImg src="Avatar.png" width="240" height="240" class="rounded-lg" alt="Avatar" />
-      </div>
+      </EditorCornerFrame>
     </div>
   </div>
 </template>
