@@ -15,7 +15,7 @@ const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', '
 <template>
   <div class="relative overflow-hidden">
     <div
-      class="pointer-events-none absolute -top-24 -left-24 w-[36rem] h-[36rem] rounded-full blur-3xl bg-[radial-gradient(circle,theme(colors.pink.500/18%),transparent_65%)]"
+      class="pointer-events-none absolute top-1/2 left-0 w-80 h-80 -translate-x-1/3 -translate-y-1/2 rounded-full blur-2xl bg-[radial-gradient(circle,theme(colors.pink.500/20%),transparent_60%)]"
     />
     <div class="relative grid gap-10 lg:grid-cols-[1fr_auto] items-center py-10 font-jetbrains">
       <div>
