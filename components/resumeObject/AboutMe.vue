@@ -43,12 +43,54 @@ function splitHtmlIntoSentences(html: string): string[] {
   return parts
 }
 
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+}
+
+// Renders a sentence as literal Markdown source: <strong>/<b> becomes visible
+// **bold** syntax instead of actually-rendered bold HTML. A private-use
+// marker keeps the bold boundaries intact through HTML-escaping, then gets
+// swapped for a dimmed "**" + bold text (Markdown syntax-highlighting look).
+function toMarkdownLine(sentenceHtml: string): string {
+  // Drop every tag except <strong>/<b>, then split ON those tags — String.split
+  // with a non-capturing... actually a matching regex naturally alternates
+  // [plain, bold, plain, bold, ...] since each strong/b pair produces one
+  // split boundary pair, with no marker characters needed.
+  const withoutOtherTags = sentenceHtml.replace(/<(?!\/?(?:strong|b)\b)[^>]+>/gi, '')
+  const parts = withoutOtherTags.split(/<\/?(?:strong|b)>/gi)
+  return parts
+    .map((chunk, i) =>
+      i % 2 === 1
+        ? `<span class="text-slate-500">**</span><span class="font-bold text-white">${escapeHtml(chunk)}</span><span class="text-slate-500">**</span>`
+        : escapeHtml(chunk),
+    )
+    .join('')
+}
+
+// `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,
+// no Vue binding needed for plain navigation) so it stays clickable.
+function markdownLink(text: string, url: string) {
+  return (
+    `<span class="text-slate-500">[</span>` +
+    `<a href="${escapeHtml(url)}" target="_blank" class="text-blue-400 hover:underline">${escapeHtml(text)}</a>` +
+    `<span class="text-slate-500">](</span><span class="text-orange-300">${escapeHtml(url)}</span><span class="text-slate-500">)</span>`
+  )
+}
+
 const bioLines = computed(() => {
   // API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those
   // block wrappers first so the depth-based sentence splitter below isn't gated off
   // for the whole string by one never-closing tag.
   const withoutParagraphs = (hero.value.introduction || '').replace(/<\/?p[^>]*>/gi, '')
-  return splitHtmlIntoSentences(withoutParagraphs)
+  const sentences = splitHtmlIntoSentences(withoutParagraphs).map(toMarkdownLine)
+  const socialLines = Object.entries(social.value || {}).map(([name, link]) => markdownLink(name, link as string))
+  return [
+    '<span class="text-slate-500"># </span><span class="font-bold text-white">About me</span>',
+    '',
+    ...sentences,
+    '',
+    ...socialLines,
+  ]
 })
 
 async function downloadResume() {
@@ -76,28 +118,14 @@ async function downloadResume() {
       <EditorCodeBlock :lines="bioLines" class="mb-4" />
     </ClientOnly>
 
-    <ul v-if="social" class="flex gap-1 space-x-4">
-      <li v-for="[name, link] in Object.entries(social)" :key="name">
-        <a :href="link" target="_blank" class="text-pink">
-          <UTooltip :text="link" :popper="{ placement: 'top' }">
-            <UIcon
-              :name="`grommet-icons:${name.toLocaleLowerCase() === 'website' ? 'globe' : name}`"
-              class="w-6 h-6"
-            />
-          </UTooltip>
-        </a>
-      </li>
-    </ul>
-
-    <p class="mt-4">
-      <UButton color="pink" variant="solid" size="lg" :disabled="isDisabled" @click="downloadResume()">
-        Download CV
-      </UButton>
-    </p>
+    <button
+      type="button"
+      class="font-jetbrains text-sm mt-2 disabled:opacity-40 disabled:cursor-not-allowed"
+      :disabled="isDisabled"
+      @click="downloadResume()"
+    >
+      <span class="text-slate-500">[</span><span class="text-blue-400 hover:underline">Download CV</span
+      ><span class="text-slate-500">](</span><span class="text-orange-300">./resume.pdf</span><span class="text-slate-500">)</span>
+    </button>
   </div>
 </template>
-<style scoped>
-:deep(strong) {
-	color: var(--color-green);
-}
-</style>

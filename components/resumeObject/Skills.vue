@@ -5,39 +5,52 @@
  * Description:
  */
 
-import type { ProfessionalSkill } from '@/types/resume-document'
-interface ObjectRender {
-	[key: string]: ProfessionalSkill[]
+import { buildSkillsTsLines } from '@/utils/index'
+
+const store = useResumeStore()
+
+// Only maps to logos actually present under public/svg/ — skill names come
+// from the API as free text, so unmatched skills just render without an icon
+// rather than guessing/faking one.
+const SKILL_ICONS: Record<string, string> = {
+  javascript: 'js',
+  typescript: 'typescript',
+  vuejs: 'vue-js',
+  vue: 'vue-js',
+  nuxtjs: 'nuxt-js',
+  nuxt: 'nuxt-js',
+  reactjs: 'react-js',
+  react: 'react-js',
+  nextjs: 'next-js',
+  next: 'next-js',
+  nodejs: 'node-js',
+  node: 'node-js',
+  mongodb: 'mongodb',
+  mongo: 'mongodb',
+  bootstrap: 'bootstrap',
+  tailwindcss: 'tailwindcss',
+  tailwind: 'tailwindcss',
+  git: 'git',
 }
-const { skills, groups } = useResumeStore()
 
-const objectRender: ObjectRender = reactive({})
-getObjectRender(skills, groups)
-
-function getObjectRender(skills: ProfessionalSkill[], groups: string[]) {
-  for (const gr of groups) {
-    const _filter = skills.filter((s) => s.group === gr)
-    _filter.length && (objectRender[gr] = _filter)
-  }
-
-  {
-    const _filter = skills.filter((s) => !Object.hasOwn(s, 'group'))
-    _filter.length && (objectRender['Other'] = _filter)
-  }
+function skillIcon(name: string): string | undefined {
+  return SKILL_ICONS[name.toLowerCase().replace(/[^a-z0-9]/g, '')]
 }
 
-const expLabel = (val: ProfessionalSkill) => (val.exp ? `${val.exp}+ years` : undefined)
+const groupedSkills = computed(() => {
+  const result: { label: string; skills: { name: string; exp?: number; icon?: string }[] }[] = []
+  for (const gr of store.groups) {
+    const filtered = store.skills.filter((s) => s.group === gr)
+    if (filtered.length) result.push({ label: gr, skills: filtered.map((s) => ({ ...s, icon: skillIcon(s.name) })) })
+  }
+  const rest = store.skills.filter((s) => !Object.hasOwn(s, 'group'))
+  if (rest.length) result.push({ label: 'Other', skills: rest.map((s) => ({ ...s, icon: skillIcon(s.name) })) })
+  return result
+})
+
+const lines = computed(() => buildSkillsTsLines(groupedSkills.value))
 </script>
 
 <template>
-  <ul class="space-y-4">
-    <li v-for="[_key, _val] of Object.entries(objectRender)" :key="`${_key}`" class="flex flex-wrap items-center gap-x-3 gap-y-2">
-      <span class="font-bold capitalize text-orange-400 shrink-0">{{ _key }}:</span>
-      <span class="flex flex-wrap gap-2">
-        <UTooltip v-for="(val, i) of _val" :key="`sub-skill-${i}`" :text="expLabel(val)">
-          <UBadge :label="val.name" variant="outline" />
-        </UTooltip>
-      </span>
-    </li>
-  </ul>
+  <EditorCodeBlock :lines="lines" />
 </template>
