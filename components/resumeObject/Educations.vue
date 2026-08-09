@@ -5,22 +5,26 @@
  * Description:
  */
 
+import { buildJsonArrayLines, convertNumberToDate } from '@/utils/index'
+
 const store = useResumeStore()
 const educations = computed(() => store.educations)
+
+const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+
+const lines = computed(() =>
+  buildJsonArrayLines(
+    (educations.value || []).map((el) => ({
+      school: el.school || '',
+      major: el.major || '',
+      startDate: convertNumberToDate(el.startDate),
+      endDate: el.isCurrent ? 'present' : convertNumberToDate(el.endDate),
+      description: stripHtml(el.description),
+    })),
+  ),
+)
 </script>
 
 <template>
-  <ul class="space-y-12">
-    <li v-for="(el, index) in educations" :key="el._id || index">
-      <ResumeObjectItem
-        :title="el.school"
-        icon-position="fe:building"
-        :position="el.major"
-        :start-date="el.startDate"
-        :end-date="el.endDate"
-        :description="el.description"
-        :is-current="el.isCurrent"
-      />
-    </li>
-  </ul>
+  <EditorCodeBlock :lines="lines" />
 </template>
