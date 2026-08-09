@@ -9,7 +9,7 @@ const sections = [
   { key: 'about-me', label: 'about-me' },
   { key: 'skills', label: 'skills' },
   { key: 'experience', label: 'experience' },
-  { key: 'education', label: 'education.json' },
+  { key: 'education', label: 'educations.json' },
   { key: 'languages', label: 'languages.json' },
 ]
 const active = ref(sections[0].key)
