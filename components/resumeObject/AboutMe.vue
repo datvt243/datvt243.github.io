@@ -48,8 +48,7 @@ const bioLines = computed(() => {
   // block wrappers first so the depth-based sentence splitter below isn't gated off
   // for the whole string by one never-closing tag.
   const withoutParagraphs = (hero.value.introduction || '').replace(/<\/?p[^>]*>/gi, '')
-  const sentences = splitHtmlIntoSentences(withoutParagraphs)
-  return ['/**', ' * About me', ' *', ...sentences.map((s) => ` * ${s}`), ' */']
+  return splitHtmlIntoSentences(withoutParagraphs)
 })
 
 async function downloadResume() {

@@ -6,7 +6,7 @@
  */
 
 const sections = [
-  { key: 'about-me', label: 'about-me' },
+  { key: 'about-me', label: 'about-me.txt' },
   { key: 'skills', label: 'skills' },
   { key: 'experience', label: 'experience' },
   { key: 'education', label: 'educations.json' },
