@@ -9,10 +9,11 @@ const sections = [
   { key: 'about-me', label: 'about-me' },
   { key: 'skills', label: 'skills' },
   { key: 'experience', label: 'experience' },
-  { key: 'education', label: 'education' },
-  { key: 'languages', label: 'languages' },
+  { key: 'education', label: 'education.json' },
+  { key: 'languages', label: 'languages.json' },
 ]
 const active = ref(sections[0].key)
+const activeLabel = computed(() => sections.find((s) => s.key === active.value)?.label ?? active.value)
 const folderOpen = ref(true)
 </script>
 
@@ -23,7 +24,7 @@ const folderOpen = ref(true)
     <div class="mt-4">
       <EditorPanel>
         <template #filetab>
-          {{ active }}
+          {{ activeLabel }}
           <UIcon name="fe:close" class="w-3.5 h-3.5 opacity-40" />
         </template>
 
