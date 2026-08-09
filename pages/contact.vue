@@ -73,6 +73,7 @@ function submitMessage() {
             id="contact-name"
             v-model="form.name"
             type="text"
+            placeholder="Your name"
             required
             class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none"
           />
@@ -83,6 +84,7 @@ function submitMessage() {
             id="contact-email"
             v-model="form.email"
             type="email"
+            placeholder="you@example.com"
             required
             class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none"
           />
@@ -93,6 +95,7 @@ function submitMessage() {
             id="contact-message"
             v-model="form.message"
             rows="5"
+            placeholder="What's on your mind?"
             required
             class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none resize-y"
           />
