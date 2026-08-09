@@ -26,8 +26,10 @@ const getURL = computed(() => {
 
 <template>
   <article class="flex flex-col space-y-2 xl:space-y-0 font-jetbrains">
-    <dl class="flex items-center text-base font-medium text-slate-500 mb-2">
-      <dt class="pr-1"/>
+    <dl class="flex items-center gap-1.5 text-base font-medium text-slate-500 mb-2">
+      <dt class="flex items-center">
+        <UIcon name="fe:calendar" class="w-3.5 h-3.5 opacity-60" />
+      </dt>
       <dd class="leading-6">
         <time :datetime="formatDate(modelValue.createdAt)" class="text-sm">
           {{ formatDate(modelValue.createdAt) }}

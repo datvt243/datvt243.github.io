@@ -96,6 +96,9 @@ function pugTag(name: string, cls?: string) {
   text-align: right;
   flex-shrink: 0;
   user-select: none;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .line-content {

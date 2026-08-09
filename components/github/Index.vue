@@ -11,6 +11,17 @@ const { data } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>(
 
 const user = computed(() => data.value?.data.user as GitUser)
 const repos = computed(() => data.value?.data.repos as GitRepos[])
+
+const languages = computed(() => {
+  return [...new Set((repos.value || []).filter((r) => !!r.language).map((r) => r.language))].sort()
+})
+
+const selected = ref<string[]>([])
+
+const filteredRepos = computed(() => {
+  if (!selected.value.length) return repos.value || []
+  return (repos.value || []).filter((r) => selected.value.includes(r.language))
+})
 </script>
 
 <template>
@@ -18,8 +29,12 @@ const repos = computed(() => data.value?.data.repos as GitRepos[])
     <EditorPanel>
       <template #sidebar>
         <GithubGitUser :user="user" />
+
+        <div class="mt-6 pt-4 border-t border-slate-800">
+          <EditorFilterFolder v-model="selected" label="languages" :items="languages" />
+        </div>
       </template>
-      <GithubGitRepos :repos="repos" />
+      <GithubGitRepos :repos="filteredRepos" />
     </EditorPanel>
   </UContainer>
 </template>

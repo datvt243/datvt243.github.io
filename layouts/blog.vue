@@ -25,8 +25,8 @@ provide('query', {
 </script>
 
 <template>
-  <main class="grow p-0 layout-blog pt-4">
-    <UContainer class="!pt-0 pb-10">
+  <main class="grow p-0 layout-blog">
+    <UContainer>
       <EditorPanel>
         <template #sidebar>
           <PostCategories />

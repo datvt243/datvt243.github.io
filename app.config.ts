@@ -38,7 +38,7 @@ export default defineAppConfig({
 
   ui: {
     container: {
-      constrained: 'mx-auto max-w-screen-lg px-3 py-10 md:py-14 lg:py-18',
+      constrained: 'mx-auto max-w-screen-lg px-3 py-6 md:py-8 lg:py-10',
     },
     button: {
       color: {
