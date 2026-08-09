@@ -20,6 +20,14 @@ useSeoMeta({
   description: getDesc.value,
   ogDescription: getDesc.value,
 })
+
+const form = reactive({ name: '', email: '', message: '' })
+
+function submitMessage() {
+  const subject = `Portfolio contact from ${form.name || 'someone'}`
+  const body = `${form.message}\n\n— ${form.name} (${form.email})`
+  window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
 </script>
 
 <template>
@@ -57,16 +65,40 @@ useSeoMeta({
         </ul>
       </template>
 
-      <p class="text-xs text-slate-500 font-jetbrains mb-3"># reach out - no backend wired up yet, ping me directly :)</p>
-      <pre class="font-jetbrains text-sm leading-relaxed overflow-x-auto"><code><span class="text-blue-400">const</span> <span class="text-white">contact</span> <span class="text-slate-500">=</span> <span class="text-slate-500">{</span>
-  <span class="text-slate-300">phone</span><span class="text-slate-500">:</span> <span class="text-orange-300">'{{ contact.phone }}'</span><span class="text-slate-500">,</span>
-  <span class="text-slate-300">email</span><span class="text-slate-500">:</span> <span class="text-orange-300">'{{ contact.email }}'</span><span class="text-slate-500">,</span>
-  <span class="text-slate-300">address</span><span class="text-slate-500">:</span> <span class="text-orange-300">'{{ contact.address }}'</span><span class="text-slate-500">,</span>
-<span class="text-slate-500">}</span>
-
-<span class="text-blue-400">function</span> <span class="text-white">reachOut</span><span class="text-slate-500">()</span> <span class="text-slate-500">{</span>
-  <span class="text-slate-500">return</span> <span class="text-slate-300">`Hey </span><span class="text-orange-300">${</span><span class="text-slate-300">contact.email</span><span class="text-orange-300">}</span><span class="text-slate-300">, let's talk!`</span>
-<span class="text-slate-500">}</span></code></pre>
+      <p class="text-xs text-slate-500 font-jetbrains mb-4"># fills your mail client - no server involved :)</p>
+      <form class="space-y-4 font-jetbrains max-w-lg" @submit.prevent="submitMessage">
+        <div>
+          <label for="contact-name" class="block text-sm text-slate-400 mb-1.5">_name:</label>
+          <input
+            id="contact-name"
+            v-model="form.name"
+            type="text"
+            required
+            class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label for="contact-email" class="block text-sm text-slate-400 mb-1.5">_email:</label>
+          <input
+            id="contact-email"
+            v-model="form.email"
+            type="email"
+            required
+            class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label for="contact-message" class="block text-sm text-slate-400 mb-1.5">_message:</label>
+          <textarea
+            id="contact-message"
+            v-model="form.message"
+            rows="5"
+            required
+            class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none resize-y"
+          />
+        </div>
+        <UButton type="submit" color="pink" variant="solid" class="font-jetbrains">submit-message</UButton>
+      </form>
     </EditorPanel>
   </UContainer>
 </template>
