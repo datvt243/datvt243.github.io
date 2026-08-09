@@ -85,13 +85,13 @@ const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').repla
       </template>
 
       <p v-if="!filtered.length" class="text-slate-500 font-jetbrains">No projects match the selected filters.</p>
-      <div v-else class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      <div v-else class="grid gap-6 grid-cols-1">
         <article
           v-for="(p, i) in filtered"
           :key="p._id || i"
-          class="flex flex-col rounded-lg border border-slate-800 bg-slate-900/50 overflow-hidden transition-colors hover:border-orange-400/40"
+          class="flex flex-col sm:flex-row rounded-lg border border-slate-800 bg-slate-900/50 overflow-hidden transition-colors hover:border-orange-400/40"
         >
-          <div class="relative aspect-video bg-slate-800/70 shrink-0">
+          <div class="relative aspect-video sm:aspect-square sm:w-48 shrink-0 bg-slate-800/70">
             <NuxtImg v-if="p.images?.[0]" :src="p.images[0]" class="w-full h-full object-cover" :alt="p.name" />
             <div v-else class="w-full h-full flex items-center justify-center">
               <UIcon name="fe:file" class="w-8 h-8 text-slate-600" />
@@ -104,31 +104,19 @@ const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').repla
             </span>
           </div>
 
-          <div class="flex flex-col grow p-5">
+          <div class="flex flex-col grow p-5 min-w-0">
             <p class="font-jetbrains text-sm text-blue-400 mb-2">
               Project {{ i + 1 }} <span class="text-slate-600">//</span> _{{ p.name?.toLowerCase().replace(/\s+/g, '-') }}
             </p>
             <h2 class="text-lg font-bold text-white mb-1">{{ p.name }}</h2>
             <p v-if="p.position" class="text-sm text-slate-400 italic mb-2">{{ p.position }}</p>
             <p class="text-xs text-slate-500 font-jetbrains mb-3">{{ getDate(p) }}</p>
-            <p class="text-sm text-slate-300 mb-4 line-clamp-3">{{ stripHtml(p.description) }}</p>
+            <p class="text-sm text-slate-300 mb-4 line-clamp-3 max-w-2xl">{{ stripHtml(p.description) }}</p>
             <ul v-if="p.technology?.length" class="flex flex-wrap gap-2 mb-4">
               <li v-for="t in p.technology" :key="t">
                 <UBadge :label="t" variant="outline" />
               </li>
             </ul>
-            <UButton
-              v-if="p.link"
-              :to="p.link"
-              target="_blank"
-              size="xs"
-              color="gray"
-              variant="solid"
-              trailing-icon="fe:link-external"
-              class="mt-auto self-start font-jetbrains"
-            >
-              view-project
-            </UButton>
           </div>
         </article>
       </div>
