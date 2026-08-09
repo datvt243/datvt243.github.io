@@ -100,7 +100,13 @@ function submitMessage() {
             class="w-full rounded bg-slate-800/50 border border-slate-700 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-orange-400/50 focus:outline-none resize-y"
           />
         </div>
-        <UButton type="submit" color="pink" variant="solid" class="font-jetbrains">submit-message</UButton>
+        <button
+          type="submit"
+          class="inline-flex items-center gap-2 rounded bg-orange-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-orange-300 transition-colors font-jetbrains"
+        >
+          submit-message
+          <UIcon name="fe:paper-plane" class="w-4 h-4" />
+        </button>
       </form>
     </EditorPanel>
   </UContainer>
