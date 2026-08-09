@@ -13,6 +13,7 @@ const sections = [
   { key: 'languages', label: 'languages' },
 ]
 const active = ref(sections[0].key)
+const folderOpen = ref(true)
 </script>
 
 <template>
@@ -21,12 +22,28 @@ const active = ref(sections[0].key)
 
     <div class="mt-4">
       <EditorPanel>
+        <template #filetab>
+          {{ active }}
+          <UIcon name="fe:close" class="w-3.5 h-3.5 opacity-40" />
+        </template>
+
         <template #sidebar>
-          <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains">personal-info</p>
-          <ul class="space-y-1">
+          <button
+            type="button"
+            class="flex items-center gap-1.5 text-xs uppercase tracking-widest text-slate-500 mb-3 font-jetbrains"
+            @click="folderOpen = !folderOpen"
+          >
+            <UIcon name="fe:drop-down" class="w-3 h-3 transition-transform" :class="folderOpen ? '' : '-rotate-90'" />
+            <UIcon :name="folderOpen ? 'fe:folder-open' : 'fe:folder'" class="w-3.5 h-3.5" />
+            personal-info
+          </button>
+          <ul v-show="folderOpen" class="space-y-1">
             <li v-for="s in sections" :key="s.key">
               <EditorNavItem :active="active === s.key" @click="active = s.key">
-                {{ s.label }}
+                <span class="flex items-center gap-2">
+                  <UIcon name="fe:file" class="w-3.5 h-3.5 opacity-50 shrink-0" />
+                  {{ s.label }}
+                </span>
               </EditorNavItem>
             </li>
           </ul>
