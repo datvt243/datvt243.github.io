@@ -30,11 +30,20 @@ const getRepos = computed(() => {
     <div class="search mb-3">
       <UInput
         v-model="search"
-        size="xl"
+        size="sm"
         icon="fe:search"
-        color="primary"
+        color="gray"
         variant="outline"
         placeholder="Search repos name..."
+        :ui="{
+          base: 'font-jetbrains',
+          color: {
+            gray: {
+              outline:
+                'shadow-none bg-slate-900/50 dark:bg-slate-900/50 text-slate-200 dark:text-slate-200 ring-1 ring-inset ring-slate-700 dark:ring-slate-700 focus:ring-1 focus:ring-orange-400 dark:focus:ring-orange-400',
+            },
+          },
+        }"
       />
     </div>
     <div v-if="props.repos" class="clearfix overflow-hidden">
