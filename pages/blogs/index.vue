@@ -78,7 +78,7 @@ const total = computed(() => data.value?.data?.total || 0)
       </template>
     </ListRender>
     <div class="mt-4 flex justify-center">
-      <UPagination v-model="page" :page-count="perPage" :total="total" />
+      <UPagination v-model="page" :page-count="perPage" :total="total" :active-button="{ color: 'orange' }" />
     </div>
 
   </div>
