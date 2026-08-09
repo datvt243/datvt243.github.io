@@ -5,22 +5,27 @@
  * Description:
  */
 
+import { buildJsonArrayLines, convertNumberToDate } from '@/utils/index'
+
 const store = useResumeStore()
 const experiences = computed(() => store.experiences)
+
+const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+
+const lines = computed(() =>
+  buildJsonArrayLines(
+    (experiences.value || []).map((el) => ({
+      position: el.position || '',
+      company: el.company || '',
+      startDate: convertNumberToDate(el.startDate),
+      endDate: el.isCurrent ? 'present' : convertNumberToDate(el.endDate),
+      skills: (el.skills || []).join(', '),
+      description: stripHtml(el.description),
+    })),
+  ),
+)
 </script>
 
 <template>
-  <ul class="space-y-12">
-    <li v-for="(el, index) in experiences" :key="el._id || index">
-      <ResumeObjectItem
-        :title="el.position"
-        icon-position="fe:building"
-        :position="el.company"
-        :start-date="el.startDate"
-        :end-date="el.endDate"
-        :description="el.description"
-        :is-current="el.isCurrent"
-      />
-    </li>
-  </ul>
+  <EditorCodeBlock :lines="lines" />
 </template>
