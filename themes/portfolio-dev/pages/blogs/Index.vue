@@ -18,15 +18,38 @@ interface GetPosts {
 	page: number,
 	perPage: number
 }
-const { data, status } = useFetch<APIFormatResponse<GetPosts>>(`/api/blogs/posts`, {
+const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
+const { data, status, refresh } = useFetch<APIFormatResponse<GetPosts>>(`/api/blogs/posts`, {
+  key: fetchKey,
   query: {
     page: page,
     perPage: perPage,
     category: category,
-  }
+  },
+  // Show whatever we fetched last time for these params instantly (no
+  // blank/loading flash), then silently refetch below and overwrite it -
+  // Nuxt's own default getCachedData only reads from the SSR/static payload,
+  // which isn't populated for plain client-side re-navigation.
+  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key],
+})
+// `status` is already 'success' here (reused from the cached fetch above)
+// only when we're displaying stale data from a previous visit - kick off a
+// background refresh so it gets replaced with fresh data once it arrives.
+// Nuxt's page Suspense/transition setup can call onMounted twice for the
+// same mount, so guard with a flag scoped to this component instance
+// (not to the in-flight request, which may already have finished by the
+// time the second onMounted call happens).
+let hasRevalidated = false
+onMounted(() => {
+  if (status.value !== 'success' || hasRevalidated) return
+  hasRevalidated = true
+  refresh()
 })
 const blogs = computed(() => data.value?.data?.data || null)
 const total = computed(() => data.value?.data?.total || 0)
+// Keep showing the (possibly stale) list during the background refresh
+// instead of flashing back to the ListRender loading state.
+const listStatus = computed(() => (blogs.value ? 'success' : status.value))
 </script>
 
 <template>
@@ -45,7 +68,7 @@ const total = computed(() => data.value?.data?.total || 0)
         </div>
       </div>
     </div>
-    <ListRender :status="status" :data="blogs">
+    <ListRender :status="listStatus" :data="blogs">
       <template #default>
         <li v-for="post in blogs" :key="post._id" class="p-4 border border-theme-border rounded-lg transition-colors hover:border-theme-accent/40">
           <ThemePostItem :model-value="post" />
