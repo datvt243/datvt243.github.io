@@ -2,6 +2,22 @@
 
 /* import * as dotenv from 'dotenv' */
 
+// The active UI theme. A theme is a folder under `themes/<name>/` providing:
+// - `pages/` - one subfolder per route content (resumeObject, github, contact,
+//   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.
+//   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file
+//   renders.
+// - `components/` - reusable chrome shared across pages (Panel, Folder,
+//   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),
+//   same `Theme` prefix (e.g. <ThemePanel>).
+// - `layout/` - site-wide chrome outside the page content (Header, Footer),
+//   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).
+// - `tokens.css` - the theme's CSS custom properties (see
+//   themes/portfolio-dev/tokens.css).
+// Swapping UI = add a new themes/<name>/ folder implementing that contract,
+// then change this constant.
+const ACTIVE_THEME = 'portfolio-dev'
+
 export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2024-04-03',
@@ -47,7 +63,13 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
+  css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
+  components: [
+    { path: `~/themes/${ACTIVE_THEME}/pages`, prefix: 'Theme' },
+    { path: `~/themes/${ACTIVE_THEME}/layout`, prefix: 'Theme' },
+    { path: `~/themes/${ACTIVE_THEME}/components`, prefix: 'Theme' },
+    '~/components',
+  ],
   modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui', '@nuxt/icon', '@nuxt/eslint'],
   typescript: {
     // The integrated dev/build vue-tsc check runs against the root tsconfig

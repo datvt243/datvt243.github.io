@@ -37,7 +37,7 @@ const isValid = computed(() => !!data.value && Object.keys(data.value).length)
   <div class="page-index mx-auto">
     <template v-if="!error">
       <UContainer v-if="isValid && data">
-        <ResumeObject />
+        <ThemeResumeObject />
       </UContainer>
     </template>
     <template v-else>

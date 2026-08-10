@@ -27,12 +27,12 @@ provide('query', {
 <template>
   <main class="grow p-0 layout-blog">
     <UContainer>
-      <EditorPanel>
+      <ThemePanel>
         <template #sidebar>
-          <PostCategories />
+          <ThemePostCategories />
         </template>
         <slot/>
-      </EditorPanel>
+      </ThemePanel>
     </UContainer>
   </main>
 </template>
