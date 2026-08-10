@@ -26,7 +26,5 @@ const postDetail = computed<Post>(() => {
 </script>
 
 <template>
-  <div class="container-block !pt-0">
-    <PostDetail :model-value="postDetail" />
-  </div>
+  <ThemePostDetail :model-value="postDetail" />
 </template>

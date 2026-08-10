@@ -24,3 +24,7 @@ logs
 !.env.example
 
 .vscode
+
+# Claude Code: ignore local/personal config, but keep shared custom commands tracked
+.claude/*
+!.claude/commands/

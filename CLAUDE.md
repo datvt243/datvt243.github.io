@@ -44,11 +44,55 @@ External APIs:
 
 ### Components
 
-- `components/resumeObject/` — active CV UI (JSON object-notation style). This is what renders on `/`.
-- `components/github/` — GitUser, GitRepos (debounced search + language filter), part/Item.
-- `components/post/` — Author, Detail, Item, Loading, RelatedArticles.
-- `components/template/` — Header (mobile slideover), Footer.
-- `components/PostCategories.vue` — blog sidebar, fetches via `fetchWithRetry`.
+- `components/ListRender.vue` — the only component left outside the theme: a generic
+  status-driven slot dispatcher (500ms-delay loading state), reusable by any theme.
+- Everything else presentational lives under `themes/portfolio-dev/` (`pages/`,
+  `layout/`, `components/` — see below) — `pages/*.vue` are thin loaders with no
+  theme-specific markup.
+
+### UI Theme (`themes/`)
+
+The site's entire visual/presentational layer is a swappable theme, not hardcoded into
+`pages/` — including what used to be "content" components (resumeObject/github/post
+listings), since their JSON/file-tree/code-block metaphor is itself an editor-theme
+choice, not neutral markup. Every `pages/*.vue` file is just `definePageMeta` +
+`useSeoMeta` (+ route-param-driven fetches, e.g. `blogs/[id].vue`'s
+`useFetch('/api/blogs/detail/${id}')`) rendering exactly one `Theme*`-prefixed component:
+
+- `pages/index.vue` → `ThemeResumeObject`, `pages/github.vue` → `ThemeGithub`,
+  `pages/contact.vue` → `ThemeContact`, `pages/projects.vue` → `ThemeProjects`,
+  `pages/blogs/index.vue` → `ThemeBlogs`, `pages/blogs/[id].vue` → `ThemePostDetail`.
+
+A theme has three auto-imported dirs (all `Theme`-prefixed, split for discoverability):
+
+- `themes/portfolio-dev/pages/` — one subfolder per route content
+  (`resumeObject/`, `github/`, `post/`, `contact/`, `projects/`, `blogs/`), each
+  owning its own data fetching (`useFetch`/`useAsyncData`/`useResumeStore`) and
+  markup — these are exactly what the `pages/*.vue → Theme*` list above renders.
+- `themes/portfolio-dev/layout/` — site-wide chrome outside page content,
+  rendered directly by `app.vue`: `Header.vue` (top nav, tag `ThemeHeader`),
+  `Footer.vue` (status bar, tag `ThemeFooter`).
+- `themes/portfolio-dev/components/` — reusable chrome shared across the `pages/`
+  content: `PostCategories.vue`, `PageHeading.vue`, and the 6 primitives
+  (`Panel`, `Folder`, `NavItem`, `FilterFolder`, `CodeBlock`, `CornerFrame`).
+- Semantic Tailwind classes (`bg-theme-panel`, `border-theme-border`,
+  `text-theme-muted`, `text-theme-accent`, `font-theme-mono`, …) — defined in
+  `tailwind.config.js` as `rgb(var(--theme-x) / <alpha-value>)`, backed by CSS
+  custom properties from the active theme's `tokens.css`.
+
+Nuxt's directory-based component naming does the prefixing automatically regardless
+of which of the three dirs a file lives in (e.g.
+`themes/portfolio-dev/pages/resumeObject/Hero.vue` → `<ThemeResumeObjectHero>`,
+`themes/portfolio-dev/layout/Header.vue` → `<ThemeHeader>`), per the `components:`
+entry in `nuxt.config.ts`.
+
+The active theme is the `ACTIVE_THEME` constant in `nuxt.config.ts`, currently
+`'portfolio-dev'` (`themes/portfolio-dev/`). Adding a new theme = create
+`themes/<name>/` with a `tokens.css` (same CSS variable names as
+`themes/portfolio-dev/tokens.css`, new values) and `pages/`+`layout/`+`components/`
+trees providing a component for every tag each `pages/*.vue` file (and `app.vue`)
+renders, then flip `ACTIVE_THEME`. No file under the top-level `pages/` needs to
+change.
 
 ### State (Pinia)
 
@@ -69,6 +113,33 @@ GITHUB_TOKEN=                # GitHub token; falls back to unauthenticated reque
 GITHUB_USER=                 # GitHub username
 PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
 ```
+
+## Agent Work Log (`agent-hub/histories/`)
+
+Before starting any bug fix or feature work, check `agent-hub/histories/` (sorted by
+filename, newest last) for recent entries — they carry context and decisions that
+aren't derivable from the code/git history alone (why something was scoped the way it
+was, what was deliberately left alone, what the natural next step is).
+
+Write/update the log **when creating a commit**, not after every individual fix or
+feature — batch everything the commit covers into one entry rather than logging each
+small step separately, to avoid repeated busywork within a single working session.
+Target `agent-hub/histories/YYYY-MM-DD.md` for the day of the commit. If a file for
+that day already exists, append a new `##`-level section to it rather than
+overwriting. (Skip entirely for pure Q&A/research/read-only work, and for anything
+never committed.) Write it so a future session with zero memory of this conversation
+can pick up the thread. Cover, at minimum:
+
+- **Goal** — what was being fixed/built and why (the actual user ask, not a
+  restatement of the diff).
+- **What was done** — the concrete steps/decisions, in order, including anything
+  deliberately left alone or judgment calls made (and why).
+- **Current state** — build/lint/test status, what was verified and how (e.g.
+  screenshots, which routes), what's committed vs. still pending.
+- **Possible next steps** — open threads, known follow-ups, things worth
+  double-checking later.
+
+See `agent-hub/histories/2026-08-11.md` for the format this was modeled on.
 
 ## Known Issues
 
