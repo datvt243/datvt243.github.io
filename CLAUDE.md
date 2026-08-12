@@ -114,6 +114,29 @@ GITHUB_USER=                 # GitHub username
 PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
 ```
 
+## Bug Fix / Feature Workflow
+
+For any tracked bug fix or feature (not one-off docs/config tweaks), follow this
+process. `/start-work` automates steps 1–3, `/finish-work` automates steps 4–5,
+`/merge-work` automates step 6.
+
+1. **Create a GitHub issue** (`gh issue create`) describing the bug/feature before
+   writing any code. Get the issue number from the result.
+2. **Sync `main`**: `git checkout main && git pull` (check `git status` first —
+   don't discard uncommitted work silently).
+3. **Branch from `main`**, named `bug/<issue_number>` or `feature/<issue_number>`
+   (issue number only, no slug).
+4. Do the work. Log it in `agent-hub/histories/` per the section below, then
+   commit as usual.
+5. **Never push directly to `main`.** Push the branch and open a pull request
+   (`gh pr create --base main`) referencing the issue (e.g. `Closes #<n>`).
+6. **On merge**: `bug/*` branches may be deleted after merging
+   (`gh pr merge --delete-branch`); `feature/*` branches must be kept — never
+   delete them, even after merge.
+
+`/ship` remains available for untracked quick changes (docs, config) and also
+refuses to push while on `main`.
+
 ## Agent Work Log (`agent-hub/histories/`)
 
 Before starting any bug fix or feature work, check `agent-hub/histories/` (sorted by

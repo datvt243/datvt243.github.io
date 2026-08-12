@@ -4,6 +4,11 @@ description: Lint-fix changed files, commit, log work-history, and push
 
 Ship the pending changes in this repo, in this order:
 
+0. **Guard**: check the current branch (`git branch --show-current`). If it's
+   `main`, stop and tell the user — per `CLAUDE.md`'s Bug Fix / Feature Workflow,
+   direct pushes to `main` aren't allowed. Use `/start-work` to create an issue +
+   branch first, then `/finish-work` to open a PR instead.
+
 1. **Lint-fix changed files.** Get the changed files (`git status --short`,
    covering both staged and unstaged) and run `npx eslint --fix` on the
    subset ESLint covers in this repo (`.vue`/`.ts`/`.js` — see `eslint.config.js`).
