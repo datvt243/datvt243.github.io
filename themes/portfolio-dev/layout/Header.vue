@@ -6,10 +6,14 @@
 
 const { menuPrimary = [] } = useAppConfig()
 const route = useRoute()
+const colorMode = useColorMode()
 
 const isOpen = ref(false)
 
 const isActive = (link: string) => route.path === link
+const toggleColorMode = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 
 const mainTabs = computed(() => menuPrimary.filter((r: { link: string }) => r.link !== '/contact'))
 const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.link === '/contact'))
@@ -54,6 +58,15 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
             {{ contactTab.page }}
           </NuxtLink>
         </nav>
+
+        <button
+          class="flex items-center border-l border-theme-border px-4 text-theme-muted hover:text-theme-text-strong transition-colors"
+          :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="toggleColorMode"
+        >
+          <UIcon v-if="colorMode.value === 'dark'" name="fe:sunny-o" class="w-4 h-4" />
+          <UIcon v-else name="fe:moon" class="w-4 h-4" />
+        </button>
 
         <div class="grow lg:hidden" />
 

@@ -1,0 +1,27 @@
+/**
+ * Light mode design tokens — same slate/orange scale as dark.css, inverted
+ * (light backgrounds, dark text), applied via the `.light` class
+ * @nuxtjs/color-mode puts on <html> when the user picks light mode.
+ */
+.light {
+  /* backgrounds */
+  --theme-panel: 248 250 252; /* slate-50 */
+  --theme-panel-subtle: 241 245 249; /* slate-100 */
+
+  /* borders */
+  --theme-border: 226 232 240; /* slate-200 */
+  --theme-border-subtle: 203 213 225; /* slate-300 */
+  --theme-border-faint: 148 163 184; /* slate-400 */
+
+  /* text */
+  --theme-text: 15 23 42; /* slate-900 */
+  --theme-text-strong: 30 41 59; /* slate-800 */
+  --theme-text-soft: 51 65 85; /* slate-700 */
+  --theme-muted: 100 116 139; /* slate-500 */
+  --theme-faint: 148 163 184; /* slate-400 */
+
+  /* accent (darker orange shades for contrast on a light background) */
+  --theme-accent: 234 88 12; /* orange-600 */
+  --theme-accent-soft: 249 115 22; /* orange-500 */
+  --theme-accent-contrast: 255 255 255; /* white, for text on an accent-colored background */
+}

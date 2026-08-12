@@ -94,6 +94,17 @@ trees providing a component for every tag each `pages/*.vue` file (and `app.vue`
 renders, then flip `ACTIVE_THEME`. No file under the top-level `pages/` needs to
 change.
 
+**Color mode (light/dark)** is an orthogonal axis to the theme itself — same
+component tree, different `--theme-*` values. `tokens.css` is a thin aggregator
+that `@import`s per-mode files from `tokens/` (`dark.css`, `light.css`), each
+scoped to a `.dark`/`.light` class. `@nuxt/ui` auto-installs `@nuxtjs/color-mode`
+(forced `classSuffix: ''`), which puts that class on `<html>` and exposes the
+`useColorMode()` composable (used by `ThemeHeader`'s toggle button); `nuxt.config.ts`'s
+`colorMode` key sets `preference`/`fallback` to `'dark'` so existing users see no
+change until they opt into light. Adding another mode (e.g. Dracula) = a new
+`tokens/<name>.css` scoped to `.<name>` + one `@import` line + wiring it into the
+toggle.
+
 ### State (Pinia)
 
 - `useResumeStore` — fetches `/api/resume`, exposes getters: `hero`, `contact`, `social`, `experiences`, `educations`, `projects`, `foreignLanguages`, `skills`, `groups`.
