@@ -5,6 +5,7 @@
  */
 .light {
   /* backgrounds */
+  --theme-canvas: 226 232 240; /* slate-200, page background - kept greyer than panel so chrome (header/footer) and editor components visibly sit on top of it */
   --theme-panel: 248 250 252; /* slate-50 */
   --theme-panel-subtle: 241 245 249; /* slate-100 */
 

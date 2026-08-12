@@ -74,6 +74,7 @@ export default {
         // Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to
         // re-skin every component that uses `theme-*` classes.
         theme: {
+          canvas: themeColor('--theme-canvas'),
           panel: themeColor('--theme-panel'),
           'panel-subtle': themeColor('--theme-panel-subtle'),
           border: themeColor('--theme-border'),

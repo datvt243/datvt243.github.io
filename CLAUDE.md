@@ -137,8 +137,11 @@ process. `/start-work` automates steps 1–3, `/finish-work` automates steps 4�
    don't discard uncommitted work silently).
 3. **Branch from `main`**, named `bug/<issue_number>` or `feature/<issue_number>`
    (issue number only, no slug).
-4. Do the work. Log it in `agent-hub/histories/` per the section below, then
-   commit as usual.
+4. Do the work. Whenever it requires opening a browser (checking a UI bug,
+   verifying a fix visually), run `/browser` first instead of launching Chrome
+   ad hoc — it reuses the existing CDP-debuggable instance on port 9888 if one
+   is already running, only launching a new one if needed. Log the work in
+   `agent-hub/histories/` per the section below, then commit as usual.
 5. **Never push directly to `main`.** Push the branch and open a pull request
    (`gh pr create --base main`) referencing the issue (e.g. `Closes #<n>`).
 6. **On merge**: `bug/*` branches may be deleted after merging
