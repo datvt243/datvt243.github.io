@@ -1,0 +1,31 @@
+/**
+ * Dark mode (default) design tokens — RGB triplets of the slate/orange shades
+ * the site already used (Tailwind defaults), exposed as CSS custom properties
+ * so `tailwind.config.js` and the other mode files stay palette-agnostic.
+ * Applied via the `.dark` class @nuxtjs/color-mode puts on <html>; `:root` is
+ * also included so this is the fallback if no class has been applied yet.
+ */
+:root,
+.dark {
+  /* backgrounds */
+  --theme-canvas: 2 6 23; /* slate-950, page background - kept darker than panel so chrome (header/footer) and editor components visibly sit on top of it */
+  --theme-panel: 15 23 42; /* slate-900 */
+  --theme-panel-subtle: 30 41 59; /* slate-800 */
+
+  /* borders */
+  --theme-border: 30 41 59; /* slate-800 */
+  --theme-border-subtle: 51 65 85; /* slate-700 */
+  --theme-border-faint: 71 85 105; /* slate-600 */
+
+  /* text */
+  --theme-text: 255 255 255; /* white */
+  --theme-text-strong: 226 232 240; /* slate-200 */
+  --theme-text-soft: 203 213 225; /* slate-300 */
+  --theme-muted: 148 163 184; /* slate-400 */
+  --theme-faint: 100 116 139; /* slate-500 */
+
+  /* accent */
+  --theme-accent: 251 146 60; /* orange-400 */
+  --theme-accent-soft: 253 186 116; /* orange-300 */
+  --theme-accent-contrast: 2 6 23; /* slate-950, for text on an accent-colored background */
+}

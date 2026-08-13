@@ -94,6 +94,17 @@ trees providing a component for every tag each `pages/*.vue` file (and `app.vue`
 renders, then flip `ACTIVE_THEME`. No file under the top-level `pages/` needs to
 change.
 
+**Color mode (light/dark)** is an orthogonal axis to the theme itself — same
+component tree, different `--theme-*` values. `tokens.css` is a thin aggregator
+that `@import`s per-mode files from `tokens/` (`dark.css`, `light.css`), each
+scoped to a `.dark`/`.light` class. `@nuxt/ui` auto-installs `@nuxtjs/color-mode`
+(forced `classSuffix: ''`), which puts that class on `<html>` and exposes the
+`useColorMode()` composable (used by `ThemeHeader`'s toggle button); `nuxt.config.ts`'s
+`colorMode` key sets `preference`/`fallback` to `'dark'` so existing users see no
+change until they opt into light. Adding another mode (e.g. Dracula) = a new
+`tokens/<name>.css` scoped to `.<name>` + one `@import` line + wiring it into the
+toggle.
+
 ### State (Pinia)
 
 - `useResumeStore` — fetches `/api/resume`, exposes getters: `hero`, `contact`, `social`, `experiences`, `educations`, `projects`, `foreignLanguages`, `skills`, `groups`.
@@ -126,8 +137,11 @@ process. `/start-work` automates steps 1–3, `/finish-work` automates steps 4�
    don't discard uncommitted work silently).
 3. **Branch from `main`**, named `bug/<issue_number>` or `feature/<issue_number>`
    (issue number only, no slug).
-4. Do the work. Log it in `agent-hub/histories/` per the section below, then
-   commit as usual.
+4. Do the work. Whenever it requires opening a browser (checking a UI bug,
+   verifying a fix visually), run `/browser` first instead of launching Chrome
+   ad hoc — it reuses the existing CDP-debuggable instance on port 9888 if one
+   is already running, only launching a new one if needed. Log the work in
+   `agent-hub/histories/` per the section below, then commit as usual.
 5. **Never push directly to `main`.** Push the branch and open a pull request
    (`gh pr create --base main`) referencing the issue (e.g. `Closes #<n>`).
 6. **On merge**: `bug/*` branches may be deleted after merging

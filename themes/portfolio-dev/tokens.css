@@ -1,31 +1,16 @@
 /**
- * "editor" theme design tokens.
- * Values are the RGB triplets of the slate/orange shades the site already used
- * (Tailwind defaults), exposed as CSS custom properties so `tailwind.config.js`
- * stays theme-agnostic and a future theme only has to ship its own copy of this file.
+ * Design tokens for the active UI theme (see CLAUDE.md's "UI Theme" section).
+ * Color values are split per color mode under `tokens/` (`dark.css`,
+ * `light.css`, ...) so the `.dark`/`.light` class @nuxtjs/color-mode puts on
+ * <html> (see nuxt.config.ts's `colorMode` options) swaps the whole palette.
+ * Adding a mode = a new `tokens/<name>.css` file (scoped to a `.<name>`
+ * class) + an `@import` line here. Tokens that don't vary by mode (e.g. the
+ * font) live directly in this file.
  */
+@import './tokens/dark.css';
+@import './tokens/light.css';
+
 :root {
   --theme-font-mono: 'JetBrains Mono', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
-
-  /* backgrounds */
-  --theme-panel: 15 23 42; /* slate-900 */
-  --theme-panel-subtle: 30 41 59; /* slate-800 */
-
-  /* borders */
-  --theme-border: 30 41 59; /* slate-800 */
-  --theme-border-subtle: 51 65 85; /* slate-700 */
-  --theme-border-faint: 71 85 105; /* slate-600 */
-
-  /* text */
-  --theme-text: 255 255 255; /* white */
-  --theme-text-strong: 226 232 240; /* slate-200 */
-  --theme-text-soft: 203 213 225; /* slate-300 */
-  --theme-muted: 148 163 184; /* slate-400 */
-  --theme-faint: 100 116 139; /* slate-500 */
-
-  /* accent */
-  --theme-accent: 251 146 60; /* orange-400 */
-  --theme-accent-soft: 253 186 116; /* orange-300 */
-  --theme-accent-contrast: 2 6 23; /* slate-950, for text on an accent-colored background */
 }
