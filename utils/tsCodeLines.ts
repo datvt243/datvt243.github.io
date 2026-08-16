@@ -26,11 +26,11 @@ function toIdentifier(label: string): string {
   return id ? (/^[0-9]/.test(id) ? `_${id}` : id) : 'Group'
 }
 
-const kw = (s: string) => `<span class="text-blue-400">${s}</span>`
-const type = (s: string) => `<span class="text-sky-300">${escapeHtml(s)}</span>`
-const str = (s: string) => `<span class="text-orange-300">'${escapeHtml(s)}'</span>`
-const punct = (s: string) => `<span class="text-slate-500">${s}</span>`
-const comment = (s: string) => `<span class="text-slate-600 italic">// ${escapeHtml(s)}</span>`
+const kw = (s: string) => `<span class="text-theme-code-keyword">${s}</span>`
+const type = (s: string) => `<span class="text-theme-code-type">${escapeHtml(s)}</span>`
+const str = (s: string) => `<span class="text-theme-code-string">'${escapeHtml(s)}'</span>`
+const punct = (s: string) => `<span class="text-theme-code-punct">${s}</span>`
+const comment = (s: string) => `<span class="text-theme-code-comment italic">// ${escapeHtml(s)}</span>`
 /** icon is a filename (no extension) under public/svg/, only passed when a real logo exists for that skill. */
 const skillIcon = (icon: string) => `<img src="/svg/${icon}.svg" class="line-icon" alt="" />`
 

@@ -19,9 +19,9 @@ function escapeHtml(str: string): string {
  * line-numbered JSON lines, ready for EditorCodeBlock's `lines` prop.
  */
 export function buildJsonArrayLines(items: Record<string, string>[]): CodeLine[] {
-  const punct = (s: string) => `<span class="text-slate-500">${s}</span>`
-  const key = (s: string) => `<span class="text-blue-300">"${escapeHtml(s)}"</span>`
-  const value = (s: string) => `<span class="text-orange-300">"${escapeHtml(s)}"</span>`
+  const punct = (s: string) => `<span class="text-theme-code-punct">${s}</span>`
+  const key = (s: string) => `<span class="text-theme-code-key">"${escapeHtml(s)}"</span>`
+  const value = (s: string) => `<span class="text-theme-code-string">"${escapeHtml(s)}"</span>`
 
   const lines: CodeLine[] = [{ html: punct('[') }]
   items.forEach((item, itemIndex) => {

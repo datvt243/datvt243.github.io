@@ -85,13 +85,13 @@ function pugTag(name: string, cls?: string) {
   gap: 1rem;
   margin: 0;
   font-weight: 400;
-  color: theme('colors.slate.300');
+  color: rgb(var(--theme-code-text));
   list-style: none;
 }
 
 .code-line::before {
   content: counter(line);
-  color: theme('colors.slate.600');
+  color: rgb(var(--theme-code-line-number));
   width: 1.5rem;
   text-align: right;
   flex-shrink: 0;
@@ -126,19 +126,19 @@ function pugTag(name: string, cls?: string) {
 .title {
   font-size: 1rem;
   font-weight: 700;
-  color: white;
+  color: rgb(var(--theme-code-title));
 }
 
 .comment {
-  color: theme('colors.slate.600');
+  color: rgb(var(--theme-code-comment));
   font-style: italic;
 }
 
 :deep(.tag-name) {
-  color: theme('colors.pink.400');
+  color: rgb(var(--theme-code-tag));
 }
 :deep(.class-name) {
-  color: theme('colors.sky.300');
+  color: rgb(var(--theme-code-type));
 }
 
 ul {
