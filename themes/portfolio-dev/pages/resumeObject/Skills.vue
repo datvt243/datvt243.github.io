@@ -41,10 +41,10 @@ const groupedSkills = computed(() => {
   const result: { label: string; skills: { name: string; exp?: number; icon?: string }[] }[] = []
   for (const gr of store.groups) {
     const filtered = store.skills.filter((s) => s.group === gr)
-    if (filtered.length) result.push({ label: gr, skills: filtered.map((s) => ({ ...s, icon: skillIcon(s.name) })) })
+    if (filtered.length) result.push({ label: gr, skills: filtered.map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })) })
   }
-  const rest = store.skills.filter((s) => !Object.hasOwn(s, 'group'))
-  if (rest.length) result.push({ label: 'Other', skills: rest.map((s) => ({ ...s, icon: skillIcon(s.name) })) })
+  const rest = store.skills.filter((s) => s.group === 'Other')
+  if (rest.length) result.push({ label: 'Other', skills: rest.map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })) })
   return result
 })
 

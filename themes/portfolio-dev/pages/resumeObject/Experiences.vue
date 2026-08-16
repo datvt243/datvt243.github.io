@@ -13,14 +13,8 @@
  * literal punctuation.
  */
 
-import { convertNumberToDate, extractListItems } from '@/utils/index'
-
 const store = useResumeStore()
 const experiences = computed(() => store.experiences)
-
-function dateRange(el: { startDate: number; endDate: number; isCurrent: boolean }) {
-  return `${convertNumberToDate(el.startDate)} - ${el.isCurrent ? 'present' : convertNumberToDate(el.endDate)}`
-}
 
 const tagName = (s: string) => `<span class="tag-name">${s}</span>`
 const className = (s: string) => `<span class="class-name">.${s}</span>`
@@ -31,7 +25,7 @@ function pugTag(name: string, cls?: string) {
 
 <template>
   <div class="code-lines font-theme-mono text-sm leading-relaxed">
-    <template v-for="(el, index) in experiences" :key="el._id || index">
+    <template v-for="(el, index) in experiences" :key="el.id || index">
       <div v-if="index > 0" class="code-line" aria-hidden="true"><span class="line-content">&nbsp;</span></div>
       <div v-if="index > 0" class="code-line comment" aria-hidden="true">
         <span class="line-content">// next experience</span>
@@ -49,7 +43,7 @@ function pugTag(name: string, cls?: string) {
           >
         </p>
         <time class="code-line depth-1">
-          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('time')" /><span class="tag-text">{{ dateRange(el) }}</span></span>
+          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('time')" /><span class="tag-text">{{ el.dateRangeLabel }}</span></span>
         </time>
 
         <template v-if="el.skills?.length">
@@ -61,10 +55,10 @@ function pugTag(name: string, cls?: string) {
           </ul>
         </template>
 
-        <template v-if="extractListItems(el.description).length">
+        <template v-if="el.descriptionItems.length">
           <div class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('ul', 'description')" /></div>
           <ul>
-            <li v-for="(point, i) in extractListItems(el.description)" :key="i" class="code-line depth-2">
+            <li v-for="(point, i) in el.descriptionItems" :key="i" class="code-line depth-2">
               <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('li')" /><span class="tag-text">{{ point }}</span></span>
             </li>
           </ul>

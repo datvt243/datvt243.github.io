@@ -7,7 +7,6 @@
 
 const store = useResumeStore()
 const hero = computed(() => store.hero)
-const getFullName = computed(() => `${hero.value.firstName} ${hero.value.lastName}`)
 
 const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', 'node-js', 'bootstrap', 'tailwindcss']
 </script>
@@ -17,7 +16,7 @@ const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', '
     <div>
       <p class="text-violet-400 mb-4">Hi there! I am <span class="text-theme-text">_</span></p>
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-pink-500 leading-none">
-        {{ getFullName }} <span class="text-theme-text">{</span>
+        {{ hero.fullName }} <span class="text-theme-text">{</span>
       </h1>
       <p class="text-2xl text-blue-400 mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}

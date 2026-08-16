@@ -4,7 +4,9 @@
  * Description:
  */
 
-import type { Resume, SocialMedia, Education, Experience, GeneralInformation, ForeignLanguage, Project, ProfessionalSkill } from '@/types'
+import type { Resume, GeneralInformation } from '@/types'
+import type { EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/models'
+import { resumeAdapter } from '@/utils/ResumeAdapter'
 
 export const useResumeStore = defineStore('resume', {
   state: () => ({
@@ -24,39 +26,27 @@ export const useResumeStore = defineStore('resume', {
       return generalInformation || ({} as GeneralInformation)
     },
 
-    hero({ resume = {} }) {
-      const { firstName = '', lastName = '', introduction = '', email = '' } = resume
-      const { positionDesired = 'A frontend developer' } = this.generalInformation as GeneralInformation
-      return {
-        firstName,
-        lastName,
-        email,
-        positionDesired,
-        introduction,
-      }
-    },
-    contact({ resume }) {
-      const { phone, email, address } = resume
-      return { phone, email, address }
+    hero({ resume = {} }): HeroModel {
+      return resumeAdapter.toHero(resume, this.generalInformation as GeneralInformation)
     },
 
-    social({ resume: { socialMedia } }): SocialMedia | Record<string, never> {
-      return socialMedia
+    social({ resume: { socialMedia } }): SocialMediaModel {
+      return resumeAdapter.toSocialMedia(socialMedia || {})
     },
-    experiences({ resume: { experiences } }): Experience[] {
-      return [...experiences].sort((a, b) => b.startDate - a.startDate)
+    experiences({ resume: { experiences } }): ExperienceModel[] {
+      return [...(experiences || [])].sort((a, b) => b.startDate - a.startDate).map(resumeAdapter.toExperience)
     },
-    educations({ resume: { educations } }): Education[] {
-      return educations
+    educations({ resume: { educations } }): EducationModel[] {
+      return (educations || []).map(resumeAdapter.toEducation)
     },
-    projects({ resume: { projects } }): Project[] {
-      return projects
+    projects({ resume: { projects } }): ProjectModel[] {
+      return (projects || []).map(resumeAdapter.toProject)
     },
-    foreignLanguages(): ForeignLanguage[] {
-      return (this.generalInformation as GeneralInformation).foreignLanguages || ([] as ForeignLanguage[])
+    foreignLanguages(): LanguageModel[] {
+      return ((this.generalInformation as GeneralInformation).foreignLanguages || []).map(resumeAdapter.toLanguage)
     },
-    skills(): ProfessionalSkill[] {
-      return (this.generalInformation as GeneralInformation).professionalSkills || []
+    skills(): SkillModel[] {
+      return ((this.generalInformation as GeneralInformation).professionalSkills || []).map(resumeAdapter.toSkill)
     },
     groups(): string[] {
       return (this.generalInformation as GeneralInformation).professionalSkillsGroup || []
