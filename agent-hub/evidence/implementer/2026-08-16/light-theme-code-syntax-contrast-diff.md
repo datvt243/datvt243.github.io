@@ -3,23 +3,24 @@
 - Worker: implementer
 - Version: 0.1.0
 - Node: `haven/diagrams/dev-loop.prime-mermaid.md` → `light-theme-code-syntax-contrast`
-- Task (nguyên văn): "page _resume, phần skills, exp, educations... màu sắc
-  text với màu nền đang rất khó đọc, hãy kiểm tra, light theme"
+- Task (verbatim): "on the _resume page, the Skills, Experiences,
+  Educations sections... the text color against the background is very
+  hard to read, please check it, light theme"
 
 ## Diff
 | File | Why |
 |---|---|
-| `themes/portfolio-dev/settings-colors-theme/dark.css` | Thêm 10 token `--theme-code-*`, giá trị = NGUYÊN VĂN màu Tailwind literal cũ (không đổi dark mode) |
-| `themes/portfolio-dev/settings-colors-theme/light.css` | Thêm 10 token `--theme-code-*` cùng tên, giá trị = shade đậm hơn cùng hue, đủ contrast trên nền trắng/`slate-200` |
-| `tailwind.config.js` | Map 10 token trên vào `theme.colors.theme['code-*']` theo pattern có sẵn (`themeColor()`) |
+| `themes/portfolio-dev/settings-colors-theme/dark.css` | Added 10 `--theme-code-*` tokens, values = the exact old literal Tailwind colors, VERBATIM (dark mode unchanged) |
+| `themes/portfolio-dev/settings-colors-theme/light.css` | Added the same 10 `--theme-code-*` tokens, values = a darker shade of the same hue, enough contrast on white/`slate-200` |
+| `tailwind.config.js` | Mapped the 10 tokens above into `theme.colors.theme['code-*']` following the existing pattern (`themeColor()`) |
 | `utils/tsCodeLines.ts` | `text-blue-400`→`text-theme-code-keyword`, `text-sky-300`→`text-theme-code-type`, `text-orange-300`→`text-theme-code-string`, `text-slate-500`→`text-theme-code-punct`, `text-slate-600 italic`→`text-theme-code-comment italic` |
 | `utils/jsonCodeLines.ts` | `text-slate-500`→`text-theme-code-punct`, `text-blue-300`→`text-theme-code-key`, `text-orange-300`→`text-theme-code-string` |
-| `themes/portfolio-dev/pages/resumeObject/Experiences.vue` | `<style scoped>`: `theme('colors.slate.300')`→`rgb(var(--theme-code-text))`, `theme('colors.slate.600')` (2 chỗ, vai trò khác nhau)→`rgb(var(--theme-code-line-number))` và `rgb(var(--theme-code-comment))`, `color: white`→`rgb(var(--theme-code-title))`, `theme('colors.pink.400')`→`rgb(var(--theme-code-tag))`, `theme('colors.sky.300')`→`rgb(var(--theme-code-type))`. Dùng `rgb(var(--x))` trực tiếp thay vì `theme('colors.theme.x')` vì `<alpha-value>` placeholder trong định nghĩa token không được Tailwind thay thế khi gọi qua `theme()` ngoài ngữ cảnh utility class. |
-| `agent-hub/haven/diagrams/dev-loop.prime-mermaid.md` | Node `light-theme-code-syntax-contrast`: PENDING → (sẽ SEALED bởi verifier) |
+| `themes/portfolio-dev/pages/resumeObject/Experiences.vue` | `<style scoped>`: `theme('colors.slate.300')`→`rgb(var(--theme-code-text))`, `theme('colors.slate.600')` (2 spots, different roles)→`rgb(var(--theme-code-line-number))` and `rgb(var(--theme-code-comment))`, `color: white`→`rgb(var(--theme-code-title))`, `theme('colors.pink.400')`→`rgb(var(--theme-code-tag))`, `theme('colors.sky.300')`→`rgb(var(--theme-code-type))`. Used `rgb(var(--x))` directly instead of `theme('colors.theme.x')` since the `<alpha-value>` placeholder in the token's definition isn't substituted by Tailwind when called via `theme()` outside a utility-class context. |
+| `agent-hub/haven/diagrams/dev-loop.prime-mermaid.md` | Node `light-theme-code-syntax-contrast`: PENDING → (will be SEALED by the verifier) |
 
-Không đổi: `themes/portfolio-dev/components/CodeBlock.vue` (đã dùng đúng
-theme token từ trước — `text-theme-faint`, `text-theme-text-soft`, không
-phải nguồn bug).
+Not changed: `themes/portfolio-dev/components/CodeBlock.vue` (already
+using correct theme tokens beforehand — `text-theme-faint`,
+`text-theme-text-soft`, not the source of the bug).
 
 ## Command
 ```
@@ -30,8 +31,8 @@ npm run lint
 ```
 
 ## Output
-`npm run build` — lần 1 (ngay sau khi xoá cache `.nuxt`/`.output`) lỗi
-prerender `/contact`:
+`npm run build` — first run (right after clearing the `.nuxt`/`.output`
+cache) failed to prerender `/contact`:
 ```
  ERROR  [nuxt] [request error] [unhandled] [500] Cannot find module '@iconify-json/fe/icons.json'
 ...
@@ -40,12 +41,12 @@ Errors prerendering:
 ...
  ERROR  Exiting due to prerender errors.
 ```
-Đã xác nhận đây KHÔNG liên quan tới diff này: `@iconify-json/fe` và
-`@iconify-json/grommet-icons` vẫn nằm đúng ở `dependencies` trong
-`package.json` (không phải `devDependencies` — trap đã fix trước đó vẫn
-còn hiệu lực). Chạy lại `npm run build` lần 2 (không đổi gì) — cùng loại
-WARN xuất hiện (`[Icon] loading icon ... timed out after 500ms`) nhưng lần
-này resolve được, build thành công:
+Confirmed this is UNRELATED to this diff: `@iconify-json/fe` and
+`@iconify-json/grommet-icons` are still correctly in `dependencies` in
+`package.json` (not `devDependencies` — the previously-fixed trap is still
+in effect). Ran `npm run build` a 2nd time (no changes) — the same class of
+WARN appeared (`[Icon] loading icon ... timed out after 500ms`) but this
+time it resolved fine, build succeeded:
 ```
 [nitro]   ├─ /contact (1045ms)
 [nitro]   ├─ /contact/_payload.json (3ms)
@@ -55,23 +56,25 @@ này resolve được, build thành công:
 Σ Total size: 26.3 MB (9.76 MB gzip)
 [nitro] ✔ You can preview this build using node .output/server/index.mjs
 ```
-Kết luận: flaky do module warm-up ngay sau khi xoá cache toàn bộ (không
-phải do diff), retry thành công là hành vi đã biết (tương tự trap
-"Build lỗi/flaky lặp lại" trong `doctrine/domains/PROJECT.md`, dù trap đó
-mô tả nguyên nhân hơi khác — ghi bổ sung ở mục Traps bên dưới).
+Conclusion: flaky due to module warm-up right after a full cache wipe (not
+from the diff); a successful retry is a known behavior (similar to the
+"flaky/repeated build failure" trap in `doctrine/domains/PROJECT.md`,
+though that trap describes a slightly different cause — added a note about
+this below).
 
-`npm run lint` — verbatim cuối:
+`npm run lint` — verbatim tail:
 ```
 ✖ 34 problems (0 errors, 34 warnings)
 ```
-34 warning giống hệt baseline các node trước, không file nào trong
-`## Diff` xuất hiện trong output.
+34 warnings, identical to the baseline of the previous nodes, none of the
+files in `## Diff` appear in the output.
 
 ## Browser verification
-Chrome CDP port 9888 (đã chạy sẵn), dev server khởi động riêng cho bước
-này, connect qua `puppeteer-core`. `<html>` đã có class `light` sẵn. Đọc
-computed `color` trực tiếp trên DOM thật (mọi section render sẵn qua
-`v-show`, không cần đợi client fetch thêm):
+Chrome CDP port 9888 (already running), a dev server started specifically
+for this step, connected via `puppeteer-core`. `<html>` already had the
+class `light`. Read computed `color` directly on the real DOM (every
+section renders through `v-show`, no need to wait for extra client
+fetches):
 
 ```json
 {
@@ -88,48 +91,50 @@ computed `color` trực tiếp trên DOM thật (mọi section render sẵn qua
   "bodyBg": "rgb(255, 255, 255)"
 }
 ```
-Mọi giá trị khớp đúng bảng token light-mode đã định nghĩa ở plan note.
-Ngoài ra chụp 3 ảnh sau khi click từng tab (`skills.ts`,
-`experiences.pug`, `educations.json`) trên trang `/` thật — quan sát trực
-tiếp: chữ xanh dương (keyword/key), xanh sky (type/class), cam (string),
-xám đậm (punct/comment), hồng đậm (tag), đen (title) — tất cả đọc rõ trên
-nền editor xám nhạt (`--theme-editor: 226 232 240`), không còn chữ nhạt
-màu-trên-màu như trước fix.
+Every value matches the light-mode token table defined in the plan note.
+Also took 3 screenshots after clicking each tab (`skills.ts`,
+`experiences.pug`, `educations.json`) on the real `/` page — observed
+directly: blue text (keyword/key), sky-blue text (type/class), orange
+(string), dark grey (punct/comment), dark pink (tag), black (title) — all
+clearly readable against the light-grey editor background
+(`--theme-editor: 226 232 240`), no more low-contrast-color-on-color like
+before the fix.
 
-Xác nhận dark mode KHÔNG đổi: build ra CSS thật, grep trực tiếp
-`entry-styles.*.mjs`:
+Confirmed dark mode was NOT changed: built the real CSS, grepped it
+directly:
 ```
---theme-code-keyword:96 165 250   (block :root/.dark — khớp blue-400 cũ)
---theme-code-type:125 211 252     (khớp sky-300 cũ)
---theme-code-string:253 186 116   (khớp orange-300 cũ)
---theme-code-punct:71 85 105 / --theme-code-comment:100 116 139 hoặc ngược lại tuỳ block — cả 2 giá trị 71 85 105 (slate-600) và 100 116 139 (slate-500) đều có mặt đúng ở đúng token, đúng block
---theme-code-tag:244 114 182      (khớp pink-400 cũ)
---theme-code-title:255 255 255    (khớp white cũ)
+--theme-code-keyword:96 165 250   (block :root/.dark — matches the old blue-400)
+--theme-code-type:125 211 252     (matches the old sky-300)
+--theme-code-string:253 186 116   (matches the old orange-300)
+--theme-code-punct:71 85 105 / --theme-code-comment:100 116 139 or the reverse depending on the block — both values 71 85 105 (slate-600) and 100 116 139 (slate-500) are present at the correct token, correct block
+--theme-code-tag:244 114 182      (matches the old pink-400)
+--theme-code-title:255 255 255    (matches the old white)
 ```
-(giá trị light tương ứng cũng có mặt, không lẫn lộn giữa 2 block — xem
-grep đầy đủ trong phiên làm việc).
+(the corresponding light values are also present, not mixed up between the
+2 blocks — see the full grep in this session).
 
 ## Acceptance
 | # | Criterion | Evidence |
 |---|---|---|
-| 1 | Dark mode: mọi `--theme-code-*` khớp nguyên văn màu cũ | grep CSS build thật ở trên — `96 165 250`, `125 211 252`, `253 186 116`, `71 85 105`, `100 116 139`, `244 114 182`, `255 255 255`, `203 213 225` đều đúng khớp giá trị Tailwind gốc |
-| 2 | Light mode: hết chữ pastel/nhạt trên nền sáng | computed style CDP + 3 screenshot ở trên |
-| 3 | `npm run build` sạch | trích ở trên (sau khi loại trừ flaky không liên quan) |
-| 4 | `npm run lint` sạch | `✖ 34 problems (0 errors, 34 warnings)` |
-| 5 | Không còn class màu literal trong 3 file | `grep -n "text-blue-\|text-sky-\|text-orange-\|text-slate-5\|text-slate-6\|text-pink-\|theme('colors\.\|color: white"` trên cả 3 file → 0 kết quả |
-| 6 | CDP xác nhận màu đúng cho cả 3 section | JSON computed style ở trên bao quát cả `codeKeyword/Type/String/Punct/Comment/Key` (Skills+Educations) và `expTitle/Tag/Class/Comment` (Experiences) |
+| 1 | Dark mode: every `--theme-code-*` matches the old value verbatim | Cited real built-CSS grep above — `96 165 250`, `125 211 252`, `253 186 116`, `71 85 105`, `100 116 139`, `244 114 182`, `255 255 255`, `203 213 225` all correctly match the original Tailwind values |
+| 2 | Light mode: no more pastel/light text on a light background | CDP computed style + 3 screenshots above |
+| 3 | `npm run build` clean | Cited above (after excluding an unrelated flake) |
+| 4 | `npm run lint` clean | `✖ 34 problems (0 errors, 34 warnings)` |
+| 5 | No remaining literal color class in the 3 files | `grep -n "text-blue-\|text-sky-\|text-orange-\|text-slate-5\|text-slate-6\|text-pink-\|theme('colors\.\|color: white"` on all 3 files → 0 results |
+| 6 | CDP confirms correct colors for all 3 sections | The computed-style JSON above covers `codeKeyword/Type/String/Punct/Comment/Key` (Skills+Educations) and `expTitle/Tag/Class/Comment` (Experiences) |
 
 ## Noticed, not done
-- Lỗi prerender `/contact` lần build đầu (module iconify) là flaky, không
-  liên quan diff này — ghi thêm 1 dòng vào bảng Traps của
-  `doctrine/domains/PROJECT.md` để lần sau không hoảng khi gặp lại (xem
-  diff riêng ở `doctrine/domains/PROJECT.md` nếu implementer áp dụng —
-  KHÔNG tự sửa doctrine trong evidence note này, chỉ ghi nhận ở đây).
-- 10 token mới hơi nhiều cho 1 tính năng nhỏ (syntax highlight) nhưng mỗi
-  token map 1-1 với 1 màu Tailwind literal riêng biệt đã tồn tại — gộp bớt
-  sẽ đổi màu dark mode hiện có (vi phạm acceptance #1), nên giữ đủ 10,
-  không gộp thêm.
+- The first `/contact` prerender failure (iconify module) is flaky,
+  unrelated to this diff — added a line to the Traps table in
+  `doctrine/domains/PROJECT.md` so it's not alarming next time it happens
+  (see the separate diff to `doctrine/domains/PROJECT.md` if the
+  implementer applied it — NOT editing the doctrine within this evidence
+  note itself, just recording it here).
+- 10 new tokens is a fair number for one small feature (syntax
+  highlighting), but each maps 1:1 to a separate pre-existing literal
+  Tailwind color — merging them would change dark mode's existing colors
+  (violating acceptance #1), so kept all 10, no further merging.
 
 ## Seal gate
-None — không có hành động outward-facing (không commit/push/xoá/PR) trong
-lượt implementer này.
+None — no outward-facing action (no commit/push/delete/PR) in this
+implementer pass.

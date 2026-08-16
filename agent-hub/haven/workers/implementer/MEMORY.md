@@ -1,26 +1,29 @@
-> Đây là chỗ TÔI học được khi làm việc. Không phải ground truth của project
-> (đó là `doctrine/domains/`), không phải rule của hub (đó là
-> `doctrine/MEMORY.md`) — mà là craft riêng tôi tích trên codebase này.
-> Append-only: sửa một entry khi nó hoá ra sai, đừng lặng lẽ bỏ nó đi.
+> This is where I write what I've learned while working. Not the project's
+> ground truth (that's `doctrine/domains/`), not the hub's rules (that's
+> `doctrine/MEMORY.md`) — this is my own craft, built up on this codebase.
+> Append-only: fix an entry when it turns out wrong, don't quietly drop it.
 
 ## Always true for me
-- Tôi đọc `doctrine/MEMORY.md` để lấy lệnh build/lint CHÍNH XÁC mỗi phiên —
-  project này không có test suite, đừng bịa lệnh `npm test`.
-- Tôi chạy build/lint từ repo root (`/Users/_david/Workspace/Project/datvt243.github.io`).
-- Khi build fail HAI LẦN cùng lý do, tôi dừng và đọc lại `doctrine/domains/`
-  trước khi thử lần ba — hai lần fail nghĩa là mô hình của tôi về project
-  sai, không phải code sai.
-- Nếu build lỗi sau một thay đổi tưởng như "không liên quan" (vd config
-  chung), tôi nghi ngờ cache/tree-shaking trước khi nghi ngờ code — xem trap
-  liên quan trong `doctrine/domains/PROJECT.md`.
+- I read `doctrine/MEMORY.md` to get the EXACT build/lint commands every
+  session — this project has no test suite, don't make up a `npm test`
+  command.
+- I run build/lint from the repo root
+  (`/Users/_david/Workspace/Project/datvt243.github.io`).
+- When a build fails TWICE for the same reason, I stop and re-read
+  `doctrine/domains/` before trying a third time — two failures means my
+  mental model of the project is wrong, not the code.
+- If a build breaks after a change that looked "unrelated" (e.g. a shared
+  config), I suspect cache/tree-shaking before I suspect the code — see the
+  related trap in `doctrine/domains/PROJECT.md`.
 
 ## Patterns that work here
-- Theme system: mọi markup trình bày sống trong `themes/<ACTIVE_THEME>/` —
-  `pages/*.vue` ở top-level chỉ là SEO meta + fetch, không viết markup trực
-  tiếp vào đó.
-- Khi rename tag component, anchor regex vào `<Tag`/`</Tag`, không thay thế
-  chữ trần (tránh phá TS type import trùng tên).
-- Icon collection package dùng qua binding động phải nằm ở `dependencies`.
+- Theme system: all presentational markup lives in `themes/<ACTIVE_THEME>/`
+  — top-level `pages/*.vue` are only SEO meta + fetch, never write markup
+  directly into them.
+- When renaming a tag component, anchor the regex to `<Tag`/`</Tag`, don't
+  replace bare words (avoids breaking a TS type import with the same name).
+- Icon collection packages used via a dynamic binding must be in
+  `dependencies`.
 
 ## Recipes I've earned
 | Recipe | Written | Times replayed |
@@ -31,4 +34,4 @@
 ## Corrections
 | Date | I believed | Actually |
 |---|---|---|
-| 2026-08-16 | `.claude/commands/browser.md` đã bị gỡ khỏi repo (ghi vào `PROJECT.md` lúc viết doctrine trên `feature/65`, trước khi branch đó có commit `fe433b6`) | File vẫn tồn tại và được track — quay lại repo qua PR #66 ("feat: add Light/Dark mode toggle"). Dùng `/browser` trực tiếp, đừng tự viết lại cơ chế `curl`/`open -na` thủ công |
+| 2026-08-16 | `.claude/commands/browser.md` had been removed from the repo (written into `PROJECT.md` while drafting the doctrine on `feature/65`, before that branch had commit `fe433b6`) | The file still exists and is tracked — it came back to the repo via PR #66 ("feat: add Light/Dark mode toggle"). Use `/browser` directly, don't hand-write the `curl`/`open -na` mechanism again |

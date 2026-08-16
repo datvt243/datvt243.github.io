@@ -6,51 +6,58 @@ authority: 65537
 dna: datvt243_portfolio_hub
 ---
 
-> Northstar là cái KHÔNG đổi khi mọi thứ khác đổi.
+> Northstar is what does NOT change when everything else does.
 
 ## One sentence
-Giữ mọi thay đổi lên portfolio/blog Nuxt 3 của Đạt có bằng chứng verify độc
-lập, để một agent phiên sau (hoặc chính Claude phiên sau) không phải re-scan
-code hay tin lời note cũ để biết cái gì thật sự xong.
+Keep every change to Đạt's Nuxt 3 portfolio/blog backed by independently
+verified evidence, so an agent in a later session (or the same Claude in a
+later session) doesn't have to re-scan the code or trust old notes to know
+what's actually done.
 
 ## What done means
-Một node CHỈ được coi là xong khi **TẤT CẢ** (không phải chỉ một trong số)
-điều sau đúng:
+A node is ONLY considered done when **ALL** (not just some) of the
+following are true:
 
-1. Trace được về đúng một node trên `haven/diagrams/`.
-2. Có diff nhỏ nhất khiến node đó đủ điều kiện (không refactor thừa).
-3. Đã chạy đúng lệnh từ `doctrine/MEMORY.md` (`npm run build` + `npm run
-   lint`) và ĐỌC LẠI output — không suy luận. Project này KHÔNG có automated
-   test suite; "verify" ở đây gồm cả kiểm tra UI thật qua Chrome CDP khi thay
-   đổi có phần visual (xem `doctrine/domains/PROJECT.md`).
-4. Có evidence note tại `evidence/<...>/<date>-<slug>.md`.
-5. Verifier trả `SEAL` với evidence trích dẫn cụ thể.
-6. Bảng PM status trên diagram đã cập nhật khớp.
+1. It traces back to exactly one node on `haven/diagrams/`.
+2. There's a minimal diff that makes that node qualify (no unnecessary
+   refactor).
+3. The exact commands from `doctrine/MEMORY.md` (`npm run build` + `npm run
+   lint`) were run AND THE OUTPUT WAS READ — not inferred. This project has
+   NO automated test suite; "verify" here also includes checking the real
+   UI via Chrome CDP when a change has a visual part (see `doctrine/domains/
+   PROJECT.md`'s "Browser verification" section).
+4. There's an evidence note at `evidence/<...>/<date>-<slug>.md`.
+5. The verifier returns `SEAL` with concrete cited evidence.
+6. The diagram's PM status table has been updated to match.
 
-Thiếu điều (3) hoặc (5) → forbidden state `EDIT_UNVERIFIED`.
+Missing (3) or (5) → forbidden state `EDIT_UNVERIFIED`.
 
 ## What this hub does NOT do
-- Không tự động tạo GitHub issue/branch/PR (`ADHOC_WORK` nếu code bị sửa mà
-  không qua node trên diagram, nhưng việc mở issue/PR/branch/merge vẫn là
-  thao tác git thủ công của operator, ngoài phạm vi `/worker`/`/todo`).
-- Không tự commit/push thay operator (`EDIT_UNVERIFIED` nếu claim đã
-  push/merge mà chưa có xác nhận thật — seal gate luôn dừng lại chờ approval).
-- Không tự bịa lệnh test — project không có test suite, và hub sẽ không giả
-  vờ có (`EDIT_UNVERIFIED` nếu claim "tests pass" khi không có test nào).
-- Không ghi code vào `haven/` (`CODE_IN_HAVEN`).
+- Doesn't automatically create GitHub issues/branches/PRs (`ADHOC_WORK` if
+  code is changed without going through a node on the diagram, but opening
+  an issue/PR/branch/merge is still a manual git action by the operator,
+  outside the scope of `/worker`/`/todo`).
+- Doesn't commit/push on the operator's behalf (`EDIT_UNVERIFIED` if it
+  claims something was pushed/merged without real confirmation — the seal
+  gate always stops to wait for approval).
+- Doesn't make up test commands — the project has no test suite, and the
+  hub won't pretend it does (`EDIT_UNVERIFIED` if it claims "tests pass"
+  when no tests exist).
+- Doesn't write code into `haven/` (`CODE_IN_HAVEN`).
 
 ## The success picture (3 months out)
-- Mọi thay đổi outward-facing (build/lint-breaking risk cao, thay đổi theme,
-  thay đổi caching) đều đi qua implementer → verifier → evidence trước khi
-  commit.
-- `doctrine/domains/PROJECT.md` tích luỹ đủ traps để không lặp lại bug đã gặp
-  (ví dụ: `@iconify-json/*` phải nằm ở `dependencies`, không phải
-  `devDependencies`).
-- 0 forbidden state trong 20 thay đổi gần nhất.
-- `haven/diagrams/dev-loop.prime-mermaid.md` phản ánh đúng trạng thái thật,
-  không lệch với code.
-- Ít nhất vài recipe trong `haven/workers/*/recipes/` đã được replay ≥ 2 lần.
+- Every outward-facing change (high build/lint-breaking risk, theme
+  changes, caching changes) goes through implementer → verifier → evidence
+  before committing.
+- `doctrine/domains/PROJECT.md` accumulates enough traps that the same real
+  bugs don't get repeated (e.g.: `@iconify-json/*` must be in
+  `dependencies`, not `devDependencies`).
+- 0 forbidden states across the last 20 changes.
+- `haven/diagrams/dev-loop.prime-mermaid.md` accurately reflects real
+  state, no drift from the code.
+- At least a few recipes in `haven/workers/*/recipes/` have been replayed
+  ≥ 2 times.
 
 ## Cross-references
-`CLAUDE.md` (root, project thật) · `agent-hub/CLAUDE.md` (hợp đồng hub) ·
+`CLAUDE.md` (root, the real project) · `agent-hub/CLAUDE.md` (hub contract) ·
 `doctrine/MEMORY.md` · `haven/diagrams/dev-loop.prime-mermaid.md`
