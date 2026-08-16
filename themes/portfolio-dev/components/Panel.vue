@@ -2,11 +2,16 @@
 /**
  * Reusable 2-column "sidebar file-tree + editor pane" shell.
  * Used by resumeObject/Index.vue and later reskinned pages (github/blogs/contact).
+ *
+ * The root's `editor-scope` class re-skins this whole subtree to Dracula
+ * (see settings-colors-theme/editor-dracula.css) by overriding the same
+ * `--theme-*` custom properties every descendant already reads - no
+ * component below this needs to know that scope exists.
  */
 </script>
 
 <template>
-  <div class="border border-theme-border rounded-lg overflow-hidden font-theme-mono">
+  <div class="editor-scope border border-theme-border rounded-lg overflow-hidden font-theme-mono bg-theme-editor shadow-md">
     <div class="grid lg:grid-cols-[240px_1fr]">
       <aside class="border-b lg:border-b-0 lg:border-r border-theme-border bg-theme-panel/50 p-4">
         <slot name="sidebar" />

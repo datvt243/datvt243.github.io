@@ -1,14 +1,21 @@
 /**
  * Design tokens for the active UI theme (see CLAUDE.md's "UI Theme" section).
- * Color values are split per color mode under `tokens/` (`dark.css`,
- * `light.css`, ...) so the `.dark`/`.light` class @nuxtjs/color-mode puts on
- * <html> (see nuxt.config.ts's `colorMode` options) swaps the whole palette.
- * Adding a mode = a new `tokens/<name>.css` file (scoped to a `.<name>`
- * class) + an `@import` line here. Tokens that don't vary by mode (e.g. the
- * font) live directly in this file.
+ * Color values are split per color mode under `settings-colors-theme/`
+ * (`dark.css`, `light.css`, ...) so the `.dark`/`.light` class
+ * @nuxtjs/color-mode puts on <html> (see nuxt.config.ts's `colorMode`
+ * options) swaps the whole palette.
+ * Adding a mode = a new `settings-colors-theme/<name>.css` file (scoped to
+ * a `.<name>` class) + an `@import` line here. Tokens that don't vary by
+ * mode (e.g. the font) live directly in this file.
+ *
+ * `editor-dracula.css` is a different kind of file: not a 3rd mode, but a
+ * scoped override (`.dark .editor-scope` / `.light .editor-scope`) that
+ * re-skins only the `<ThemePanel>` subtree (see Panel.vue's `editor-scope`
+ * class) to Dracula, layered on top of whichever mode below is active.
  */
-@import './tokens/dark.css';
-@import './tokens/light.css';
+@import './settings-colors-theme/dark.css';
+@import './settings-colors-theme/light.css';
+@import './settings-colors-theme/editor-dracula.css';
 
 :root {
   --theme-font-mono: 'JetBrains Mono', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',

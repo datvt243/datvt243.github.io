@@ -1,0 +1,44 @@
+/**
+ * Light mode design tokens — same slate/orange scale as dark.css, inverted
+ * (light backgrounds, dark text), applied via the `.light` class
+ * @nuxtjs/color-mode puts on <html> when the user picks light mode.
+ */
+.light {
+  /* backgrounds */
+  --theme-canvas: 255 255 255; /* white, page background */
+  --theme-panel: 248 250 252; /* slate-50, header/footer chrome */
+  --theme-panel-subtle: 241 245 249; /* slate-100 */
+  --theme-editor: 226 232 240; /* slate-200, ThemePanel (editor shell) - deliberately more saturated than panel so the editor reads as the most prominent surface, not just chrome */
+
+  /* borders */
+  --theme-border: 226 232 240; /* slate-200 */
+  --theme-border-subtle: 203 213 225; /* slate-300 */
+  --theme-border-faint: 148 163 184; /* slate-400 */
+
+  /* text */
+  --theme-text: 15 23 42; /* slate-900 */
+  --theme-text-strong: 30 41 59; /* slate-800 */
+  --theme-text-soft: 51 65 85; /* slate-700 */
+  --theme-muted: 100 116 139; /* slate-500 */
+  --theme-faint: 148 163 184; /* slate-400 */
+
+  /* accent (darker orange shades for contrast on a light background) */
+  --theme-accent: 234 88 12; /* orange-600 */
+  --theme-accent-soft: 249 115 22; /* orange-500 */
+  --theme-accent-contrast: 255 255 255; /* white, for text on an accent-colored background */
+
+  /* code syntax highlighting (Skills/Experiences/Educations resume sections) -
+     darker shade of the same hue as dark.css's pastel value, for readable
+     contrast on a light background instead of the light-on-light that was
+     here before this token existed */
+  --theme-code-text: 51 65 85; /* slate-700 */
+  --theme-code-line-number: 100 116 139; /* slate-500 */
+  --theme-code-keyword: 37 99 235; /* blue-600 */
+  --theme-code-key: 29 78 216; /* blue-700 */
+  --theme-code-type: 3 105 161; /* sky-700 */
+  --theme-code-string: 194 65 12; /* orange-700 */
+  --theme-code-punct: 71 85 105; /* slate-600 */
+  --theme-code-comment: 100 116 139; /* slate-500, stays lighter than punct so comments still read as more muted */
+  --theme-code-tag: 190 24 93; /* pink-700 */
+  --theme-code-title: 15 23 42; /* slate-900, = --theme-text light value */
+}

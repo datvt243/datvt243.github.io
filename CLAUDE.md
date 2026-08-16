@@ -96,14 +96,30 @@ change.
 
 **Color mode (light/dark)** is an orthogonal axis to the theme itself — same
 component tree, different `--theme-*` values. `tokens.css` is a thin aggregator
-that `@import`s per-mode files from `tokens/` (`dark.css`, `light.css`), each
-scoped to a `.dark`/`.light` class. `@nuxt/ui` auto-installs `@nuxtjs/color-mode`
-(forced `classSuffix: ''`), which puts that class on `<html>` and exposes the
-`useColorMode()` composable (used by `ThemeHeader`'s toggle button); `nuxt.config.ts`'s
-`colorMode` key sets `preference`/`fallback` to `'dark'` so existing users see no
-change until they opt into light. Adding another mode (e.g. Dracula) = a new
-`tokens/<name>.css` scoped to `.<name>` + one `@import` line + wiring it into the
-toggle.
+that `@import`s per-mode files from `settings-colors-theme/` (`dark.css`,
+`light.css`), each scoped to a `.dark`/`.light` class — this is the one place
+to look to reskin the palette (all values are `R G B` triplets, e.g.
+`234 88 12`, required by Tailwind's `rgb(var(--theme-x) / <alpha-value>)`
+opacity-modifier pattern in `tailwind.config.js` — don't switch to hex without
+also reworking every `bg-theme-*/50`-style opacity usage). `@nuxt/ui`
+auto-installs `@nuxtjs/color-mode` (forced `classSuffix: ''`), which puts that
+class on `<html>` and exposes the `useColorMode()` composable (used by
+`ThemeHeader`'s toggle button); `nuxt.config.ts`'s `colorMode` key sets
+`preference`/`fallback` to `'dark'` so existing users see no change until they
+opt into light. Adding another full-site mode = a new
+`settings-colors-theme/<name>.css` scoped to `.<name>` + one `@import` line +
+wiring it into the toggle.
+
+**Editor-scoped palette**: `settings-colors-theme/editor-dracula.css` is a
+different kind of file — not a 3rd full-site mode, but a Dracula override
+scoped to `.dark .editor-scope`/`.light .editor-scope` that re-skins only
+`<ThemePanel>`'s subtree (Panel.vue's root carries `editor-scope`), riding on
+top of whichever mode above is active. Because every descendant inside
+`<ThemePanel>` already reads `--theme-*`/`--theme-code-*` via CSS custom
+property inheritance, this needed zero changes to Folder/NavItem/
+FilterFolder/CodeBlock/PostCategories/Experiences.vue. The same technique —
+a class + a scoped override block — is the way to re-skin any other subtree
+independently of the site-wide mode, without touching that subtree's markup.
 
 ### State (Pinia)
 
