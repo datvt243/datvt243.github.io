@@ -77,6 +77,7 @@ export default {
           canvas: themeColor('--theme-canvas'),
           panel: themeColor('--theme-panel'),
           'panel-subtle': themeColor('--theme-panel-subtle'),
+          editor: themeColor('--theme-editor'),
           border: themeColor('--theme-border'),
           'border-subtle': themeColor('--theme-border-subtle'),
           'border-faint': themeColor('--theme-border-faint'),

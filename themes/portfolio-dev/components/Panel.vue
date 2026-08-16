@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div class="border border-theme-border rounded-lg overflow-hidden font-theme-mono">
+  <div class="border border-theme-border rounded-lg overflow-hidden font-theme-mono bg-theme-editor shadow-md">
     <div class="grid lg:grid-cols-[240px_1fr]">
       <aside class="border-b lg:border-b-0 lg:border-r border-theme-border bg-theme-panel/50 p-4">
         <slot name="sidebar" />

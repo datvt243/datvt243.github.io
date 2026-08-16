@@ -42,7 +42,8 @@ flowchart TD
 ## PM status
 | Node | State | Notes |
 |---|---|---|
-| _(chưa có node nào)_ | — | Node đầu tiên được tạo bởi `implementer: pick_next` khi có task thật đầu tiên qua `/worker implementer` hoặc `/todo` |
+| `light-theme-elevation` | SEALED | Light mode: `--theme-canvas` → trắng thuần; `ThemeHeader`/`ThemeFooter` giữ `bg-theme-panel` (`248 250 252`); `ThemePanel` (editor) có `--theme-editor` (`226 232 240`) riêng + `shadow-md` để nổi trội hơn. Verified: `npm run build`/`npm run lint` sạch + Chrome CDP computed style. Evidence: `evidence/implementer/2026-08-16/light-theme-elevation-{plan,diff}.md`, `evidence/verifier/2026-08-16/light-theme-elevation-seal.md`. |
+| `centralize-color-tokens` | SEALED | Gom nơi khai báo mã màu vào 1 chỗ dễ tìm/dễ sửa: đổi tên `themes/portfolio-dev/tokens/` → `themes/portfolio-dev/settings-colors-theme/` (giữ nguyên `dark.css`/`light.css`, giữ format RGB triplet vì `<alpha-value>` opacity modifier cần nó). Verified: build/lint sạch + grep trực tiếp trên CSS đã build. Evidence: `evidence/implementer/2026-08-16/centralize-color-tokens-{plan,diff}.md`, `evidence/verifier/2026-08-16/centralize-color-tokens-seal.md`. |
 
 Any regression phải là **node mới** (LAI-13) — không được sửa trực tiếp PM
 status của node cũ để "gỡ" một SEAL đã có.
