@@ -5,21 +5,19 @@
  * Description:
  */
 
-import { buildJsonArrayLines, convertNumberToDate } from '@/utils/index'
+import { buildJsonArrayLines } from '@/utils/index'
 
 const store = useResumeStore()
 const educations = computed(() => store.educations)
 
-const stripHtml = (html?: string) => (html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
-
 const lines = computed(() =>
   buildJsonArrayLines(
     (educations.value || []).map((el) => ({
-      school: el.school || '',
-      major: el.major || '',
-      startDate: convertNumberToDate(el.startDate),
-      endDate: el.isCurrent ? 'present' : convertNumberToDate(el.endDate),
-      description: stripHtml(el.description),
+      school: el.school,
+      major: el.major,
+      startDate: el.startDateLabel,
+      endDate: el.endDateLabel,
+      description: el.descriptionText,
     })),
   ),
 )

@@ -81,9 +81,9 @@ const bioLines = computed(() => {
   // API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those
   // block wrappers first so the depth-based sentence splitter below isn't gated off
   // for the whole string by one never-closing tag.
-  const withoutParagraphs = (hero.value.introduction || '').replace(/<\/?p[^>]*>/gi, '')
+  const withoutParagraphs = hero.value.introduction.replace(/<\/?p[^>]*>/gi, '')
   const sentences = splitHtmlIntoSentences(withoutParagraphs).map(toMarkdownLine)
-  const socialLines = Object.entries(social.value || {}).map(([name, link]) => markdownLink(name, link as string))
+  const socialLines = social.value.links.map(({ name, url }) => markdownLink(name, url))
   return [
     '<span class="text-theme-faint"># </span><span class="font-bold text-theme-text">About me</span>',
     '',

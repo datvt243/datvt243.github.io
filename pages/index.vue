@@ -6,7 +6,7 @@
  */
 
 import type { Resume } from '@/types/resume-document'
-import { removeHtmlTags } from '@/utils/removeHtmlTags'
+import { removeHtmlTags } from '@/utils'
 
 const resumeStore = useResumeStore()
 

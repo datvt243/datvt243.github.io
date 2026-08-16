@@ -10,9 +10,7 @@ import { buildJsonArrayLines } from '@/utils/index'
 const store = useResumeStore()
 const foreignLanguages = computed(() => store.foreignLanguages)
 
-const lines = computed(() =>
-  buildJsonArrayLines((foreignLanguages.value || []).map((el) => ({ language: el.language || '', level: el.level || '' }))),
-)
+const lines = computed(() => buildJsonArrayLines(foreignLanguages.value.map((el) => ({ language: el.language, level: el.level }))))
 </script>
 
 <template>
