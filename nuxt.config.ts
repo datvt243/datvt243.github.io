@@ -66,8 +66,8 @@ export default defineNuxtConfig({
   css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
   // @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these
   // options merge with that. Defaults to dark (existing look) until the user
-  // explicitly toggles - see themes/<name>/tokens/{dark,light}.css for the
-  // `.dark`/`.light` palettes this class selects between.
+  // explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css
+  // for the `.dark`/`.light` palettes this class selects between.
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
