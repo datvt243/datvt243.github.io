@@ -29,4 +29,16 @@
   --theme-accent: 251 146 60; /* orange-400 */
   --theme-accent-soft: 253 186 116; /* orange-300 */
   --theme-accent-contrast: 2 6 23; /* slate-950, for text on an accent-colored background */
+
+  /* code syntax highlighting (Skills/Experiences/Educations resume sections) */
+  --theme-code-text: 203 213 225; /* slate-300, Experiences.vue base body text */
+  --theme-code-line-number: 71 85 105; /* slate-600, Experiences.vue's own line-number gutter */
+  --theme-code-keyword: 96 165 250; /* blue-400, TS `enum`/`const` keyword */
+  --theme-code-key: 147 197 253; /* blue-300, JSON object key */
+  --theme-code-type: 125 211 252; /* sky-300, TS type name + Experiences .class-name */
+  --theme-code-string: 253 186 116; /* orange-300, TS string + JSON value */
+  --theme-code-punct: 100 116 139; /* slate-500, punctuation */
+  --theme-code-comment: 71 85 105; /* slate-600, // comments */
+  --theme-code-tag: 244 114 182; /* pink-400, Experiences .tag-name (pug <tag>) */
+  --theme-code-title: 255 255 255; /* white, Experiences job title */
 }

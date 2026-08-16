@@ -54,6 +54,7 @@ Xem `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | Thêm config `nuxt.config.ts` tưởng như không liên quan (vd `colorMode:`) có thể đổi cách Nitro tree-shake, làm hỏng import động ở chỗ khác | Nitro's dependency tracing nhạy với thay đổi config hơn trực giác | Khi build lỗi sau 1 thay đổi "không liên quan", bisect bằng `git worktree` (checkout `main` sạch, revert từng file một, rebuild) thay vì đoán |
 | Build lỗi/flaky lặp lại dù đã fix đúng root cause | `node_modules/.cache`, `.nuxt`, `.output` có thể stale sau nhiều vòng dev/build liên tục trong cùng session | `rm -rf node_modules/.cache .nuxt .output` rồi rebuild trước khi kết luận "fix chưa đúng" — cache này gitignored, không tồn tại ở CI/prod sạch |
 | Regex rename tag component (vd `Post` → `ThemePost`) bằng text substitution thô sẽ phá TS type import (`import type { Post }`) | Tên component và tên TS type trùng chữ | Anchor regex vào `<Tag`/`</Tag`, không thay thế chữ trần |
+| Ngay sau `rm -rf node_modules/.cache .nuxt .output`, lần `npm run build` ĐẦU TIÊN có thể lỗi prerender `/contact` với `Cannot find module '@iconify-json/.../icons.json'` dù package vẫn đúng ở `dependencies` | Module warm-up: prerender chạy trước khi Nitro kịp resolve xong icon package lần đầu sau khi xoá cache — không phải regression thật | Chạy lại `npm run build` lần 2 (không sửa gì) trước khi nghi ngờ code — nếu lần 2 cũng lỗi y hệt thì mới là bug thật, cần điều tra tiếp |
 
 ## Decisions, with reasoning
 > Một quyết định không ghi lý do sẽ bị một agent tương lai "làm đẹp" mất —
@@ -67,6 +68,7 @@ Xem `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | 2026-08-13 | Persistence theme mode qua `localStorage`, không phải cookie | Đơn giản hơn, chấp nhận đánh đổi | Cookie-based SSR-safe (không flash tối khi reload) — chưa làm, có thể revisit nếu bị report phiền |
 | 2026-08-13 | `@iconify-json/fe`/`@iconify-json/grommet-icons` chuyển từ `devDependencies` sang `dependencies` | Fix thật cho lỗi prerender (xem Traps) | Không có — đây là fix chuẩn cho loại lỗi `@nuxt/icon` này |
 | 2026-08-16 | Thay thế quy ước `agent-hub/histories/` + `.claude/commands/{start-work,finish-work,merge-work,ship}.md` bằng agent-hub doctrine/haven/evidence + implementer/verifier | User muốn kỷ luật verify độc lập chặt hơn (builder không tự báo done), evidence bắt buộc thay vì work-log tự do | Giữ nguyên hệ thống cũ song song — bị bác, chọn thay thế hoàn toàn |
+| 2026-08-16 | Dracula chỉ áp cho `<ThemePanel>` (file-tree + editor), KHÔNG phải toàn site; bám theo dark/light toggle sẵn có (Dracula khi dark, 1 palette Dracula-light tự suy khi light) thay vì thêm mode/toggle thứ 3 | User xác nhận qua AskUserQuestion + làm rõ thêm ("dracula theo dark, thêm 1 theme khác theo light") — scope hẹp hơn ví dụ "thêm mode Dracula" đã ghi sẵn ở root `CLAUDE.md` | Thêm Dracula làm mode thứ 3 toàn site (cycle dark→light→dracula) — user chọn phạm vi hẹp hơn, chỉ editor |
 
 ## Legacy reference
 `agent-hub/histories/2026-08-11.md` và `2026-08-13.md` — work-log narrative

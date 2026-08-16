@@ -7,9 +7,15 @@
  * Adding a mode = a new `settings-colors-theme/<name>.css` file (scoped to
  * a `.<name>` class) + an `@import` line here. Tokens that don't vary by
  * mode (e.g. the font) live directly in this file.
+ *
+ * `editor-dracula.css` is a different kind of file: not a 3rd mode, but a
+ * scoped override (`.dark .editor-scope` / `.light .editor-scope`) that
+ * re-skins only the `<ThemePanel>` subtree (see Panel.vue's `editor-scope`
+ * class) to Dracula, layered on top of whichever mode below is active.
  */
 @import './settings-colors-theme/dark.css';
 @import './settings-colors-theme/light.css';
+@import './settings-colors-theme/editor-dracula.css';
 
 :root {
   --theme-font-mono: 'JetBrains Mono', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',

@@ -1,0 +1,103 @@
+/**
+ * Scoped "editor" palette (Dracula) — applies ONLY inside <ThemePanel>
+ * (Panel.vue's root carries the `.editor-scope` class), not to the rest
+ * of the site (header/footer/page chrome keep the regular dark.css/
+ * light.css palette from tokens.css).
+ *
+ * Mechanism: CSS custom properties are inherited properties resolved per
+ * DOM element. A rule that matches an element directly (`.editor-scope`)
+ * always wins over a value the element would otherwise inherit from an
+ * ancestor (`:root`/`.dark`/`.light` in dark.css/light.css) — so every
+ * descendant already using `bg-theme-panel`, `text-theme-muted`,
+ * `text-theme-code-*`, etc. (Folder/NavItem/FilterFolder/CodeBlock/
+ * PostCategories/Experiences.vue, all unmodified) automatically picks up
+ * these values with zero component changes.
+ *
+ * Dark = Dracula, canonical palette (draculatheme.com):
+ *   Background #282a36  Current Line #44475a  Foreground #f8f8f2
+ *   Comment #6272a4      Cyan #8be9fd  Green #50fa7b  Orange #ffb86c
+ *   Pink #ff79c6  Purple #bd93f9  Red #ff5555  Yellow #f1fa8c
+ * Roles without a dedicated canonical color (text-soft/muted/code-punct)
+ * are linearly interpolated between the two neutral anchors (Foreground,
+ * Comment) rather than inventing an unrelated hue.
+ *
+ * Light = a Dracula-derived companion, not a separate named theme: the
+ * neutral anchors are inverted (Foreground becomes the light background,
+ * Background becomes the dark text — same two canonical colors, swapped
+ * roles) and every accent hue (pink/cyan/green/yellow/purple) is kept but
+ * darkened for contrast on a light surface, same technique used for
+ * `--theme-code-*` in dark.css/light.css.
+ */
+.dark .editor-scope {
+  /* backgrounds */
+  --theme-canvas: 40 42 54; /* #282a36 Background */
+  --theme-editor: 40 42 54; /* #282a36 Background */
+  --theme-panel: 68 71 90; /* #44475a Current Line */
+  --theme-panel-subtle: 68 71 90; /* #44475a Current Line */
+
+  /* borders */
+  --theme-border: 68 71 90; /* #44475a Current Line */
+  --theme-border-subtle: 98 114 164; /* #6272a4 Comment */
+  --theme-border-faint: 68 71 90; /* #44475a Current Line */
+
+  /* text */
+  --theme-text: 248 248 242; /* #f8f8f2 Foreground */
+  --theme-text-strong: 248 248 242; /* #f8f8f2 Foreground */
+  --theme-text-soft: 211 215 223; /* interpolated Foreground->Comment @25% */
+  --theme-muted: 166 174 199; /* interpolated Foreground->Comment @50% */
+  --theme-faint: 98 114 164; /* #6272a4 Comment */
+
+  /* accent (UI chrome inside the editor: buttons/links/focus) */
+  --theme-accent: 189 147 249; /* #bd93f9 Purple */
+  --theme-accent-soft: 207 177 247; /* Purple, lightened for hover */
+  --theme-accent-contrast: 40 42 54; /* #282a36 Background, text on accent bg */
+
+  /* code syntax highlighting (Skills/Experiences/Educations) */
+  --theme-code-text: 248 248 242; /* #f8f8f2 Foreground */
+  --theme-code-line-number: 98 114 164; /* #6272a4 Comment */
+  --theme-code-keyword: 255 121 198; /* #ff79c6 Pink */
+  --theme-code-key: 80 250 123; /* #50fa7b Green */
+  --theme-code-type: 139 233 253; /* #8be9fd Cyan */
+  --theme-code-string: 241 250 140; /* #f1fa8c Yellow */
+  --theme-code-punct: 166 174 199; /* interpolated, de-emphasized vs keywords */
+  --theme-code-comment: 98 114 164; /* #6272a4 Comment */
+  --theme-code-tag: 255 121 198; /* #ff79c6 Pink, same role as keyword */
+  --theme-code-title: 248 248 242; /* #f8f8f2 Foreground */
+}
+
+.light .editor-scope {
+  /* backgrounds - Dracula's own Foreground reused as the light surface */
+  --theme-canvas: 248 248 242; /* #f8f8f2 */
+  --theme-editor: 248 248 242; /* #f8f8f2 */
+  --theme-panel: 228 228 238; /* Current Line, lightened for a light surface */
+  --theme-panel-subtle: 228 228 238;
+
+  /* borders */
+  --theme-border: 210 210 224;
+  --theme-border-subtle: 148 156 196; /* Comment family, darkened for visibility */
+  --theme-border-faint: 219 219 232;
+
+  /* text - Dracula's own Background reused as the dark-on-light text */
+  --theme-text: 40 42 54; /* #282a36 */
+  --theme-text-strong: 40 42 54;
+  --theme-text-soft: 55 60 82; /* interpolated Background->Comment @25% */
+  --theme-muted: 69 78 109; /* interpolated Background->Comment @50% */
+  --theme-faint: 98 114 164; /* #6272a4 Comment - same value works on light too */
+
+  /* accent */
+  --theme-accent: 124 58 204; /* Purple, darkened for contrast on light bg */
+  --theme-accent-soft: 155 89 230; /* Purple, lighter hover variant */
+  --theme-accent-contrast: 255 255 255; /* white text on the dark accent bg */
+
+  /* code syntax highlighting */
+  --theme-code-text: 40 42 54;
+  --theme-code-line-number: 98 114 164; /* #6272a4 Comment */
+  --theme-code-keyword: 219 42 142; /* Pink, darkened */
+  --theme-code-key: 13 138 54; /* Green, darkened */
+  --theme-code-type: 8 145 178; /* Cyan, darkened */
+  --theme-code-string: 122 110 20; /* Yellow, darkened to olive/amber for contrast */
+  --theme-code-punct: 69 78 109;
+  --theme-code-comment: 98 114 164; /* #6272a4 Comment - same value works on light too */
+  --theme-code-tag: 219 42 142; /* Pink, same role as keyword */
+  --theme-code-title: 40 42 54;
+}
