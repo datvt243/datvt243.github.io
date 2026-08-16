@@ -3,60 +3,64 @@
 - Worker: implementer
 - Version: 0.1.0
 - Node: `haven/diagrams/dev-loop.prime-mermaid.md` → `centralize-color-tokens`
-- Task (nguyên văn): "có thể tách các chỗ khai báo mã màu ra một nơi riêng,
-  settings-colors-theme chẳng hạn, để user có thể tự đổi hoặc khi cung cấp
-  1 ảnh mã màu thì claude có thể đổi luôn 1 cách nhanh chóng"
+- Task (verbatim): "can you split out the color code declarations into one
+  place, e.g. settings-colors-theme, so the user can edit it themselves, or
+  when given a color reference image Claude can swap it quickly"
 
-## Process note (honest, không giấu)
-Node này được tạo SAU khi file đã `git mv` xong (chuỗi thao tác thực tế:
-hỏi operator 2 câu clarifying qua AskUserQuestion trước → nhận câu trả lời
-→ `git mv` → mới quay lại ghi node + plan note này). Đúng ra `NodeBeforeCode`
-đòi node phải có TRƯỚC khi chạm file. Ghi rõ ở đây thay vì giả vờ thứ tự
-đã đúng — không có tác động thực tế (rename không đổi giá trị, build/lint
-verify vẫn chạy đầy đủ trước khi seal) nhưng là một lệch quy trình thật.
+## Process note (honest, not hidden)
+This node was created AFTER the file had already been `git mv`'d (the real
+sequence of actions: asked the operator 2 clarifying questions via
+AskUserQuestion first → got answers → `git mv` → only then came back to
+write this node + plan note). `NodeBeforeCode` properly requires the node
+to exist BEFORE touching any file. Recording that honestly here instead of
+pretending the order was correct — no real impact (the rename didn't
+change any value, build/lint verification still ran in full before
+sealing) but it's a real process slip.
 
-## Current state (đọc trước khi viết)
-- Trước khi đổi: `themes/portfolio-dev/tokens/dark.css` +
-  `themes/portfolio-dev/tokens/light.css` — 2 file RGB triplet
-  (`--theme-x: R G B`), import bởi `themes/portfolio-dev/tokens.css` qua
+## Current state (read before writing)
+- Before the change: `themes/portfolio-dev/tokens/dark.css` +
+  `themes/portfolio-dev/tokens/light.css` — 2 RGB-triplet files
+  (`--theme-x: R G B`), imported by `themes/portfolio-dev/tokens.css` via
   `@import './tokens/dark.css'` + `@import './tokens/light.css'`.
-- `tailwind.config.js` đọc value qua `rgb(var(--theme-x) / <alpha-value>)`
-  — BẮT BUỘC giá trị là RGB triplet cách nhau bằng space (không phải hex)
-  để `<alpha-value>` hoạt động với opacity modifier Tailwind
-  (`bg-theme-panel/50` dùng ở nhiều nơi: `Panel.vue`, `Header.vue`,
-  `PostCategories.vue`, `NavItem.vue`...). Operator đã xác nhận qua
-  AskUserQuestion: giữ RGB triplet, không đổi hex.
-- Operator chọn: đổi tên thư mục `tokens/` → `settings-colors-theme/`
-  (không đổi sang 1 file JSON/TS + build step mới — vượt `SmallestDiff`,
-  cần thiết kế/test riêng).
-- Tham chiếu tới path `tokens/dark.css`/`tokens/light.css`/`tokens/<name>.css`
-  nằm ở: `themes/portfolio-dev/tokens.css` (2 dòng `@import` + 2 dòng
-  comment), `nuxt.config.ts` (1 dòng comment), root `CLAUDE.md` (mục
-  "Color mode (light/dark)"). File aggregator `themes/portfolio-dev/tokens.css`
-  GIỮ NGUYÊN tên (không đổi) vì `nuxt.config.ts:66` reference trực tiếp
-  `~/themes/${ACTIVE_THEME}/tokens.css` — đổi tên file đó sẽ chạm vào dòng
-  code thật, ngoài scope operator chọn (chỉ đổi tên thư mục con).
+- `tailwind.config.js` reads the value via
+  `rgb(var(--theme-x) / <alpha-value>)` — the value MUST be an RGB triplet
+  separated by spaces (not hex) for `<alpha-value>` to work with Tailwind's
+  opacity modifier (`bg-theme-panel/50`, used in many places: `Panel.vue`,
+  `Header.vue`, `PostCategories.vue`, `NavItem.vue`...). The operator
+  confirmed via AskUserQuestion: keep the RGB triplet, don't switch to hex.
+- The operator chose: rename the `tokens/` folder → `settings-colors-theme/`
+  (not switching to a single JSON/TS file + a new build step — that would
+  exceed `SmallestDiff`, needs its own design/testing).
+- References to the `tokens/dark.css`/`tokens/light.css`/`tokens/<name>.css`
+  path live in: `themes/portfolio-dev/tokens.css` (2 `@import` lines + 2
+  comment lines), `nuxt.config.ts` (1 comment line), root `CLAUDE.md` (the
+  "Color mode (light/dark)" section). The aggregator file itself
+  `themes/portfolio-dev/tokens.css` KEEPS its name (unchanged) since
+  `nuxt.config.ts:66` references `~/themes/${ACTIVE_THEME}/tokens.css`
+  directly — renaming that file would touch real running code, outside
+  the scope the operator chose (they only chose to rename the subfolder).
 
 ## Plan (smallest diff)
 1. `git mv themes/portfolio-dev/tokens/dark.css themes/portfolio-dev/settings-colors-theme/dark.css`
 2. `git mv themes/portfolio-dev/tokens/light.css themes/portfolio-dev/settings-colors-theme/light.css`
-3. `themes/portfolio-dev/tokens.css`: cập nhật 2 dòng `@import` + comment liên quan.
-4. `nuxt.config.ts`: cập nhật 1 dòng comment (không đụng dòng code `css: [...]` thật, path đó vẫn trỏ `tokens.css` không đổi).
-5. Root `CLAUDE.md` mục "Color mode (light/dark)": cập nhật path
-   `tokens/` → `settings-colors-theme/`, thêm 1 câu ghi rõ đây là "nơi duy
-   nhất cần sửa để đổi palette" + cảnh báo không đổi sang hex (trực tiếp
-   trả lời ý "để user tự đổi hoặc Claude đổi nhanh khi có ảnh" — giờ có
-   1 câu trong CLAUDE.md nói thẳng "đây là chỗ" thay vì phải suy luận).
+3. `themes/portfolio-dev/tokens.css`: update the 2 `@import` lines + related comments.
+4. `nuxt.config.ts`: update 1 comment line (don't touch the real `css: [...]` code line, that path still points at `tokens.css` unchanged).
+5. Root `CLAUDE.md`'s "Color mode (light/dark)" section: update the
+   `tokens/` → `settings-colors-theme/` path, add a sentence stating
+   clearly this is "the only place you need to edit to repalette" (directly
+   answers the "so the user can edit it, or Claude can edit it quickly with
+   an image" intent — now there's a sentence in `CLAUDE.md` saying plainly
+   "this is the place" instead of needing to infer it).
 
 ## Acceptance criteria
 | # | Criterion |
 |---|---|
-| 1 | `themes/portfolio-dev/tokens/` không còn tồn tại |
-| 2 | `themes/portfolio-dev/settings-colors-theme/dark.css` + `light.css` tồn tại, nội dung y hệt bản gốc (chỉ rename, không đổi giá trị) |
-| 3 | `npm run build` sạch (chứng minh `@import` resolve đúng) |
-| 4 | `npm run lint` sạch |
-| 5 | CSS output thật (sau build) chứa đúng giá trị `--theme-canvas`/`--theme-editor` cho cả `.dark` và `.light` — không bị mất token nào trong lúc rename |
-| 6 | Không còn reference nào tới path cũ `tokens/dark.css`/`tokens/light.css`/`tokens/<name>.css` trong code/docs (trừ `agent-hub/evidence/`, `agent-hub/histories/` — lịch sử, không sửa) |
+| 1 | `themes/portfolio-dev/tokens/` no longer exists |
+| 2 | `themes/portfolio-dev/settings-colors-theme/dark.css` + `light.css` exist, content identical to the originals (rename only, no value changes) |
+| 3 | `npm run build` clean (proves the `@import` resolves correctly) |
+| 4 | `npm run lint` clean |
+| 5 | The real built CSS output contains the correct `--theme-canvas`/`--theme-editor` values for both `.dark` and `.light` — no token lost during the rename |
+| 6 | No remaining references to the old `tokens/dark.css`/`tokens/light.css`/`tokens/<name>.css` path in code/docs (except `agent-hub/evidence/`, `agent-hub/histories/` — history, not edited) |
 
 ## Files
 - `themes/portfolio-dev/tokens/dark.css` → `themes/portfolio-dev/settings-colors-theme/dark.css` (rename)
@@ -64,7 +68,7 @@ verify vẫn chạy đầy đủ trước khi seal) nhưng là một lệch quy 
 - `themes/portfolio-dev/tokens.css`
 - `nuxt.config.ts`
 - `CLAUDE.md` (root)
-- `agent-hub/haven/diagrams/dev-loop.prime-mermaid.md` (node mới)
+- `agent-hub/haven/diagrams/dev-loop.prime-mermaid.md` (new node)
 
 ## Blocked by
-Không.
+None.

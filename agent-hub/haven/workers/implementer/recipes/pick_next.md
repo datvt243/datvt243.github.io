@@ -4,18 +4,19 @@
   files: string[], blocked_by: string|null}`
 
 ## Steps
-1. Đọc `NORTHSTAR.md` + root `CLAUDE.md` (project thật) + `doctrine/MEMORY.md`
-   + `doctrine/domains/PROJECT.md`.
-2. Đọc MỌI diagram trong `haven/diagrams/`, lập danh sách node + PM status.
-3. Tìm node PENDING sớm nhất trên critical path.
-4. Không match → không tự bịa việc; báo rõ "không có node PENDING", dừng.
-5. Định vị code anchors bằng grep — path thật trong repo Nuxt (`pages/`,
+1. Read `NORTHSTAR.md` + root `CLAUDE.md` (the real project) +
+   `doctrine/MEMORY.md` + `doctrine/domains/PROJECT.md`.
+2. Read EVERY diagram in `haven/diagrams/`, list out nodes + PM status.
+3. Find the earliest PENDING node on the critical path.
+4. No match → don't make something up; clearly report "no PENDING node",
+   stop.
+5. Locate code anchors via grep — real paths in the Nuxt repo (`pages/`,
    `themes/<ACTIVE_THEME>/`, `server/api/`, `components/`, `stores/`...),
-   không tự bịa.
-6. Khai báo blockers nếu cần env var (`.env.example` liệt kê:
+   don't invent them.
+6. Declare blockers if a needed env var (`.env.example` lists:
    `MY_EMAIL`, `NODE_API`, `GITHUB_TOKEN`, `GITHUB_USER`,
-   `PUPPETEER_EXECUTABLE_PATH`) chưa có sẵn.
-7. Evidence: viết `evidence/implementer/<date>/<slug>-plan.md`.
+   `PUPPETEER_EXECUTABLE_PATH`) isn't already set.
+7. Evidence: write `evidence/implementer/<date>/<slug>-plan.md`.
 
 ## Hard rules honored
 `NodeBeforeCode` | `EvidencePerAction` | `NoSilentFailure`
@@ -23,10 +24,10 @@
 ## Failure branches
 | Failure | Handling |
 |---|---|
-| Chưa có diagram nào khớp | Tạo node mới trên `haven/diagrams/dev-loop.prime-mermaid.md`, giữ đúng format ratchet LAI-13 |
-| Task mơ hồ | Dừng và hỏi, không đoán |
-| Task đòi hỏi env var chưa set (vd `PUPPETEER_EXECUTABLE_PATH` cho PDF) | Báo `blocked`, không giả lập giá trị |
+| No diagram matches yet | Create a new node on `haven/diagrams/dev-loop.prime-mermaid.md`, keeping the LAI-13 ratchet format |
+| Task is ambiguous | Stop and ask, don't guess |
+| Task needs an unset env var (e.g. `PUPPETEER_EXECUTABLE_PATH` for PDF) | Report `blocked`, don't fake a value |
 
 ## Runtime
-`/worker implementer "<task>"` hoặc là lượt 1 của `/todo "<task>"`. Không API
-key, không network call ngoài repo — Claude Code LÀ runtime.
+`/worker implementer "<task>"` or as pass 1 of `/todo "<task>"`. No API
+key, no network call outside the repo — Claude Code IS the runtime.

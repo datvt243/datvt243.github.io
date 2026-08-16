@@ -1,15 +1,15 @@
-# BOOT.md — 5 sự thật định hướng
+# BOOT.md — 5 orienting truths
 
-> Đọc bởi lệnh `/boot`. KHÔNG thay thế `doctrine/` — chỉ là launchpad 60
-> giây để không phải đọc lại toàn bộ mỗi phiên.
+> Read by the `/boot` command. Does NOT replace `doctrine/` — it's just a
+> 60-second launchpad so you don't have to re-read everything every session.
 
-1. Doctrine (`doctrine/`) là nơi giữ sự thật đã verify — model reset mỗi
-   phiên, doctrine thì không.
-2. Recipes (`haven/workers/*/recipes/`) là suy luận đã lưu — dùng lại thay
-   vì suy luận lại từ đầu.
-3. Hành động của worker phải quan sát được thật (build/lint output, screenshot
-   qua Chrome CDP), không phải "hình dung ra". Project này không có test
-   suite — đừng tưởng tượng ra kết quả test.
-4. Mọi việc outward-facing (commit/push/PR/xoá file) cần approval của
-   operator — không có ngoại lệ, kể cả khi `/todo` tự chạy 2 lượt.
-5. Evidence or it didn't happen. Confidence không phải là output.
+1. Doctrine (`doctrine/`) holds verified truth — the model resets every
+   session, doctrine doesn't.
+2. Recipes (`haven/workers/*/recipes/`) are saved reasoning — replay them
+   instead of re-deriving from scratch.
+3. A worker's actions must be really observable (build/lint output,
+   screenshots via Chrome CDP), not "imagined." This project has no test
+   suite — don't imagine test results.
+4. Every outward-facing action (commit/push/PR/delete file) needs operator
+   approval — no exceptions, even when `/todo` runs both passes automatically.
+5. Evidence or it didn't happen. Confidence is not output.

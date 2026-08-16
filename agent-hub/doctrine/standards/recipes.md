@@ -1,28 +1,32 @@
-> Recipe là SAVED REASONING — các bước tốt định thay thế việc suy ra từ
-> đầu. Lần sau chỉ cần replay.
+> A recipe is SAVED REASONING — good steps recorded once, meant to replace
+> re-deriving from scratch. Next time, just replay it.
 
-## Why they matter (Trí Tuệ Tích Luỹ)
-"Recipes are capital. Models are fuel." Trí tuệ tích luỹ không nằm trong
-model — nó nằm trong recipe đã viết ra. Ví dụ thật đã xảy ra trong repo này
-(trước khi hub tồn tại, xem `agent-hub/histories/2026-08-13.md`): bisect một
-build lỗi bằng `git worktree` — quy trình đó đáng lẽ nên là 1 recipe thay vì
-phải suy luận lại từ đầu lần sau.
+## Why they matter (Accumulated Intelligence)
+"Recipes are capital. Models are fuel." Accumulated intelligence doesn't
+live in the model — it lives in the recipes that got written down. A real
+example that happened in this repo (before the hub existed, see
+`agent-hub/histories/2026-08-13.md`): bisecting a broken build with `git
+worktree` — that process should have been a recipe instead of having to be
+re-derived from scratch next time.
 
 ## When to write one
-Viết recipe khi: (1) task này lặp lại ≥ 2 lần, (2) có bước dễ nhầm/khó nhớ,
-(3) có bước tốn công debug mới ra, (4) quy trình đủ dài để đáng lưu lại.
+Write a recipe when: (1) this task repeats ≥ 2 times, (2) there's a step
+that's easy to get wrong/forget, (3) there's a step that took real debugging
+effort to figure out, (4) the process is long enough to be worth saving.
 
 ## What they are NOT
-Không phải action/lệnh cố định trong `manifest.yaml` — đó là thẩm quyền khác.
-Recipe sống ở `haven/workers/<wid>/recipes/*.md`.
+Not the same as a fixed action/command in `manifest.yaml` — that's a
+different authority. Recipes live at `haven/workers/<wid>/recipes/*.md`.
 
-## Format (bắt buộc 5 mục)
-1. **Contract** — Input, Output, khi nào dùng.
-2. **Steps** — đánh số, tất định.
-3. **Hard rules honored** — liệt kê tên hard rule liên quan.
-4. **Failure branches** — bảng | Failure | Handling |.
-5. **Runtime** — cách gọi (`/worker <wid> "<task>"` hoặc `/todo "<task>"`).
+## Format (5 required sections)
+1. **Contract** — Input, Output, when to use it.
+2. **Steps** — numbered, deterministic.
+3. **Hard rules honored** — list the related hard rule names.
+4. **Failure branches** — a table of | Failure | Handling |.
+5. **Runtime** — how to invoke it (`/worker <wid> "<task>"` or
+   `/todo "<task>"`).
 
 ## Maintaining them
-Recipe sai thì sửa lại, và ghi vào bảng Corrections trong `MEMORY.md` của
-worker khi phát hiện nó sai. Không xoá rồi bỏ đi — sửa và giữ lại bài học.
+When a recipe turns out wrong, fix it, and write it into the Corrections
+table in that worker's `MEMORY.md` when you discover it's wrong. Don't
+delete and walk away — fix it and keep the lesson.

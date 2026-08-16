@@ -1,36 +1,38 @@
-> "You may not claim an outcome you have not observed." Quy tắc bị vi phạm
-> nhiều nhất trong agent work. Exceptions: None.
+> "You may not claim an outcome you have not observed." The most-violated
+> rule in agent work. Exceptions: None.
 
 ## The rule
-Chỉ được báo hoàn tất khi output đã thực sự được xuất ra và đọc lại — không
-phải khi bạn nghĩ edit đã đúng. Project này KHÔNG có test suite; "output"
-nghĩa là `npm run build`/`npm run lint` verbatim, và với thay đổi visual,
-screenshot/DOM query thật qua Chrome CDP (port 9888).
+Only report something as complete once the output has actually been
+produced and read back — not once you think the edit is correct. This
+project has NO test suite; "output" means the verbatim `npm run build`/
+`npm run lint` result, and for visual changes, a real screenshot/DOM query
+via Chrome CDP (port 9888).
 
 ## Not evidence vs Evidence
 | Not evidence | Evidence |
 |---|---|
-| "Fix này chắc sẽ giải quyết được lỗi" | Chạy `npm run build`, đọc output thật |
-| "Build should pass now" | Verbatim log — build không lỗi, không warning bị bỏ qua |
-| "UI chắc đúng rồi" | Screenshot/computed style thật qua Chrome CDP, trích cụ thể (vd màu `rgb(...)` đọc được) |
-| "Tests pass" | KHÔNG BAO GIỜ dùng câu này — project không có test suite |
+| "This fix should probably solve the bug" | Ran `npm run build`, read the real output |
+| "Build should pass now" | Verbatim log — build has no errors, no warning was skipped |
+| "UI is probably correct" | Real screenshot/computed style via Chrome CDP, cited concretely (e.g. a readable `rgb(...)` color) |
+| "Tests pass" | NEVER use this phrase — the project has no test suite |
 
 ## Why reasoning doesn't count
-Lập luận về code không phải là chạy code. Mô hình thường tin vào mô tả của
-chính nó hơn là kiểm tra thật.
+Reasoning about code is not running code. Models tend to trust their own
+description more than an actual check.
 
-## What read back means
-Copy nguyên văn lệnh CHÍNH XÁC từ `doctrine/MEMORY.md`, chạy, đọc kết quả
-verbatim, ghi vào evidence note — không tự diễn giải, không tóm tắt thành
-kết luận riêng.
+## What "read back" means
+Copy the EXACT command verbatim from `doctrine/MEMORY.md`, run it, read the
+result back verbatim, write it into the evidence note — don't paraphrase,
+don't summarize into your own conclusion.
 
 ## No Exceptions
-Chưa verify được → báo `blocked`. Không có ngoại lệ "chắc là đúng".
+Can't verify it yet → report `blocked`. No "probably fine" exception.
 
 ## Failure mode this catches
-"Green-by-supposition" — tự claim build/UI đúng mà không thực sự chạy/kiểm.
+"Green-by-supposition" — claiming build/UI is correct without actually
+running/checking it.
 
 ## Enforcement
-Implementer: hard rule `TestsBeforeDone` (ở đây nghĩa là build+lint trước
-done). Verifier: hard rule `EvidencePerAction` — claim không đủ bằng chứng →
-REOPEN. Liên quan: `EDIT_UNVERIFIED`.
+Implementer: hard rule `TestsBeforeDone` (here meaning build+lint before
+done). Verifier: hard rule `EvidencePerAction` — a claim without enough
+evidence → REOPEN. Related: `EDIT_UNVERIFIED`.

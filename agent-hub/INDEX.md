@@ -1,19 +1,19 @@
 # agent-hub/INDEX.md — inventory
 
-> Không lặp nội dung — chỉ trỏ tới. Xem `README.md` cho triết lý,
-> `CLAUDE.md` cho hợp đồng agent.
+> Doesn't repeat content — only points to it. See `README.md` for
+> philosophy, `CLAUDE.md` for the agent contract.
 
-| File/dir | Vai trò |
+| File/dir | Role |
 |---|---|
-| `NORTHSTAR.md` | "Done" nghĩa là gì, success picture |
-| `CLAUDE.md` | Hợp đồng agent cho vòng `/boot`/`/worker`/`/todo` |
-| `BOOT.md` | 5 sự thật cho `/boot`, launchpad 60 giây |
-| `README.md` | Entry point cho người đọc |
-| `doctrine/` | Sự thật đã verify — path, lệnh, ground truth project, traps, decisions |
-| `haven/diagrams/` | Nguồn trạng thái DUY NHẤT — `dev-loop.prime-mermaid.md` |
-| `haven/workers/` | Bundle implementer + verifier (identity, memory, recipes) |
-| `evidence/` | Audit trail mới, append-only, từ 2026-08-16 |
-| `histories/` | Work-log cũ (trước hub) — giữ nguyên, không còn active |
+| `NORTHSTAR.md` | What "done" means, the success picture |
+| `CLAUDE.md` | Agent contract for the `/boot`/`/worker`/`/todo` loop |
+| `BOOT.md` | 5 truths for `/boot`, 60-second launchpad |
+| `README.md` | Entry point for readers |
+| `doctrine/` | Verified truth — paths, commands, project ground truth, traps, decisions |
+| `haven/diagrams/` | The SINGLE source of state — `dev-loop.prime-mermaid.md` |
+| `haven/workers/` | Implementer + verifier bundles (identity, memory, recipes) |
+| `evidence/` | New audit trail, append-only, since 2026-08-16 |
+| `histories/` | Old work-log (pre-hub) — kept as-is, no longer active |
 
-Root `CLAUDE.md` (ngoài `agent-hub/`) vẫn là nguồn thật cho stack/architecture
-project — không lặp lại ở đây.
+Root `CLAUDE.md` (outside `agent-hub/`) is still the real source for the
+project's stack/architecture — not repeated here.

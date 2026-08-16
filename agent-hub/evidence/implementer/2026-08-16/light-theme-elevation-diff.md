@@ -3,20 +3,19 @@
 - Worker: implementer
 - Version: 0.1.0
 - Node: `haven/diagrams/dev-loop.prime-mermaid.md` → `light-theme-elevation`
-- Task (nguyên văn): "Light theme: đặt --theme-canvas (nền trang) thành
-  trắng thuần (255 255 255), và làm cho header/footer với editor
-  (ThemePanel component) có màu nền khác biệt rõ với nền trắng đó — riêng
-  editor (ThemePanel) phải nổi trội/nổi bật hơn header/footer, không chỉ
-  khác màu nhẹ."
+- Task (verbatim): "Light theme: set --theme-canvas (page background) to
+  pure white (255 255 255), and make header/footer and the editor
+  (ThemePanel component) have a background color visibly different from
+  that white — the editor (ThemePanel) specifically needs to stand out
+  more than header/footer, not just a slight color difference."
 
 ## Diff
 | File | Why |
 |---|---|
-| `themes/portfolio-dev/tokens/light.css` | `--theme-canvas` → trắng thuần `255 255 255`. Thêm token mới `--theme-editor: 226 232 240` (tái dùng đúng giá trị slate-200 cũ của canvas) thay vì đổi `--theme-panel` — `--theme-panel` bị dùng rộng ở nhiều nơi ngoài header/footer (icon bg, badge, project card...), đổi nó sẽ vượt scope task |
-| `themes/portfolio-dev/tokens/dark.css` | Thêm `--theme-editor: 2 6 23` = đúng giá trị `--theme-canvas` dark hiện tại, để KHÔNG đổi visual dark mode (task chỉ nói light theme) |
-| `tailwind.config.js` | Map `theme.editor` → `themeColor('--theme-editor')`, theo đúng pattern các token khác (`canvas`, `panel`, `panel-subtle`) |
-| `themes/portfolio-dev/components/Panel.vue` | Outer wrapper (`<ThemePanel>`, editor shell) thêm class `bg-theme-editor shadow-md` — nền riêng + shadow để nổi khối rõ hơn `ThemeHeader`/`ThemeFooter` (vốn chỉ `bg-theme-panel`, không shadow) |
-| `agent-hub/haven/diagrams/dev-loop.prime-mermaid.md` | Tạo node đầu tiên `light-theme-elevation` (PM status trước đó trống — `pick_next` failure branch: không có node PENDING nào tồn tại) |
+| `themes/portfolio-dev/tokens/light.css` | `--theme-canvas` → pure white `255 255 255`. Added a new token `--theme-editor: 226 232 240` (reusing the exact old slate-200 canvas value) instead of changing `--theme-panel` — `--theme-panel` is used widely beyond header/footer (icon bg, badge, project card...), changing it would exceed this task's scope |
+| `themes/portfolio-dev/tokens/dark.css` | Added `--theme-editor: 2 6 23` = exactly the current dark `--theme-canvas` value, so dark mode's visual is NOT changed (the task only mentions light theme) |
+| `tailwind.config.js` | Mapped `theme.editor` → `themeColor('--theme-editor')`, following the same pattern as the other tokens (`canvas`, `panel`, `panel-subtle`) |
+| `themes/portfolio-dev/components/Panel.vue` | The outer wrapper (`<ThemePanel>`, the editor shell) got `bg-theme-editor shadow-md` added — its own background + a shadow so it stands out more clearly than `ThemeHeader`/`ThemeFooter` (which only have `bg-theme-panel`, no shadow) |
 
 ## Command
 ```
@@ -27,24 +26,26 @@ npm run lint
 ```
 
 ## Output
-`npm run build` — verbatim tail (không lỗi, kết thúc bằng):
+`npm run build` — verbatim tail (no errors, ends with):
 ```
 Σ Total size: 27.4 MB (10 MB gzip)
 [nitro] ✔ You can preview this build using node .output/server/index.mjs
 ```
 
-`npm run lint` — verbatim cuối:
+`npm run lint` — verbatim tail:
 ```
 ✖ 34 problems (0 errors, 34 warnings)
 ```
-34 warning này pre-existing, không thuộc 5 file bị đổi ở trên (đã kiểm —
-không file nào trong `## Diff` xuất hiện trong danh sách warning).
+These 34 warnings are pre-existing, not from any of the 5 files changed
+above (checked — none of the files in `## Diff` appear in the warning
+list).
 
 ## Browser verification
-Chrome CDP port 9888 (đã chạy sẵn, không launch instance mới), connect qua
-`puppeteer-core`, navigate `http://localhost:3000/` (dev server tự khởi
-động cho việc kiểm tra này). `<html>` đã có class `light` sẵn khi load —
-không cần bấm toggle. Đọc computed style qua `page.evaluate`:
+Chrome CDP port 9888 (already running, no new instance launched), connected
+via `puppeteer-core`, navigated to `http://localhost:3000/` (dev server
+started specifically for this check). `<html>` already had the class
+`light` on load — no need to click the toggle. Read computed style via
+`page.evaluate`:
 
 ```json
 {
@@ -59,36 +60,39 @@ không cần bấm toggle. Đọc computed style qua `page.evaluate`:
               "border": "rgb(226, 232, 240)" }
 }
 ```
-Screenshot chụp cùng lúc (trang chủ, viewport mặc định) lưu tại phiên làm
-việc (không commit vào repo — không phải asset cần giữ lâu dài); mô tả:
-thanh header nền trắng-xám nhạt phẳng, không shadow; khối "editor"
-(sidebar file-tree "PERSONAL-INFO" + nội dung) nền xám rõ (`rgb(226, 232,
-240)`) với drop-shadow mềm, nổi khối rõ trên nền trắng của trang.
+Screenshot taken at the same time (homepage, default viewport) saved for
+this session (not committed to the repo — not an asset worth keeping
+long-term); description: the header bar has a flat, near-white-grey
+background, no shadow; the "editor" block (file-tree sidebar
+"PERSONAL-INFO" + content) has a clearly grey background (`rgb(226, 232,
+240)`) with a soft drop-shadow, standing out clearly against the page's
+white background.
 
 ## Acceptance
 | # | Criterion | Evidence |
 |---|---|---|
-| 1 | `.light` → `--theme-canvas` = `255 255 255` | `themes/portfolio-dev/tokens/light.css` diff; xác nhận runtime: `body.bg = "rgb(255, 255, 255)"` ở trên |
-| 2 | `npm run build` sạch | `[nitro] ✔ You can preview this build using node .output/server/index.mjs`, không có dòng lỗi trong output đầy đủ |
-| 3 | `npm run lint` sạch | `✖ 34 problems (0 errors, 34 warnings)` — 0 errors |
-| 4 | Computed bg `<body>` = `rgb(255, 255, 255)` | trích ở trên |
-| 5 | bg header/footer ≠ trắng và ≠ bg panel | header/footer = `rgb(248, 250, 252)`; panel = `rgb(226, 232, 240)`; canvas = `rgb(255, 255, 255)` — cả 3 giá trị khác nhau |
-| 6 | Panel có bg khác header/footer VÀ có box-shadow (header/footer thì không) | panel `shadow` có giá trị thật (`0px 4px 6px -1px rgba(0,0,0,0.1)...`); header/footer `shadow: "none"` |
+| 1 | `.light` → `--theme-canvas` = `255 255 255` | `themes/portfolio-dev/tokens/light.css` diff; confirmed at runtime: `body.bg = "rgb(255, 255, 255)"` above |
+| 2 | `npm run build` clean | `[nitro] ✔ You can preview this build using node .output/server/index.mjs`, no error line in the full output |
+| 3 | `npm run lint` clean | `✖ 34 problems (0 errors, 34 warnings)` — 0 errors |
+| 4 | Computed bg of `<body>` = white | cited above |
+| 5 | header/footer bg ≠ white and ≠ panel bg | header/footer = `rgb(248, 250, 252)`; panel = `rgb(226, 232, 240)`; canvas = `rgb(255, 255, 255)` — all 3 values differ |
+| 6 | Panel has a bg different from header/footer AND has a box-shadow (header/footer don't) | panel's `shadow` has a real value (`0px 4px 6px -1px rgba(0,0,0,0.1)...`); header/footer `shadow: "none"` |
 
 ## Noticed, not done
-- `--theme-panel` (`248 250 252`, slate-50) chỉ khác `--theme-canvas`
-  (`255 255 255`) một khoảng RGB nhỏ (~7 đơn vị) — về mặt số liệu là "khác
-  màu" thật, nhìn trên ảnh chụp thấy có viền `border-b`/`border-t-2
-  border-theme-accent` (cam) làm rõ ranh giới, nhưng nếu operator thấy vẫn
-  chưa đủ rõ so với kỳ vọng, có thể cân nhắc bump `--theme-panel` lên
-  `241 245 249` (slate-100) ở một task/node riêng — KHÔNG tự làm ở đây vì
-  `--theme-panel` dùng rộng ngoài header/footer (xem bảng Diff), đổi nó
-  vượt `SmallestDiff` cho task này.
-- Dev server (`npm run dev`) đã được khởi động riêng cho bước kiểm tra
-  này, đang chạy nền (log: process ngoài phiên implementer) — không phải
-  hành động outward-facing, không cần seal gate, nhưng operator có thể
-  muốn dừng nó sau khi xem xong.
+- `--theme-panel` (`248 250 252`, slate-50) only differs from
+  `--theme-canvas` (`255 255 255`) by a small RGB gap (~7 units) —
+  numerically it really is "a different color", and the screenshot shows a
+  `border-b`/`border-t-2 border-theme-accent` (orange) border making the
+  boundary clear, but if the operator feels it's still not distinct
+  enough, `--theme-panel` could be bumped up to `241 245 249` (slate-100)
+  as a separate task/node — NOT done here since `--theme-panel` is used
+  broadly beyond header/footer (see the Diff table), changing it would
+  exceed `SmallestDiff` for this task.
+- The dev server (`npm run dev`) was started specifically for this
+  verification step, running in the background (log: a process outside
+  the implementer session) — not an outward-facing action, no seal gate
+  needed, but the operator may want to stop it after reviewing.
 
 ## Seal gate
-None — không có hành động outward-facing (không commit/push/xoá file/mở
-PR) trong lượt implementer này.
+None — no outward-facing action (no commit/push/delete/PR) in this
+implementer pass.
