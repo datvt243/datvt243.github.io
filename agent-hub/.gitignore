@@ -1,0 +1,5 @@
+# Loại scratch + secrets phát sinh trong lúc worker làm việc.
+# evidence/ KHÔNG được ignore — đó là audit trail, phải commit.
+*.tmp
+*.scratch
+.DS_Store

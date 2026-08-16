@@ -125,58 +125,37 @@ GITHUB_USER=                 # GitHub username
 PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
 ```
 
-## Bug Fix / Feature Workflow
+## Agent-Hub (`agent-hub/`)
 
-For any tracked bug fix or feature (not one-off docs/config tweaks), follow this
-process. `/start-work` automates steps 1–3, `/finish-work` automates steps 4–5,
-`/merge-work` automates step 6.
+Bug fix / feature work in this repo goes through **agent-hub**
+(`agent-hub/README.md`) — a doctrine/haven/evidence hub with two separated
+roles, **implementer** (writes the diff) and **verifier** (independently
+checks it before anything is marked done). This replaced
+`start-work`/`finish-work`/`merge-work` and the `agent-hub/histories/`
+work-log convention on 2026-08-16 (see `agent-hub/doctrine/domains/PROJECT.md`'s
+Decisions table for why). `/ship` was recreated afterward for quick,
+untracked changes only (docs/config, not node-tracked code work) — updated
+to match agent-hub's seal gate: it commits but always stops for approval
+before `git push`, it no longer pushes automatically.
 
-1. **Create a GitHub issue** (`gh issue create`) describing the bug/feature before
-   writing any code. Get the issue number from the result.
-2. **Sync `main`**: `git checkout main && git pull` (check `git status` first —
-   don't discard uncommitted work silently).
-3. **Branch from `main`**, named `bug/<issue_number>` or `feature/<issue_number>`
-   (issue number only, no slug).
-4. Do the work. Whenever it requires opening a browser (checking a UI bug,
-   verifying a fix visually), run `/browser` first instead of launching Chrome
-   ad hoc — it reuses the existing CDP-debuggable instance on port 9888 if one
-   is already running, only launching a new one if needed. Log the work in
-   `agent-hub/histories/` per the section below, then commit as usual.
-5. **Never push directly to `main`.** Push the branch and open a pull request
-   (`gh pr create --base main`) referencing the issue (e.g. `Closes #<n>`).
-6. **On merge**: `bug/*` branches may be deleted after merging
-   (`gh pr merge --delete-branch`); `feature/*` branches must be kept — never
-   delete them, even after merge.
+```
+/boot                              # 60s orientation, reads doctrine + diagram + evidence, no edits
+/worker implementer "<task>"       # pick a node, smallest diff, build+lint, evidence note
+/worker verifier "<task>"          # independent check → SEAL or REOPEN
+/todo "<task>"                     # both of the above in one command, still 2 separate passes
+```
 
-`/ship` remains available for untracked quick changes (docs, config) and also
-refuses to push while on `main`.
+Git mechanics are unchanged and still enforced (not automated by agent-hub):
+never push directly to `main`; branch `bug/<issue_number>` or
+`feature/<issue_number>` off `main`; open a PR referencing the issue
+(`Closes #<n>`); `bug/*` branches may be deleted after merge, `feature/*`
+branches are kept. For UI checks, run `/browser` first (see
+`agent-hub/doctrine/domains/PROJECT.md`'s "Browser verification" section)
+instead of driving Chrome/CDP by hand.
 
-## Agent Work Log (`agent-hub/histories/`)
-
-Before starting any bug fix or feature work, check `agent-hub/histories/` (sorted by
-filename, newest last) for recent entries — they carry context and decisions that
-aren't derivable from the code/git history alone (why something was scoped the way it
-was, what was deliberately left alone, what the natural next step is).
-
-Write/update the log **when creating a commit**, not after every individual fix or
-feature — batch everything the commit covers into one entry rather than logging each
-small step separately, to avoid repeated busywork within a single working session.
-Target `agent-hub/histories/YYYY-MM-DD.md` for the day of the commit. If a file for
-that day already exists, append a new `##`-level section to it rather than
-overwriting. (Skip entirely for pure Q&A/research/read-only work, and for anything
-never committed.) Write it so a future session with zero memory of this conversation
-can pick up the thread. Cover, at minimum:
-
-- **Goal** — what was being fixed/built and why (the actual user ask, not a
-  restatement of the diff).
-- **What was done** — the concrete steps/decisions, in order, including anything
-  deliberately left alone or judgment calls made (and why).
-- **Current state** — build/lint/test status, what was verified and how (e.g.
-  screenshots, which routes), what's committed vs. still pending.
-- **Possible next steps** — open threads, known follow-ups, things worth
-  double-checking later.
-
-See `agent-hub/histories/2026-08-11.md` for the format this was modeled on.
+`agent-hub/histories/` (the old dated work-log files) is kept as-is for
+historical reference — not deleted, no longer the active audit trail. New
+audit trail lives in `agent-hub/evidence/`.
 
 ## Known Issues
 
