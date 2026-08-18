@@ -4,6 +4,7 @@
  * Visual reference: alexdeploy/developer-portfolio-v2 (tab-bar theme).
  */
 
+const { t } = useI18n()
 const currentYear = new Date().getFullYear()
 const socialMedia = [
   { name: 'github', icon: 'grommet-icons:github', link: 'https://github.com/datvt243' },
@@ -16,7 +17,7 @@ const socialMedia = [
     <UContainer :ui="{ constrained: 'mx-auto max-w-screen-lg px-3 py-0 md:py-0 lg:py-0' }">
       <div class="py-2.5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <span class="hidden sm:inline">find me in:</span>
+          <span class="hidden sm:inline">{{ t('footer.findMeIn') }}</span>
           <a
             v-for="social in socialMedia"
             :key="social.name"
