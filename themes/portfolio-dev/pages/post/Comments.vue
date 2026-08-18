@@ -59,7 +59,12 @@ watch(
   },
 )
 
-onMounted(() => {
+onMounted(async () => {
+  // containerRef sits inside <ClientOnly>, which doesn't render its real
+  // slot content until one tick after this component's own onMounted -
+  // without this, containerRef.value is still null here and loadGiscus()
+  // silently no-ops (isConfigured guard passes, container guard doesn't).
+  await nextTick()
   loadGiscus()
 })
 </script>
