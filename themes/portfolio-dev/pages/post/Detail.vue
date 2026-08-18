@@ -76,6 +76,7 @@ const props = defineProps<{
           </div>
         </footer>
       </div>
+      <ThemePostComments />
     </article>
   </div>
 </template>

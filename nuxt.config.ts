@@ -60,6 +60,9 @@ export default defineNuxtConfig({
       MY_EMAIL: process.env.MY_EMAIL,
       NODE_API: process.env.NODE_API,
       GITHUB_USER: process.env.GITHUB_USER,
+      GISCUS_CATEGORY: process.env.GISCUS_CATEGORY,
+      GISCUS_CATEGORY_ID: process.env.GISCUS_CATEGORY_ID,
+      GISCUS_REPO_ID: process.env.GISCUS_REPO_ID,
     },
   },
 
