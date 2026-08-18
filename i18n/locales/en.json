@@ -1,0 +1,12 @@
+{
+  "header": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Switch language"
+  },
+  "footer": {
+    "findMeIn": "find me in:"
+  }
+}
