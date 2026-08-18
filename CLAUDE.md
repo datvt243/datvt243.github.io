@@ -139,7 +139,21 @@ NODE_API=                    # Resume backend base URL
 GITHUB_TOKEN=                # GitHub token; falls back to unauthenticated requests if unset/rejected
 GITHUB_USER=                 # GitHub username
 PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
+GISCUS_CATEGORY=             # GitHub Discussions category name for blog comments (e.g. "Comments")
+GISCUS_CATEGORY_ID=          # Discussions category ID from https://giscus.app's config generator
+GISCUS_REPO_ID=              # Repo ID from https://giscus.app's config generator
 ```
+
+`GISCUS_*` power the comment widget on `/blogs/[id]` (`ThemePostComments`,
+`themes/portfolio-dev/pages/post/Comments.vue`). Unset by default — the
+widget renders a "not configured" placeholder instead of a broken embed
+until an operator does, once, in order: (1) enable GitHub Discussions on
+this repo, (2) install the Giscus GitHub App
+(`github.com/apps/giscus/installations/new`), (3) run
+https://giscus.app's config generator against this repo to get the real
+`GISCUS_CATEGORY_ID`/`GISCUS_REPO_ID` values. The repo name itself
+(`datvt243/datvt243.github.io`) is a hardcoded constant in the component,
+not an env var — it never changes.
 
 ## Agent-Hub (`agent-hub/`)
 
