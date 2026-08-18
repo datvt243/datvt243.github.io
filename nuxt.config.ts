@@ -81,7 +81,30 @@ export default defineNuxtConfig({
     { path: `~/themes/${ACTIVE_THEME}/components`, prefix: 'Theme' },
     '~/components',
   ],
-  modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui', '@nuxt/icon', '@nuxt/eslint'],
+  modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui', '@nuxt/icon', '@nuxt/eslint', '@nuxtjs/i18n'],
+  // UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are
+  // filename-style, e.g. "_resume.ts" - part of the code-editor metaphor,
+  // deliberately NOT translated, same as nobody translates a real file
+  // name in an IDE). `vi` (the site's original language, 100% of current
+  // traffic) keeps its existing unprefixed URLs; only `en` gets a
+  // `/en/*` prefix - see i18n-foundation node in
+  // agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why
+  // `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.
+  i18n: {
+    locales: [
+      { code: 'vi', language: 'vi-VN', file: 'vi.json' },
+      { code: 'en', language: 'en-US', file: 'en.json' },
+    ],
+    defaultLocale: 'vi',
+    strategy: 'prefix_except_default',
+    langDir: 'locales',
+    // @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)
+    // auto-redirects `/` to `/en` for visitors with an English browser
+    // locale - not something asked for here (only a manual switcher was),
+    // and a surprising behavior change for every real visitor on a live
+    // site. Disabled to keep this node's diff to exactly what was scoped.
+    detectBrowserLanguage: false,
+  },
   typescript: {
     // The integrated dev/build vue-tsc check runs against the root tsconfig
     // only, whose generated `include` pulls in server/**/*.ts but doesn't

@@ -1,0 +1,12 @@
+{
+  "header": {
+    "switchToLight": "Chuyển sang chế độ sáng",
+    "switchToDark": "Chuyển sang chế độ tối",
+    "openMenu": "Mở menu",
+    "closeMenu": "Đóng menu",
+    "switchLanguage": "Chuyển ngôn ngữ"
+  },
+  "footer": {
+    "findMeIn": "Tìm mình ở:"
+  }
+}
