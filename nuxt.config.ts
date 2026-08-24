@@ -98,6 +98,11 @@ export default defineNuxtConfig({
     defaultLocale: 'vi',
     strategy: 'prefix_except_default',
     langDir: 'locales',
+    // Same production origin already hardcoded as SITE_URL in
+    // server/routes/{rss,sitemap}.xml.ts - required by useLocaleHead()
+    // (used in app.vue to set <html lang> per active locale) to generate
+    // valid hreflang/canonical link values instead of a build warning.
+    baseUrl: 'https://datvt243.github.io',
     // @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)
     // auto-redirects `/` to `/en` for visitors with an English browser
     // locale - not something asked for here (only a manual switcher was),

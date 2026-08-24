@@ -7,6 +7,7 @@
 
 import type { GitRepos } from '@/types/github'
 
+const { t } = useI18n()
 const props = defineProps<{
 	repos: GitRepos[]
 }>()
@@ -34,7 +35,7 @@ const getRepos = computed(() => {
         icon="fe:search"
         color="gray"
         variant="outline"
-        placeholder="Search repos name..."
+        :placeholder="t('github.searchPlaceholder')"
         :ui="{
           base: 'font-theme-mono',
           color: {

@@ -8,5 +8,46 @@
   },
   "footer": {
     "findMeIn": "find me in:"
+  },
+  "resume": {
+    "greeting": "Hi there! I am",
+    "aboutMeHeading": "About me",
+    "downloadCv": "Download CV"
+  },
+  "projects": {
+    "seoTitle": "Projects",
+    "seoDescription": "Projects built by Võ Tấn Đạt.",
+    "noMatch": "No projects match the selected filters.",
+    "projectLabel": "Project"
+  },
+  "blogs": {
+    "seoTitle": "Blogs",
+    "seoDescription": "Articles, tutorials, snippets, rants, and everything else.",
+    "intro": "Articles, tutorials, snippets, rants, and everything else.",
+    "show": "Show:",
+    "readMore": "Read more ..."
+  },
+  "post": {
+    "publishedOn": "Published on",
+    "tags": "Tags",
+    "backToBlog": "Back to the blog",
+    "comments": "Comments",
+    "giscusNotConfigured": "Giscus is not configured yet."
+  },
+  "contact": {
+    "seoTitle": "Contact me",
+    "seoDescription": "Get in touch with me at {email}. I would love to hear from you! Reach us at {phone} and {address}.",
+    "formHint": "# fills your mail client - no server involved :)",
+    "namePlaceholder": "Your name",
+    "messagePlaceholder": "What's on your mind?"
+  },
+  "github": {
+    "seoTitle": "Github",
+    "seoDescription": "GitHub profile and repositories of Võ Tấn Đạt (datvt243).",
+    "searchPlaceholder": "Search repos name...",
+    "followers": "followers",
+    "following": "following",
+    "noData": "NO data",
+    "updatedOn": "Updated on"
   }
 }

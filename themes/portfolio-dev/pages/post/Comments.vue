@@ -14,6 +14,7 @@
 // step - see root CLAUDE.md).
 const GISCUS_REPO = 'datvt243/datvt243.github.io'
 
+const { t, locale } = useI18n()
 const { GISCUS_CATEGORY, GISCUS_CATEGORY_ID, GISCUS_REPO_ID } = useRuntimeConfig().public
 const isConfigured = Boolean(GISCUS_REPO_ID && GISCUS_CATEGORY_ID)
 
@@ -41,7 +42,7 @@ function loadGiscus() {
   script.setAttribute('data-emit-metadata', '0')
   script.setAttribute('data-input-position', 'bottom')
   script.setAttribute('data-theme', giscusTheme())
-  script.setAttribute('data-lang', 'vi')
+  script.setAttribute('data-lang', locale.value)
 
   containerRef.value.appendChild(script)
 }
@@ -59,6 +60,15 @@ watch(
   },
 )
 
+watch(
+  () => locale.value,
+  (lang) => {
+    const iframe = getGiscusIframe()
+    if (!iframe || !iframe.contentWindow) return
+    iframe.contentWindow.postMessage({ giscus: { setConfig: { lang } } }, 'https://giscus.app')
+  },
+)
+
 onMounted(async () => {
   // containerRef sits inside <ClientOnly>, which doesn't render its real
   // slot content until one tick after this component's own onMounted -
@@ -72,9 +82,9 @@ onMounted(async () => {
 <template>
   <ClientOnly>
     <div class="pt-4 xl:pt-8 border-t border-theme-border">
-      <h2 class="text-lg text-bold uppercase tracking-wide text-theme-accent pb-2 mb-4">Comments</h2>
+      <h2 class="text-lg text-bold uppercase tracking-wide text-theme-accent pb-2 mb-4">{{ t('post.comments') }}</h2>
       <div v-if="isConfigured" ref="containerRef" class="giscus" />
-      <p v-else class="text-sm text-theme-muted">Giscus chưa được cấu hình.</p>
+      <p v-else class="text-sm text-theme-muted">{{ t('post.giscusNotConfigured') }}</p>
     </div>
   </ClientOnly>
 </template>

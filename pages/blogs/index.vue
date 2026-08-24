@@ -8,11 +8,16 @@
 definePageMeta({
   layout: 'blog',
 })
+
+const { t } = useI18n()
+const seoTitle = computed(() => t('blogs.seoTitle'))
+const seoDescription = computed(() => t('blogs.seoDescription'))
+
 useSeoMeta({
-  title: 'Blogs',
-  ogTitle: 'Blogs',
-  description: '',
-  ogDescription: '',
+  title: seoTitle,
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
 })
 </script>
 

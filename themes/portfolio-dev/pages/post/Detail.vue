@@ -7,6 +7,7 @@
 import { formatDate } from '~/utils'
 import type { Post } from '@/types/index'
 
+const { t } = useI18n()
 const props = defineProps<{
 	modelValue: Post
 }>()
@@ -21,7 +22,7 @@ const props = defineProps<{
         <div class="space-y-1 text-center">
           <dl class="space-y-10">
             <div>
-              <dt class="sr-only">Published on</dt>
+              <dt class="sr-only">{{ t('post.publishedOn') }}</dt>
               <dd class="text-base font-medium leading-6 text-theme-faint">
                 <time datetime="2023-08-05T00:00:00.000Z">
                   {{ formatDate(modelValue.createdAt) }}
@@ -54,7 +55,7 @@ const props = defineProps<{
             class="divide-theme-border text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
           >
             <div class="py-4 xl:py-8">
-              <h2 class="text-lg text-bold uppercase tracking-wide text-theme-accent pb-2 mb-2 border-b border-theme-border">Tags</h2>
+              <h2 class="text-lg text-bold uppercase tracking-wide text-theme-accent pb-2 mb-2 border-b border-theme-border">{{ t('post.tags') }}</h2>
               <div class="flex flex-wrap space-x-4">
                 <NuxtLink to="'/blogs'" class="link text-sm font-medium lowercase text-theme-muted hover:text-theme-accent">
                   #tag
@@ -66,11 +67,11 @@ const props = defineProps<{
             <NuxtLink
               to="/blogs"
               class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-all"
-              aria-label="Back to the blog"
+              :aria-label="t('post.backToBlog')"
             >
               <span class="flex items-center space-x-2">
                 <UIcon name="fe:backward" class="w-5 h-5" />
-                <span class="uppercase">Back to the blog</span>
+                <span class="uppercase">{{ t('post.backToBlog') }}</span>
               </span>
             </NuxtLink>
           </div>

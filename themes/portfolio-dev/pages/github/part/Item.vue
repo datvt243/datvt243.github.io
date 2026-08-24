@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { GitRepos } from '@/types/github'
+const { t } = useI18n()
 const props = defineProps<{
 	modelValue: GitRepos
 }>()
@@ -55,7 +56,7 @@ const getFieldValue = (field: keyof GitRepos): string => {
     <p v-if="modelValue.description" class="text-theme-text-soft text-sm mt-1">{{ modelValue.description }}</p>
 
     <p v-if="modelValue.topics?.length" class="flex flex-wrap gap-2 mt-2">
-      <UBadge v-for="t in modelValue.topics" :key="t" :label="t" variant="outline" />
+      <UBadge v-for="topic in modelValue.topics" :key="topic" :label="topic" variant="outline" />
     </p>
 
     <ul class="flex flex-wrap items-center gap-4 mt-3 text-sm">
@@ -74,7 +75,7 @@ const getFieldValue = (field: keyof GitRepos): string => {
         <UIcon name="fe:fork" class="w-4 h-4" />
         {{ modelValue.forks_count }}
       </li>
-      <li class="text-theme-faint">Updated on {{ new Date(modelValue.updated_at).toLocaleDateString() }}</li>
+      <li class="text-theme-faint">{{ t('github.updatedOn') }} {{ new Date(modelValue.updated_at).toLocaleDateString() }}</li>
     </ul>
   </div>
 </template>

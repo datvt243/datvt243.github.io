@@ -7,6 +7,7 @@
 import { formatDate } from '~/utils'
 import type { Post } from '~/types'
 
+const { t } = useI18n()
 const excerptLength = 50;
 
 const props = defineProps<{
@@ -58,7 +59,7 @@ const getURL = computed(() => {
       </div>
       <p>
         <NuxtLink :to="getURL" class="text-theme-accent hover:text-theme-accent-soft text-sm">
-          Read more ...
+          {{ t('blogs.readMore') }}
         </NuxtLink>
       </p>
     </div>
