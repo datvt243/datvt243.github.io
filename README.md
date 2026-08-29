@@ -13,6 +13,7 @@ Visit: [https://resume-nuxt-vert.vercel.app](https://resume-nuxt-vert.vercel.app
 - **TailwindCSS** v3 + **@nuxt/ui**
 - **Pinia** — state management
 - **puppeteer-core** — PDF generation
+- **@nuxtjs/i18n** — Vietnamese/English localization
 
 ---
 
@@ -25,7 +26,20 @@ Visit: [https://resume-nuxt-vert.vercel.app](https://resume-nuxt-vert.vercel.app
 | `/github` | GitHub profile & repositories |
 | `/contact` | Contact information |
 | `/blogs` | Blog list with category filter |
-| `/blogs/[id]` | Blog post detail |
+| `/blogs/[id]` | Blog post detail, with Giscus (GitHub Discussions) comments |
+
+The site is bilingual (Vietnamese/English) via `@nuxtjs/i18n`. Vietnamese
+is the default and keeps unprefixed URLs (e.g. `/blogs`); English is
+served under an `/en/*` prefix (e.g. `/en/blogs`).
+
+---
+
+## Feeds
+
+| Route | Description |
+|---|---|
+| `/rss.xml` | RSS 2.0 feed of the 20 most recent blog posts |
+| `/sitemap.xml` | Sitemap covering the static routes plus one `<url>` per blog post |
 
 ---
 
@@ -39,7 +53,13 @@ NODE_API=                    # Base URL of the resume API
 GITHUB_TOKEN=                # GitHub personal access token
 GITHUB_USER=                 # GitHub username
 PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (required in production)
+GISCUS_CATEGORY=             # GitHub Discussions category name for blog comments (e.g. "Comments")
+GISCUS_CATEGORY_ID=          # Discussions category ID from https://giscus.app's config generator
+GISCUS_REPO_ID=              # Repo ID from https://giscus.app's config generator
 ```
+
+`GISCUS_*` are optional — the comments widget on `/blogs/[id]` renders a
+"not configured" placeholder instead of a broken embed until they're set.
 
 ---
 
