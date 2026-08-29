@@ -19,6 +19,13 @@ const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', '
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-pink-500 leading-none">
         {{ hero.fullName }} <span class="text-theme-text">{</span>
       </h1>
+      <span
+        v-if="hero.openToWork"
+        class="inline-flex items-center gap-2 mt-4 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-sm text-green-400"
+      >
+        <span class="w-2 h-2 rounded-full bg-green-400" />
+        Open to work
+      </span>
       <p class="text-2xl text-blue-400 mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>
