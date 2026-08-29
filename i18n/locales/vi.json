@@ -8,5 +8,46 @@
   },
   "footer": {
     "findMeIn": "Tìm mình ở:"
+  },
+  "resume": {
+    "greeting": "Xin chào! Tôi là",
+    "aboutMeHeading": "Giới thiệu",
+    "downloadCv": "Tải CV"
+  },
+  "projects": {
+    "seoTitle": "Dự án",
+    "seoDescription": "Các dự án do Võ Tấn Đạt thực hiện.",
+    "noMatch": "Không có dự án nào khớp với bộ lọc đã chọn.",
+    "projectLabel": "Dự án"
+  },
+  "blogs": {
+    "seoTitle": "Blog",
+    "seoDescription": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
+    "intro": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
+    "show": "Hiển thị:",
+    "readMore": "Đọc thêm ..."
+  },
+  "post": {
+    "publishedOn": "Đăng vào",
+    "tags": "Thẻ",
+    "backToBlog": "Quay lại blog",
+    "comments": "Bình luận",
+    "giscusNotConfigured": "Giscus chưa được cấu hình."
+  },
+  "contact": {
+    "seoTitle": "Liên hệ",
+    "seoDescription": "Liên hệ với tôi qua {email}. Rất mong được nghe từ bạn! Bạn cũng có thể liên hệ qua {phone} và {address}.",
+    "formHint": "# điền sẵn vào ứng dụng email của bạn - không qua máy chủ nào cả :)",
+    "namePlaceholder": "Tên của bạn",
+    "messagePlaceholder": "Bạn đang nghĩ gì?"
+  },
+  "github": {
+    "seoTitle": "Github",
+    "seoDescription": "Hồ sơ GitHub và các repository của Võ Tấn Đạt (datvt243).",
+    "searchPlaceholder": "Tìm tên repo...",
+    "followers": "người theo dõi",
+    "following": "đang theo dõi",
+    "noData": "Không có dữ liệu",
+    "updatedOn": "Cập nhật vào"
   }
 }

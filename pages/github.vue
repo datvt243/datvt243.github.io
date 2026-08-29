@@ -8,11 +8,16 @@
 definePageMeta({
   layout: 'default',
 })
+
+const { t } = useI18n()
+const seoTitle = computed(() => t('github.seoTitle'))
+const seoDescription = computed(() => t('github.seoDescription'))
+
 useSeoMeta({
-  title: 'Github',
-  ogTitle: 'Github',
-  description: 'GitHub profile and repositories of Võ Tấn Đạt (datvt243).',
-  ogDescription: 'GitHub profile and repositories of Võ Tấn Đạt (datvt243).',
+  title: seoTitle,
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
 })
 </script>
 

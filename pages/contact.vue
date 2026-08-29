@@ -9,16 +9,16 @@ definePageMeta({
   layout: 'default',
 })
 
+const { t } = useI18n()
 const { contact } = useAppConfig()
-const getDesc = computed(() => {
-  return `Get in touch with me at ${contact.email}. I would love to hear from you! Reach us at ${contact.phone} and ${contact.address}.`
-})
+const seoTitle = computed(() => t('contact.seoTitle'))
+const seoDescription = computed(() => t('contact.seoDescription', { email: contact.email, phone: contact.phone, address: contact.address }))
 
 useSeoMeta({
-  title: 'Contact me',
-  ogTitle: 'Contact me',
-  description: getDesc.value,
-  ogDescription: getDesc.value,
+  title: seoTitle,
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
 })
 </script>
 

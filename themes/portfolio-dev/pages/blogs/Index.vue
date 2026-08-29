@@ -7,6 +7,7 @@
 
 import type { APIFormatResponse, Post } from '@/types/index'
 
+const { t } = useI18n()
 const query = inject<{ category: Ref<string>, page: Ref<number>, perPage: Ref<number> }>('query');
 const category = toRef(query?.category || '')
 const page = toRef(query?.page || 1)
@@ -59,11 +60,11 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
     </div>
     <div class="mb-4 flex justify-between items-center px-2 space-x-4 text-theme-muted">
       <div>
-        <p>Articles, tutorials, snippets, rants, and everything else.</p>
+        <p>{{ t('blogs.intro') }}</p>
       </div>
       <div class="">
         <div class="flex items-center space-x-4 border border-theme-border-subtle rounded pl-3">
-          <div class="leading-none text-sm">Show:</div>
+          <div class="leading-none text-sm">{{ t('blogs.show') }}</div>
           <USelect v-model="perPage" :options="[10, 20, 30, 40, 50]"  variant="none" />
         </div>
       </div>

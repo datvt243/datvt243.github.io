@@ -5,6 +5,7 @@
  * Description:
  */
 
+const { t } = useI18n()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 
@@ -14,7 +15,7 @@ const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', '
 <template>
   <div class="grid gap-10 lg:grid-cols-[1fr_auto] items-center py-10 font-theme-mono">
     <div>
-      <p class="text-violet-400 mb-4">Hi there! I am <span class="text-theme-text">_</span></p>
+      <p class="text-violet-400 mb-4">{{ t('resume.greeting') }} <span class="text-theme-text">_</span></p>
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-pink-500 leading-none">
         {{ hero.fullName }} <span class="text-theme-text">{</span>
       </h1>

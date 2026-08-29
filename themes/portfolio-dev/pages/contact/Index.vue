@@ -5,6 +5,7 @@
  * Description:
  */
 
+const { t } = useI18n()
 const { contact } = useAppConfig()
 
 const form = reactive({ name: '', email: '', message: '' })
@@ -51,7 +52,7 @@ function submitMessage() {
         </ul>
       </template>
 
-      <p class="text-xs text-theme-faint font-theme-mono mb-4"># fills your mail client - no server involved :)</p>
+      <p class="text-xs text-theme-faint font-theme-mono mb-4">{{ t('contact.formHint') }}</p>
       <form class="space-y-4 font-theme-mono max-w-lg" @submit.prevent="submitMessage">
         <div>
           <label for="contact-name" class="block text-sm text-theme-muted mb-1.5">_name:</label>
@@ -59,7 +60,7 @@ function submitMessage() {
             id="contact-name"
             v-model="form.name"
             type="text"
-            placeholder="Your name"
+            :placeholder="t('contact.namePlaceholder')"
             required
             class="w-full rounded bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-none"
           />
@@ -81,7 +82,7 @@ function submitMessage() {
             id="contact-message"
             v-model="form.message"
             rows="5"
-            placeholder="What's on your mind?"
+            :placeholder="t('contact.messagePlaceholder')"
             required
             class="w-full rounded bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-none resize-y"
           />

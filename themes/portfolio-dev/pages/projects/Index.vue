@@ -5,6 +5,7 @@
  * Description:
  */
 
+const { t } = useI18n()
 const store = useResumeStore()
 await useAsyncData('api-resume', async () => await store.fetchData())
 const projects = computed(() => store.projects || [])
@@ -32,7 +33,7 @@ const filtered = computed(() => {
         <ThemeFilterFolder v-model="selected" label="projects" :items="allTech" />
       </template>
 
-      <p v-if="!filtered.length" class="text-theme-faint font-theme-mono">No projects match the selected filters.</p>
+      <p v-if="!filtered.length" class="text-theme-faint font-theme-mono">{{ t('projects.noMatch') }}</p>
       <div v-else class="grid gap-6 grid-cols-1">
         <article
           v-for="(p, i) in filtered"
@@ -54,15 +55,15 @@ const filtered = computed(() => {
 
           <div class="flex flex-col grow p-5 min-w-0">
             <p class="font-theme-mono text-sm text-blue-400 mb-2">
-              Project {{ i + 1 }} <span class="text-theme-faint">//</span> _{{ p.slug }}
+              {{ t('projects.projectLabel') }} {{ i + 1 }} <span class="text-theme-faint">//</span> _{{ p.slug }}
             </p>
             <h2 class="text-lg font-bold text-theme-text mb-1">{{ p.name }}</h2>
             <p v-if="p.position" class="text-sm text-theme-muted italic mb-2">{{ p.position }}</p>
             <p class="text-xs text-theme-faint font-theme-mono mb-3">{{ p.dateRangeLabel }}</p>
             <p class="text-sm text-theme-text-soft mb-4 line-clamp-3 max-w-2xl">{{ p.descriptionText }}</p>
             <ul v-if="p.technology.length" class="flex flex-wrap gap-2 mb-4">
-              <li v-for="t in p.technology" :key="t">
-                <UBadge :label="t" variant="outline" />
+              <li v-for="tech in p.technology" :key="tech">
+                <UBadge :label="tech" variant="outline" />
               </li>
             </ul>
           </div>

@@ -5,6 +5,7 @@
  * Description:
  */
 
+const { t } = useI18n()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
@@ -85,7 +86,7 @@ const bioLines = computed(() => {
   const sentences = splitHtmlIntoSentences(withoutParagraphs).map(toMarkdownLine)
   const socialLines = social.value.links.map(({ name, url }) => markdownLink(name, url))
   return [
-    '<span class="text-theme-faint"># </span><span class="font-bold text-theme-text">About me</span>',
+    `<span class="text-theme-faint"># </span><span class="font-bold text-theme-text">${escapeHtml(t('resume.aboutMeHeading'))}</span>`,
     '',
     ...sentences,
     '',
@@ -124,7 +125,7 @@ async function downloadResume() {
       :disabled="isDisabled"
       @click="downloadResume()"
     >
-      <span class="text-theme-faint">[</span><span class="text-blue-400 hover:underline">Download CV</span
+      <span class="text-theme-faint">[</span><span class="text-blue-400 hover:underline">{{ t('resume.downloadCv') }}</span
       ><span class="text-theme-faint">](</span><span class="text-theme-accent-soft">./resume.pdf</span><span class="text-theme-faint">)</span>
     </button>
   </div>

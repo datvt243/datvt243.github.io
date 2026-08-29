@@ -24,6 +24,10 @@
   replace bare words (avoids breaking a TS type import with the same name).
 - Icon collection packages used via a dynamic binding must be in
   `dependencies`.
+- When adding `const { t } = useI18n()` to a file that already has a
+  `v-for="t in ..."` loop variable named `t` in its template, lint catches
+  the shadowing (`vue/no-template-shadow`) — rename the (usually more
+  local) loop var, don't rename the i18n import.
 
 ## Recipes I've earned
 | Recipe | Written | Times replayed |

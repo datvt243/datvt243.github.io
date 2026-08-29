@@ -7,6 +7,7 @@
 
 import type { GitUser } from '@/types/github'
 
+const { t } = useI18n()
 const props = defineProps<{
 	user: GitUser
 }>()
@@ -38,11 +39,11 @@ const props = defineProps<{
 
       <div class="flex flex-wrap items-center gap-1 mt-2 text-xs text-theme-faint">
         <UIcon name="fe:users" class="w-4 h-4 opacity-50" />
-        <span>{{ props.user.followers }} followers</span>
+        <span>{{ props.user.followers }} {{ t('github.followers') }}</span>
         <span class="opacity-50">&middot;</span>
-        <span>{{ props.user.following }} following</span>
+        <span>{{ props.user.following }} {{ t('github.following') }}</span>
       </div>
     </div>
-    <p v-else class="text-theme-faint">NO data</p>
+    <p v-else class="text-theme-faint">{{ t('github.noData') }}</p>
   </div>
 </template>
