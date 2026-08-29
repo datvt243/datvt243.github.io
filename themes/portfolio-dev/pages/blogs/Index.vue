@@ -5,7 +5,7 @@
  * Description:
  */
 
-import type { APIFormatResponse, Post } from '@/types/index'
+import type { APIFormatResponse, PaginatedPosts } from '@/types/index'
 
 const { t } = useI18n()
 const query = inject<{ category: Ref<string>, page: Ref<number>, perPage: Ref<number> }>('query');
@@ -13,14 +13,8 @@ const category = toRef(query?.category || '')
 const page = toRef(query?.page || 1)
 const perPage = toRef(query?.perPage || 20)
 
-interface GetPosts {
-	data: Post[],
-	total: number,
-	page: number,
-	perPage: number
-}
 const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
-const { data, status, refresh } = useFetch<APIFormatResponse<GetPosts>>(`/api/blogs/posts`, {
+const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
   key: fetchKey,
   query: {
     page: page,

@@ -4,7 +4,7 @@
  * Description:
  */
 
-import type { APIFormatResponse, Post } from '@/types'
+import type { APIFormatResponse, PaginatedPosts } from '@/types'
 
 interface Query {
   category?: string
@@ -12,25 +12,30 @@ interface Query {
   perPage?: number
 }
 
-export const cacheGetPosts = defineCachedFunction(
-  async (query: Query) => {
-    const {
-      status = false,
-      data = null,
-      errors = [],
-      message = '',
-    } = await $fetch<APIFormatResponse<Post[]>>(`https://blog-api-nodejs-express.onrender.com/api/v1/post/`, {
-      query: {
-        category: query.category || '',
-        page: query.page || 1,
-        per_page: query.perPage || 20,
-      },
-      retry: 3,
-      retryDelay: 300,
-    })
+const emptyResult = (query: Query): PaginatedPosts => ({
+  data: [],
+  total: 0,
+  page: query.page || 1,
+  perPage: query.perPage || 20,
+})
 
-    if (!status) return []
-    return !data ? [] : data
+export const cacheGetPosts = defineCachedFunction(
+  async (query: Query): Promise<PaginatedPosts> => {
+    const { status = false, data = null } = await $fetch<APIFormatResponse<PaginatedPosts>>(
+      `https://blog-api-nodejs-express.onrender.com/api/v1/post/`,
+      {
+        query: {
+          category: query.category || '',
+          page: query.page || 1,
+          per_page: query.perPage || 20,
+        },
+        retry: 3,
+        retryDelay: 300,
+      },
+    )
+
+    if (!status || !data) return emptyResult(query)
+    return data
   },
   {
     maxAge: 60 * 60,

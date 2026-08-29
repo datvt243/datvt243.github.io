@@ -4,16 +4,16 @@
  * Description:
  */
 
-import type { Post } from '@/types'
+import type { PaginatedPosts } from '@/types'
 import { cacheGetPosts } from '~/server/utils/cacheGetPost'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
 
-  const posts: Post[] | [] = await cacheGetPosts(query)
+  const result: PaginatedPosts = await cacheGetPosts(query)
 
   return {
     status: true,
-    data: posts,
+    data: result,
   }
 })
