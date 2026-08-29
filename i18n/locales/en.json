@@ -12,7 +12,8 @@
   "resume": {
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
-    "downloadCv": "Download CV"
+    "downloadCv": "Download CV",
+    "openToWork": "Open to work"
   },
   "projects": {
     "seoTitle": "Projects",
