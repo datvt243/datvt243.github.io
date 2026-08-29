@@ -5,7 +5,6 @@
  * blog post, sourced from the same cached post fetch as /api/blogs/posts.
  */
 
-import type { Post } from '@/types'
 import { cacheGetPosts } from '~/server/utils/cacheGetPost'
 
 const SITE_URL = 'https://datvt243.github.io'
@@ -13,13 +12,7 @@ const SITE_URL = 'https://datvt243.github.io'
 const STATIC_ROUTES = ['/', '/projects', '/github', '/blogs', '/contact']
 
 export default defineEventHandler(async (event) => {
-  // `cacheGetPosts` is typed as returning `Post[]` but the real blog API
-  // actually wraps it as `{ data: Post[], total, page, perPage }` (same
-  // mismatch `themes/portfolio-dev/pages/blogs/Index.vue` already works
-  // around via `?.data?.data`) - unwrap defensively rather than trust the
-  // declared return type.
-  const rawPosts = await cacheGetPosts({ page: 1, perPage: 100 })
-  const posts: Post[] = Array.isArray(rawPosts) ? rawPosts : (rawPosts as unknown as { data: Post[] })?.data || []
+  const { data: posts } = await cacheGetPosts({ page: 1, perPage: 100 })
 
   const staticUrls = STATIC_ROUTES.map(
     (path) => `  <url>
