@@ -12,7 +12,8 @@
   "resume": {
     "greeting": "Xin chào! Tôi là",
     "aboutMeHeading": "Giới thiệu",
-    "downloadCv": "Tải CV"
+    "downloadCv": "Tải CV",
+    "openToWork": "Đang tìm việc"
   },
   "projects": {
     "seoTitle": "Dự án",
