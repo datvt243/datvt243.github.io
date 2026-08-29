@@ -39,6 +39,7 @@ export interface GeneralInformation extends BaseDocument {
   yearsOfExperience: number
   workLocation: string
   workForm: string
+  openToWork: boolean
   careerGoal: string
   personalSkills: any[]
   professionalSkills?: ProfessionalSkill[]

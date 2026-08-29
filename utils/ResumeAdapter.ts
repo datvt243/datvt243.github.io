@@ -99,6 +99,7 @@ export class ResumeAdapter {
       positionDesired: generalInformation.positionDesired || 'A frontend developer',
       introduction: information.introduction ?? '',
       email: information.email ?? '',
+      openToWork: Boolean(generalInformation.openToWork),
     })
   }
 
