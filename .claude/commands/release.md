@@ -53,6 +53,14 @@ any other way (no direct push — it's GitHub-protected; no PR from a
    --merge` (regular merge, no `--delete-branch` — the head here is
    `main`, never delete it).
 
-10. **Report.** New version, tag name + URL, release PR URL + merge commit SHA on `main`, sync-back PR URL, deploy result (or "not configured").
+10. **Close the issues this release actually shipped.** GitHub's `Closes
+    #n` only auto-closes on a merge to the repo's *default* branch — since
+    `bug/*`/`feature/*` PRs merge into `staging` (not `main`), those issues
+    stay open even after being merged, until the code actually reaches
+    `main` here. Look at the commit list from step 0, find the issue
+    numbers, `gh issue close <n> --comment "Released to main via <PR URL>,
+    tagged vX.Y.Z."` for each one still open.
+
+11. **Report.** New version, tag name + URL, release PR URL + merge commit SHA on `main`, sync-back PR URL, deploy result (or "not configured"), issues closed.
 
 $ARGUMENTS
