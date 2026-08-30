@@ -16,13 +16,17 @@ the root `CLAUDE.md`'s content.
 | Theme system | `themes/<name>/` swappable via `ACTIVE_THEME` in `nuxt.config.ts` — see the "UI Theme" section of root `CLAUDE.md` |
 
 ## Invariants (things that never happen here)
-- **Never push directly to `main`** — always through a `bug/<issue_number>`
-  or `feature/<issue_number>` branch + pull request. As of 2026-08-30 this
-  is enforced server-side by real GitHub branch protection on `main`
-  (`enforce_admins: true`, PR required, 0 required approvals so
-  `/ship --merge`/`/todo` can still self-merge without a second reviewer),
-  not just local convention — confirmed by a real rejected test push
-  (`GH006: Protected branch update failed`).
+- **Never push directly to `main` or `staging`** — both are real
+  GitHub-protected branches as of 2026-08-30 (`enforce_admins: true`, PR
+  required, 0 required approvals so `/ship --merge`/`/todo`/`/release` can
+  still self-merge without a second reviewer) — confirmed by real rejected
+  test pushes on both (`GH006: Protected branch update failed`).
+- **`staging` is the integration branch, `main` is production.** All
+  `bug/<issue_number>`/`feature/<issue_number>` branches branch off
+  `staging` (not `main`) and PR back into `staging`. `main` ONLY ever
+  receives code from `staging`, via `/release` or a manual
+  `staging`→`main` PR — never directly from a `bug/*`/`feature/*` branch.
+  (As of 2026-08-30 — see Decisions table below.)
 - **`bug/*` and `feature/*` branches may both be deleted after merging**
   (as of 2026-08-30 — operator explicitly changed this from the old
   `feature/*`-never-deleted convention, see Decisions table below).
@@ -85,6 +89,8 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | 2026-08-16 | Dracula only applies to `<ThemePanel>` (file-tree + editor), NOT the whole site; rides on the existing dark/light toggle (Dracula when dark, a derived Dracula-light palette when light) instead of adding a 3rd mode/toggle | User confirmed via AskUserQuestion + clarified further ("dracula follows dark, add another theme that follows light") — narrower scope than the "add a Dracula mode" example already written in root `CLAUDE.md` | Adding Dracula as a 3rd site-wide mode (cycling dark→light→dracula) — user chose the narrower scope, editor only |
 | 2026-08-30 | `feature/*` branches may now be deleted after merge, same as `bug/*` — the old "`feature/*` kept forever" convention is retired | User asked to clean up 13 old fully-merged `feature/*` branches cluttering the remote; confirmed via AskUserQuestion to change the convention permanently rather than a one-off exception, so future merges don't keep re-accumulating branches that need manual cleanup later | A one-off exception (delete just this batch, keep the old never-delete rule for future merges) — user picked the permanent change instead |
 | 2026-08-30 | `main` protected via real GitHub branch protection (`enforce_admins: true`, PR required, 0 required approvals) | User asked to make "never push directly to `main`" actually enforced, not just a written convention agents could forget/skip. Confirmed via AskUserQuestion to leave required approvals at 0 rather than ≥1, specifically because GitHub disallows a PR author approving their own PR — requiring ≥1 would have blocked `/ship --merge`/`/todo`'s self-merge (same GitHub account opens and merges the PR), breaking the exact automation this session built | Requiring ≥1 approval — rejected because it would silently break `/ship --merge`/`/todo`'s self-merge automation with no second reviewer account available |
+| 2026-08-30 | New `staging` branch off `main`, same branch protection as `main`. All `bug/*`/`feature/*` work now branches off `staging` (not `main`); `main` only receives code from `staging`, via a new `/release` command | User wanted a real integration branch separating in-progress work from production, so `main` always reflects what was actually released, not whatever was last merged | Keeping the single-branch `main`-only model — rejected, user explicitly asked for `staging` |
+| 2026-08-30 | `/release` merges `staging`→`main` via a regular merge (not squash) so `main` keeps staging's individual commit history, tags `vX.Y.Z` (semver, starting `1.0.0`), attempts a `DEPLOY_HOOK_URL` webhook and skips with a clear message if unset, then syncs the version bump back to `staging` | User confirmed via AskUserQuestion: semver over date-based tags, and "skip + placeholder" over configuring a real deploy target on the spot (none exists yet — no CI/CD, no deploy config found in the repo) | Date-based tags (`v2026.08.30`) — rejected in favor of semver; blocking `/release` until a real deploy target is configured — rejected, deploy is optional/best-effort for now |
 
 ## Legacy reference
 `agent-hub/histories/2026-08-11.md` and `2026-08-13.md` — detailed
