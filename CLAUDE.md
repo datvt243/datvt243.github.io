@@ -167,11 +167,15 @@ Decisions table for why). `/ship` was recreated afterward for quick,
 untracked changes only (docs/config, not node-tracked code work). As of
 2026-08-30 it commits and pushes without a separate approval prompt —
 invoking the command is itself the operator's go-ahead — and its `--merge`
-flag also opens a PR and squash-merges it (`--delete-branch` only for
-`bug/*`, never `feature/*`, per the branch convention below). It still
-refuses to push directly to `main`. This is narrower than the seal gate
-that `agent-hub`'s own `/worker`/`/todo` flow enforces for tracked code
-work — that flow still always stops before any outward-facing action.
+flag also opens a PR and squash-merges it, always with `--delete-branch`
+(both `bug/*` and `feature/*` are deletable after merge, per the branch
+convention below). It still refuses to push directly to `main` — as of
+2026-08-30 that's also enforced server-side by real GitHub branch
+protection on `main` (PR required, `enforce_admins` on, no required
+approval count so `/ship --merge`/`/todo` can still self-merge), not just
+local convention. This is narrower than the seal gate that `agent-hub`'s
+own `/worker`/`/todo` flow enforces for tracked code work — that flow
+still always stops before any outward-facing action.
 
 ```
 /boot                              # 60s orientation, reads doctrine + diagram + evidence, no edits
