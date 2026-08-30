@@ -35,7 +35,9 @@ self-report done), mandatory evidence instead of a free-form daily work-log.
   2026-08-13) — NOT deleted, just no longer where new audit trail gets
   written. The durable lessons in it have been distilled into
   `doctrine/domains/PROJECT.md`.
-- **The real git workflow** (never push directly to `main`, branch
-  `bug/<n>` / `feature/<n>`, PR flow) still applies — the hub doesn't
-  automate the git/PR side, it only governs the implement/verify discipline
-  within a task. See the Invariants section of `doctrine/domains/PROJECT.md`.
+- **The real git workflow** (never push directly to `main` or `staging`,
+  branch `bug/<n>` / `feature/<n>` off `staging`, PR into `staging`, `main`
+  only updated from `staging` via `/release`) still applies — the hub
+  doesn't automate the git/PR side, it only governs the implement/verify
+  discipline within a task. See the Invariants section of
+  `doctrine/domains/PROJECT.md`.

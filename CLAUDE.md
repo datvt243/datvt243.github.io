@@ -142,6 +142,7 @@ PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (r
 GISCUS_CATEGORY=             # GitHub Discussions category name for blog comments (e.g. "Comments")
 GISCUS_CATEGORY_ID=          # Discussions category ID from https://giscus.app's config generator
 GISCUS_REPO_ID=              # Repo ID from https://giscus.app's config generator
+DEPLOY_HOOK_URL=             # Optional: POSTed by `/release` after tagging main. Unset by default — no deploy target is configured yet, `/release` skips the deploy step with a "not configured" message instead of failing
 ```
 
 `GISCUS_*` power the comment widget on `/blogs/[id]` (`ThemePostComments`,
@@ -169,9 +170,9 @@ untracked changes only (docs/config, not node-tracked code work). As of
 invoking the command is itself the operator's go-ahead — and its `--merge`
 flag also opens a PR and squash-merges it, always with `--delete-branch`
 (both `bug/*` and `feature/*` are deletable after merge, per the branch
-convention below). It still refuses to push directly to `main` — as of
-2026-08-30 that's also enforced server-side by real GitHub branch
-protection on `main` (PR required, `enforce_admins` on, no required
+convention below). It still refuses to push directly to `main` **or**
+`staging` — as of 2026-08-30 that's enforced server-side by real GitHub
+branch protection on both (PR required, `enforce_admins` on, no required
 approval count so `/ship --merge`/`/todo` can still self-merge), not just
 local convention. This is narrower than the seal gate that `agent-hub`'s
 own `/worker`/`/todo` flow enforces for tracked code work — that flow
@@ -182,15 +183,20 @@ still always stops before any outward-facing action.
 /worker implementer "<task>"       # pick a node, smallest diff, build+lint, evidence note
 /worker verifier "<task>"          # independent check → SEAL or REOPEN
 /todo "<task>"                     # both of the above in one command, still 2 separate passes
+/release [patch|minor|major]       # staging → main: merge, tag vX.Y.Z, deploy if configured
 ```
 
-Git mechanics are unchanged and still enforced (not automated by agent-hub):
-never push directly to `main`; branch `bug/<issue_number>` or
-`feature/<issue_number>` off `main`; open a PR referencing the issue
-(`Closes #<n>`); `bug/*` and `feature/*` branches may both be deleted
-after merge (as of 2026-08-30 — previously `feature/*` was kept forever,
-see `agent-hub/doctrine/domains/PROJECT.md`'s Decisions table for why that
-changed). For UI checks, run `/browser` first (see
+Git mechanics (as of 2026-08-30, see `agent-hub/doctrine/domains/
+PROJECT.md`'s Decisions table for why): never push directly to `main` or
+`staging` — both are GitHub-protected, PR-only. `staging` is the
+integration branch: branch `bug/<issue_number>` or
+`feature/<issue_number>` off `staging` (not `main`), open a PR into
+`staging` referencing the issue (`Closes #<n>`). `main` is production —
+it ONLY ever receives code from `staging`, via `/release` (merges
+`staging` into `main`, tags `vX.Y.Z`, deploys if a deploy target is
+configured) or a manual `staging`→`main` PR. `bug/*` and `feature/*`
+branches may both be deleted after merge (as of 2026-08-30 — previously
+`feature/*` was kept forever). For UI checks, run `/browser` first (see
 `agent-hub/doctrine/domains/PROJECT.md`'s "Browser verification" section)
 instead of driving Chrome/CDP by hand.
 
