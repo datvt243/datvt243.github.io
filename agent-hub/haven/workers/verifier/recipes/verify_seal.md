@@ -14,7 +14,12 @@
 2. Read the NOTE — only the note, do NOT open the diff directly.
    (`EvidenceOnly`)
 3. Read the NODE — get the acceptance criteria from `haven/diagrams/`,
-   forbidden states from `agent-hub/CLAUDE.md`.
+   forbidden states from `agent-hub/CLAUDE.md`. [GUARD, added 2026-08-31]
+   Don't `Read agent-hub/CLAUDE.md` yourself for this — same mechanism as
+   `boot/SKILL.md`: the harness auto-injects this file's full content as a
+   nested-CLAUDE.md `<system-reminder>` the moment step 2 touches anything
+   under `agent-hub/`; reading it again here duplicates that content. Read
+   it directly only if it's actually missing from context after step 2.
 4. Check the command in the note matches `doctrine/MEMORY.md` (`npm run
    build`, `npm run lint` — verbatim, not a made-up command like `npm
    test`).

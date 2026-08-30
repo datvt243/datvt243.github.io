@@ -9,7 +9,12 @@ Chỉ đọc, không sửa gì. 7 bước, theo đúng thứ tự:
 
 1. `agent-hub/NORTHSTAR.md`
 2. Root `CLAUDE.md` (project thật: stack/architecture/commands)
-3. `agent-hub/CLAUDE.md` (hợp đồng hub)
+3. `agent-hub/CLAUDE.md` (hợp đồng hub) — [GUARD, thêm 2026-08-31] KHÔNG tự
+   `cat`/`Read` file này: harness tự bơm lại toàn bộ nội dung file này qua
+   nested-CLAUDE.md `<system-reminder>` ngay khi bước 1 chạm vào bất kỳ
+   file nào dưới `agent-hub/` — đọc tay ở đây chỉ tạo ra 1 bản trùng thứ 2
+   trong context. Chỉ đọc tay nếu bản tự bơm đó không xuất hiện trong
+   phiên này.
 4. `agent-hub/doctrine/MEMORY.md`
 5. `agent-hub/doctrine/domains/PROJECT.md`
 6. `agent-hub/haven/diagrams/*.prime-mermaid.md` — mọi node + PM status

@@ -3,10 +3,22 @@
 - Output: `{node, diagram, current_state, acceptance: string[],
   files: string[], blocked_by: string|null}`
 
+> [GUARD, added 2026-08-31] If `/boot` already ran in THIS SAME session,
+> `NORTHSTAR.md` / root `CLAUDE.md` / `doctrine/MEMORY.md` /
+> `doctrine/domains/PROJECT.md` / `haven/diagrams/` are already in context
+> from that pass — steps 1-2 below REUSE that content, don't `Read` it
+> again (a second full read of the same files is pure duplication, same
+> class of token waste as the `agent-hub/CLAUDE.md` case fixed in
+> `boot/SKILL.md`). Only `Read` for real when: (a) `/worker implementer` is
+> invoked without a prior `/boot` this session, or (b) the content might
+> have changed since it was last read.
+
 ## Steps
-1. Read `NORTHSTAR.md` + root `CLAUDE.md` (the real project) +
-   `doctrine/MEMORY.md` + `doctrine/domains/PROJECT.md`.
-2. Read EVERY diagram in `haven/diagrams/`, list out nodes + PM status.
+1. Get `NORTHSTAR.md` + root `CLAUDE.md` (the real project) +
+   `doctrine/MEMORY.md` + `doctrine/domains/PROJECT.md` — reuse from
+   `/boot` if available (see GUARD above), else `Read` fresh.
+2. Get every diagram in `haven/diagrams/`, list out nodes + PM status —
+   reuse from `/boot` if available (see GUARD above), else `Read` fresh.
 3. Find the earliest PENDING node on the critical path.
 4. No match → don't make something up; clearly report "no PENDING node",
    stop.
