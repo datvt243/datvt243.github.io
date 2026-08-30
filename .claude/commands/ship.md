@@ -1,13 +1,14 @@
 ---
-description: Lint-fix changed files and commit; stops for approval before pushing — for quick untracked changes (docs/config); tracked bug/feature work goes through agent-hub (`/worker implementer`, `/todo`)
+description: Lint-fix changed files, commit, and push — no stop-for-approval (invoking this command IS the approval). Add --merge to also open a PR and squash-merge it into main. For quick changes (docs/config); tracked bug/feature code work still prefers agent-hub (`/worker implementer`, `/todo`).
 ---
 
 Ship the pending changes in this repo, in this order:
 
 0. **Guard**: check the current branch (`git branch --show-current`). If it's
    `main`, stop and tell the user — per `CLAUDE.md`, direct pushes to `main`
-   aren't allowed. Branch as `bug/<issue_number>` or `feature/<issue_number>`
-   off `main` first.
+   aren't allowed, even with this command. Branch as `bug/<issue_number>` or
+   `feature/<issue_number>` off `main` first. This guard is never skipped,
+   `--merge` or not.
 
 1. **Lint-fix changed files.** Get the changed files (`git status --short`,
    covering both staged and unstaged) and run `npx eslint --fix` on the
@@ -21,15 +22,34 @@ Ship the pending changes in this repo, in this order:
    *why*, stage specific files — including the lint fixes from step 1 —
    commit with the `Co-Authored-By` trailer, verify with `git status` after).
 
-3. **Stop before pushing and ask for confirmation.** Unlike the old `/ship`,
-   invoking this command is *not* itself a go-ahead to push — `agent-hub`'s
-   seal gate (`agent-hub/CLAUDE.md`, `NORTHSTAR.md`, `BOOT.md`) treats
-   `git push` as an outward-facing action that always needs explicit operator
-   approval, no exceptions. Show the commit that was just made (e.g.
-   `git log -1 --stat`) and ask before running `git push` (or
-   `git push -u origin <branch>` if it has no upstream yet). If the push is
-   rejected (e.g. non-fast-forward), stop and report it rather than
-   force-pushing.
+3. **Push — no confirmation prompt.** Invoking `/ship` is itself the
+   operator's go-ahead; unlike the old `/ship`, don't stop and ask before
+   `git push`. Run `git push -u origin <branch>` (plain `git push` if the
+   branch already has an upstream). If the push is rejected (e.g.
+   non-fast-forward), stop and report it plainly rather than force-pushing —
+   that failure is not something to route around.
+
+4. **No `--merge` flag → stop here.** Report the commit (`git log -1
+   --stat`) and the push result, and mention that re-running with `--merge`
+   would open a PR and merge it.
+
+5. **`--merge` flag → open and merge a PR:**
+   a. Parse the issue number from the branch name (`bug/<n>` or
+      `feature/<n>`). If the branch doesn't match that pattern, proceed
+      without a `Closes #<n>` line — don't invent an issue number.
+   b. `gh pr create --base main --head <branch> --title "<last commit
+      subject>" --body "<last commit body>$( [ -n "$issue" ] && echo
+      "\n\nCloses #$issue" )"` — reuse the commit message rather than
+      writing a new one from scratch.
+   c. `gh pr merge <PR#> --squash`, plus `--delete-branch` **only** if the
+      branch is `bug/*` (matches the repo's own convention that `bug/*`
+      branches may be deleted after merge, `feature/*` branches are kept —
+      never pass `--delete-branch` for a `feature/*` branch). Note: if the
+      repo's own GitHub setting "Automatically delete head branches" is on,
+      it can still delete a `feature/*` branch's remote copy regardless of
+      this flag — that's a repo setting, not something this command
+      controls.
+   d. Report the PR URL and the merge result (squash commit SHA on `main`).
 
 If there is nothing to commit (clean working tree), say so and stop after
 step 1.

@@ -164,9 +164,14 @@ checks it before anything is marked done). This replaced
 `start-work`/`finish-work`/`merge-work` and the `agent-hub/histories/`
 work-log convention on 2026-08-16 (see `agent-hub/doctrine/domains/PROJECT.md`'s
 Decisions table for why). `/ship` was recreated afterward for quick,
-untracked changes only (docs/config, not node-tracked code work) — updated
-to match agent-hub's seal gate: it commits but always stops for approval
-before `git push`, it no longer pushes automatically.
+untracked changes only (docs/config, not node-tracked code work). As of
+2026-08-30 it commits and pushes without a separate approval prompt —
+invoking the command is itself the operator's go-ahead — and its `--merge`
+flag also opens a PR and squash-merges it (`--delete-branch` only for
+`bug/*`, never `feature/*`, per the branch convention below). It still
+refuses to push directly to `main`. This is narrower than the seal gate
+that `agent-hub`'s own `/worker`/`/todo` flow enforces for tracked code
+work — that flow still always stops before any outward-facing action.
 
 ```
 /boot                              # 60s orientation, reads doctrine + diagram + evidence, no edits
