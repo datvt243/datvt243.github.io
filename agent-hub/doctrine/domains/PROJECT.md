@@ -17,7 +17,12 @@ the root `CLAUDE.md`'s content.
 
 ## Invariants (things that never happen here)
 - **Never push directly to `main`** — always through a `bug/<issue_number>`
-  or `feature/<issue_number>` branch + pull request.
+  or `feature/<issue_number>` branch + pull request. As of 2026-08-30 this
+  is enforced server-side by real GitHub branch protection on `main`
+  (`enforce_admins: true`, PR required, 0 required approvals so
+  `/ship --merge`/`/todo` can still self-merge without a second reviewer),
+  not just local convention — confirmed by a real rejected test push
+  (`GH006: Protected branch update failed`).
 - **`bug/*` and `feature/*` branches may both be deleted after merging**
   (as of 2026-08-30 — operator explicitly changed this from the old
   `feature/*`-never-deleted convention, see Decisions table below).
@@ -79,6 +84,7 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | 2026-08-16 | Replaced the `agent-hub/histories/` + `.claude/commands/{start-work,finish-work,merge-work,ship}.md` convention with agent-hub doctrine/haven/evidence + implementer/verifier | User wanted stricter independent verification discipline (the builder can't self-report done), mandatory evidence instead of a free-form work-log | Keeping the old system running in parallel — rejected, chose a full replacement instead |
 | 2026-08-16 | Dracula only applies to `<ThemePanel>` (file-tree + editor), NOT the whole site; rides on the existing dark/light toggle (Dracula when dark, a derived Dracula-light palette when light) instead of adding a 3rd mode/toggle | User confirmed via AskUserQuestion + clarified further ("dracula follows dark, add another theme that follows light") — narrower scope than the "add a Dracula mode" example already written in root `CLAUDE.md` | Adding Dracula as a 3rd site-wide mode (cycling dark→light→dracula) — user chose the narrower scope, editor only |
 | 2026-08-30 | `feature/*` branches may now be deleted after merge, same as `bug/*` — the old "`feature/*` kept forever" convention is retired | User asked to clean up 13 old fully-merged `feature/*` branches cluttering the remote; confirmed via AskUserQuestion to change the convention permanently rather than a one-off exception, so future merges don't keep re-accumulating branches that need manual cleanup later | A one-off exception (delete just this batch, keep the old never-delete rule for future merges) — user picked the permanent change instead |
+| 2026-08-30 | `main` protected via real GitHub branch protection (`enforce_admins: true`, PR required, 0 required approvals) | User asked to make "never push directly to `main`" actually enforced, not just a written convention agents could forget/skip. Confirmed via AskUserQuestion to leave required approvals at 0 rather than ≥1, specifically because GitHub disallows a PR author approving their own PR — requiring ≥1 would have blocked `/ship --merge`/`/todo`'s self-merge (same GitHub account opens and merges the PR), breaking the exact automation this session built | Requiring ≥1 approval — rejected because it would silently break `/ship --merge`/`/todo`'s self-merge automation with no second reviewer account available |
 
 ## Legacy reference
 `agent-hub/histories/2026-08-11.md` and `2026-08-13.md` — detailed
