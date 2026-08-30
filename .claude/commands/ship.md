@@ -41,14 +41,10 @@ Ship the pending changes in this repo, in this order:
       subject>" --body "<last commit body>$( [ -n "$issue" ] && echo
       "\n\nCloses #$issue" )"` — reuse the commit message rather than
       writing a new one from scratch.
-   c. `gh pr merge <PR#> --squash`, plus `--delete-branch` **only** if the
-      branch is `bug/*` (matches the repo's own convention that `bug/*`
-      branches may be deleted after merge, `feature/*` branches are kept —
-      never pass `--delete-branch` for a `feature/*` branch). Note: if the
-      repo's own GitHub setting "Automatically delete head branches" is on,
-      it can still delete a `feature/*` branch's remote copy regardless of
-      this flag — that's a repo setting, not something this command
-      controls.
+   c. `gh pr merge <PR#> --squash --delete-branch` — as of 2026-08-30 both
+      `bug/*` and `feature/*` branches may be deleted after merge (the
+      old `feature/*`-kept-forever convention was retired, see
+      `agent-hub/doctrine/domains/PROJECT.md`'s Decisions table).
    d. Report the PR URL and the merge result (squash commit SHA on `main`).
 
 If there is nothing to commit (clean working tree), say so and stop after

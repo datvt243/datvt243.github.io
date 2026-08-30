@@ -183,8 +183,10 @@ work — that flow still always stops before any outward-facing action.
 Git mechanics are unchanged and still enforced (not automated by agent-hub):
 never push directly to `main`; branch `bug/<issue_number>` or
 `feature/<issue_number>` off `main`; open a PR referencing the issue
-(`Closes #<n>`); `bug/*` branches may be deleted after merge, `feature/*`
-branches are kept. For UI checks, run `/browser` first (see
+(`Closes #<n>`); `bug/*` and `feature/*` branches may both be deleted
+after merge (as of 2026-08-30 — previously `feature/*` was kept forever,
+see `agent-hub/doctrine/domains/PROJECT.md`'s Decisions table for why that
+changed). For UI checks, run `/browser` first (see
 `agent-hub/doctrine/domains/PROJECT.md`'s "Browser verification" section)
 instead of driving Chrome/CDP by hand.
 
