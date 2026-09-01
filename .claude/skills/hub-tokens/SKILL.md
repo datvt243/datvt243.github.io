@@ -8,13 +8,14 @@ description: "Report the token cost of agent-hub/ — how much gets read every w
 Read-only diagnostic. No file changes, no seal gate needed.
 
 ## Why this exists
-`haven/diagrams/dev-loop.prime-mermaid.md` is read in full by every worker
-session (implementer, verifier, and every subagent spawned for a `/todo`
-verify pass re-loads it from scratch). Left unchecked it grows forever and
-becomes the single biggest recurring token cost in the hub — this is what
-the `dev-loop-archive.md` convention (see the diagram file's own header
-note) exists to bound. This command measures whether that's actually
-happening, instead of guessing.
+`haven/diagrams/dev-loop.prime-mermaid.md` and `doctrine/domains/
+PROJECT.md` are both read in full by every worker session (implementer,
+verifier, and every subagent spawned for a `/todo` verify pass re-loads
+them from scratch). Left unchecked either grows forever and becomes the
+single biggest recurring token cost in the hub — this is what the
+`dev-loop-archive.md` / `PROJECT-archive.md` conventions (see each file's
+own header note) exist to bound. This command measures whether that's
+actually happening, instead of guessing.
 
 There's no exact tokenizer available here — the report uses `bytes / 4` as
 a documented, consistent proxy (not a real token count). Good enough to
@@ -37,7 +38,7 @@ echo "agent-hub token report — $(date +%Y-%m-%d)  [$ROOT]"
 echo "==================================================================="
 echo "READ EVERY WORKER SESSION (this is the recurring cost):"
 ROOT_B=$(bytes_glob "$HUB" 1)
-DOCTRINE_B=$(bytes_glob "$HUB/doctrine")
+DOCTRINE_B=$(bytes_glob_exclude "$HUB/doctrine")
 DIAG_ACTIVE_B=$(bytes_glob_exclude "$HUB/haven/diagrams")
 IMPL_B=$(bytes_glob "$HUB/haven/workers/implementer")
 VERIF_B=$(bytes_glob "$HUB/haven/workers/verifier")
@@ -52,12 +53,14 @@ echo
 echo "COLD STORAGE (opened on demand only, NOT re-read wholesale by"
 echo "pick_next/verify_seal — large size here is not a recurring cost):"
 ARCHIVE_B=$(find "$HUB/haven/diagrams" -type f -iname "*archive*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' ')
+DOCTRINE_ARCHIVE_B=$(find "$HUB/doctrine" -type f -iname "*archive*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' ')
 EVI_I_B=$(bytes_glob "$HUB/evidence/implementer")
 EVI_V_B=$(bytes_glob "$HUB/evidence/verifier")
 row "haven/diagrams/*archive*" "$ARCHIVE_B"
+row "doctrine/**/*archive*" "$DOCTRINE_ARCHIVE_B"
 row "evidence/implementer/" "$EVI_I_B"
 row "evidence/verifier/" "$EVI_V_B"
-COLD_B=$(( ARCHIVE_B + EVI_I_B + EVI_V_B ))
+COLD_B=$(( ARCHIVE_B + DOCTRINE_ARCHIVE_B + EVI_I_B + EVI_V_B ))
 row "= cold storage total" "$COLD_B"
 echo
 TOTAL_B=$(( SESSION_B + COLD_B ))
@@ -79,28 +82,37 @@ if [ -f "$DIAG_FILE" ]; then
     echo "  ✓ dev-loop.prime-mermaid.md is ${DB}B, under the 15KB threshold ($REAL_SEALED full SEALED entries, $POINTER_SEALED archived pointers)"
   fi
 fi
+PROJ_FILE="$HUB/doctrine/domains/PROJECT.md"
+if [ -f "$PROJ_FILE" ]; then
+  PB=$(wc -c < "$PROJ_FILE")
+  if [ "$PB" -gt 15360 ]; then
+    echo "  ⚠ PROJECT.md is ${PB}B (>15KB threshold) — consider moving Traps/Decisions rows older than the current work session to doctrine/domains/PROJECT-archive.md"
+  else
+    echo "  ✓ PROJECT.md is ${PB}B, under the 15KB threshold"
+  fi
+fi
 ```
 
 2. Report the output verbatim — don't paraphrase the numbers into prose,
    the table is already the report.
-3. If the flag fires (active diagram over 15KB), that's a real signal to
-   do an archive pass (see `haven/diagrams/dev-loop-archive.md`'s own
-   convention note, or the equivalent section in
-   `haven/diagrams/dev-loop.prime-mermaid.md`'s PM-status header) — but
-   this command itself never edits anything. Archiving is a separate,
-   explicit action.
+3. If a flag fires (active diagram or `PROJECT.md` over 15KB), that's a
+   real signal to do an archive pass (see `haven/diagrams/
+   dev-loop-archive.md` / `doctrine/domains/PROJECT-archive.md`'s own
+   convention notes, or the equivalent header sections in the active
+   files) — but this command itself never edits anything. Archiving is a
+   separate, explicit action.
 
 ## What the numbers mean
 - **Recurring per-session cost** — what a fresh implementer or verifier
   worker reads before touching any code. This is the number that actually
   compounds: every subagent spawned for a verify pass pays it again, from
   zero, with no cache reuse across separate agent contexts.
-- **Cold storage** — `evidence/` and archived diagram rows. Large here is
-  normal and not itself a problem: `/boot` and `pick_next` only touch a
-  handful of the most recent evidence notes, not the whole directory. Only
-  worth worrying about if something starts reading it in bulk (e.g. a
-  recipe that globs all of `evidence/` instead of the specific notes it
-  needs).
+- **Cold storage** — `evidence/` and archived rows from both the diagram
+  and `PROJECT.md`. Large here is normal and not itself a problem: `/boot`
+  and `pick_next` only touch a handful of the most recent evidence notes,
+  not the whole directory. Only worth worrying about if something starts
+  reading it in bulk (e.g. a recipe that globs all of `evidence/` instead
+  of the specific notes it needs).
 
 ## Runtime
 `/hub-tokens`. Read-only — no seal gate, no evidence note, no worker
