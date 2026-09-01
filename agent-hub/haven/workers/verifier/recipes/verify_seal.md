@@ -8,6 +8,33 @@
   immediately: "I wrote this, a separate verifier pass is required."
   (`NeverVerifyOwnWork`)
 
+## Re-run scope [cost-driven, added 2026-09-02]
+Default: AUDIT the note, don't independently re-run `npm run build`/
+`npm run lint`/the CDP script from scratch (including cold-cache rebuilds —
+deleting `.nuxt`/`.output`/cache before rebuilding). `EvidenceOnly` means
+"don't substitute reasoning for real evidence" — it does NOT mean "always
+regenerate the evidence yourself." If the note's output is verbatim, not
+truncated (step 5), the command matches `doctrine/MEMORY.md` (step 4), the
+CDP evidence is concrete and citable (step 6), and it covers every
+acceptance criterion (step 7) → verdict straight off the note, no re-run.
+
+Only re-run (build, lint, or CDP — partial or full) when:
+- The note is missing a citation, output looks truncated/hidden, or the CDP
+  evidence is vague ("looks fine") rather than a concrete
+  screenshot/computed-style quote → REOPEN per steps 4-6 instead — don't
+  spend a cold-cache rebuild confirming a note that's already broken.
+- The node is outward-facing or a `/release` gate — higher risk than an
+  ordinary diff, worth the independent-confirmation cost.
+- `doctrine/domains/PROJECT.md` names this class of change as needing
+  independent re-run (a per-project call, not the kit default).
+
+Observed in practice (usage audit 2026-09-02, this hub included): the
+verifier re-running the full build+lint+CDP cycle from cold cache for
+EVERY node — including a 1-line README change — made nearly every task cost
+2x (build, lint, and CDP script all duplicated) with no change to the
+verdict versus just auditing the note. Not a bug, but not what
+`EvidenceOnly` actually asks for — this section pins the boundary.
+
 ## Steps
 1. REFUSE TO GRADE YOUR OWN WORK FIRST — did I write this diff in this
    session?
