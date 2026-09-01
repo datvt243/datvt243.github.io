@@ -63,4 +63,14 @@ any other way (no direct push — it's GitHub-protected; no PR from a
 
 11. **Report.** New version, tag name + URL, release PR URL + merge commit SHA on `main`, sync-back PR URL, deploy result (or "not configured"), issues closed.
 
+12. **Return to `staging` as the local working branch.** Always run,
+    regardless of whether step 9 synced anything: `git fetch origin
+    staging` then `git checkout -B staging origin/staging`
+    (force-updates local `staging` to match the remote, whether it
+    existed and drifted or never existed locally). This command's earlier
+    git actions leave the local checkout on `main` or a temporary
+    `release/vX.Y.Z` branch — `staging` is where day-to-day
+    `bug/*`/`feature/*` work branches off, so land back there instead of
+    leaving the operator on a protected/temporary branch.
+
 $ARGUMENTS
