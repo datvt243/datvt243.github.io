@@ -84,6 +84,44 @@ npm run preview
 
 ---
 
+## Git Workflow
+
+Two-tier branching, both `main` and `staging` are GitHub branch-protected
+(no direct push, PR required — enforced for real, not just convention):
+
+```
+bug/<issue>, feature/<issue>  →  staging  →  main
+   (branch off staging)         (PR)         (/release only)
+```
+
+- **`staging`** is the integration branch. All `bug/<issue_number>` and
+  `feature/<issue_number>` branches branch off `staging` (not `main`) and
+  PR back into `staging`.
+- **`main`** is production. It only ever receives code from `staging`, via
+  the `/release` command (or a manual `staging`→`main` PR) — never
+  directly from a `bug/*`/`feature/*` branch.
+- **Branch protection** on both branches: PR required, `enforce_admins`
+  on (no bypassing as an admin), 0 required approving reviews. That last
+  part is deliberate, not lax: GitHub doesn't allow a PR author to approve
+  their own PR, so requiring ≥1 approval would block this repo's own
+  self-merge automation (`/ship --merge`, `/release`) with no second
+  reviewer account available. PR-required + `enforce_admins` still blocks
+  every direct push either way.
+- **Releasing**: `/release` merges `staging` → `main` with a real merge
+  commit (not squash), so `main` keeps `staging`'s individual commit
+  history instead of collapsing it into one commit. It runs `npm run
+  build` + `npm run lint` first and refuses to merge if either fails,
+  bumps the version (semver, `vX.Y.Z` tag), calls a deploy webhook if
+  `DEPLOY_HOOK_URL` is configured (skips with a clear message if not),
+  then syncs the version bump back to `staging`.
+
+Day-to-day code changes on this repo go through **agent-hub**
+(`agent-hub/README.md`) — an implementer/verifier discipline with
+evidence notes, on top of this same branch model. See the root
+`CLAUDE.md`'s "Agent-Hub" section for the full loop.
+
+---
+
 ## External APIs
 
 - **Resume API** — `${NODE_API}/api/me/${MY_EMAIL}`

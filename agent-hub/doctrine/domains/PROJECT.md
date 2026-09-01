@@ -60,6 +60,15 @@ code must match it.
 See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 `CODE_IN_HAVEN`, `DIAGRAM_DRIFT`.
 
+## Archiving convention
+> Older Traps/Decisions rows move to `doctrine/domains/PROJECT-archive.md`
+> once this file crosses the 15KB threshold (checked by `/hub-tokens`, same
+> threshold/mechanism as `haven/diagrams/dev-loop.prime-mermaid.md` uses
+> for its PM status table) — every worker session reads this file in full.
+> Nothing deleted: the archive keeps each row's full original text
+> verbatim. When it fires, archive rows older than the current work
+> session first, keep recent ones inline for context.
+
 ## Traps (append when you hit a new one)
 | Trap | Why | What to do instead |
 |---|---|---|
@@ -91,6 +100,7 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | 2026-08-30 | `main` protected via real GitHub branch protection (`enforce_admins: true`, PR required, 0 required approvals) | User asked to make "never push directly to `main`" actually enforced, not just a written convention agents could forget/skip. Confirmed via AskUserQuestion to leave required approvals at 0 rather than ≥1, specifically because GitHub disallows a PR author approving their own PR — requiring ≥1 would have blocked `/ship --merge`/`/todo`'s self-merge (same GitHub account opens and merges the PR), breaking the exact automation this session built | Requiring ≥1 approval — rejected because it would silently break `/ship --merge`/`/todo`'s self-merge automation with no second reviewer account available |
 | 2026-08-30 | New `staging` branch off `main`, same branch protection as `main`. All `bug/*`/`feature/*` work now branches off `staging` (not `main`); `main` only receives code from `staging`, via a new `/release` command | User wanted a real integration branch separating in-progress work from production, so `main` always reflects what was actually released, not whatever was last merged | Keeping the single-branch `main`-only model — rejected, user explicitly asked for `staging` |
 | 2026-08-30 | `/release` merges `staging`→`main` via a regular merge (not squash) so `main` keeps staging's individual commit history, tags `vX.Y.Z` (semver, starting `1.0.0`), attempts a `DEPLOY_HOOK_URL` webhook and skips with a clear message if unset, then syncs the version bump back to `staging` | User confirmed via AskUserQuestion: semver over date-based tags, and "skip + placeholder" over configuring a real deploy target on the spot (none exists yet — no CI/CD, no deploy config found in the repo) | Date-based tags (`v2026.08.30`) — rejected in favor of semver; blocking `/release` until a real deploy target is configured — rejected, deploy is optional/best-effort for now |
+| 2026-09-01 | Added an archive convention for this file's Traps/Decisions tables (`doctrine/domains/PROJECT-archive.md` scaffold + a `/hub-tokens` 15KB size check), mirroring `haven/diagrams/`'s existing archive convention | A `/hub-tokens` run showed this file (12.9KB) as the single largest recurring-cost file in the hub, with no archive mechanism yet — unlike the diagram, which already needed one after crossing 15KB | Leaving it unbounded until it actually crosses 15KB — rejected, cheaper to set up the convention now while the file is still small than retrofit it later under pressure |
 
 ## Legacy reference
 `agent-hub/histories/2026-08-11.md` and `2026-08-13.md` — detailed
