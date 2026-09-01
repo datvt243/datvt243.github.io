@@ -70,6 +70,7 @@ flowchart TD
 | `giscus-live-fix` | SEALED | 2026-08-19 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-08-19/giscus-live-fix-{plan,diff}.md`. |
 | `i18n-foundation` | SEALED | 2026-08-19 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-08-19/i18n-foundation-{plan,diff}.md`. |
 | `rss-sitemap-feed` | SEALED | 2026-08-19 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-08-19/rss-sitemap-feed-{plan,diff}.md`. |
+| `visit-tracking-client-call` | SEALED | New client-only plugin (`plugins/VisitTracker.client.ts`) POSTs to the backend's new `POST /api/me/:email/visit` endpoint (resume-nodejs-api's `add-visit-tracking` node, branch `feat/visit-tracking`, not yet merged/deployed) on real page load, so the backend sees the real visitor IP/geo. Fire-and-forget, never blocks rendering; independently confirmed via CDP that a real SPA nav click doesn't re-fire the request. Verified: build/lint clean (32 problems, 0 errors, unchanged — independently re-run by the verifier from a cold cache) + CDP independently re-verified with a fresh script/port, plus a stronger real-click SPA-nav check. Production backend doesn't have the route live yet (branch not merged/deployed) — expected 404s, disclosed, not a bug here. Evidence: `evidence/implementer/2026-09-01/visit-tracking-client-call-{plan,diff}.md`, `evidence/verifier/2026-09-01/visit-tracking-client-call-seal.md`. |
 
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
