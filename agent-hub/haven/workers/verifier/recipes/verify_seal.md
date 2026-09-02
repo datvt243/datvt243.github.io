@@ -3,9 +3,10 @@
 # Contract
 - Input: path to an evidence note under `evidence/implementer/`.
 - Output: `{verdict: SEAL|REOPEN, node, cited: string[], missing: string[],
-  forbidden_hit: string|null, pm_updated: boolean, rerun: none|partial|full}`
-  — `rerun` is a real self-declaration (step 13b), not inferred from
-  outside.
+  forbidden_hit: string|null, pm_updated: boolean, rerun: none|partial|full,
+  isolation_proof: string}` — `rerun` is a real self-declaration (step 13b),
+  `isolation_proof` is a real self-declaration (step 1b), neither inferred
+  from outside.
 - REFUSAL: if this same session wrote the diff being graded → refuse
   immediately: "I wrote this, a separate verifier pass is required."
   (`NeverVerifyOwnWork`)
@@ -40,6 +41,17 @@ verdict versus just auditing the note. Not a bug, but not what
 ## Steps
 1. REFUSE TO GRADE YOUR OWN WORK FIRST — did I write this diff in this
    session?
+1b. [added 2026-09-02] Record proof this pass is really a separate
+    subagent context, not a self-report: cite whatever this invocation
+    was actually spawned with that the implementer pass didn't have
+    (e.g. the `description`/task string passed to the Agent tool for
+    this spawn, or an equivalent fresh identifier this context can see
+    for itself) — write it into the note's `## Isolation proof` line.
+    This does NOT technically block a skipped isolation (no hook
+    enforces it) — it only leaves a citeable trail: a missing line, or
+    one that's identical to the implementer's own task string, is itself
+    evidence for a later audit that the subagent-spawn rule in
+    `worker/SKILL.md` was skipped this round.
 2. Read the NOTE — only the note, do NOT open the diff directly.
    (`EvidenceOnly`)
 3. Read the NODE — get the acceptance criteria from `haven/diagrams/`,
@@ -69,6 +81,8 @@ verdict versus just auditing the note. Not a bug, but not what
 12. Only on SEAL: update the ratchet/PM status.
 13. Write the verdict into
     `evidence/verifier/<date>/<slug>-{seal|reopen}.md`.
+13a. [added 2026-09-02] In that note, include the `## Isolation proof`
+    line from step 1b.
 13b. [added 2026-09-02] In that note, declare the real `## Re-run` line:
     `none` (audit only, the default per "Re-run scope" above), `partial`
     (name which command), or `full` (re-ran build/lint/CDP from cold

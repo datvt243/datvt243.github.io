@@ -57,12 +57,14 @@ DOCTRINE_ARCHIVE_B=$(find "$HUB/doctrine" -type f -iname "*archive*" 2>/dev/null
 EVI_I_B=$(bytes_glob "$HUB/evidence/implementer")
 EVI_V_B=$(bytes_glob "$HUB/evidence/verifier")
 TODO_LOG_B=$(wc -c < "$HUB/evidence/worker-runs.log" 2>/dev/null | tr -d ' '); TODO_LOG_B=${TODO_LOG_B:-0}
+TODO_LOG_ARCHIVE_B=$(wc -c < "$HUB/evidence/worker-runs-archive.log" 2>/dev/null | tr -d ' '); TODO_LOG_ARCHIVE_B=${TODO_LOG_ARCHIVE_B:-0}
 row "haven/diagrams/*archive*" "$ARCHIVE_B"
 row "doctrine/**/*archive*" "$DOCTRINE_ARCHIVE_B"
 row "evidence/implementer/" "$EVI_I_B"
 row "evidence/verifier/" "$EVI_V_B"
 row "evidence/worker-runs.log" "$TODO_LOG_B"
-COLD_B=$(( ARCHIVE_B + DOCTRINE_ARCHIVE_B + EVI_I_B + EVI_V_B + TODO_LOG_B ))
+row "evidence/worker-runs-archive.log" "$TODO_LOG_ARCHIVE_B"
+COLD_B=$(( ARCHIVE_B + DOCTRINE_ARCHIVE_B + EVI_I_B + EVI_V_B + TODO_LOG_B + TODO_LOG_ARCHIVE_B ))
 row "= cold storage total" "$COLD_B"
 echo
 TOTAL_B=$(( SESSION_B + COLD_B ))
@@ -91,6 +93,15 @@ if [ -f "$PROJ_FILE" ]; then
     echo "  ⚠ PROJECT.md is ${PB}B (>15KB threshold) — consider moving Traps/Decisions rows older than the current work session to doctrine/domains/PROJECT-archive.md"
   else
     echo "  ✓ PROJECT.md is ${PB}B, under the 15KB threshold"
+  fi
+fi
+LOG_FILE="$HUB/evidence/worker-runs.log"
+if [ -f "$LOG_FILE" ]; then
+  LB=$(wc -c < "$LOG_FILE")
+  if [ "$LB" -gt 15360 ]; then
+    echo "  ⚠ evidence/worker-runs.log is ${LB}B (>15KB threshold) — consider moving lines older than the current work session to evidence/worker-runs-archive.log (see evidence/README.md's archiving convention)"
+  else
+    echo "  ✓ evidence/worker-runs.log is ${LB}B, under the 15KB threshold"
   fi
 fi
 ```
