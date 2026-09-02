@@ -12,6 +12,10 @@ node_modules
 # Logs
 logs
 *.log
+# ...except agent-hub's committed evidence trail (doctrine/MEMORY.md:
+# "evidence/ is committed" — *.log above would otherwise silently drop it)
+!agent-hub/evidence/worker-runs.log
+!agent-hub/evidence/worker-runs-archive.log
 
 # Misc
 .DS_Store
