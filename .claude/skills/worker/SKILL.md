@@ -7,6 +7,14 @@ description: Trở thành implementer hoặc verifier trong agent-hub của datv
 
 `<wid>` là `implementer` hoặc `verifier`.
 
+> [BẮT BUỘC, hạ tầng — không phải kỷ luật tự giác] Nếu `<wid>` là
+> `verifier`: lượt này PHẢI chạy như một **subagent riêng** (spawn qua
+> Agent tool), context trắng — không được là cùng phiên/pass vừa viết ra
+> diff đang bị chấm, kể cả khi gọi từ `/todo`. Đây là cách `NeverVerifyOwnWork`
+> được đảm bảo bằng hạ tầng, không phải lời hứa tự chối chấm. Nếu
+> `/worker verifier` bị gọi ngay trong cùng context với implementer vừa
+> xong → từ chối chạy inline, spawn subagent thay vào đó.
+
 ## 1. Load the bundle — all of it
 Đọc TOÀN BỘ `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,
 `MEMORY.md` (nếu có), và MỌI file trong `recipes/` — không chỉ file liên

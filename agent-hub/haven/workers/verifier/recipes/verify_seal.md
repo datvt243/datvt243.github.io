@@ -3,7 +3,9 @@
 # Contract
 - Input: path to an evidence note under `evidence/implementer/`.
 - Output: `{verdict: SEAL|REOPEN, node, cited: string[], missing: string[],
-  forbidden_hit: string|null, pm_updated: boolean}`
+  forbidden_hit: string|null, pm_updated: boolean, rerun: none|partial|full}`
+  — `rerun` is a real self-declaration (step 13b), not inferred from
+  outside.
 - REFUSAL: if this same session wrote the diff being graded → refuse
   immediately: "I wrote this, a separate verifier pass is required."
   (`NeverVerifyOwnWork`)
@@ -67,6 +69,26 @@ verdict versus just auditing the note. Not a bug, but not what
 12. Only on SEAL: update the ratchet/PM status.
 13. Write the verdict into
     `evidence/verifier/<date>/<slug>-{seal|reopen}.md`.
+13b. [added 2026-09-02] In that note, declare the real `## Re-run` line:
+    `none` (audit only, the default per "Re-run scope" above), `partial`
+    (name which command), or `full` (re-ran build/lint/CDP from cold
+    cache) — always with a reason matching one of the 3 exceptions in
+    "Re-run scope" if not `none`. Misdeclaring this (e.g. writing `none`
+    after actually re-running) breaks the duplicate-cost signal step 14
+    depends on.
+14. [added 2026-09-02] Append one line to `evidence/worker-runs.log`
+    (create if missing): take `hub_bytes_before` from the
+    `## Hub bytes before` line in the implementer's note (already read in
+    step 2, reuse it — don't read it again); measure `hub_bytes_after` the
+    same way (this hub's `/hub-tokens` per-session total), taken AFTER
+    updating PM status in step 12 if SEALED. Format:
+    ```
+    <ISO timestamp> role=verifier outcome=SEAL|REOPEN node=<slug>
+    rerun=none|partial|full hub_bytes_before=<N> hub_bytes_after=<N>
+    ```
+    Same logging whether called via `/todo` or a standalone
+    `/worker verifier`. NEVER edit/delete an old line here — append-only,
+    same rule as the rest of `evidence/`.
 
 ## Hard rules honored
 `NeverVerifyOwnWork` | `EvidenceOnly` | `VerdictOnly` | `RatchetOnly`
