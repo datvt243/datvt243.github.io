@@ -7,13 +7,19 @@ description: Trở thành implementer hoặc verifier trong agent-hub của datv
 
 `<wid>` là `implementer` hoặc `verifier`.
 
-> [BẮT BUỘC, hạ tầng — không phải kỷ luật tự giác] Nếu `<wid>` là
-> `verifier`: lượt này PHẢI chạy như một **subagent riêng** (spawn qua
-> Agent tool), context trắng — không được là cùng phiên/pass vừa viết ra
-> diff đang bị chấm, kể cả khi gọi từ `/todo`. Đây là cách `NeverVerifyOwnWork`
-> được đảm bảo bằng hạ tầng, không phải lời hứa tự chối chấm. Nếu
-> `/worker verifier` bị gọi ngay trong cùng context với implementer vừa
-> xong → từ chối chạy inline, spawn subagent thay vào đó.
+> [BẮT BUỘC] Nếu `<wid>` là `verifier`: lượt này PHẢI chạy như một
+> **subagent riêng** (spawn qua Agent tool), context trắng — không được
+> là cùng phiên/pass vừa viết ra diff đang bị chấm, kể cả khi gọi từ
+> `/todo`. Nếu `/worker verifier` bị gọi ngay trong cùng context với
+> implementer vừa xong → từ chối chạy inline, spawn subagent thay vào
+> đó. [Sửa 2026-09-02: bản trước ghi đây là "hạ tầng, không phải lời hứa
+> tự chối chấm" — không đúng, chưa có hook/gate kỹ thuật nào chặn việc
+> này thật, đây vẫn là 1 quy tắc bắt buộc phải tự tuân theo. Phần duy
+> nhất mang tính hạ tầng là để lại **dấu vết kiểm chứng được** — xem
+> `verify_seal.md`'s `## Isolation proof` field: verifier phải ghi lại
+> danh tính subagent riêng của lượt này (khác implementer's), để 1 audit
+> sau này có thể phát hiện nếu bước tách context bị bỏ qua, thay vì phải
+> tin lời tự khai.]
 
 ## 1. Load the bundle — all of it
 Đọc TOÀN BỘ `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,

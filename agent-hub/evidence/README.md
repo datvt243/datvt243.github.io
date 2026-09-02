@@ -33,6 +33,12 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 
 ## Format — verifier verdict
 - Worker · Node · New PM status (PENDING/SEALED/REOPEN)
+- `## Isolation proof` — [added 2026-09-02] cites whatever makes this a
+  real separate subagent context from the implementer pass (e.g. the
+  Agent tool spawn's `description`/task string). Not a technical
+  guarantee (no hook enforces it) — a citeable trail: missing, or
+  identical to the implementer's own task string, is itself a red flag
+  for later audit. See "Steps" 1b/13a in `recipes/verify_seal.md`.
 - `## Reasoning` — cite evidence for each criterion
 - `## Missing` — only present on REOPEN
 - `## Re-run` — [added 2026-09-02] `none`/`partial`/`full`, declared
@@ -67,6 +73,14 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 - Cold storage — not re-read wholesale every worker session (unlike
   `doctrine/`, the active diagram), only opened when someone audits
   patterns on purpose. NEVER delete a line, even one recording a bad run.
+- **Archiving convention** — [added 2026-09-02] same 15KB threshold/
+  mechanism `/hub-tokens` already checks for `doctrine/domains/PROJECT.md`
+  and `haven/diagrams/`: once `worker-runs.log` crosses 15KB, move lines
+  older than the current work session into `evidence/worker-runs-archive.log`
+  (create it if missing), oldest first, full text verbatim — nothing
+  deleted, only relocated. Recent lines stay inline. `/hub-tokens` already
+  counts this file; when it flags >15KB, do this pass before appending
+  more lines.
 
 ## The three rules of this directory
 1. **VERBATIM, ALWAYS** — never claim something without citeable evidence.
