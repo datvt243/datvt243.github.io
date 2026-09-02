@@ -28,7 +28,12 @@
 6. Declare blockers if a needed env var (`.env.example` lists:
    `MY_EMAIL`, `NODE_API`, `GITHUB_TOKEN`, `GITHUB_USER`,
    `PUPPETEER_EXECUTABLE_PATH`) isn't already set.
-7. Evidence: write `evidence/implementer/<date>/<slug>-plan.md`.
+7. [added 2026-09-02] Measure `hub_bytes_before`: run `/hub-tokens`'s
+   script, take the "= per-session total" line's byte count. Write it into
+   the evidence note at step 8 — the verifier reads this back to compute
+   the hub-size delta in `worker-runs.log`, not a side task of `/todo`.
+8. Evidence: write `evidence/implementer/<date>/<slug>-plan.md`, including
+   a `## Hub bytes before: <N>` line from step 7.
 
 ## Hard rules honored
 `NodeBeforeCode` | `EvidencePerAction` | `NoSilentFailure`

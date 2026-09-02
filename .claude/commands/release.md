@@ -1,76 +1,100 @@
 ---
-description: Promote staging into main — merge, bump semver + tag vX.Y.Z, deploy if DEPLOY_HOOK_URL is configured, then sync the version bump back to staging. Invoking this command IS the operator's go-ahead — no separate confirmation prompt.
+description: "Promote staging into main: build+lint gate, real merge commit (no squash), bump semver + tag vX.Y.Z, deploy if DEPLOY_HOOK_URL is set, sync the version bump back to staging, close shipped issues. Usage: /release [patch|minor|major]. Invoking this command IS the operator's go-ahead — no separate confirmation prompt, the build+lint gate + branch protection are the real safety net."
+argument-hint: "[patch|minor|major]"
 ---
 
-Release `staging` into `main`, in this order. `main` NEVER receives code
-any other way (no direct push — it's GitHub-protected; no PR from a
-`bug/*`/`feature/*` branch — those only ever target `staging`).
+# /release — promote `staging` into `main`
 
-0. **Pre-flight.** `git fetch origin`. Compare `git log origin/main..origin/staging --oneline` — if empty, there's nothing to release: say so and stop. Read `package.json` on `origin/main` for the current version. Check `git tag -l` — if it's empty, this is the **first-ever release**.
+> Assumes npm + `package.json` semver + GitHub CLI (`gh`) + `staging`/`main`
+> both branch-protected (no direct push to either). Adapt the package
+> manager / git-host CLI calls if the target project uses a different
+> stack — the step order and safety gates below stay the same.
 
-1. **Determine the version bump.** **First-ever release** (no tags exist): release the current `package.json` version as-is (`1.0.0`) — skip `npm version`/step 3's bump entirely, there's nothing to bump from. **Every release after that**: `$ARGUMENTS` may be `patch`, `minor`, or `major`. If it's none of those, show the operator the commit list from step 0 and ask (AskUserQuestion) which bump applies — don't guess a breaking change silently.
+`main` NEVER receives code any other way: no direct push (branch-protected),
+no PR straight from a feature/fix branch (those only ever target `staging`).
+This command is the ONLY path `staging` → `main`.
 
-2. **Create the release branch** — skip this step entirely on the
-   first-ever release (no bump commit needed, so there's nothing to add on
-   top of `staging`; PR `staging` itself into `main` in step 5). Every
-   release after that: off the latest `origin/staging`, `git checkout -b
-   release/vX.Y.Z origin/staging`.
-
-3. **Bump the version** — skipped on the first-ever release (see step 1).
-   Otherwise: `npm version <bump> --no-git-tag-version` (updates
-   `package.json` + `package-lock.json` together — don't hand-edit the
-   JSON). Commit as `chore: release vX.Y.Z`. Don't let `npm version` create
-   its own tag (`--no-git-tag-version` handles that) — this command
-   creates the real tag itself in step 6, on the actual `main` merge
+## Steps
+0. **Pre-flight.** `git fetch origin`. Compare
+   `git log origin/main..origin/staging --oneline` — empty means nothing to
+   release: say so, stop. Read the current version from `package.json` on
+   `origin/main`. `git tag -l` empty → this is the **first-ever release**
+   (changes steps 1-3, 6, 9 below).
+1. **Determine the version bump.** First-ever release: release the current
+   `package.json` version as-is, skip `npm version`/step 3 entirely —
+   nothing to bump from. Otherwise: the command argument may be `patch`,
+   `minor`, or `major`. If it's none of those, show the commit list from
+   step 0 and ask (don't guess a breaking change silently).
+2. **Create the release branch** — skip on the first-ever release (PR
+   `staging` itself into `main` in step 5 instead). Otherwise: off the
+   latest `origin/staging`, `git checkout -b release/vX.Y.Z origin/staging`.
+3. **Bump the version** — skipped on the first-ever release. Otherwise:
+   `npm version <bump> --no-git-tag-version` (updates `package.json` +
+   lockfile together — never hand-edit the JSON). Commit as
+   `chore: release vX.Y.Z`. `--no-git-tag-version` on purpose — this
+   command creates the real tag itself in step 6, on the `main` merge
    commit, not on the release branch.
-
-4. **Push the release branch** (skip if step 2 was skipped — nothing new
-   to push, `staging` is already pushed), then **verify for real** before
-   merging anything into production: run `npm run build` + `npm run lint`
-   (the exact commands from `agent-hub/doctrine/MEMORY.md`) and read the
-   output back verbatim. Either fails → stop, report the failure plainly,
-   do NOT open the PR, do NOT tag, do NOT deploy. This project has no test
-   suite — this build+lint pass is the only gate before something ships to
-   real users.
-
-5. **Open the release PR.** `gh pr create --base main --head
-   release/vX.Y.Z --title "Release vX.Y.Z" --body "<commit list from step
-   0>"` — or `--head staging` directly on the first-ever release (step 2
-   was skipped).
-
-6. **Merge with a real merge commit, not squash.** `gh pr merge <PR#> --merge` — a regular merge (unlike `/ship`'s squash) so `main` keeps `staging`'s individual commit history, giving real traceability of what shipped in this release. Add `--delete-branch` ONLY if step 2 wasn't skipped (removes the temporary `release/vX.Y.Z` branch) — never pass it when the head was `staging` directly (first-ever release), that would delete `staging` itself.
-
-7. **Tag.** `git fetch origin main`, then `git tag -a vX.Y.Z origin/main -m "Release vX.Y.Z"` and `git push origin vX.Y.Z`.
-
-8. **Deploy if configured.** Check `$DEPLOY_HOOK_URL` (see root `CLAUDE.md`'s Environment Variables). Unset → print `deploy: not configured (set DEPLOY_HOOK_URL to enable)` and move on, this is not a failure. Set → `curl -fsS -X POST "$DEPLOY_HOOK_URL"`, report the real response/status code. A deploy failure here does NOT undo the merge or the tag — the release already happened; report the deploy failure plainly and let the operator retry the deploy separately.
-
-9. **Sync the version bump back to `staging`** — skip entirely on the
-   first-ever release (`main` and `staging` are already identical, nothing
-   to sync). Every release after that: `main` is now `staging` + the
-   version-bump commit — `staging` needs that same commit so it doesn't
-   drift. `gh pr create --base staging --head main --title "chore: sync
-   vX.Y.Z back into staging" --body "..."`, then `gh pr merge <PR#>
-   --merge` (regular merge, no `--delete-branch` — the head here is
-   `main`, never delete it).
-
-10. **Close the issues this release actually shipped.** GitHub's `Closes
-    #n` only auto-closes on a merge to the repo's *default* branch — since
-    `bug/*`/`feature/*` PRs merge into `staging` (not `main`), those issues
-    stay open even after being merged, until the code actually reaches
-    `main` here. Look at the commit list from step 0, find the issue
-    numbers, `gh issue close <n> --comment "Released to main via <PR URL>,
-    tagged vX.Y.Z."` for each one still open.
-
-11. **Report.** New version, tag name + URL, release PR URL + merge commit SHA on `main`, sync-back PR URL, deploy result (or "not configured"), issues closed.
-
+4. **Push the release branch** (skip if step 2 was skipped), then verify
+   for real before merging anything into production: run the exact
+   build/lint (and test, if this project has one) commands from
+   `agent-hub/doctrine/MEMORY.md`, read the output back verbatim. Any
+   failure → stop, report it plainly, do NOT open the PR/tag/deploy.
+5. **Open the release PR.**
+   `gh pr create --base main --head release/vX.Y.Z --title "Release vX.Y.Z" --body "<commit list from step 0>"`
+   — or `--head staging` directly on the first-ever release.
+6. **Merge with a real merge commit, not squash.**
+   `gh pr merge <PR#> --merge` — keeps `staging`'s individual commit
+   history on `main` for real traceability of what shipped. Add
+   `--delete-branch` ONLY if step 2 wasn't skipped — never when the head
+   was `staging` directly (that would delete `staging` itself).
+7. **Tag.** `git fetch origin main`, then
+   `git tag -a vX.Y.Z origin/main -m "Release vX.Y.Z"`,
+   `git push origin vX.Y.Z`.
+8. **Deploy if configured.** Check `$DEPLOY_HOOK_URL`. Unset → print
+   `deploy: not configured (set DEPLOY_HOOK_URL to enable)`, not a failure.
+   Set → `curl -fsS -X POST "$DEPLOY_HOOK_URL"`, report the real
+   response/status. A deploy failure does NOT undo the merge/tag — the
+   release already happened; report it plainly, let the operator retry the
+   deploy separately.
+9. **Sync the version bump back to `staging`** — skip on the first-ever
+   release (`main`/`staging` already identical). Otherwise:
+   `gh pr create --base staging --head main --title "chore: sync vX.Y.Z back into staging" --body "..."`,
+   then `gh pr merge <PR#> --merge` (no `--delete-branch` — head is `main`,
+   never delete it).
+10. **Close the issues this release actually shipped.** `Closes #n` only
+    auto-closes on a merge to the repo's *default* branch — if feature/fix
+    PRs merge into `staging` (not default), those issues stay open until
+    the code reaches `main` here. From the commit list in step 0, find the
+    issue numbers, `gh issue close <n> --comment "Released to main via <PR URL>, tagged vX.Y.Z."`
+    for each one still open.
+11. **Report.** New version, tag name + URL, release PR URL + merge commit
+    SHA on `main`, sync-back PR URL, deploy result (or "not configured"),
+    issues closed.
 12. **Return to `staging` as the local working branch.** Always run,
-    regardless of whether step 9 synced anything: `git fetch origin
-    staging` then `git checkout -B staging origin/staging`
-    (force-updates local `staging` to match the remote, whether it
-    existed and drifted or never existed locally). This command's earlier
-    git actions leave the local checkout on `main` or a temporary
-    `release/vX.Y.Z` branch — `staging` is where day-to-day
-    `bug/*`/`feature/*` work branches off, so land back there instead of
-    leaving the operator on a protected/temporary branch.
+    regardless of step 9: `git fetch origin staging` then
+    `git checkout -B staging origin/staging` — this command's git actions
+    leave the local checkout on `main` or a temporary `release/vX.Y.Z`
+    branch; land back on `staging`, where day-to-day work branches off,
+    instead of leaving the operator on a protected/temporary branch.
 
-$ARGUMENTS
+## Hard rules honored
+Build/lint (or test) gate before any merge to `main` (step 4) | real merge
+commit, never squash, into `main` (step 6) | never `--force`/direct push to
+a protected branch | deploy failure never undoes a completed release (step
+8) | invoking this command IS the seal-gate approval for the whole chain —
+no separate "show diff, wait" pause between steps.
+
+## Failure branches
+| Failure | Handling |
+|---|---|
+| Nothing to release (`origin/main..origin/staging` empty) | Say so, stop |
+| Build or lint fails (step 4) | Stop, report the real output, don't open the PR/tag/deploy |
+| Bump type ambiguous and not the first-ever release | Ask (AskUserQuestion), don't guess a breaking change |
+| Deploy hook call fails | Report the real response, don't undo the merge/tag — retry deploy separately |
+| PR merge blocked (checks pending, conflicts) | Report the real `gh` output, don't force-merge |
+
+## Runtime
+`/release [patch|minor|major]`. Requires `gh` CLI authenticated against the
+project's git host and `staging`/`main` both branch-protected (set up via
+whatever mechanism the target project used — this command only promotes
+between them, it doesn't create the branches/protection itself).
