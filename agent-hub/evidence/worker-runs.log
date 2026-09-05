@@ -1,1 +1,2 @@
 2026-09-02T11:36:18Z role=verifier outcome=SEAL node=dependency-upgrade-phase1 rerun=full hub_bytes_before=66068 hub_bytes_after=68286
+2026-09-05T12:17:32Z role=verifier outcome=SEAL node=dependency-upgrade-phase2 rerun=full hub_bytes_before=68286 hub_bytes_after=70089
