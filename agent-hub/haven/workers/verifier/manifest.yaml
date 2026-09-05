@@ -14,6 +14,9 @@ hard_rules:
   - EvidenceOnly        # never trust reasoning in place of real evidence
   - NeverVerifyOwnWork    # can't grade a diff it wrote itself
   - RatchetOnly          # PM status only ever moves forward, never backwards
+  - AppendOnly          # [added 2026-09-05] update a node's own row IN PLACE
+                         # on SEAL — never reorder/move rows in the PM status
+                         # table, same reason as the implementer's AppendOnly
 reads: [evidence/implementer/, haven/diagrams/, doctrine/MEMORY.md, CLAUDE.md (root + agent-hub)]
 # doctrine/MEMORY.md: recipe step 4 needs it to check the note's command.
 # No NORTHSTAR.md — recipe never uses it, was dead weight on every spawn.

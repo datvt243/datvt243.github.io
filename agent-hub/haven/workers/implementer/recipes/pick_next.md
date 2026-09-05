@@ -36,12 +36,12 @@
    a `## Hub bytes before: <N>` line from step 7.
 
 ## Hard rules honored
-`NodeBeforeCode` | `EvidencePerAction` | `NoSilentFailure`
+`NodeBeforeCode` | `EvidencePerAction` | `NoSilentFailure` | `AppendOnly`
 
 ## Failure branches
 | Failure | Handling |
 |---|---|
-| No diagram matches yet | Create a new node on `haven/diagrams/dev-loop.prime-mermaid.md`, keeping the LAI-13 ratchet format |
+| No diagram matches yet | Create a new node on `haven/diagrams/dev-loop.prime-mermaid.md`, keeping the LAI-13 ratchet format. [added 2026-09-05] Always APPEND the new row at the END of the PM status table, never insert it in the middle — required for `agent-hub/.gitattributes`' `merge=union` to merge cleanly when 2 branches each add a different new node around the same time. |
 | Task is ambiguous | Stop and ask, don't guess |
 | Task needs an unset env var (e.g. `PUPPETEER_EXECUTABLE_PATH` for PDF) | Report `blocked`, don't fake a value |
 

@@ -1,15 +1,37 @@
 > the gate.
 
 # Contract
-- Input: path to an evidence note under `evidence/implementer/`.
-- Output: `{verdict: SEAL|REOPEN, node, cited: string[], missing: string[],
-  forbidden_hit: string|null, pm_updated: boolean, rerun: none|partial|full,
-  isolation_proof: string}` — `rerun` is a real self-declaration (step 13b),
-  `isolation_proof` is a real self-declaration (step 1b), neither inferred
-  from outside.
+- Input: path to an evidence note under `evidence/implementer/`, OR
+  multiple paths (batch), OR `all-pending` (every node currently
+  `sealed_pending_verifier` on `dev-loop.prime-mermaid.md` — see "Batch
+  verify" below). [batch added 2026-09-05]
+- Output: AN ARRAY, 1 element per node: `{verdict: SEAL|REOPEN, node,
+  cited: string[], missing: string[], forbidden_hit: string|null,
+  pm_updated: boolean, rerun: none|partial|full, isolation_proof: string}`
+  — `rerun` is a real self-declaration (step 13b), `isolation_proof` is a
+  real self-declaration (step 1b), neither inferred from outside.
 - REFUSAL: if this same session wrote the diff being graded → refuse
   immediately: "I wrote this, a separate verifier pass is required."
-  (`NeverVerifyOwnWork`)
+  (`NeverVerifyOwnWork`) — in a batch, this applies PER NODE: refuse just
+  the self-written node, don't cancel the rest of the batch.
+
+## Batch verify [added 2026-09-05]
+The heaviest cost of a verify pass isn't the act of verifying — it's
+reloading the whole bundle + doctrine on every subagent spawn. Batch
+verify pays that cost EXACTLY ONCE for N nodes instead of N times,
+without changing anything about the substance of verifying:
+- Step 1 (self-refusal check) + the blank-context spawn run ONCE for the
+  whole batch — this is the part that gets amortized.
+- Steps 2-13b (read note, check criteria, scan forbidden states, verdict,
+  write the verdict note, `## Isolation proof`, `## Re-run` declaration)
+  run REPEATEDLY, INDEPENDENTLY, for EACH node — using node A's
+  evidence/reasoning to infer node B's verdict is forbidden, even if the
+  two notes look similar. Each node still gets its own evidence, own
+  verdict, own verdict note.
+- Being in a batch is NEVER an excuse to loosen any criterion in steps
+  2-13b — batching only folds the SPAWN COST, never the VERDICT.
+- `all-pending`: first list every `sealed_pending_verifier` node on
+  `dev-loop.prime-mermaid.md`, then run the full procedure below on each.
 
 ## Re-run scope [cost-driven, added 2026-09-02]
 Default: AUDIT the note, don't independently re-run `npm run build`/
@@ -40,7 +62,10 @@ verdict versus just auditing the note. Not a bug, but not what
 
 ## Steps
 1. REFUSE TO GRADE YOUR OWN WORK FIRST — did I write this diff in this
-   session?
+   session? [batch added 2026-09-05] In a batch, this check and the
+   blank-context spawn itself run ONCE for the whole batch; if one
+   specific node turns out self-written, refuse just that node and
+   continue verifying the rest.
 1b. [added 2026-09-02] Record proof this pass is really a separate
     subagent context, not a self-report: cite whatever this invocation
     was actually spawned with that the implementer pass didn't have
@@ -52,8 +77,8 @@ verdict versus just auditing the note. Not a bug, but not what
     one that's identical to the implementer's own task string, is itself
     evidence for a later audit that the subagent-spawn rule in
     `worker/SKILL.md` was skipped this round.
-2. Read the NOTE — only the note, do NOT open the diff directly.
-   (`EvidenceOnly`)
+2. [LOOP STARTS HERE FOR EACH NODE if batch] Read the NOTE — only the
+   note, do NOT open the diff directly. (`EvidenceOnly`)
 3. Read the NODE — get the acceptance criteria from `haven/diagrams/`,
    forbidden states from `agent-hub/CLAUDE.md`. [GUARD, added 2026-08-31]
    Don't `Read agent-hub/CLAUDE.md` yourself for this — same mechanism as
@@ -78,7 +103,11 @@ verdict versus just auditing the note. Not a bug, but not what
     REOPEN (`SmallestDiff`).
 11. The verdict is exactly one of two: SEAL (every criterion has citeable
     evidence) or REOPEN (even a single important gap is enough).
-12. Only on SEAL: update the ratchet/PM status.
+12. Only on SEAL: update the ratchet/PM status. [added 2026-09-05]
+    Update the node's own row IN PLACE (state column PENDING/IN_PROGRESS
+    → SEALED) — never reorder, move, or re-sort rows in the table
+    (`AppendOnly`); this keeps `agent-hub/.gitattributes`' `merge=union`
+    able to merge cleanly across branches.
 13. Write the verdict into
     `evidence/verifier/<date>/<slug>-{seal|reopen}.md`.
 13a. [added 2026-09-02] In that note, include the `## Isolation proof`
@@ -105,7 +134,8 @@ verdict versus just auditing the note. Not a bug, but not what
     same rule as the rest of `evidence/`.
 
 ## Hard rules honored
-`NeverVerifyOwnWork` | `EvidenceOnly` | `VerdictOnly` | `RatchetOnly`
+`NeverVerifyOwnWork` | `EvidenceOnly` | `VerdictOnly` | `RatchetOnly` |
+`AppendOnly`
 
 ## Failure branches
 | Failure | Handling |
@@ -117,3 +147,8 @@ verdict versus just auditing the note. Not a bug, but not what
 
 ## Runtime
 `/worker verifier "<task or note>"` or pass 2 of `/todo "<task>"`.
+[added 2026-09-05] `/worker verifier "<path1> <path2> ..."` (multiple
+evidence note paths) or `/worker verifier all-pending` spawns ONE
+subagent that verifies every queued node independently — use this after
+several small implementer passes have piled up, instead of one
+`/worker verifier` call per node.

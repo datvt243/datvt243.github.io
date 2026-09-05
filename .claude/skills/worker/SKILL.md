@@ -5,7 +5,13 @@ description: Trở thành implementer hoặc verifier trong agent-hub của datv
 
 # /worker <wid> "<task>"
 
-`<wid>` là `implementer` hoặc `verifier`.
+`<wid>` là `implementer` hoặc `verifier`. [thêm 2026-09-05] Riêng
+`verifier`, tham số sau `<wid>` có thể là 1 đường dẫn evidence note,
+NHIỀU đường dẫn cùng lúc (batch), hoặc từ khoá `all-pending` (mọi node
+đang ở trạng thái `sealed_pending_verifier` trên diagram active) — xem
+"Batch verify" trong `verify_seal.md`. Batch chỉ gộp CHI PHÍ SPAWN (load
+bundle 1 lần cho cả lô), verdict vẫn tính RIÊNG, ĐỘC LẬP cho từng node —
+không suy luận verdict của node này từ node khác.
 
 > [BẮT BUỘC] Nếu `<wid>` là `verifier`: lượt này PHẢI chạy như một
 > **subagent riêng** (spawn qua Agent tool), context trắng — không được
