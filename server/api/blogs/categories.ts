@@ -3,16 +3,13 @@
  * Date: `--/--`
  * Description:
  */
-import type { APIFormatResponse } from '~/types'
+import { categoriesResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
 
 export default defineCachedEventHandler(
   async (event) => {
-    const {
-      status = false,
-      data = null,
-      errors = [],
-      message = '',
-    } = await $fetch<APIFormatResponse<string[]>>(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`)
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`)
+
+    const { status, data } = parseBlogApiResponse(categoriesResponseSchema, raw, 'categories')
 
     return status ? data : []
   },
