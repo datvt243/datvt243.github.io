@@ -29,7 +29,8 @@
         "puppeteer-core": "^23.8.0",
         "tinycolor2": "^1.6.0",
         "vue": "latest",
-        "vue-router": "latest"
+        "vue-router": "latest",
+        "zod": "^3.25.76"
     },
     "devDependencies": {
         "@nuxt/eslint": "^1.17.0",
