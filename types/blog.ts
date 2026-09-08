@@ -8,7 +8,11 @@ export interface Post {
   _id: string
   title: string
   slug: string
-  isPublic: boolean
+  // Declared on the type but the real API never actually returns it
+  // (confirmed live 2026-09-06 while adding runtime validation, issue
+  // #141) and nothing in the app reads `post.isPublic` — kept optional
+  // to match reality instead of a field that was never really there.
+  isPublic?: boolean
   content: string
   authorId: string
   createdAt: string

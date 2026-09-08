@@ -6,9 +6,21 @@ const props = defineProps<{
 }>()
 
 const links: { field: keyof GitRepos; icon: string; class: string }[] = [
-  { field: 'homepage', icon: 'fe:globe', class: 'text-blue-400' },
+  { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword' },
   { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent' },
 ]
+
+// Overrides UBadge's default Nuxt UI `{color}` variant (which never picks
+// up the --theme-* CSS custom properties) with --theme-accent, same
+// pattern proven in projects/Index.vue's techBadgeUi - Nuxt UI's `ui` prop
+// merges via tailwind-merge per class-modifier group, so the `dark:`
+// variant needs its own explicit override too, or the default
+// `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.
+const topicBadgeUi = {
+  variant: {
+    outline: 'text-theme-accent dark:text-theme-accent ring-1 ring-inset ring-theme-accent/40 dark:ring-theme-accent/40',
+  },
+}
 
 const languageColors: Record<string, string> = {
   Vue: '#41b883',
@@ -56,7 +68,7 @@ const getFieldValue = (field: keyof GitRepos): string => {
     <p v-if="modelValue.description" class="text-theme-text-soft text-sm mt-1">{{ modelValue.description }}</p>
 
     <p v-if="modelValue.topics?.length" class="flex flex-wrap gap-2 mt-2">
-      <UBadge v-for="topic in modelValue.topics" :key="topic" :label="topic" variant="outline" />
+      <UBadge v-for="topic in modelValue.topics" :key="topic" :label="topic" variant="outline" :ui="topicBadgeUi" />
     </p>
 
     <ul class="flex flex-wrap items-center gap-4 mt-3 text-sm">
