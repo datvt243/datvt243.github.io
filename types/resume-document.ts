@@ -121,6 +121,11 @@ export interface Reference {
   position: string
 }
 
+// `link`/`images` intentionally dropped (issue #142): `server/utils/
+// createPDF.ts` is the only consumer of this type anywhere in the repo
+// (`grep -rn "\bCertificate\b"` confirms) and never reads either field
+// (`grep -n "\.link\b\|\.images\b" createPDF.ts`: 0 matches) — dead type
+// surface, not a behavior change (interfaces have no runtime footprint).
 export interface Certificate {
   name: string
   organization: string
@@ -128,15 +133,13 @@ export interface Certificate {
   startDate: number
   endDate: number
   isNoExpiration: boolean
-  link?: string
-  images?: string[]
 }
 
+// `link`/`images` dropped for the same reason as `Certificate` above
+// (issue #142) — `createPDF.ts` never reads either field.
 export interface Award {
   name: string
   organization: string
   issueDate: number
-  link?: string
-  images?: string[]
   description?: string
 }
