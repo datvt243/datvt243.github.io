@@ -4,7 +4,7 @@
  * Description:
  */
 
-import type { APIFormatResponse, Post } from '@/types'
+import { postResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
 
 export default defineCachedEventHandler(
   async (event) => {
@@ -18,12 +18,9 @@ export default defineCachedEventHandler(
         message: 'Missing ID',
       }
 
-    const {
-      status = false,
-      data = null,
-      errors = [],
-      message = '',
-    } = await $fetch<APIFormatResponse<Post>>(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`)
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`)
+
+    const { status, data, errors, message } = parseBlogApiResponse(postResponseSchema, raw, `post detail ${id}`)
 
     return {
       status,

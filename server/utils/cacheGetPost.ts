@@ -4,7 +4,8 @@
  * Description:
  */
 
-import type { APIFormatResponse, PaginatedPosts } from '@/types'
+import type { PaginatedPosts } from '@/types'
+import { paginatedPostsResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
 
 interface Query {
   category?: string
@@ -21,7 +22,7 @@ const emptyResult = (query: Query): PaginatedPosts => ({
 
 export const cacheGetPosts = defineCachedFunction(
   async (query: Query): Promise<PaginatedPosts> => {
-    const { status = false, data = null } = await $fetch<APIFormatResponse<PaginatedPosts>>(
+    const raw = await $fetch(
       `https://blog-api-nodejs-express.onrender.com/api/v1/post/`,
       {
         query: {
@@ -33,6 +34,8 @@ export const cacheGetPosts = defineCachedFunction(
         retryDelay: 300,
       },
     )
+
+    const { status, data } = parseBlogApiResponse(paginatedPostsResponseSchema, raw, 'posts list')
 
     if (!status || !data) return emptyResult(query)
     return data
