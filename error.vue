@@ -28,7 +28,7 @@ function handleError() {
               <h1 class="my-2 font-bold text-2xl">Looks like you've found the doorway to the great nothing</h1>
               <p class="my-3">Sorry about that! Please visit our Homepage to get where you need to go.</p>
               <button
-                class="sm:w-full lg:w-auto my-2 border rounded md py-3 px-8 text-center bg-pink-500 text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+                class="sm:w-full lg:w-auto my-2 border rounded md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-none focus:ring-2 focus:ring-theme-accent focus:ring-opacity-50"
                 @click="handleError"
               >
                 Take me there!
