@@ -17,9 +17,15 @@ Chỉ đọc, không sửa gì. 7 bước, theo đúng thứ tự:
    phiên này.
 4. `agent-hub/doctrine/MEMORY.md`
 5. `agent-hub/doctrine/domains/PROJECT.md`
-6. `agent-hub/haven/diagrams/*.prime-mermaid.md` — mọi node + PM status
+6. `agent-hub/haven/diagrams/*.prime-mermaid.md` — mọi node + PM status.
+   [thêm 2026-09-02] Nếu tồn tại `haven/diagrams/index.md` (epic sharding,
+   opt-in) → CHỈ đọc `index.md` + (các) epic file có `active: true`, không
+   đọc mọi epic mỗi phiên.
 7. `agent-hub/haven/workers/*/MEMORY.md` (nếu có) + 5 evidence note gần
-   nhất trong `agent-hub/evidence/` (mới nhất trước, theo mtime)
+   nhất trong `agent-hub/evidence/implementer/` và `agent-hub/evidence/verifier/`
+   — dùng đúng lệnh sau để liệt kê (KHÔNG dùng `ls -lat` trực tiếp, đã ghi
+   nhận trả sai thư mục trong sandbox thực tế):
+   `find <dir> -maxdepth 1 -type f -name "*.md" -exec ls -t {} + | head -5`
 
 Sau đó báo cáo **đúng 6 dòng**, không hơn không kém:
 

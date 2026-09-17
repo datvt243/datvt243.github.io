@@ -88,8 +88,8 @@ echo "FLAGS:"
 DIAG_FILE="$HUB/haven/diagrams/dev-loop.prime-mermaid.md"
 if [ -f "$DIAG_FILE" ]; then
   DB=$(wc -c < "$DIAG_FILE")
-  FULL_SEALED=$(grep -cE '\| SEALED \|' "$DIAG_FILE" 2>/dev/null || echo 0)
-  POINTER_SEALED=$(grep -cE '— archived, see' "$DIAG_FILE" 2>/dev/null || echo 0)
+  FULL_SEALED=$(grep -cE '\| SEALED \|' "$DIAG_FILE" 2>/dev/null)
+  POINTER_SEALED=$(grep -cE '— archived, see' "$DIAG_FILE" 2>/dev/null)
   REAL_SEALED=$(( FULL_SEALED - POINTER_SEALED ))
   if [ "$DB" -gt 15360 ]; then
     echo "  ⚠ dev-loop.prime-mermaid.md is ${DB}B (>15KB threshold), $REAL_SEALED full SEALED entries not yet archived."
@@ -103,6 +103,12 @@ if [ -f "$DIAG_FILE" ]; then
 fi
 check_threshold "$HUB/doctrine/domains/PROJECT.md" 15360 \
   "consider moving Traps/Decisions rows older than the current work session to doctrine/domains/PROJECT-archive.md"
+DOCTRINE_THRESHOLD=51200
+if [ "$DOCTRINE_B" -gt "$DOCTRINE_THRESHOLD" ]; then
+  echo "  ⚠ doctrine/ as a whole is ${DOCTRINE_B}B (>$((DOCTRINE_THRESHOLD/1024))KB threshold) — aggregate signal, no single archive destination. Check which file grew: domains/PROJECT.md over 15KB → archive via PROJECT-archive.md (see above); MEMORY.md/SOUL.md/INDEX.md/standards/*.md over 8KB → anomaly, not an archive candidate (see step 4 below)."
+else
+  echo "  ✓ doctrine/ as a whole is ${DOCTRINE_B}B, under the $((DOCTRINE_THRESHOLD/1024))KB threshold"
+fi
 check_threshold "$HUB/evidence/worker-runs.log" 15360 \
   "consider moving lines older than the current work session to evidence/worker-runs-archive.log (see evidence/README.md's archiving convention)"
 echo
@@ -136,6 +142,18 @@ done
    belongs in `haven/workers/<wid>/recipes/`), and move it to its one
    correct home instead of inventing a new archive file for a file that
    was never meant to grow.
+5. [added 2026-09-13] `doctrine/ as a whole` gets its own flag on top of
+   the per-file ones above — `doctrine/` (root files + `domains/` +
+   `standards/`, archives excluded) is the single biggest chunk of the
+   recurring per-session cost and had no aggregate check before, only
+   `PROJECT.md` individually. This flag has no archive file of its own —
+   it's a router, not a destination: when it fires, re-read the per-file
+   flags above to find which specific file actually grew, then apply
+   *that* file's own convention (step 3's archive pass if it's
+   `PROJECT.md`, step 4's anomaly triage if it's one of the 5 static
+   files). Don't create a `doctrine-archive.md` for this flag — it exists
+   to catch the case where several files each stayed under their own
+   threshold but the directory's total still crept up.
 
 ## If this hub uses epic sharding [added 2026-09-02]
 If `haven/diagrams/index.md` exists (opt-in, see
