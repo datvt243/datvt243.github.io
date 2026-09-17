@@ -5,8 +5,8 @@
 > will be wrong in one of them.
 
 ## What this is
-- Hub path (absolute): `/Users/_david/Workspace/Project/datvt243.github.io/agent-hub`
-- Code repo path (absolute): `/Users/_david/Workspace/Project/datvt243.github.io`
+- Hub path (absolute): `/Users/_david/Workspace/Project/resume/datvt243.github.io/agent-hub`
+- Code repo path (absolute): `/Users/_david/Workspace/Project/resume/datvt243.github.io`
 - Hub ↔ repo relationship: the hub sits DIRECTLY INSIDE the repo (not two
   separate repos). Still only cross-checks the repo through a worker, with
   a real build/lint run + evidence note — never ad hoc.
