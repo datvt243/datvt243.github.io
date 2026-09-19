@@ -23,6 +23,13 @@ const { data } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id
 const postDetail = computed<Post>(() => {
   return data.value?.data as Post
 })
+
+useSeoMeta({
+  title: () => postDetail.value?.title,
+  ogTitle: () => postDetail.value?.title,
+  description: () => postDetail.value?.excerpt,
+  ogDescription: () => postDetail.value?.excerpt,
+})
 </script>
 
 <template>

@@ -7,7 +7,8 @@
     "switchLanguage": "Switch language"
   },
   "footer": {
-    "findMeIn": "find me in:"
+    "findMeIn": "find me in:",
+    "visitDisclosure": "Visits are logged (IP/location) for the owner's own analytics"
   },
   "resume": {
     "greeting": "Hi there! I am",

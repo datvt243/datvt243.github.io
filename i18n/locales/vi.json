@@ -7,7 +7,8 @@
     "switchLanguage": "Chuyển ngôn ngữ"
   },
   "footer": {
-    "findMeIn": "Tìm mình ở:"
+    "findMeIn": "Tìm mình ở:",
+    "visitDisclosure": "Lượt truy cập (IP/vị trí) được ghi lại phục vụ thống kê của chủ trang"
   },
   "resume": {
     "greeting": "Xin chào! Tôi là",
