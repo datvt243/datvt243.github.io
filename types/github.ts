@@ -24,13 +24,13 @@ export interface GitUser {
   user_view_type: string
   site_admin: boolean
   name: string
-  company: any
+  company: string | null
   blog: string
   location: string
-  email: any
-  hireable: any
+  email: string | null
+  hireable: boolean | null
   bio: string
-  twitter_username: any
+  twitter_username: string | null
   public_repos: number
   public_gists: number
   followers: number
@@ -93,11 +93,11 @@ export interface GitRepos {
   ssh_url: string
   clone_url: string
   svn_url: string
-  homepage: any
+  homepage: string | null
   size: number
   stargazers_count: number
   watchers_count: number
-  language: any
+  language: string | null
   has_issues: boolean
   has_projects: boolean
   has_downloads: boolean
@@ -105,21 +105,21 @@ export interface GitRepos {
   has_pages: boolean
   has_discussions: boolean
   forks_count: number
-  mirror_url: any
+  mirror_url: string | null
   archived: boolean
   disabled: boolean
   open_issues_count: number
-  license: any
+  license: { key: string; name: string; spdx_id: string; url: string | null; node_id: string } | null
   allow_forking: boolean
   is_template: boolean
   web_commit_signoff_required: boolean
-  topics: any[]
+  topics: string[]
   visibility: string
   forks: number
   open_issues: number
   watchers: number
   default_branch: string
-  temp_clone_token?: any
+  temp_clone_token?: string
   network_count?: number
   subscribers_count?: number
 }
