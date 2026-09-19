@@ -18,6 +18,6 @@
 @import './settings-colors-theme/editor-dracula.css';
 
 :root {
-  --theme-font-mono: 'JetBrains Mono', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  --theme-font-mono: 'Fira Code', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
