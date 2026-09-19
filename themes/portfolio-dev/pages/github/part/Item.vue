@@ -2,7 +2,7 @@
 import type { GitRepos } from '@/types/github'
 const { t } = useI18n()
 const props = defineProps<{
-	modelValue: GitRepos
+  modelValue: GitRepos
 }>()
 
 const links: { field: keyof GitRepos; icon: string; class: string }[] = [
@@ -43,21 +43,17 @@ const getFieldValue = (field: keyof GitRepos): string => {
   <div class="git-repos-item font-theme-mono">
     <div class="flex items-start justify-between gap-4">
       <p class="flex items-center flex-wrap gap-2">
-        <a
-          :href="modelValue.url"
-          class="text-theme-text font-bold text-lg hover:text-theme-accent transition-all"
-        >{{ modelValue.name }}</a
-        >
-        <span class="px-2 py-0.5 rounded-full border border-theme-border-subtle text-theme-muted text-xs leading-none">{{ modelValue.visibility }}</span>
+        <a href="javascript:void()" class="text-theme-text font-bold text-lg hover:text-theme-accent transition-all">
+          {{ modelValue.name }}
+        </a>
+        <span class="px-2 py-0.5 rounded-full border border-theme-border-subtle text-theme-muted text-xs leading-none">
+          {{ modelValue.visibility }}
+        </span>
       </p>
       <ul class="flex gap-2 shrink-0">
         <template v-for="el in links">
           <li v-if="getFieldValue(el.field)" :key="el.field">
-            <a
-              :href="getFieldValue(el?.field) || '#'"
-              :class="[el.class, 'hover:opacity-50 transition-all']"
-              target="_blank"
-            >
+            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-all']" target="_blank">
               <UIcon :name="`${el.icon}`" class="w-5 h-5" />
             </a>
           </li>
@@ -73,9 +69,9 @@ const getFieldValue = (field: keyof GitRepos): string => {
 
     <ul class="flex flex-wrap items-center gap-4 mt-3 text-sm">
       <li v-if="modelValue.language" class="flex items-center gap-1.5 text-theme-muted">
-        <span
-          class="w-2.5 h-2.5 rounded-full shrink-0"
-          :style="{ backgroundColor: languageColors[modelValue.language] || '#8b8b8b' }"
+        <span 
+          class="w-2.5 h-2.5 rounded-full shrink-0" 
+          :style="{ backgroundColor: languageColors[modelValue.language] || '#8b8b8b' }" 
         />
         {{ modelValue.language }}
       </li>
@@ -87,7 +83,9 @@ const getFieldValue = (field: keyof GitRepos): string => {
         <UIcon name="fe:fork" class="w-4 h-4" />
         {{ modelValue.forks_count }}
       </li>
-      <li class="text-theme-faint">{{ t('github.updatedOn') }} {{ new Date(modelValue.updated_at).toLocaleDateString() }}</li>
+      <li class="text-theme-faint">
+        {{ t('github.updatedOn') }} {{ new Date(modelValue.updated_at).toLocaleDateString() }}
+      </li>
     </ul>
   </div>
 </template>
