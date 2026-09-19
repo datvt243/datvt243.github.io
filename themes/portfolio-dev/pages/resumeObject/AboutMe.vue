@@ -73,7 +73,7 @@ function toMarkdownLine(sentenceHtml: string): string {
 function markdownLink(text: string, url: string) {
   return (
     `<span class="text-theme-faint">[</span>` +
-    `<a href="${escapeHtml(url)}" target="_blank" class="text-blue-400 hover:underline">${escapeHtml(text)}</a>` +
+    `<a href="${escapeHtml(url)}" target="_blank" class="text-theme-code-keyword hover:underline">${escapeHtml(text)}</a>` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
   )
 }
@@ -114,19 +114,18 @@ async function downloadResume() {
 
 <template>
   <div>
-    <ClientOnly>
-      <!-- v-html chỉ chạy ở client, server ko render ra đc -> tạm thời xài clientOnly -->
-      <ThemeCodeBlock :lines="bioLines" class="mb-4" />
-    </ClientOnly>
+    <ThemeCodeBlock :lines="bioLines" class="mb-4" />
 
     <button
       type="button"
-      class="font-theme-mono text-sm mt-2 disabled:opacity-40 disabled:cursor-not-allowed"
+      class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
       :disabled="isDisabled"
       @click="downloadResume()"
     >
-      <span class="text-theme-faint">[</span><span class="text-blue-400 hover:underline">{{ t('resume.downloadCv') }}</span
-      ><span class="text-theme-faint">](</span><span class="text-theme-accent-soft">./resume.pdf</span><span class="text-theme-faint">)</span>
+      <span class="flex items-center space-x-2">
+        <UIcon name="fe:download" class="w-5 h-5" />
+        <span class="uppercase font-theme-mono text-sm">{{ t('resume.downloadCv') }}</span>
+      </span>
     </button>
   </div>
 </template>

@@ -7,19 +7,22 @@
     "switchLanguage": "Chuyển ngôn ngữ"
   },
   "footer": {
-    "findMeIn": "Tìm mình ở:"
+    "findMeIn": "Tìm mình ở:",
+    "visitDisclosure": "Lượt truy cập (IP/vị trí) được ghi lại phục vụ thống kê của chủ trang"
   },
   "resume": {
     "greeting": "Xin chào! Tôi là",
     "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
-    "openToWork": "Đang tìm việc"
+    "openToWork": "Đang tìm việc",
+    "contactMe": "Liên hệ"
   },
   "projects": {
     "seoTitle": "Dự án",
     "seoDescription": "Các dự án do Võ Tấn Đạt thực hiện.",
     "noMatch": "Không có dự án nào khớp với bộ lọc đã chọn.",
-    "projectLabel": "Dự án"
+    "projectLabel": "Dự án",
+    "viewProject": "Xem dự án"
   },
   "blogs": {
     "seoTitle": "Blog",

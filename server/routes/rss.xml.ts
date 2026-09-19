@@ -5,9 +5,9 @@
  * post fetch as /api/blogs/posts.
  */
 
+import type { PaginatedPosts } from '@/types'
 import { cacheGetPosts } from '~/server/utils/cacheGetPost'
-
-const SITE_URL = 'https://datvt243.github.io'
+import { SITE_URL } from '~/server/utils/siteUrl'
 
 function escapeXml(value: string): string {
   return value
@@ -19,7 +19,15 @@ function escapeXml(value: string): string {
 }
 
 export default defineEventHandler(async (event) => {
-  const { data: posts } = await cacheGetPosts({ page: 1, perPage: 20 })
+  // Degrade to an empty feed instead of a 504 if the blog API is cold (see
+  // cacheGetPost.ts's timeout comment) - an empty RSS response is a far
+  // better reader experience than a hard server error.
+  let posts: PaginatedPosts['data']
+  try {
+    posts = (await cacheGetPosts({ page: 1, perPage: 20 })).data
+  } catch {
+    posts = []
+  }
 
   const items = posts
     .map((post) => {

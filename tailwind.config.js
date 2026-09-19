@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 import tinycolor from 'tinycolor2'
-import defaultTheme from 'tailwindcss/defaultTheme'
 
 /**
  * Tạo danh sách màu với mã màu gốc - tinycolors
@@ -39,9 +38,6 @@ export default {
     './server/plugins/*.{js,ts}',
   ],
   theme: {
-    fontFamily: {
-      barlow: ['BarlowMedium', defaultTheme.fontFamily.sans],
-    },
     /* colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
@@ -62,8 +58,6 @@ export default {
     },
     extend: {
       fontFamily: {
-        barlow: ['Barlow', defaultTheme.fontFamily.sans],
-        opensans: ['Open Sans', defaultTheme.fontFamily.sans],
         'theme-mono': ['var(--theme-font-mono)'],
       },
       colors: {

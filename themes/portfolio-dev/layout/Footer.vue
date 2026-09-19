@@ -30,6 +30,8 @@ const socialMedia = [
           </a>
           <span class="hidden md:inline text-theme-faint">&middot;</span>
           <span class="hidden md:inline">&copy; {{ currentYear }} datvt243</span>
+          <span class="hidden lg:inline text-theme-faint">&middot;</span>
+          <span class="hidden lg:inline text-theme-faint">{{ t('footer.visitDisclosure') }}</span>
         </div>
         <a href="https://github.com/datvt243" target="_blank" class="flex items-center gap-1.5 hover:text-theme-text transition-colors">
           <span>@datvt243</span>

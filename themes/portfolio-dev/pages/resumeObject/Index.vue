@@ -17,7 +17,7 @@ const activeLabel = computed(() => sections.find((s) => s.key === active.value)?
 </script>
 
 <template>
-  <div class="clearfix font-opensans">
+  <div class="clearfix font-theme-mono">
     <ThemeResumeObjectHero />
 
     <div class="mt-4">

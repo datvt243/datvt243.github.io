@@ -81,6 +81,16 @@ const techBadgeUi = {
                 <UBadge :label="tech" variant="outline" :ui="techBadgeUi" />
               </li>
             </ul>
+            <a
+              v-if="p.link"
+              :href="p.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-auto inline-flex items-center gap-2 text-sm text-theme-accent hover:underline w-fit"
+            >
+              <UIcon name="fe:link-external" class="w-4 h-4" />
+              {{ t('projects.viewProject') }}
+            </a>
           </div>
         </article>
       </div>

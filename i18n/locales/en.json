@@ -7,19 +7,22 @@
     "switchLanguage": "Switch language"
   },
   "footer": {
-    "findMeIn": "find me in:"
+    "findMeIn": "find me in:",
+    "visitDisclosure": "Visits are logged (IP/location) for the owner's own analytics"
   },
   "resume": {
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
-    "openToWork": "Open to work"
+    "openToWork": "Open to work",
+    "contactMe": "Contact me"
   },
   "projects": {
     "seoTitle": "Projects",
     "seoDescription": "Projects built by Võ Tấn Đạt.",
     "noMatch": "No projects match the selected filters.",
-    "projectLabel": "Project"
+    "projectLabel": "Project",
+    "viewProject": "View project"
   },
   "blogs": {
     "seoTitle": "Blogs",
