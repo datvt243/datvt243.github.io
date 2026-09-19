@@ -5,14 +5,22 @@
  * blog post, sourced from the same cached post fetch as /api/blogs/posts.
  */
 
+import type { PaginatedPosts } from '@/types'
 import { cacheGetPosts } from '~/server/utils/cacheGetPost'
-
-const SITE_URL = 'https://datvt243.github.io'
+import { SITE_URL } from '~/server/utils/siteUrl'
 
 const STATIC_ROUTES = ['/', '/projects', '/github', '/blogs', '/contact']
 
 export default defineEventHandler(async (event) => {
-  const { data: posts } = await cacheGetPosts({ page: 1, perPage: 100 })
+  // Degrade to static-routes-only instead of a 504 if the blog API is cold
+  // (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs
+  // for one crawl is far better than the crawler getting no sitemap at all.
+  let posts: PaginatedPosts['data']
+  try {
+    posts = (await cacheGetPosts({ page: 1, perPage: 100 })).data
+  } catch {
+    posts = []
+  }
 
   const staticUrls = STATIC_ROUTES.map(
     (path) => `  <url>
