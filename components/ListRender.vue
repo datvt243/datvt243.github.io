@@ -7,7 +7,7 @@
 
 const props = defineProps<{
 	status: 'idle' | 'pending' | 'success' | 'error'
-	data: Record<string, any>[] | null
+	data: Record<string, unknown>[] | null
 	message?: string
 }>()
 

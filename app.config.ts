@@ -40,15 +40,5 @@ export default defineAppConfig({
     container: {
       constrained: 'mx-auto max-w-screen-lg px-3 py-6 md:py-8 lg:py-10',
     },
-    button: {
-      color: {
-        pink: {
-          solid:
-            'uppercase bg-pink-500 text-white hover:bg-opacity-70 rounded-full inline-block transition-colors only:sm:text-sm px-4 py-2 md:px-7 md:py-2 tracking-widest font-bold disabled:pointer-event-none',
-          ghost:
-            'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
-        },
-      },
-    },
   },
 })

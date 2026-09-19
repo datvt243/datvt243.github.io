@@ -16,7 +16,7 @@ const props = defineProps<{
   <div class="git-user font-theme-mono">
     <div v-if="props.user || Object.keys(props.user).length">
       <template v-if="props.user.avatar_url">
-        <NuxtImg :src="props.user.avatar_url" class="w-24 h-24 rounded-lg mb-4 border border-theme-border-subtle" />
+        <NuxtImg :src="props.user.avatar_url" :alt="props.user.login" class="w-24 h-24 rounded-lg mb-4 border border-theme-border-subtle" />
       </template>
       <p class="space-x-1 flex items-center">
         <a

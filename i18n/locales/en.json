@@ -14,7 +14,8 @@
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
-    "openToWork": "Open to work"
+    "openToWork": "Open to work",
+    "contactMe": "Contact me"
   },
   "projects": {
     "seoTitle": "Projects",

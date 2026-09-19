@@ -41,7 +41,7 @@ export interface GeneralInformation extends BaseDocument {
   workForm: string
   openToWork: boolean
   careerGoal: string
-  personalSkills: any[]
+  personalSkills: ProfessionalSkill[]
   professionalSkills?: ProfessionalSkill[]
   foreignLanguages?: ForeignLanguage[]
   professionalSkillsGroup?: string[]
@@ -75,7 +75,7 @@ export interface Project extends BaseDocument {
   description: string
   position: string
   technologyUsed: string[]
-  images: any[]
+  images: string[]
   link: string
   isWorking: boolean
   startDate: number
