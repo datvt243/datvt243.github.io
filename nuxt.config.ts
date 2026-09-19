@@ -2,6 +2,8 @@
 
 /* import * as dotenv from 'dotenv' */
 
+import { SITE_URL } from './server/utils/siteUrl'
+
 // The active UI theme. A theme is a folder under `themes/<name>/` providing:
 // - `pages/` - one subfolder per route content (resumeObject, github, contact,
 //   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.
@@ -98,11 +100,11 @@ export default defineNuxtConfig({
     defaultLocale: 'vi',
     strategy: 'prefix_except_default',
     langDir: 'locales',
-    // Same production origin already hardcoded as SITE_URL in
-    // server/routes/{rss,sitemap}.xml.ts - required by useLocaleHead()
+    // Same production origin as server/utils/siteUrl.ts's SITE_URL (shared
+    // constant, not a separate hardcoded copy) - required by useLocaleHead()
     // (used in app.vue to set <html lang> per active locale) to generate
     // valid hreflang/canonical link values instead of a build warning.
-    baseUrl: 'https://datvt243.github.io',
+    baseUrl: SITE_URL,
     // @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)
     // auto-redirects `/` to `/en` for visitors with an English browser
     // locale - not something asked for here (only a manual switcher was),

@@ -143,6 +143,7 @@ GISCUS_CATEGORY=             # GitHub Discussions category name for blog comment
 GISCUS_CATEGORY_ID=          # Discussions category ID from https://giscus.app's config generator
 GISCUS_REPO_ID=              # Repo ID from https://giscus.app's config generator
 DEPLOY_HOOK_URL=             # Optional: POSTed by `/release` after tagging main. Unset by default — no deploy target is configured yet, `/release` skips the deploy step with a "not configured" message instead of failing
+SITE_URL=                    # Optional: canonical production origin for sitemap.xml/rss.xml/i18n hreflang (server/utils/siteUrl.ts). Defaults to https://resume-nuxt-vert.vercel.app if unset — the real live domain, not the datvt243.github.io repo-name domain (that serves an unrelated static page)
 ```
 
 `GISCUS_*` power the comment widget on `/blogs/[id]` (`ThemePostComments`,

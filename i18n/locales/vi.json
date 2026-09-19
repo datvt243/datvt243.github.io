@@ -19,7 +19,8 @@
     "seoTitle": "Dự án",
     "seoDescription": "Các dự án do Võ Tấn Đạt thực hiện.",
     "noMatch": "Không có dự án nào khớp với bộ lọc đã chọn.",
-    "projectLabel": "Dự án"
+    "projectLabel": "Dự án",
+    "viewProject": "Xem dự án"
   },
   "blogs": {
     "seoTitle": "Blog",

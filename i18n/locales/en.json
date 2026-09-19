@@ -19,7 +19,8 @@
     "seoTitle": "Projects",
     "seoDescription": "Projects built by Võ Tấn Đạt.",
     "noMatch": "No projects match the selected filters.",
-    "projectLabel": "Project"
+    "projectLabel": "Project",
+    "viewProject": "View project"
   },
   "blogs": {
     "seoTitle": "Blogs",
