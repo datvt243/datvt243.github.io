@@ -11,6 +11,13 @@ const { t } = useI18n()
 const props = defineProps<{
 	user: GitUser
 }>()
+
+// Plain-text interpolation (unlike the v-html it replaces) doesn't go
+// through the browser's HTML parser, which otherwise silently normalizes
+// "\r\n" to "\n" - without this, a bio containing CRLF line endings
+// hydration-mismatches (SSR HTML gets browser-normalized to "\n" before
+// Vue compares it against the client's freshly computed "\r\n" string).
+const bioText = computed(() => props.user.bio?.replace(/\r\n?/g, '\n'))
 </script>
 <template>
   <div class="git-user font-theme-mono">
@@ -28,9 +35,7 @@ const props = defineProps<{
       </p>
       <p class="text-theme-faint text-sm">{{ props.user.login }}</p>
 
-      <ClientOnly>
-        <p class="px-3 py-1 my-3 border-l-2 border-blue-400 italic text-sm text-theme-text-soft" v-html="props.user.bio"/>
-      </ClientOnly>
+      <p class="px-3 py-1 my-3 border-l-2 border-blue-400 italic text-sm text-theme-text-soft">{{ bioText }}</p>
 
       <p v-if="props.user.location" class="flex items-center gap-2 text-sm text-theme-text-soft mt-2">
         <UIcon name="fe:location" class="opacity-50" />

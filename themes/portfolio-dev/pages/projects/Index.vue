@@ -73,7 +73,7 @@ const techBadgeUi = {
               {{ t('projects.projectLabel') }} {{ i + 1 }} <span class="text-theme-faint">//</span> _{{ p.slug }}
             </p>
             <h2 class="text-lg font-bold text-theme-text mb-1">{{ p.name }}</h2>
-            <p v-if="p.position" class="text-sm text-theme-muted italic mb-2">{{ p.position }}</p>
+            <p v-if="p.position" class="text-sm text-theme-muted mb-2">{{ t('projects.role') }}: {{ p.position }}</p>
             <p class="text-xs text-theme-faint font-theme-mono mb-3">{{ p.dateRangeLabel }}</p>
             <p class="text-sm text-theme-text-soft mb-4 line-clamp-3 max-w-2xl">{{ p.descriptionText }}</p>
             <ul v-if="p.technology.length" class="flex flex-wrap gap-2 mb-4">
