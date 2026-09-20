@@ -46,6 +46,7 @@
     "seoTitle": "Contact me",
     "seoDescription": "Get in touch with me at {email}. I would love to hear from you! Reach us at {phone} and {address}.",
     "formHint": "# fills your mail client - no server involved :)",
+    "mailFallback": "If this doesn't open your mail app, reach me directly at {email}.",
     "namePlaceholder": "Your name",
     "messagePlaceholder": "What's on your mind?"
   },
