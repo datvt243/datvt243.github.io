@@ -42,7 +42,7 @@ export default defineCachedEventHandler(
     name: 'github-api',
     getKey() {
       const user = useRuntimeConfig().public.GITHUB_USER
-      return `api-resume-${user}`
+      return `api-github-${user}`
     },
     maxAge: 60 * 60 * 24 * 12,
   },

@@ -14,6 +14,7 @@ interface Category {
 	[key: string]: string
 }
 
+const { t } = useI18n()
 const { data = [], status, error } = await useAsyncData<Category[]>(() => fetchWithRetry('/api/blogs/categories'))
 
 const query = inject<{ category: Ref<string>; page: Ref<number>; perPage: Ref<number> }>('query')
@@ -22,7 +23,7 @@ const category = toRef(query?.category || '')
 
 <template>
   <div class="font-theme-mono">
-    <p v-if="error" class="text-red-400 text-sm">{{ error }}</p>
+    <p v-if="error" class="text-theme-muted text-sm">{{ t('blogs.categoriesLoadError') }}</p>
     <ThemeFolder v-if="data?.length" label="categories">
       <li v-for="cate in data" :key="cate._id">
         <NuxtLink
@@ -36,6 +37,6 @@ const category = toRef(query?.category || '')
         </NuxtLink>
       </li>
     </ThemeFolder>
-    <p v-else class="text-theme-faint text-sm">No categories</p>
+    <p v-else class="text-theme-faint text-sm">{{ t('blogs.noCategories') }}</p>
   </div>
 </template>

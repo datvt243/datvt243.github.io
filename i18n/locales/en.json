@@ -31,7 +31,9 @@
     "seoDescription": "Articles, tutorials, snippets, rants, and everything else.",
     "intro": "Articles, tutorials, snippets, rants, and everything else.",
     "show": "Show:",
-    "readMore": "Read more ..."
+    "readMore": "Read more ...",
+    "noCategories": "No categories",
+    "categoriesLoadError": "Couldn't load categories."
   },
   "post": {
     "publishedOn": "Published on",

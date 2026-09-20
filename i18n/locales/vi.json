@@ -31,7 +31,9 @@
     "seoDescription": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "intro": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "show": "Hiển thị:",
-    "readMore": "Đọc thêm ..."
+    "readMore": "Đọc thêm ...",
+    "noCategories": "Không có chuyên mục nào",
+    "categoriesLoadError": "Không tải được danh sách chuyên mục."
   },
   "post": {
     "publishedOn": "Đăng vào",
