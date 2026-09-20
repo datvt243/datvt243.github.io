@@ -5,6 +5,8 @@
  * Description:
  */
 
+import { accentBadgeUi } from '~/utils'
+
 const { t } = useI18n()
 const store = useResumeStore()
 await useAsyncData('api-resume', async () => await store.fetchData())
@@ -25,20 +27,6 @@ const filtered = computed(() => {
   return projects.value.filter((p) => p.technology.some((t) => selected.value.includes(t)))
 })
 
-// Overrides UBadge's default Nuxt UI `{color}` variant (which never picks
-// up the --theme-* CSS custom properties) with the same --theme-accent
-// token this component already uses for its other small accent text/icons
-// (see the hash-icon badge below) - so the tag follows the Dracula
-// editor-scope like everything else inside <ThemePanel>. Nuxt UI's `ui`
-// prop merges via tailwind-merge per class-modifier group, so the default
-// `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive unless
-// explicitly overridden too - can't rely on the base (non-dark) override
-// alone to also win in dark mode.
-const techBadgeUi = {
-  variant: {
-    outline: 'text-theme-accent dark:text-theme-accent ring-1 ring-inset ring-theme-accent/40 dark:ring-theme-accent/40',
-  },
-}
 </script>
 
 <template>
@@ -78,7 +66,7 @@ const techBadgeUi = {
             <p class="text-sm text-theme-text-soft mb-4 line-clamp-3 max-w-2xl">{{ p.descriptionText }}</p>
             <ul v-if="p.technology.length" class="flex flex-wrap gap-2 mb-4">
               <li v-for="tech in p.technology" :key="tech">
-                <UBadge :label="tech" variant="outline" :ui="techBadgeUi" />
+                <UBadge :label="tech" variant="outline" :ui="accentBadgeUi" />
               </li>
             </ul>
             <a
