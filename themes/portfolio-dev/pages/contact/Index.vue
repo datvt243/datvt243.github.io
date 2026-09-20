@@ -94,6 +94,9 @@ function submitMessage() {
           submit-message
           <UIcon name="fe:paper-plane" class="w-4 h-4" />
         </button>
+        <p class="text-xs text-theme-faint font-theme-mono">
+          {{ t('contact.mailFallback', { email: contact.email }) }}
+        </p>
       </form>
     </ThemePanel>
   </UContainer>

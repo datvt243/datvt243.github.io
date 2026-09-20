@@ -51,6 +51,21 @@
   }
 }
 
+// nuxt.config.ts's pageTransition/layoutTransition both use the
+// `transition-opacity` name above (fixed 0.4s fade+blur, no guard before
+// this). A near-zero duration (not `none`) is used deliberately - Vue's
+// <Transition> waits for a real `transitionend` event to remove its
+// enter/leave classes, so setting `transition: none` here would leave it
+// waiting forever instead of actually skipping the animation.
+@media (prefers-reduced-motion: reduce) {
+  .transition-opacity {
+    &-enter-active,
+    &-leave-active {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
 .post-content {
   position: relative;
   > * {

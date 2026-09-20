@@ -46,6 +46,7 @@
     "seoTitle": "Liên hệ",
     "seoDescription": "Liên hệ với tôi qua {email}. Rất mong được nghe từ bạn! Bạn cũng có thể liên hệ qua {phone} và {address}.",
     "formHint": "# điền sẵn vào ứng dụng email của bạn - không qua máy chủ nào cả :)",
+    "mailFallback": "Nếu không tự mở được ứng dụng email, bạn có thể liên hệ trực tiếp qua {email}.",
     "namePlaceholder": "Tên của bạn",
     "messagePlaceholder": "Bạn đang nghĩ gì?"
   },
