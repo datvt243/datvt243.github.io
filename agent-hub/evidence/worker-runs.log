@@ -11,3 +11,4 @@
 2026-09-20T08:29:22Z role=verifier outcome=SEAL node=p1-portfolio-review-fixes rerun=full hub_bytes_before=107955 hub_bytes_after=111789
 2026-09-20T11:00:38Z role=verifier outcome=SEAL node=p2-polish-fixes-round2 rerun=full hub_bytes_before=111789 hub_bytes_after=115870
 2026-09-20T11:20:53Z role=verifier outcome=SEAL node=p3-nice-to-have-fixes rerun=full hub_bytes_before=115870 hub_bytes_after=119218
+2026-09-20T13:47:41Z role=verifier outcome=SEAL node=revert-sanitize-html-outage rerun=full hub_bytes_before=119218 hub_bytes_after=122475
