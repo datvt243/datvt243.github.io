@@ -15,13 +15,15 @@
     "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
     "openToWork": "Đang tìm việc",
-    "contactMe": "Liên hệ"
+    "contactMe": "Liên hệ",
+    "experienceSummary": "{years}+ năm kinh nghiệm — gần đây nhất tại {company}"
   },
   "projects": {
     "seoTitle": "Dự án",
     "seoDescription": "Các dự án do Võ Tấn Đạt thực hiện.",
     "noMatch": "Không có dự án nào khớp với bộ lọc đã chọn.",
     "projectLabel": "Dự án",
+    "role": "Vai trò",
     "viewProject": "Xem dự án"
   },
   "blogs": {
@@ -29,7 +31,9 @@
     "seoDescription": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "intro": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "show": "Hiển thị:",
-    "readMore": "Đọc thêm ..."
+    "readMore": "Đọc thêm ...",
+    "noCategories": "Không có chuyên mục nào",
+    "categoriesLoadError": "Không tải được danh sách chuyên mục."
   },
   "post": {
     "publishedOn": "Đăng vào",
@@ -42,6 +46,7 @@
     "seoTitle": "Liên hệ",
     "seoDescription": "Liên hệ với tôi qua {email}. Rất mong được nghe từ bạn! Bạn cũng có thể liên hệ qua {phone} và {address}.",
     "formHint": "# điền sẵn vào ứng dụng email của bạn - không qua máy chủ nào cả :)",
+    "mailFallback": "Nếu không tự mở được ứng dụng email, bạn có thể liên hệ trực tiếp qua {email}.",
     "namePlaceholder": "Tên của bạn",
     "messagePlaceholder": "Bạn đang nghĩ gì?"
   },

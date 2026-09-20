@@ -15,13 +15,15 @@
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
     "openToWork": "Open to work",
-    "contactMe": "Contact me"
+    "contactMe": "Contact me",
+    "experienceSummary": "{years}+ years experience — most recently at {company}"
   },
   "projects": {
     "seoTitle": "Projects",
     "seoDescription": "Projects built by Võ Tấn Đạt.",
     "noMatch": "No projects match the selected filters.",
     "projectLabel": "Project",
+    "role": "Role",
     "viewProject": "View project"
   },
   "blogs": {
@@ -29,7 +31,9 @@
     "seoDescription": "Articles, tutorials, snippets, rants, and everything else.",
     "intro": "Articles, tutorials, snippets, rants, and everything else.",
     "show": "Show:",
-    "readMore": "Read more ..."
+    "readMore": "Read more ...",
+    "noCategories": "No categories",
+    "categoriesLoadError": "Couldn't load categories."
   },
   "post": {
     "publishedOn": "Published on",
@@ -42,6 +46,7 @@
     "seoTitle": "Contact me",
     "seoDescription": "Get in touch with me at {email}. I would love to hear from you! Reach us at {phone} and {address}.",
     "formHint": "# fills your mail client - no server involved :)",
+    "mailFallback": "If this doesn't open your mail app, reach me directly at {email}.",
     "namePlaceholder": "Your name",
     "messagePlaceholder": "What's on your mind?"
   },

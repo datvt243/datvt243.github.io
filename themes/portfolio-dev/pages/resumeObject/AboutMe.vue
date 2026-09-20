@@ -10,7 +10,7 @@ const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
 
-const isDisabled = ref(false)
+const { downloadResume, isDisabled } = useDownloadResume()
 
 // Splits an HTML string into "sentences" only at points where no tag is
 // currently open, so inline markup (e.g. <strong>) never gets broken across lines.
@@ -94,22 +94,6 @@ const bioLines = computed(() => {
   ]
 })
 
-async function downloadResume() {
-  const response = await fetch('/api/generate-pdf')
-
-  const { status } = response
-  if (status !== 200) {
-    isDisabled.value = true
-    return
-  }
-
-  const blob = await response.blob()
-  const link = document.createElement('a')
-
-  link.href = URL.createObjectURL(blob)
-  link.download = `${hero.value.email || 'download'}.pdf`
-  link.click()
-}
 </script>
 
 <template>
