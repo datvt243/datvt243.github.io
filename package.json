@@ -1,6 +1,6 @@
 {
     "name": "nuxt-app",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "private": true,
     "type": "module",
     "engines": {
@@ -27,7 +27,6 @@
         "nuxt": "^3.21.11",
         "pinia": "^2.2.2",
         "puppeteer-core": "^23.8.0",
-        "sanitize-html": "^2.17.7",
         "tinycolor2": "^1.6.0",
         "vue": "latest",
         "vue-router": "latest",
@@ -36,7 +35,6 @@
     "devDependencies": {
         "@nuxt/eslint": "^1.17.0",
         "@nuxt/ui": "^2.22.3",
-        "@types/sanitize-html": "^2.16.1",
         "@vue/runtime-core": "^3.5.42",
         "autoprefixer": "^10.5.4",
         "eslint": "^10.6.0",
