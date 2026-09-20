@@ -7,3 +7,4 @@
 2026-09-06T17:19:56Z role=verifier outcome=SEAL node=blog-api-runtime-validation rerun=partial hub_bytes_before=79297 hub_bytes_after=83191
 2026-09-06T17:37:10Z role=verifier outcome=SEAL node=cleanup-pdf-only-types rerun=partial hub_bytes_before=83191 hub_bytes_after=85914
 2026-09-11T18:34:25Z role=verifier outcome=SEAL node=error-vue-theme-colors rerun=none hub_bytes_before=85834 hub_bytes_after=89149
+2026-09-20T07:47:08Z role=verifier outcome=SEAL node=fix-blog-author-tag rerun=full hub_bytes_before=105848 hub_bytes_after=107955

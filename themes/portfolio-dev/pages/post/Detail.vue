@@ -54,12 +54,12 @@ const props = defineProps<{
           <div
             class="divide-theme-border text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
           >
-            <div class="py-4 xl:py-8">
+            <div v-if="modelValue.tags?.length" class="py-4 xl:py-8">
               <h2 class="text-lg text-bold uppercase tracking-wide text-theme-accent pb-2 mb-2 border-b border-theme-border">{{ t('post.tags') }}</h2>
-              <div class="flex flex-wrap space-x-4">
-                <NuxtLink to="'/blogs'" class="link text-sm font-medium lowercase text-theme-muted hover:text-theme-accent">
-                  #tag
-                </NuxtLink>
+              <div class="flex flex-wrap gap-4">
+                <span v-for="tag in modelValue.tags" :key="tag" class="text-sm font-medium lowercase text-theme-muted">
+                  #{{ tag }}
+                </span>
               </div>
             </div>
           </div>
