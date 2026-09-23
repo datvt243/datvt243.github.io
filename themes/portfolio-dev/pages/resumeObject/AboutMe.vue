@@ -10,7 +10,7 @@ const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
 
-const { downloadResume, isDisabled } = useDownloadResume()
+const { downloadResume, isDisabled, isLoading } = useDownloadResume()
 
 // Splits an HTML string into "sentences" only at points where no tag is
 // currently open, so inline markup (e.g. <strong>) never gets broken across lines.
@@ -103,12 +103,12 @@ const bioLines = computed(() => {
     <button
       type="button"
       class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
-      :disabled="isDisabled"
+      :disabled="isDisabled || isLoading"
       @click="downloadResume()"
     >
       <span class="flex items-center space-x-2">
         <UIcon name="fe:download" class="w-5 h-5" />
-        <span class="uppercase font-theme-mono text-sm">{{ t('resume.downloadCv') }}</span>
+        <span class="uppercase font-theme-mono text-sm">{{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}</span>
       </span>
     </button>
   </div>
