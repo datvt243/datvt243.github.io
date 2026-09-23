@@ -1,6 +1,6 @@
 {
     "name": "nuxt-app",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "private": true,
     "type": "module",
     "engines": {
@@ -23,6 +23,7 @@
         "@nuxt/image": "^1.11.0",
         "@nuxtjs/i18n": "^9.5.6",
         "@pinia/nuxt": "^0.5.4",
+        "@sparticuz/chromium": "^153.0.0",
         "dotenv": "^16.6.1",
         "nuxt": "^3.21.11",
         "pinia": "^2.2.2",
