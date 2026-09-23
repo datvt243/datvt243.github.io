@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer-core'
 import os from 'os'
-// import chromium from 'npm i chrome-aws-lambda'
+import chromium from '@sparticuz/chromium'
 import type { ResumeAPIResponse, GeneralInformation } from '@/types'
 
 import { pageRender } from '~/server/utils/createPDF'
@@ -12,6 +12,35 @@ import { pageRender } from '~/server/utils/createPDF'
 // this still bounds how often a full headless Chrome launch is triggered.
 let cache: { buffer: Uint8Array; filename: string; generatedAt: number } | null = null
 const CACHE_MAX_AGE_MS = 60 * 60 * 24 * 1000
+
+// Vercel's serverless functions run on Amazon Linux with no system Chrome
+// installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work
+// there (there's nothing for it to point to). @sparticuz/chromium ships a
+// Linux-x64 Chromium binary built specifically for Lambda-style serverless
+// hosts, extracted to /tmp on first use per container. It's Linux-only, so
+// local dev (macOS/Windows) still falls back to the OS-detected/explicit
+// PUPPETEER_EXECUTABLE_PATH path below.
+async function resolveLaunchOptions(): Promise<{ executablePath: string; args: string[] }> {
+  if (process.env.VERCEL) {
+    return { executablePath: await chromium.executablePath(), args: chromium.args }
+  }
+
+  const { PUPPETEER_EXECUTABLE_PATH } = useRuntimeConfig()
+  if (PUPPETEER_EXECUTABLE_PATH) {
+    return { executablePath: PUPPETEER_EXECUTABLE_PATH, args: ['--no-sandbox', '--disable-setuid-sandbox'] }
+  }
+
+  const platform = os.platform()
+  let executablePath = ''
+  if (platform === 'win32') {
+    executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+  } else if (platform === 'darwin') {
+    executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+  } else if (platform === 'linux') {
+    executablePath = '/usr/bin/chromium-browser'
+  }
+  return { executablePath, args: ['--no-sandbox', '--disable-setuid-sandbox'] }
+}
 
 export default defineEventHandler(async (event) => {
   if (cache && Date.now() - cache.generatedAt < CACHE_MAX_AGE_MS) {
@@ -38,29 +67,9 @@ export default defineEventHandler(async (event) => {
   const { email, html: contentHTML } = pageRender(data)
 
   // Khởi tạo Puppeteer và tạo PDF
-  const { PUPPETEER_EXECUTABLE_PATH } = useRuntimeConfig()
+  const { executablePath, args } = await resolveLaunchOptions()
 
-  const getExecutablePath = (() => {
-    if (PUPPETEER_EXECUTABLE_PATH) return PUPPETEER_EXECUTABLE_PATH
-
-    // Local-dev fallback only; production must set PUPPETEER_EXECUTABLE_PATH.
-    const platform = os.platform()
-    let executablePath = ''
-
-    if (platform === 'win32') {
-      executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-    } else if (platform === 'darwin') {
-      executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-    } else if (platform === 'linux') {
-      executablePath = '/usr/bin/chromium-browser'
-    }
-    return executablePath
-  })()
-
-  const browser = await puppeteer.launch({
-    executablePath: getExecutablePath, // Đường dẫn đến trình duyệt Chrome (nếu đã cài)
-    args: ['--no-sandbox', '--disable-setuid-sandbox'], // Thêm các cờ nếu cần
-  })
+  const browser = await puppeteer.launch({ executablePath, args })
   const page = await browser.newPage()
 
   // Đặt nội dung HTML vào trang
