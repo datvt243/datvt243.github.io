@@ -9,7 +9,7 @@ const { t } = useI18n()
 const { contact } = useAppConfig()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
-const { downloadResume, isDisabled } = useDownloadResume()
+const { downloadResume, isDisabled, isLoading } = useDownloadResume()
 
 const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', 'node-js', 'bootstrap', 'tailwindcss']
 
@@ -52,11 +52,11 @@ const yearsOfExperience = computed(() => {
       <button
         type="button"
         class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
-        :disabled="isDisabled"
+        :disabled="isDisabled || isLoading"
         @click="downloadResume()"
       >
         <UIcon name="fe:download" class="w-4 h-4" />
-        {{ t('resume.downloadCv') }}
+        {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
       </button>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}

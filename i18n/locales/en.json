@@ -14,6 +14,9 @@
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
+    "downloadingCv": "Downloading CV...",
+    "downloadCvSuccess": "CV downloaded!",
+    "downloadCvError": "Couldn't download the CV. Please try again.",
     "openToWork": "Open to work",
     "contactMe": "Contact me",
     "experienceSummary": "{years}+ years experience — most recently at {company}"

@@ -8,6 +8,7 @@
       </NuxtLayout>
       <ThemeFooter />
     </div>
+    <UNotifications />
   </div>
 </template>
 <script setup lang="ts">

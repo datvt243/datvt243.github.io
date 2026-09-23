@@ -13,3 +13,4 @@
 2026-09-20T11:20:53Z role=verifier outcome=SEAL node=p3-nice-to-have-fixes rerun=full hub_bytes_before=115870 hub_bytes_after=119218
 2026-09-20T13:47:41Z role=verifier outcome=SEAL node=revert-sanitize-html-outage rerun=full hub_bytes_before=119218 hub_bytes_after=122475
 2026-09-23T15:56:02Z role=verifier outcome=SEAL node=fix-generate-pdf-vercel-chromium rerun=full hub_bytes_before=122475 hub_bytes_after=126229
+2026-09-23T17:17:14Z role=verifier outcome=SEAL node=cv-download-toast rerun=full hub_bytes_before=126821 hub_bytes_after=130064
