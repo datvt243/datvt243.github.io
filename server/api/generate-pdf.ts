@@ -4,13 +4,16 @@ import chromium from '@sparticuz/chromium'
 import type { ResumeAPIResponse, GeneralInformation } from '@/types'
 
 import { pageRender } from '~/server/utils/createPDF'
+import { pageRenderAts, type AtsLang } from '~/server/utils/createPDFAts'
 
 // defineCachedEventHandler's on-disk cache does not round-trip binary
 // Buffer bodies correctly in this Nitro version (see #29) - it serializes
 // them as plain per-byte-indexed JSON objects instead of raw bytes. Cache
 // the generated PDF in memory instead; resume data changes rarely, and
 // this still bounds how often a full headless Chrome launch is triggered.
-let cache: { buffer: Uint8Array; filename: string; generatedAt: number } | null = null
+// Keyed per template+lang (issue #206) so a cached classic body is never
+// served for an ATS request or vice versa.
+const cache = new Map<string, { buffer: Uint8Array; filename: string; generatedAt: number }>()
 const CACHE_MAX_AGE_MS = 60 * 60 * 24 * 1000
 
 // Vercel's serverless functions run on Amazon Linux with no system Chrome
@@ -43,10 +46,16 @@ async function resolveLaunchOptions(): Promise<{ executablePath: string; args: s
 }
 
 export default defineEventHandler(async (event) => {
-  if (cache && Date.now() - cache.generatedAt < CACHE_MAX_AGE_MS) {
+  const query = getQuery(event)
+  const template = query.template === 'ats' ? 'ats' : 'classic'
+  const lang: AtsLang = query.lang === 'en' ? 'en' : 'vi'
+  const cacheKey = template === 'ats' ? `ats-${lang}` : 'classic'
+
+  const cached = cache.get(cacheKey)
+  if (cached && Date.now() - cached.generatedAt < CACHE_MAX_AGE_MS) {
     setResponseHeader(event, 'Content-Type', 'application/pdf')
-    setResponseHeader(event, 'Content-Disposition', `attachment; filename="${cache.filename}.pdf"`)
-    return cache.buffer
+    setResponseHeader(event, 'Content-Disposition', `attachment; filename="${cached.filename}.pdf"`)
+    return cached.buffer
   }
 
   const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
@@ -58,13 +67,16 @@ export default defineEventHandler(async (event) => {
   }
 
   if (data) {
-    data.generalInformation = ((generalInformation: GeneralInformation[]) => {
-      if (!generalInformation.length) return {} as GeneralInformation
-      return generalInformation[0]
-    })((data?.generalInformation || []) as GeneralInformation[])
+    // The API returns this as an object or an array of one - the old
+    // array-only check turned the real object shape into {}, silently
+    // dropping skills/languages from the PDF.
+    const generalInformation = data.generalInformation
+    data.generalInformation = Array.isArray(generalInformation)
+      ? generalInformation[0] || ({} as GeneralInformation)
+      : generalInformation || ({} as GeneralInformation)
   }
 
-  const { email, html: contentHTML } = pageRender(data)
+  const { email, html: contentHTML } = template === 'ats' ? pageRenderAts(data, lang) : pageRender(data)
 
   // Khởi tạo Puppeteer và tạo PDF
   const { executablePath, args } = await resolveLaunchOptions()
@@ -76,16 +88,17 @@ export default defineEventHandler(async (event) => {
   await page.setContent(contentHTML)
 
   // Tạo PDF
-  const pdfBuffer = await page.pdf({
-    format: 'A4',
-    printBackground: true,
-  })
+  const pdfBuffer = await page.pdf(
+    template === 'ats'
+      ? { format: 'A4', printBackground: false, margin: { top: '15mm', right: '15mm', bottom: '15mm', left: '15mm' }, tagged: true }
+      : { format: 'A4', printBackground: true },
+  )
 
   await browser.close()
 
-  const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_')
+  const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_') + (template === 'ats' ? '-ats' : '')
 
-  cache = { buffer: pdfBuffer, filename: safeFilename, generatedAt: Date.now() }
+  cache.set(cacheKey, { buffer: pdfBuffer, filename: safeFilename, generatedAt: Date.now() })
 
   // Trả file PDF cho client
   setResponseHeader(event, 'Content-Type', 'application/pdf')
