@@ -58,6 +58,16 @@ const yearsOfExperience = computed(() => {
         <UIcon name="fe:download" class="w-4 h-4" />
         {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
       </button>
+      <button
+        type="button"
+        class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-theme-muted disabled:hover:border-theme-border-subtle"
+        :title="t('resume.downloadCvAtsHint')"
+        :disabled="isDisabled || isLoading"
+        @click="downloadResume('ats')"
+      >
+        <UIcon name="fe:document" class="w-4 h-4" />
+        {{ t('resume.downloadCvAts') }}
+      </button>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>
