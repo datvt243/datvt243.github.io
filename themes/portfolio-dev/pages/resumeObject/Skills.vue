@@ -4,7 +4,7 @@
  * @see https://github.com/datvt243
  */
 
-import { buildSkillsTsLines } from '@/utils/index'
+import { buildPersonalSkillsTsLines, buildSkillsTsLines } from '@/utils/index'
 
 const store = useResumeStore()
 
@@ -32,6 +32,21 @@ const SKILL_ICONS: Record<string, string> = {
   tailwindcss: 'tailwindcss',
   tailwind: 'tailwindcss',
   git: 'git',
+  sapui5: 'sapui5',
+  pinia: 'pinia',
+  gitlab: 'gitlab',
+  github: 'github',
+  sourcetree: 'sourcetree',
+  mysql: 'mysql',
+  postman: 'postman',
+  html: 'html',
+  htmlscss: 'html',
+  scss: 'sass',
+  sass: 'sass',
+  // misspelled as-is in the resume API data - drop once fixed at the source
+  gitlap: 'gitlab',
+  githup: 'github',
+  postmain: 'postman',
 }
 
 function skillIcon(name: string): string | undefined {
@@ -49,7 +64,11 @@ const groupedSkills = computed(() => {
   return result
 })
 
-const lines = computed(() => buildSkillsTsLines(groupedSkills.value))
+const lines = computed(() => {
+  const result = buildSkillsTsLines(groupedSkills.value)
+  if (store.personalSkills.length) result.push({ html: '' }, ...buildPersonalSkillsTsLines(store.personalSkills))
+  return result
+})
 </script>
 
 <template>

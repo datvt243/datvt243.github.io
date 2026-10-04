@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAPUI5">
+  <!-- Simple text badge, not the official SAP/UI5 logo. -->
+  <rect width="48" height="48" rx="8" fill="#0070f2"/>
+  <text x="24" y="31" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">UI5</text>
+</svg>

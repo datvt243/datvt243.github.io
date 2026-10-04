@@ -5,7 +5,7 @@
  * `services/createPDF.ats.ts` and rendered locally instead of proxied:
  * the backend's `GET /api/v1/download-pdf?template=ats` requires the
  * owner's short-lived (~1h) JWT, which a public site has no stable way to
- * hold. Sibling to `createPDF.ts` (the classic template, left unchanged).
+ * hold. The only CV template (the old classic `createPDF.ts` was removed).
  */
 import type { Resume, GeneralInformation, ProfessionalSkill, Certificate, Award } from '@/types/resume-document'
 

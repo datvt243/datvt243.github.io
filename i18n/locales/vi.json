@@ -7,21 +7,19 @@
     "switchLanguage": "Chuyển ngôn ngữ"
   },
   "footer": {
-    "findMeIn": "Tìm mình ở:",
-    "visitDisclosure": "Lượt truy cập (IP/vị trí) được ghi lại phục vụ thống kê của chủ trang"
+    "findMeIn": "Tìm mình ở:"
   },
   "resume": {
     "greeting": "Xin chào! Tôi là",
     "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
     "downloadingCv": "Đang tải CV...",
-    "downloadCvAts": "CV ATS",
-    "downloadCvAtsHint": "Bản một cột đơn giản, giúp hệ thống lọc hồ sơ (ATS) đọc chính xác hơn",
     "downloadCvSuccess": "Đã tải xong CV!",
     "downloadCvError": "Không thể tải CV. Vui lòng thử lại.",
     "openToWork": "Đang tìm việc",
     "contactMe": "Liên hệ",
-    "experienceSummary": "{years}+ năm kinh nghiệm — gần đây nhất tại {company}"
+    "experienceSummary": "{years}+ năm kinh nghiệm — gần đây nhất tại {company}",
+    "familiarWith": "Đã làm quen với"
   },
   "projects": {
     "seoTitle": "Dự án",

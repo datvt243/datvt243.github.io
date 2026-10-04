@@ -3,8 +3,9 @@
  * of the page) and the About tab's own button can trigger the same fetch/
  * blob/download flow without duplicating it (issue #179). Also drives a
  * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't
- * look like a silently broken button. `template: 'ats'` (issue #206) asks
- * for the single-column ATS-parser-friendly variant, in the current locale.
+ * look like a silently broken button. Always fetches the single-column
+ * ATS-parser-friendly CV (issue #206) in the current locale - the only
+ * template left.
  * @author Đạt Võ <votan.it@gmail.com>
  * @see https://github.com/datvt243
  */
@@ -16,7 +17,7 @@ export function useDownloadResume() {
   const isDisabled = ref(false)
   const isLoading = ref(false)
 
-  async function downloadResume(template: 'classic' | 'ats' = 'classic') {
+  async function downloadResume() {
     isLoading.value = true
     const notification = toast.add({
       title: t('resume.downloadingCv'),
@@ -25,7 +26,7 @@ export function useDownloadResume() {
     })
 
     try {
-      const response = await fetch(template === 'ats' ? `/api/generate-pdf?template=ats&lang=${locale.value}` : '/api/generate-pdf')
+      const response = await fetch(`/api/generate-pdf?lang=${locale.value}`)
 
       const { status } = response
       if (status !== 200) {
@@ -43,7 +44,7 @@ export function useDownloadResume() {
       const link = document.createElement('a')
 
       link.href = URL.createObjectURL(blob)
-      link.download = `${store.hero.email || 'download'}${template === 'ats' ? '-ats' : ''}.pdf`
+      link.download = `${store.hero.email || 'download'}.pdf`
       link.click()
 
       toast.update(notification.id, {

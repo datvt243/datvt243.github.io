@@ -8,10 +8,11 @@ definePageMeta({
   layout: 'default',
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { contact } = useAppConfig()
 const seoTitle = computed(() => t('contact.seoTitle'))
-const seoDescription = computed(() => t('contact.seoDescription', { email: contact.email, phone: contact.phone, address: contact.address }))
+const address = computed(() => (locale.value === 'en' ? removeVietnameseTones(contact.address) : contact.address))
+const seoDescription = computed(() => t('contact.seoDescription', { email: contact.email, phone: contact.phone, address: address.value }))
 
 useSeoMeta({
   title: seoTitle,

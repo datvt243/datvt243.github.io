@@ -29,19 +29,19 @@ function pugTag(name: string, cls?: string) {
         <span class="line-content">// next experience</span>
       </div>
 
-      <article>
-        <div class="code-line" aria-hidden="true"><span class="line-content" v-html="pugTag('article')" /></div>
+      <article class="experience">
+        <div class="code-line" aria-hidden="true"><span class="line-content" v-html="pugTag('article', 'experience')" /></div>
 
-        <h3 class="code-line depth-1 title">
-          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h3')" /><span class="tag-text">{{ el.position }}</span></span>
+        <h3 class="code-line depth-1 position">
+          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h3', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
         </h3>
         <p class="code-line depth-1">
           <span class="line-content tagged"
           ><span aria-hidden="true" class="tag-label" v-html="pugTag('p', 'company')" /><span class="tag-text">{{ el.company }}</span></span
           >
         </p>
-        <time class="code-line depth-1">
-          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('time')" /><span class="tag-text">{{ el.dateRangeLabel }}</span></span>
+        <time class="code-line depth-1 period">
+          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('time', 'period')" /><span class="tag-text">{{ el.dateRangeLabel }}</span></span>
         </time>
 
         <template v-if="el.skills?.length">
@@ -74,6 +74,7 @@ function pugTag(name: string, cls?: string) {
 .code-line {
   counter-increment: line;
   display: flex;
+  align-items: baseline;
   gap: 1rem;
   margin: 0;
   font-weight: 400;
@@ -99,6 +100,7 @@ function pugTag(name: string, cls?: string) {
 
 .tagged {
   display: flex;
+  align-items: baseline;
   gap: 1ch;
 }
 .tag-label {
@@ -115,7 +117,15 @@ function pugTag(name: string, cls?: string) {
   padding-left: 4ch;
 }
 
-.title {
+/**
+ * Only the heading text is enlarged - sizing the whole line would also
+ * scale its `ch`-based indent and push the `h3` glyph right of its
+ * siblings (`p`, `time`).
+ */
+.position {
+  font-size: inherit;
+}
+.position .tag-text {
   font-size: 1rem;
   font-weight: 700;
   color: rgb(var(--theme-code-title));
