@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { APIFormatResponse, PaginatedPosts } from '@/types/index'
@@ -21,19 +20,23 @@ const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/
     perPage: perPage,
     category: category,
   },
-  // Show whatever we fetched last time for these params instantly (no
-  // blank/loading flash), then silently refetch below and overwrite it -
-  // Nuxt's own default getCachedData only reads from the SSR/static payload,
-  // which isn't populated for plain client-side re-navigation.
+  /**
+   * Show whatever we fetched last time for these params instantly (no
+   * blank/loading flash), then silently refetch below and overwrite it -
+   * Nuxt's own default getCachedData only reads from the SSR/static payload,
+   * which isn't populated for plain client-side re-navigation.
+   */
   getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key],
 })
-// `status` is already 'success' here (reused from the cached fetch above)
-// only when we're displaying stale data from a previous visit - kick off a
-// background refresh so it gets replaced with fresh data once it arrives.
-// Nuxt's page Suspense/transition setup can call onMounted twice for the
-// same mount, so guard with a flag scoped to this component instance
-// (not to the in-flight request, which may already have finished by the
-// time the second onMounted call happens).
+/**
+ * `status` is already 'success' here (reused from the cached fetch above)
+ * only when we're displaying stale data from a previous visit - kick off a
+ * background refresh so it gets replaced with fresh data once it arrives.
+ * Nuxt's page Suspense/transition setup can call onMounted twice for the
+ * same mount, so guard with a flag scoped to this component instance
+ * (not to the in-flight request, which may already have finished by the
+ * time the second onMounted call happens).
+ */
 let hasRevalidated = false
 onMounted(() => {
   if (status.value !== 'success' || hasRevalidated) return
@@ -42,8 +45,10 @@ onMounted(() => {
 })
 const blogs = computed(() => data.value?.data?.data || null)
 const total = computed(() => data.value?.data?.total || 0)
-// Keep showing the (possibly stale) list during the background refresh
-// instead of flashing back to the ListRender loading state.
+/**
+ * Keep showing the (possibly stale) list during the background refresh
+ * instead of flashing back to the ListRender loading state.
+ */
 const listStatus = computed(() => (blogs.value ? 'success' : status.value))
 </script>
 

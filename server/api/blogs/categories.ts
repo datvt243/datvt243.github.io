@@ -1,7 +1,6 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 import { categoriesResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
 
@@ -14,7 +13,6 @@ export default defineCachedEventHandler(
     return status ? data : []
   },
   {
-    // base: 'PostCategories',
     name: 'api-post-categories',
     maxAge: 60 * 60 * 24 * 12,
   },

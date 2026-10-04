@@ -1,9 +1,8 @@
-<script setup lang="ts">/**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+<script setup lang="ts">
+/**
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
-/* import { convertNumberToDate } from '@/utils/index'; */
 import { formatDate } from '~/utils'
 import type { Post } from '~/types'
 

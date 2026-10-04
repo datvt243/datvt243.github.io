@@ -8,11 +8,10 @@ import tinycolor from 'tinycolor2'
  */
 const generateColorScale = (baseColor) => {
   const scale = {}
-  // Các mức độ màu từ 100 đến 900 (thêm sáng hoặc tối)
   for (let i = 1; i <= 9; i++) {
-    const ratio = (i - 5) * 10 // Điều chỉnh độ sáng/tối
+    const ratio = (i - 5) * 10
     const color = tinycolor(baseColor).lighten(ratio).toHexString()
-    scale[`${i * 100}`] = color // '100', '200', ..., '900'
+    scale[`${i * 100}`] = color
   }
   return scale
 }
@@ -38,23 +37,8 @@ export default {
     './server/plugins/*.{js,ts}',
   ],
   theme: {
-    /* colors: {
-			transparent: 'transparent',
-			current: 'currentColor',
-			white: '#ffffff',
-			darkness: '#23272d',
-			red: generateColorScale('#fe3d57'),
-			pink: generateColorScale('#ec4899'),
-			green: generateColorScale('#42b883'),
-			blue: generateColorScale('#38b2ac'),
-			sky: generateColorScale('#61dafb'),
-			violet: generateColorScale('#18315a'),
-			dark: generateColorScale('#333333'),
-			orange: generateColorScale('#C66828'),
-		}, */
     container: {
       center: true,
-      // padding: '10px',
     },
     extend: {
       fontFamily: {
@@ -64,9 +48,11 @@ export default {
         darkness: '#23272d',
         pink: generateColorScale('#ec4899'),
         dark: generateColorScale('#333333'),
-        // Semantic tokens for the active UI theme (see themes/<name>/tokens.css).
-        // Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to
-        // re-skin every component that uses `theme-*` classes.
+        /**
+         * Semantic tokens for the active UI theme (see themes/<name>/tokens.css).
+         * Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to
+         * re-skin every component that uses `theme-*` classes.
+         */
         theme: {
           canvas: themeColor('--theme-canvas'),
           panel: themeColor('--theme-panel'),

@@ -1,17 +1,18 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 export interface Post {
   _id: string
   title: string
   slug: string
-  // Declared on the type but the real API never actually returns it
-  // (confirmed live 2026-09-06 while adding runtime validation, issue
-  // #141) and nothing in the app reads `post.isPublic` — kept optional
-  // to match reality instead of a field that was never really there.
+  /**
+   * Declared on the type but the real API never actually returns it
+   * (confirmed live 2026-09-06 while adding runtime validation, issue
+   * #141) and nothing in the app reads `post.isPublic` — kept optional
+   * to match reality instead of a field that was never really there.
+   */
   isPublic?: boolean
   content: string
   authorId: string

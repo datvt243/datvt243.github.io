@@ -1,7 +1,6 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
  * Date: `01/09/2026`
- * Description: Records a resume visit (count/timestamp/geo/IP, per
+ * @file Records a resume visit (count/timestamp/geo/IP, per
  * candidate) via the backend's dedicated `POST /api/me/:email/visit`
  * endpoint (see resume-nodejs-api's `add-visit-tracking` node).
  *
@@ -12,6 +11,8 @@
  * and would only fire once per ISR cache window instead of once per real
  * visit). Fire-and-forget: a failed/unreachable call must never block
  * rendering or throw - only logged.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 export default defineNuxtPlugin(() => {
   const { public: { NODE_API, MY_EMAIL } } = useRuntimeConfig()

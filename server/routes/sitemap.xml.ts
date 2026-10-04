@@ -1,8 +1,8 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: sitemap.xml covering the static routes plus one <url> per
+ * @file sitemap.xml covering the static routes plus one <url> per
  * blog post, sourced from the same cached post fetch as /api/blogs/posts.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { PaginatedPosts } from '@/types'
@@ -12,9 +12,11 @@ import { SITE_URL } from '~/server/utils/siteUrl'
 const STATIC_ROUTES = ['/', '/projects', '/github', '/blogs', '/contact']
 
 export default defineEventHandler(async (event) => {
-  // Degrade to static-routes-only instead of a 504 if the blog API is cold
-  // (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs
-  // for one crawl is far better than the crawler getting no sitemap at all.
+  /**
+   * Degrade to static-routes-only instead of a 504 if the blog API is cold
+   * (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs
+   * for one crawl is far better than the crawler getting no sitemap at all.
+   */
   let posts: PaginatedPosts['data']
   try {
     posts = (await cacheGetPosts({ page: 1, perPage: 100 })).data

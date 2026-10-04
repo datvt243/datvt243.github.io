@@ -1,10 +1,10 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: robots.txt - previously an empty static file in public/;
+ * @file robots.txt - previously an empty static file in public/;
  * moved to a server route so it can point crawlers at /sitemap.xml using
  * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a
  * 4th hardcoded copy of the production domain.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import { SITE_URL } from '~/server/utils/siteUrl'

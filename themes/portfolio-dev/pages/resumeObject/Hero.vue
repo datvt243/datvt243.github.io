@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 const { t } = useI18n()
@@ -13,11 +12,13 @@ const { downloadResume, isDisabled, isLoading } = useDownloadResume()
 
 const techStack = ['vue-js', 'nuxt-js', 'react-js', 'js', 'typescript', 'git', 'node-js', 'bootstrap', 'tailwindcss']
 
-// Real, computed-from-data summary (not a hardcoded number) so a recruiter
-// can see experience length + current role without clicking into the
-// Experience tab first (issue #179). `store.experiences` is already sorted
-// most-recent-first, so [0] is the current/latest role and the last item
-// holds the earliest startDate.
+/**
+ * Real, computed-from-data summary (not a hardcoded number) so a recruiter
+ * can see experience length + current role without clicking into the
+ * Experience tab first (issue #179). `store.experiences` is already sorted
+ * most-recent-first, so [0] is the current/latest role and the last item
+ * holds the earliest startDate.
+ */
 const currentExperience = computed(() => store.experiences[0] || null)
 const yearsOfExperience = computed(() => {
   const list = store.experiences

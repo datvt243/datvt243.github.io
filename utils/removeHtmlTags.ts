@@ -1,15 +1,9 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
-/**
- * @param input - string
- * @returns string
- * */
 export function removeHtmlTags(input: string): string {
   if (typeof input !== 'string') return ''
-  // Sử dụng RegEx để tìm và loại bỏ tất cả các thẻ HTML
   return input.replace(/<\/?[^>]+(>|$)/g, '')
 }

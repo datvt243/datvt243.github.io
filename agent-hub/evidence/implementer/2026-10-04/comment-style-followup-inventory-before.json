@@ -1,0 +1,1244 @@
+[
+ {
+  "file": "app.vue",
+  "line": 15,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * nuxt.config.ts's app.head.htmlAttrs.lang is a static 'vi' fallback (SSR's\n * very first response, before any locale is known) - override it per real\n * active locale so <html lang> matches what's actually rendered (e.g. \"en\"\n * under the /en/* prefix), instead of always claiming Vietnamese.\n * addSeoAttributes was previously omitted here because it triggered an\n * \"I18n baseUrl is required\" build warning - nuxt.config.ts's i18n.baseUrl\n * is now a real value (server/utils/siteUrl.ts's SITE_URL), so canonical +\n * hreflang alternate <link> tags can be generated for real.\n */",
+  "endline": 24
+ },
+ {
+  "file": "components/ListRender.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "composables/debounceRef.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "composables/useDownloadResume.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Shared CV-download logic, extracted so both the Hero (top\n * of the page) and the About tab's own button can trigger the same fetch/\n * blob/download flow without duplicating it (issue #179). Also drives a\n * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't\n * look like a silently broken button. `template: 'ats'` (issue #206) asks\n * for the single-column ATS-parser-friendly variant, in the current locale.\n */",
+  "endline": 9
+ },
+ {
+  "file": "eslint.config.js",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// @ts-check",
+  "endline": 1
+ },
+ {
+  "file": "layouts/blog.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "models/BaseModel.ts",
+  "line": 3,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Prototype pattern base: `clone()` re-attaches the same prototype via\n * `Object.create` (so subclass getters/methods survive the clone, unlike a\n * plain-object copy) and deep-copies the instance's own data fields onto it.\n * Class methods/getters live on the prototype and are non-enumerable, so\n * `cloneDeep`'s `for...in` walk never touches them - only real data fields\n * get copied.\n */",
+  "endline": 10
+ },
+ {
+  "file": "models/Education.ts",
+  "line": 13,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** Plain text, HTML tags stripped. */",
+  "endline": 13
+ },
+ {
+  "file": "models/Experience.ts",
+  "line": 14,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** `<li>` items extracted from the raw HTML description. */",
+  "endline": 14
+ },
+ {
+  "file": "models/Experience.ts",
+  "line": 19,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** `\"MM/YYYY - MM/YYYY\"`, or `\"MM/YYYY - present\"` while ongoing. */",
+  "endline": 19
+ },
+ {
+  "file": "models/Project.ts",
+  "line": 16,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** URL-friendly slug derived from `name`, e.g. `\"my-cool-app\"`. */",
+  "endline": 16
+ },
+ {
+  "file": "models/Project.ts",
+  "line": 21,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** Plain text, HTML tags stripped. */",
+  "endline": 21
+ },
+ {
+  "file": "models/Project.ts",
+  "line": 26,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** `\"MM/YYYY - MM/YYYY\"`, or `\"MM/YYYY - present\"` while `isWorking`. */",
+  "endline": 26
+ },
+ {
+  "file": "models/SocialMedia.ts",
+  "line": 8,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** Non-empty entries as `{ name, url }` pairs, ready to iterate/render. */",
+  "endline": 8
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// https://nuxt.com/docs/api/configuration/nuxt-config",
+  "endline": 1
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 5,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * The active UI theme. A theme is a folder under `themes/<name>/` providing:\n * - `pages/` - one subfolder per route content (resumeObject, github, contact,\n *   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.\n *   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file\n *   renders.\n * - `components/` - reusable chrome shared across pages (Panel, Folder,\n *   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),\n *   same `Theme` prefix (e.g. <ThemePanel>).\n * - `layout/` - site-wide chrome outside the page content (Header, Footer),\n *   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).\n * - `tokens.css` - the theme's CSS custom properties (see\n *   themes/portfolio-dev/tokens.css).\n * Swapping UI = add a new themes/<name>/ folder implementing that contract,\n * then change this constant.\n */",
+  "endline": 20
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 51,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Silences the \"legacy-js-api\" deprecation warning Dart Sass\n// prints on every dev/build - opts into sass-embedded's newer API.",
+  "endline": 52
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 73,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n   * @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these\n   * options merge with that. Defaults to dark (existing look) until the user\n   * explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css\n   * for the `.dark`/`.light` palettes this class selects between.\n   */",
+  "endline": 78
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 90,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n   * UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are\n   * filename-style, e.g. \"_resume.ts\" - part of the code-editor metaphor,\n   * deliberately NOT translated, same as nobody translates a real file\n   * name in an IDE). `vi` (the site's original language, 100% of current\n   * traffic) keeps its existing unprefixed URLs; only `en` gets a\n   * `/en/*` prefix - see i18n-foundation node in\n   * agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why\n   * `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.\n   */",
+  "endline": 99
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 108,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Same production origin as server/utils/siteUrl.ts's SITE_URL (shared\n// constant, not a separate hardcoded copy) - required by useLocaleHead()\n// (used in app.vue to set <html lang> per active locale) to generate\n// valid hreflang/canonical link values instead of a build warning.",
+  "endline": 111
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 113,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n     * @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)\n     * auto-redirects `/` to `/en` for visitors with an English browser\n     * locale - not something asked for here (only a manual switcher was),\n     * and a surprising behavior change for every real visitor on a live\n     * site. Disabled to keep this node's diff to exactly what was scoped.\n     */",
+  "endline": 119
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 123,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n     * The integrated dev/build vue-tsc check runs against the root tsconfig\n     * only, whose generated `include` pulls in every server/ .ts file but doesn't\n     * exclude it - so every server/ file fails with false \"Cannot find\n     * name 'defineEventHandler'\" etc. errors (Nitro's server-only globals\n     * aren't in scope there). server/tsconfig.json already type-checks\n     * that directory correctly via editor tooling; disable the integrated\n     * check rather than have it report 24 false positives every dev start.\n     */",
+  "endline": 131
+ },
+ {
+  "file": "pages/blogs/[id].vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "pages/blogs/index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "pages/contact.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "pages/github.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 22,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// No dedicated social-share banner exists yet - reusing the real profile\n// photo (already used as the hero avatar) so shares at least render a real\n// image instead of none, per the `no-og-image` finding (issue #179).",
+  "endline": 24
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 37,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Person structured data - a CV site has no page more relevant to attach\n * this to than the resume itself. Every field traces to real, already-shown\n * data (app.config.ts's contact + the resume store's positionDesired) - no\n * fabricated identifiers.\n */",
+  "endline": 42
+ },
+ {
+  "file": "pages/projects.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "plugins/ErrorHandler.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "plugins/VisitTracker.client.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `01/09/2026`\n * Description: Records a resume visit (count/timestamp/geo/IP, per\n * candidate) via the backend's dedicated `POST /api/me/:email/visit`\n * endpoint (see resume-nodejs-api's `add-visit-tracking` node).\n *\n * Client-only (`.client.ts` suffix, never runs during SSR/ISR render):\n * the backend resolves the visitor's IP/location from the request that\n * reaches it, so this must fire from the real visitor's browser, not from\n * this app's own Nitro server (which would report the server's own IP,\n * and would only fire once per ISR cache window instead of once per real\n * visit). Fire-and-forget: a failed/unreachable call must never block\n * rendering or throw - only logged.\n */",
+  "endline": 15
+ },
+ {
+  "file": "server/api/blogs/categories.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/api/blogs/detail/[id].ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 13,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// Blog API unreachable/cold-starting - degrade to an empty page instead\n// of a 500/504 (see cacheGetPost.ts's timeout comment).",
+  "endline": 14
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 9,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * defineCachedEventHandler's on-disk cache does not round-trip binary\n * Buffer bodies correctly in this Nitro version (see #29) - it serializes\n * them as plain per-byte-indexed JSON objects instead of raw bytes. Cache\n * the generated PDF in memory instead; resume data changes rarely, and\n * this still bounds how often a full headless Chrome launch is triggered.\n * Keyed per template+lang (issue #206) so a cached classic body is never\n * served for an ATS request or vice versa.\n */",
+  "endline": 17
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 21,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Vercel's serverless functions run on Amazon Linux with no system Chrome\n * installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work\n * there (there's nothing for it to point to). @sparticuz/chromium ships a\n * Linux-x64 Chromium binary built specifically for Lambda-style serverless\n * hosts, extracted to /tmp on first use per container. It's Linux-only, so\n * local dev (macOS/Windows) still falls back to the OS-detected/explicit\n * PUPPETEER_EXECUTABLE_PATH path below.\n */",
+  "endline": 29
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 74,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// The API returns this as an object or an array of one - the old\n// array-only check turned the real object shape into {}, silently\n// dropping skills/languages from the PDF.",
+  "endline": 76
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 5,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * GitHub returns 401/403 for an invalid or expired token; fall back to an\n * unauthenticated request rather than failing the whole page in that case.\n */",
+  "endline": 8
+ },
+ {
+  "file": "server/api/resume.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/plugins/RenderHTML.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/routes/robots.txt.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: robots.txt - previously an empty static file in public/;\n * moved to a server route so it can point crawlers at /sitemap.xml using\n * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a\n * 4th hardcoded copy of the production domain.\n */",
+  "endline": 7
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: RSS 2.0 feed for /blogs, sourced from the same cached\n * post fetch as /api/blogs/posts.\n */",
+  "endline": 5
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 21,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// Degrade to an empty feed instead of a 504 if the blog API is cold (see\n// cacheGetPost.ts's timeout comment) - an empty RSS response is a far\n// better reader experience than a hard server error.",
+  "endline": 23
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: sitemap.xml covering the static routes plus one <url> per\n * blog post, sourced from the same cached post fetch as /api/blogs/posts.\n */",
+  "endline": 5
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 14,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// Degrade to static-routes-only instead of a 504 if the blog API is cold\n// (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs\n// for one crawl is far better than the crawler getting no sitemap at all.",
+  "endline": 16
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Runtime schema validation (zod) for the external blog\n * API's responses. The TS types in `types/blog.ts`/`types/index.ts` are\n * compile-time only and don't catch the external API changing shape\n * silently at runtime (issue #141) — a shape mismatch here now fails\n * loudly with a clear 502 instead of propagating an undefined/wrong-\n * shaped value into the theme layer.\n */",
+  "endline": 9
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 13,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * `isPublic` is declared on the `Post` TS type but the real API never\n * returns it (confirmed live 2026-09-06: actual posts carry a `status`\n * string, e.g. \"publish\", instead) and nothing in the app reads\n * `post.isPublic` (`grep -rn \"isPublic\"` across themes/stores/pages: 0\n * matches) — kept optional here rather than required so real data\n * validates instead of 502ing on a field the API was never sending.\n */",
+  "endline": 20
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 35,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * The real shape of the blog API's `data` field for a post list — a page\n * of posts plus pagination metadata, NOT a bare `Post[]` (see the trap in\n * `agent-hub/doctrine/domains/PROJECT.md`).\n */",
+  "endline": 39
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 47,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * The existing `APIFormatResponse<string[]>` cast on this endpoint\n * (`server/api/blogs/categories.ts`, pre-this-change) was already wrong —\n * the real API returns full category objects (confirmed live\n * 2026-09-06), and the actual consumer (`themes/portfolio-dev/components/\n * PostCategories.vue`'s `Category` interface) already expects objects,\n * not bare strings. Schema follows the real shape + the real consumer,\n * not the stale cast.\n */",
+  "endline": 55
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 65,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Mirrors the `{ status = false, data = null, errors = [], message = '' }`\n * destructuring defaults already used at every fetch site — same\n * tolerance for a missing wrapper field, but now enforces the actual\n * shape of whichever field IS present.\n */",
+  "endline": 70
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 84,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Validates a raw blog API response against `schema`; throws a clear 502\n * (same pattern as `server/api/generate-pdf.ts`'s existing\n * `throw createError({ statusCode: 502, ... })` for a failed external\n * call) instead of letting a shape mismatch silently propagate.\n */",
+  "endline": 89
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 21,
+  "kind": "block",
+  "trailing": false,
+  "inFn": true,
+  "text": "/**\n     * The blog API (Render free tier) cold-starts in 20-30s after\n     * inactivity; Vercel's own serverless function timeout kills the whole\n     * request well before 3 retries against that cold start can matter,\n     * producing a raw 504 instead of this app's own error handling. A\n     * bounded 6s timeout with no retry (retrying just repeats the same\n     * slow wait) lets this throw and get caught by the caller, which can\n     * still respond within the function's time budget. defineCachedFunction\n     * does not cache a rejected call, so a timeout here doesn't poison the\n     * cache for the full maxAge - the next request tries again fresh.\n     */",
+  "endline": 31
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 14,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Note: `description`/`introduction` are intentionally left unescaped — they are\n * rich-text HTML by design elsewhere in the app (rendered via v-html).\n */",
+  "endline": 17
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * ATS-optimized CV template (issue #206) — single column, system font\n * stack, no letter-spacing, standard localized section headings, no web\n * fonts/external CSS. Ported from resume-nodejs-api's\n * `services/createPDF.ats.ts` and rendered locally instead of proxied:\n * the backend's `GET /api/v1/download-pdf?template=ats` requires the\n * owner's short-lived (~1h) JWT, which a public site has no stable way to\n * hold. Sibling to `createPDF.ts` (the classic template, left unchanged).\n */",
+  "endline": 9
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 51,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Rich-text descriptions come from the owner's own resume API (same trust\n * model as createPDF.ts, which inserts them raw). Here they're reduced to a\n * plain allow-list of tags with every attribute dropped, so inline styles/\n * classes/spans can't reintroduce columns, colors or letter-spacing that\n * trip ATS parsers.\n */",
+  "endline": 57
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 94,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** The raw API returns this as an object or an array of one (see types/resume-api.ts). */",
+  "endline": 94
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 143,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// Reverse-chronological order is what ATS parsers expect for experience.",
+  "endline": 143
+ },
+ {
+  "file": "server/utils/siteUrl.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Single source of truth for the site's canonical production origin — used\n * by sitemap.xml, rss.xml, and (via nuxt.config.ts's i18n.baseUrl) hreflang/\n * canonical tags, so all three can't drift out of sync with each other.\n * Override with the SITE_URL env var if the production domain changes.\n */",
+  "endline": 6
+ },
+ {
+  "file": "stores/resume.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** @type {import('tailwindcss').Config} */",
+  "endline": 1
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 4,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Tạo danh sách màu với mã màu gốc - tinycolors\n * @param { string } baseColor\n * @returns colors[]\n */",
+  "endline": 8
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 19,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Reads a color from a CSS custom property (defined by the active theme's\n * tokens.css, see themes/<name>/tokens.css) while keeping Tailwind's\n * opacity modifiers (e.g. `bg-theme-panel/50`) working.\n * @param { string } variable e.g. '--theme-panel'\n */",
+  "endline": 24
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 51,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n         * Semantic tokens for the active UI theme (see themes/<name>/tokens.css).\n         * Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to\n         * re-skin every component that uses `theme-*` classes.\n         */",
+  "endline": 55
+ },
+ {
+  "file": "themes/portfolio-dev/components/CodeBlock.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Renders a list of HTML-string lines as a numbered code block\n * (line-number gutter + content), editor-theme style.\n *\n * A line can be a plain HTML string (no indent) or a { html, indent }\n * object — indent is applied as CSS padding (not leading spaces) so\n * wrapped text stays aligned under the line's own start column instead\n * of falling back to the left edge.\n */",
+  "endline": 10
+ },
+ {
+  "file": "themes/portfolio-dev/components/CornerFrame.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Bordered panel with 4 small corner-bracket dots, VS-Code-widget style.\n * Wrap any content (photo, thumbnail) to get the editor-theme \"framed\" look.\n */",
+  "endline": 5
+ },
+ {
+  "file": "themes/portfolio-dev/components/FilterFolder.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * File-tree style multi-select filter, used inside editor/Panel.vue sidebars.\n * Standard established by the /github languages filter.\n */",
+  "endline": 5
+ },
+ {
+  "file": "themes/portfolio-dev/components/Folder.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Collapsible file-tree folder header + list shell, used inside editor/Panel.vue sidebars.\n */",
+  "endline": 4
+ },
+ {
+  "file": "themes/portfolio-dev/components/NavItem.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * File-tree style sidebar nav button, used inside editor/Panel.vue sidebars.\n */",
+  "endline": 4
+ },
+ {
+  "file": "themes/portfolio-dev/components/PageHeading.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/components/Panel.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Reusable 2-column \"sidebar file-tree + editor pane\" shell.\n * Used by resumeObject/Index.vue and later reskinned pages (github/blogs/contact).\n *\n * The root's `editor-scope` class re-skins this whole subtree to Dracula\n * (see settings-colors-theme/editor-dracula.css) by overriding the same\n * `--theme-*` custom properties every descendant already reads - no\n * component below this needs to know that scope exists.\n */",
+  "endline": 10
+ },
+ {
+  "file": "themes/portfolio-dev/components/PostCategories.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/layout/Footer.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Editor-style bottom status bar (tab-bar look).\n * Visual reference: alexdeploy/developer-portfolio-v2 (tab-bar theme).\n */",
+  "endline": 5
+ },
+ {
+  "file": "themes/portfolio-dev/layout/Header.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Editor-style top nav (tab-bar look).\n * Visual reference: alexdeploy/developer-portfolio-v2 (tab-bar theme).\n */",
+  "endline": 5
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 20,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Show whatever we fetched last time for these params instantly (no\n// blank/loading flash), then silently refetch below and overwrite it -\n// Nuxt's own default getCachedData only reads from the SSR/static payload,\n// which isn't populated for plain client-side re-navigation.",
+  "endline": 23
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 26,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * `status` is already 'success' here (reused from the cached fetch above)\n * only when we're displaying stale data from a previous visit - kick off a\n * background refresh so it gets replaced with fresh data once it arrives.\n * Nuxt's page Suspense/transition setup can call onMounted twice for the\n * same mount, so guard with a flag scoped to this component instance\n * (not to the in-flight request, which may already have finished by the\n * time the second onMounted call happens).\n */",
+  "endline": 34
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 43,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Keep showing the (possibly stale) list during the background refresh\n// instead of flashing back to the ListRender loading state.",
+  "endline": 44
+ },
+ {
+  "file": "themes/portfolio-dev/pages/contact/Index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitRepos.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 11,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Plain-text interpolation (unlike the v-html it replaces) doesn't go\n// through the browser's HTML parser, which otherwise silently normalizes\n// \"\\r\\n\" to \"\\n\" - without this, a bio containing CRLF line endings\n// hydration-mismatches (SSR HTML gets browser-normalized to \"\\n\" before\n// Vue compares it against the client's freshly computed \"\\r\\n\" string).",
+  "endline": 15
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/Index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/part/Item.vue",
+  "line": 31,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * toLocaleDateString() with no options resolves the calendar date in the\n * RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real\n * browser client (e.g. UTC+7) can compute a different date for the same\n * instant when it falls near a UTC day boundary, causing a Vue hydration\n * mismatch. Pinning timeZone: 'UTC' makes server and client always agree,\n * since modelValue.updated_at is already a UTC ISO timestamp.\n */",
+  "endline": 38
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Author.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Giscus (GitHub Discussions) comment widget, synced with\n * the site's dark/light color mode.\n */",
+  "endline": 6
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 8,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Repo name is a fixed, deterministic constant for this site (same\n// convention as SITE_URL in server/routes/{rss,sitemap}.xml.ts) - only\n// the opaque IDs below need real values from https://giscus.app's config\n// generator, which requires GitHub Discussions enabled + the Giscus\n// GitHub App installed on the repo first (a manual, one-time operator\n// step - see root CLAUDE.md).",
+  "endline": 13
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 72,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// containerRef sits inside <ClientOnly>, which doesn't render its real\n// slot content until one tick after this component's own onMounted -\n// without this, containerRef.value is still null here and loadGiscus()\n// silently no-ops (isConfigured guard passes, container guard doesn't).",
+  "endline": 75
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Detail.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Item.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Loading.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/projects/Index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 11,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Splits an HTML string into \"sentences\" only at points where no tag is\n * currently open, so inline markup (e.g. <strong>) never gets broken across lines.\n */",
+  "endline": 14
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 49,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Renders a sentence as literal Markdown source: <strong>/<b> becomes visible **bold** syntax instead of\n * actually-rendered bold HTML, with a dimmed \"**\" around bold text (Markdown syntax-highlighting look).\n */",
+  "endline": 52
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 54,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// Drop every tag except <strong>/<b>, then split on those tags - the split naturally alternates [plain,\n// bold, plain, bold, ...] since each strong/b pair produces one boundary pair, so no marker characters are\n// needed.",
+  "endline": 56
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 68,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,\n * no Vue binding needed for plain navigation) so it stays clickable.\n */",
+  "endline": 71
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 81,
+  "kind": "line",
+  "trailing": false,
+  "inFn": true,
+  "text": "// API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those\n// block wrappers first so the depth-based sentence splitter below isn't gated off\n// for the whole string by one never-closing tag.",
+  "endline": 83
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Educations.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Experiences.vue",
+  "line": 2,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description:\n *\n * Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled\n * to look like a Pug source listing (indentation only, tag.class\n * shorthand, no closing tags). The visible \"tag\"/\".class\" glyphs are\n * decorative aria-hidden spans before the real text, and line numbers\n * come from a CSS counter (not literal text) — so a screen reader still\n * hears \"heading: Frontend Developer\", \"list, 6 items\", etc. instead of\n * literal punctuation.\n */",
+  "endline": 13
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 12,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Real, computed-from-data summary (not a hardcoded number) so a recruiter\n * can see experience length + current role without clicking into the\n * Experience tab first (issue #179). `store.experiences` is already sorted\n * most-recent-first, so [0] is the current/latest role and the last item\n * holds the earliest startDate.\n */",
+  "endline": 18
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Index.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Languages.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 2,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 2
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 8,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Only maps to logos actually present under public/svg/ — skill names come\n// from the API as free text, so unmatched skills just render without an icon\n// rather than guessing/faking one.",
+  "endline": 10
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 7,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n   * Declared on the type but the real API never actually returns it\n   * (confirmed live 2026-09-06 while adding runtime validation, issue\n   * #141) and nothing in the app reads `post.isPublic` — kept optional\n   * to match reality instead of a field that was never really there.\n   */",
+  "endline": 12
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 23,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * The real shape of the blog API's `data` field for a post list — a page\n * of posts plus pagination metadata, NOT a bare `Post[]` (see the trap in\n * `agent-hub/doctrine/domains/PROJECT.md`).\n */",
+  "endline": 27
+ },
+ {
+  "file": "types/codeLine.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/codeLine.ts",
+  "line": 5,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** Indent depth in characters (ch), applied as CSS padding so wrapped text stays aligned. */",
+  "endline": 5
+ },
+ {
+  "file": "types/github.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/index.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 9,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n   * The raw API can return generalInformation as an object or an array of\n   * one - callers normalize it to a single GeneralInformation object.\n   */",
+  "endline": 12
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 120,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * `link`/`images` intentionally dropped (issue #142): `server/utils/\n * createPDF.ts` is the only consumer of this type anywhere in the repo\n * (`grep -rn \"\\bCertificate\\b\"` confirms) and never reads either field\n * (`grep -n \"\\.link\\b\\|\\.images\\b\" createPDF.ts`: 0 matches) — dead type\n * surface, not a behavior change (interfaces have no runtime footprint).\n */",
+  "endline": 126
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 136,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * `link`/`images` dropped for the same reason as `Certificate` above\n * (issue #142) — `createPDF.ts` never reads either field.\n */",
+  "endline": 139
+ },
+ {
+  "file": "utils/ResumeAdapter.ts",
+  "line": 4,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Adapter pattern: converts raw external-API shapes (`@/types`) into the\n * app's Prototype-pattern data models (`@/models`). One class, one method\n * per entity, each cloning its own pre-built prototype instance (see\n * `@/models/BaseModel`) rather than constructing a fresh one.\n *\n * Methods are instance arrow-function fields (not `static`), for two\n * reasons: (1) `@typescript-eslint/no-extraneous-class` in this repo's\n * lint config forbids a class made of only static members; (2) arrow\n * fields bind `this` at construction time, so they stay safe to pass as\n * bare callbacks (`experiences.map(resumeAdapter.toExperience)` in\n * `stores/resume.ts`) without needing to avoid `this` inside them - a\n * regular method torn off its instance would lose that binding.\n * `resumeAdapter` below is the one instance every caller shares.\n *\n * Deliberately NOT re-exported from `utils/index.ts`'s barrel: this file\n * imports `@/models`, and models import shared helpers back through the\n * `@/utils` barrel - re-exporting this here would create a\n * `utils/index.ts` <-> `models/index.ts` circular import. Import it\n * directly (`@/utils/ResumeAdapter`) where needed instead.\n */",
+  "endline": 24
+ },
+ {
+  "file": "utils/ResumeAdapter.ts",
+  "line": 59,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n   * The raw API sometimes omits `group` from the object entirely (not\n   * just `undefined`) rather than always including it - normalized here\n   * into the model's `'Other'` default so consumers never need an\n   * `Object.hasOwn` check.\n   */",
+  "endline": 64
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 3,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * @param obj - value to deep clone (objects and arrays are copied recursively; other values are returned as-is)\n * @returns Object | Array | string ...\n * */",
+  "endline": 6
+ },
+ {
+  "file": "utils/convertNumberToDate.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/convertNumberToDate.ts",
+  "line": 3,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * @param number - epoch timestamp in milliseconds\n * @returns string, format Date\n */",
+  "endline": 6
+ },
+ {
+  "file": "utils/htmlCodeLines.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/htmlCodeLines.ts",
+  "line": 3,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Pulls out <li> item text from an HTML description (API descriptions are\n * usually <ul><li>...</li></ul> already). Falls back to the tag-stripped\n * text as a single item when there's no list to preserve.\n */",
+  "endline": 7
+ },
+ {
+  "file": "utils/index.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/jsonCodeLines.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/jsonCodeLines.ts",
+  "line": 13,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Turns an array of flat key/value records into syntax-highlighted,\n * line-numbered JSON lines, ready for EditorCodeBlock's `lines` prop.\n */",
+  "endline": 16
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/themeBadgeUi.ts",
+  "line": 1,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Overrides Nuxt UI's `<UBadge>` default `{color}` variant\n * (which never picks up the `--theme-*` CSS custom properties) with\n * `--theme-accent`, so a badge follows the active theme/Dracula editor-\n * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop\n * merges via tailwind-merge per class-modifier group, so the `dark:`\n * variant needs its own explicit override too, or the default\n * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.\n * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s\n * topic badges - previously two identical copies of this same object.\n */",
+  "endline": 12
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 1,
+  "kind": "line",
+  "trailing": false,
+  "inFn": false,
+  "text": "// Author: Đạt Võ - https://github.com/datvt243",
+  "endline": 1
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 13,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** Turns an arbitrary label into a valid-looking TS identifier (PascalCase, no symbols/spaces). */",
+  "endline": 13
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 30,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/** icon is a filename (no extension) under public/svg/, only passed when a real logo exists for that skill. */",
+  "endline": 30
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 38,
+  "kind": "block",
+  "trailing": false,
+  "inFn": false,
+  "text": "/**\n * Renders grouped skills as a TS `enum` (group names) + a `const`\n * Record<enum, string[]> object (skills per group, with a trailing\n * `// N+ years` comment when known), for EditorCodeBlock's `lines` prop.\n */",
+  "endline": 42
+ }
+]

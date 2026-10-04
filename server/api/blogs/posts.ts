@@ -1,7 +1,6 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { PaginatedPosts } from '@/types'
@@ -14,8 +13,10 @@ export default defineEventHandler(async (event) => {
   try {
     result = await cacheGetPosts(query)
   } catch {
-    // Blog API unreachable/cold-starting - degrade to an empty page instead
-    // of a 500/504 (see cacheGetPost.ts's timeout comment).
+    /**
+     * Blog API unreachable/cold-starting - degrade to an empty page instead
+     * of a 500/504 (see cacheGetPost.ts's timeout comment).
+     */
     result = emptyResult(query)
   }
 

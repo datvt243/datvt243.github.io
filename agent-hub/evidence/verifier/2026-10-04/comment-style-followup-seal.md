@@ -1,0 +1,31 @@
+# 2026-10-04 — comment-style-followup (verdict)
+
+**Worker:** verifier
+**Version:** 0.1.0
+**Node:** `comment-style-followup` (`haven/diagrams/dev-loop.prime-mermaid.md`, last PM status row)
+**New PM status:** SEALED
+**Verdict:** SEAL
+
+## Isolation proof
+Spawned as a fresh Agent-tool subagent whose task string begins "You are being spawned as the `verifier` worker for the datvt243.github.io agent-hub, grading node `comment-style-followup` (issue #210 follow-up). Fresh, independent context — you did NOT write the diff." This differs from the implementer's task string (the verbatim operator message "1. dùng /** 2. về phần Author, …"). This context did not write the diff. It wrote its own scripts in `scratchpad/verifier2/` (`tokcheck.cjs` was discarded as a false-positive-prone scanner; `leafcheck.cjs`, `tokdiff.cjs`).
+
+## Reasoning
+| # | Criterion (plan) | Evidence (verifier's own run unless noted) |
+|---|---|---|
+| 1 | Ledger + report computed from ledger | The ledger has 73 entries in 60 files: `header_line_to_jsdoc: 49, header_block_to_jsdoc: 9, multiline_line_to_block: 15`. The report's "Totals (this pass)" table also shows 15 / 49 / 9 and `Files modified 60`. All 73 ledger `before` texts are in `-inventory-before.json`, and all 73 `after` texts appear in the current files: `ledger before-not-in-inventory: 0 after-not-in-file: 0`. |
+| 2 | Zero code change vs `HEAD` | (a) Own method. TS parse, every leaf token's raw text plus parse-diagnostic count, JSDoc nodes excluded; `.vue` non-script parts compared byte-exact: `leaf-checked 66 files, 0 differ; non-code changed files outside agent-hub: none`. Negative control (each mutation restored, `cmp` confirmed): a string literal edit in `pages/index.vue`, `return  scale;` in `tailwind.config.js`, and an HTML comment in a template were each caught (`1 differ` each time), so 3/3. (b) Implementer's `codecheck.cjs` re-run: `checked 66 files, 0 with code changes`. The `git diff` lines that are not comments (trailing comments, the commented-out tailwind block, the `<script setup lang="ts">/**` line) come from the earlier SEALED `comment-cleanup-standardize` node, which already disclosed them, and (a) covers them. |
+| 3a | 0 multi-line `//` groups | After-inventory: `raw 138 logical 138 line 3 block 135 trailing 0 inFn 9`. There are 3 `//` comments left, each one physical line: `eslint.config.js:1 "// @ts-check"`, `nuxt.config.ts:1` (the docs URL), and `server/utils/createPDFAts.ts:143` (one sentence). |
+| 3b | 58 headers, all `/** */`, exact `@author` | `headers: 58 block: 58 jsdoc /**: 58`, `exact @author once: 58` (exactly one `@author` line per header, equal to `@author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)`). `@author` is the last tag line in all 58. Each header is the first comment of its file or script, in 58 files. Shape: 49 headers are 3 lines and 9 are longer (the `@file` ones). |
+| 3c | 0 old `Author: Đạt Võ -` left | `any Author: left: 0 Description: left: 0`. A grep for `Author:\|Description:` in source finds only `ogDescription:` code keys. |
+| 3d | `@file` exactly where a Description existed (9), text faithful | The before-inventory had 9 `/** */` headers with `Description:`. For all 9, the words before and after were compared (dropping only the `Author:` line and the `Description:` / `@file` keyword): `WORDS-EQUAL: true` ×9, so no text was lost. Two edge cases were checked by hand. In `Experiences.vue` the empty `Description:` line and the blank ` *` line were merged into `@file Renders…`. `VisitTracker.client.ts` keeps `Date: \`01/09/2026\`` verbatim as free description text before `@file`. The plan disclosed both. |
+| — | Non-header comments untouched except multi-line → block | 80 non-header comments before and 80 after, `non-header text mismatches: 0` (text compared without comment syntax). `line->block conversions: 15 all multi-line: true`, which equals the `multi-line // before: 15` count, and the 3 single-line `//` were kept. |
+| — | JSDoc format conformance | Fetched https://jsdoc.app/tags-author: syntax `@author <name> [<emailAddress>]`, example `@author Jane Smith <jsmith@example.com>`. Fetched https://jsdoc.app/tags-file: synonyms `fileoverview`, `overview`; "Use the tag in a JSDoc comment at the beginning of the file"; the example is `@file …` followed by `@author …` in one block. The output matches that order and placement. The trailing `(https://github.com/datvt243)` is not part of the documented syntax. It is the operator's recorded AskUserQuestion choice, and JSDoc treats the `@author` value as free text, so it does not block the seal. |
+| 4 | Build + lint | Partial re-run, Node `v24.19.0`. `npm run build` gives `build exit 0` … `└  ✨ Build complete!`. The only "error" matches in the log are chunk filenames (`error-500.mjs` and similar). `npm run lint` gives `lint exit 0`, `✖ 13 problems (0 errors, 13 warnings)`, the same as the baseline in the previous seal. |
+
+Forbidden states: none hit. `ADHOC_WORK`: no, the node is on the diagram. `NO_EVIDENCE`: no, the plan, diff, report, ledger and inventory exist. `EDIT_UNVERIFIED`: no, independently re-run above. `CODE_IN_HAVEN`: no, `haven/` changes are the diagram row only. `DIAGRAM_DRIFT`: no, the row is updated in place to SEALED.
+Seal gate: nothing outward-facing. There is no commit, push or PR, and the note says `None`.
+Proportionality: the diff stays inside the operator's two requests. Other file-level `/** */` blocks without Author were left alone, and the note lists them under "Noticed, not done".
+Note for the operator, already in the implementer's "Noticed, not done": 58 source files of a public repo now contain the owner's email. This was the operator's explicit choice.
+
+## Re-run
+`partial`. I re-ran `npm run build`, `npm run lint`, the implementer's `codecheck.cjs` and `inventory.cjs`, and wrote my own leaf-token check. No cold-cache wipe, and no CDP because nothing changed visually. Reason: this is a 60-file source sweep of the same class where the earlier node's implementer broke code twice. The parent task also asked explicitly for independent code-change and build/lint checks. The note's build output is also condensed (`build exit 0` plus the final line) rather than the full log.

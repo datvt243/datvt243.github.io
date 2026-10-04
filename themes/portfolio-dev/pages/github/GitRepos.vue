@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { GitRepos } from '@/types/github'
@@ -12,7 +11,6 @@ const props = defineProps<{
 	repos: GitRepos[]
 }>()
 
-// Filter
 const search = debouncedRef<string>('', 500)
 
 const getRepos = computed(() => {
