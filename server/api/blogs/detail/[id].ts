@@ -17,7 +17,15 @@ export default defineCachedEventHandler(
         message: 'Missing ID',
       }
 
-    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`)
+    /**
+     * The upstream API only looks posts up by _id and answers 404 for
+     * anything else (unknown id, or a slug) - surface that as our own
+     * clean 404 instead of an unhandled FetchError.
+     */
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`).catch((e) => {
+      if (e?.statusCode === 404) throw createError({ statusCode: 404, statusMessage: 'Post not found' })
+      throw e
+    })
 
     const { status, data, errors, message } = parseBlogApiResponse({ schema: postResponseSchema, raw, context: `post detail ${id}` })
 
