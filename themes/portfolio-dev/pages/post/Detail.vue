@@ -7,7 +7,7 @@ import { formatDate } from '~/utils'
 import type { Post } from '@/types/index'
 
 const { t } = useI18n()
-const props = defineProps<{
+defineProps<{
 	modelValue: Post
 }>()
 </script>
