@@ -1,17 +1,18 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import { buildSkillsTsLines } from '@/utils/index'
 
 const store = useResumeStore()
 
-// Only maps to logos actually present under public/svg/ — skill names come
-// from the API as free text, so unmatched skills just render without an icon
-// rather than guessing/faking one.
+/**
+ * Only maps to logos actually present under public/svg/ — skill names come
+ * from the API as free text, so unmatched skills just render without an icon
+ * rather than guessing/faking one.
+ */
 const SKILL_ICONS: Record<string, string> = {
   javascript: 'js',
   typescript: 'typescript',

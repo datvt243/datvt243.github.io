@@ -6,23 +6,27 @@ import type { ResumeAPIResponse, GeneralInformation } from '@/types'
 import { pageRender } from '~/server/utils/createPDF'
 import { pageRenderAts, type AtsLang } from '~/server/utils/createPDFAts'
 
-// defineCachedEventHandler's on-disk cache does not round-trip binary
-// Buffer bodies correctly in this Nitro version (see #29) - it serializes
-// them as plain per-byte-indexed JSON objects instead of raw bytes. Cache
-// the generated PDF in memory instead; resume data changes rarely, and
-// this still bounds how often a full headless Chrome launch is triggered.
-// Keyed per template+lang (issue #206) so a cached classic body is never
-// served for an ATS request or vice versa.
+/**
+ * defineCachedEventHandler's on-disk cache does not round-trip binary
+ * Buffer bodies correctly in this Nitro version (see #29) - it serializes
+ * them as plain per-byte-indexed JSON objects instead of raw bytes. Cache
+ * the generated PDF in memory instead; resume data changes rarely, and
+ * this still bounds how often a full headless Chrome launch is triggered.
+ * Keyed per template+lang (issue #206) so a cached classic body is never
+ * served for an ATS request or vice versa.
+ */
 const cache = new Map<string, { buffer: Uint8Array; filename: string; generatedAt: number }>()
 const CACHE_MAX_AGE_MS = 60 * 60 * 24 * 1000
 
-// Vercel's serverless functions run on Amazon Linux with no system Chrome
-// installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work
-// there (there's nothing for it to point to). @sparticuz/chromium ships a
-// Linux-x64 Chromium binary built specifically for Lambda-style serverless
-// hosts, extracted to /tmp on first use per container. It's Linux-only, so
-// local dev (macOS/Windows) still falls back to the OS-detected/explicit
-// PUPPETEER_EXECUTABLE_PATH path below.
+/**
+ * Vercel's serverless functions run on Amazon Linux with no system Chrome
+ * installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work
+ * there (there's nothing for it to point to). @sparticuz/chromium ships a
+ * Linux-x64 Chromium binary built specifically for Lambda-style serverless
+ * hosts, extracted to /tmp on first use per container. It's Linux-only, so
+ * local dev (macOS/Windows) still falls back to the OS-detected/explicit
+ * PUPPETEER_EXECUTABLE_PATH path below.
+ */
 async function resolveLaunchOptions(): Promise<{ executablePath: string; args: string[] }> {
   if (process.env.VERCEL) {
     return { executablePath: await chromium.executablePath(), args: chromium.args }
@@ -67,9 +71,11 @@ export default defineEventHandler(async (event) => {
   }
 
   if (data) {
-    // The API returns this as an object or an array of one - the old
-    // array-only check turned the real object shape into {}, silently
-    // dropping skills/languages from the PDF.
+    /**
+     * The API returns this as an object or an array of one - the old
+     * array-only check turned the real object shape into {}, silently
+     * dropping skills/languages from the PDF.
+     */
     const generalInformation = data.generalInformation
     data.generalInformation = Array.isArray(generalInformation)
       ? generalInformation[0] || ({} as GeneralInformation)
@@ -78,16 +84,13 @@ export default defineEventHandler(async (event) => {
 
   const { email, html: contentHTML } = template === 'ats' ? pageRenderAts(data, lang) : pageRender(data)
 
-  // Khởi tạo Puppeteer và tạo PDF
   const { executablePath, args } = await resolveLaunchOptions()
 
   const browser = await puppeteer.launch({ executablePath, args })
   const page = await browser.newPage()
 
-  // Đặt nội dung HTML vào trang
   await page.setContent(contentHTML)
 
-  // Tạo PDF
   const pdfBuffer = await page.pdf(
     template === 'ats'
       ? { format: 'A4', printBackground: false, margin: { top: '15mm', right: '15mm', bottom: '15mm', left: '15mm' }, tagged: true }
@@ -100,7 +103,6 @@ export default defineEventHandler(async (event) => {
 
   cache.set(cacheKey, { buffer: pdfBuffer, filename: safeFilename, generatedAt: Date.now() })
 
-  // Trả file PDF cho client
   setResponseHeader(event, 'Content-Type', 'application/pdf')
   setResponseHeader(event, 'Content-Disposition', `attachment; filename="${safeFilename}.pdf"`)
 

@@ -16,3 +16,6 @@
 2026-09-23T17:17:14Z role=verifier outcome=SEAL node=cv-download-toast rerun=full hub_bytes_before=126821 hub_bytes_after=130064
 2026-09-23T18:12:10Z role=verifier outcome=SEAL node=github-updated-date-tz rerun=full hub_bytes_before=130064 hub_bytes_after=132989
 2026-10-03T18:44:34Z role=verifier outcome=SEAL node=ats-cv-template-local rerun=partial hub_bytes_before=132989 hub_bytes_after=134641
+2026-10-04T00:11:11Z role=verifier outcome=SEAL node=comment-cleanup-standardize rerun=partial hub_bytes_before=134641 hub_bytes_after=136310
+2026-10-04T11:03:33Z role=verifier outcome=SEAL node=comment-style-followup rerun=partial hub_bytes_before=136310 hub_bytes_after=137859
+2026-10-04T11:07:24Z role=verifier outcome=SEAL node=author-github-see-line rerun=partial hub_bytes_before=138445 hub_bytes_after=138920

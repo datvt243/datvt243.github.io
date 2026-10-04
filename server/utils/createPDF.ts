@@ -11,8 +11,10 @@ import type {
 
 const _log = console.log.bind(console)
 
-// Note: `description`/`introduction` are intentionally left unescaped — they are
-// rich-text HTML by design elsewhere in the app (rendered via v-html).
+/**
+ * Note: `description`/`introduction` are intentionally left unescaped — they are
+ * rich-text HTML by design elsewhere in the app (rendered via v-html).
+ */
 const escapeHtml = (value: unknown): string => {
   if (value === null || value === undefined) return ''
   return String(value)
@@ -24,9 +26,6 @@ const escapeHtml = (value: unknown): string => {
 }
 
 export const pageRender = (RECORD: Record<string, any>) => {
-  /**
-   * get data format
-   */
   const {
     candidate,
     generalInformation,
@@ -38,9 +37,6 @@ export const pageRender = (RECORD: Record<string, any>) => {
     awards = [],
   } = getDataCandidate(RECORD)
 
-  /**
-   * render HTML
-   */
   let _content = ''
   const _ = _helper()
 
@@ -59,16 +55,9 @@ export const pageRender = (RECORD: Record<string, any>) => {
     email: candidate?.email || 'resume',
     html,
   }
-  /* res.send(html); */
 }
 
-/**
- * format data
- * @param {*} RECORD
- * @returns
- */
 const getDataCandidate = (RECORD: Record<string, any>) => {
-  // Thông tin cơ bản
   const candidate: Information = (() => {
     const {
       email,
@@ -101,13 +90,11 @@ const getDataCandidate = (RECORD: Record<string, any>) => {
     }
   })()
 
-  // Thông tin công việc
   const generalInformation = ((el) => {
     if (!el) return {}
     return Array.isArray(el) ? el?.[0] || {} : el
   })(RECORD?.generalInformation || null)
 
-  // ---
   const { educations, experiences, projects, references = [], certificates = [], awards = [] } = RECORD
 
   return {

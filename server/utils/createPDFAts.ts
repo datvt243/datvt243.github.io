@@ -48,11 +48,13 @@ const escapeHtml = (value: unknown): string => {
   return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
-// Rich-text descriptions come from the owner's own resume API (same trust
-// model as createPDF.ts, which inserts them raw). Here they're reduced to a
-// plain allow-list of tags with every attribute dropped, so inline styles/
-// classes/spans can't reintroduce columns, colors or letter-spacing that
-// trip ATS parsers.
+/**
+ * Rich-text descriptions come from the owner's own resume API (same trust
+ * model as createPDF.ts, which inserts them raw). Here they're reduced to a
+ * plain allow-list of tags with every attribute dropped, so inline styles/
+ * classes/spans can't reintroduce columns, colors or letter-spacing that
+ * trip ATS parsers.
+ */
 const ALLOWED_TAGS = new Set(['p', 'ul', 'ol', 'li', 'strong', 'em', 'b', 'i', 'br'])
 const simplifyRichText = (html: string | undefined | null): string => {
   if (!html) return ''
@@ -89,7 +91,7 @@ const section = (heading: string, body: string): string =>
   body ? `<section class="section"><h2 class="heading">${escapeHtml(heading)}</h2>${body}</section>` : ''
 
 export type AtsRecord = Partial<Omit<Resume, 'generalInformation'>> & {
-  // The raw API returns this as an object or an array of one (see types/resume-api.ts).
+  /** The raw API returns this as an object or an array of one (see types/resume-api.ts). */
   generalInformation?: Partial<GeneralInformation> | GeneralInformation[]
   certificates?: Certificate[]
   awards?: Award[]

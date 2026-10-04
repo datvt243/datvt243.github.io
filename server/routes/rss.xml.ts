@@ -1,8 +1,8 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: RSS 2.0 feed for /blogs, sourced from the same cached
+ * @file RSS 2.0 feed for /blogs, sourced from the same cached
  * post fetch as /api/blogs/posts.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { PaginatedPosts } from '@/types'
@@ -19,9 +19,11 @@ function escapeXml(value: string): string {
 }
 
 export default defineEventHandler(async (event) => {
-  // Degrade to an empty feed instead of a 504 if the blog API is cold (see
-  // cacheGetPost.ts's timeout comment) - an empty RSS response is a far
-  // better reader experience than a hard server error.
+  /**
+   * Degrade to an empty feed instead of a 504 if the blog API is cold (see
+   * cacheGetPost.ts's timeout comment) - an empty RSS response is a far
+   * better reader experience than a hard server error.
+   */
   let posts: PaginatedPosts['data']
   try {
     posts = (await cacheGetPosts({ page: 1, perPage: 20 })).data

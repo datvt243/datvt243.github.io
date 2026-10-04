@@ -1,0 +1,1128 @@
+[
+ {
+  "file": "app.vue",
+  "line": 15,
+  "id": 0,
+  "action": "line_to_block",
+  "before": "// nuxt.config.ts's app.head.htmlAttrs.lang is a static 'vi' fallback (SSR's\n// very first response, before any locale is known) - override it per real\n// active locale so <html lang> matches what's actually rendered (e.g. \"en\"\n// under the /en/* prefix), instead of always claiming Vietnamese.\n// addSeoAttributes was previously omitted here because it triggered an\n// \"I18n baseUrl is required\" build warning - nuxt.config.ts's i18n.baseUrl\n// is now a real value (server/utils/siteUrl.ts's SITE_URL), so canonical +\n// hreflang alternate <link> tags can be generated for real.",
+  "after": "/**\n * nuxt.config.ts's app.head.htmlAttrs.lang is a static 'vi' fallback (SSR's\n * very first response, before any locale is known) - override it per real\n * active locale so <html lang> matches what's actually rendered (e.g. \"en\"\n * under the /en/* prefix), instead of always claiming Vietnamese.\n * addSeoAttributes was previously omitted here because it triggered an\n * \"I18n baseUrl is required\" build warning - nuxt.config.ts's i18n.baseUrl\n * is now a real value (server/utils/siteUrl.ts's SITE_URL), so canonical +\n * hreflang alternate <link> tags can be generated for real.\n */"
+ },
+ {
+  "file": "components/ListRender.vue",
+  "line": 2,
+  "id": 1,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "composables/debounceRef.ts",
+  "line": 1,
+  "id": 2,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "composables/useDownloadResume.ts",
+  "line": 1,
+  "id": 3,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: Shared CV-download logic, extracted so both the Hero (top\n * of the page) and the About tab's own button can trigger the same fetch/\n * blob/download flow without duplicating it (issue #179). Also drives a\n * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't\n * look like a silently broken button. `template: 'ats'` (issue #206) asks\n * for the single-column ATS-parser-friendly variant, in the current locale.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Shared CV-download logic, extracted so both the Hero (top\n * of the page) and the About tab's own button can trigger the same fetch/\n * blob/download flow without duplicating it (issue #179). Also drives a\n * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't\n * look like a silently broken button. `template: 'ats'` (issue #206) asks\n * for the single-column ATS-parser-friendly variant, in the current locale.\n */"
+ },
+ {
+  "file": "eslint.config.js",
+  "line": 28,
+  "id": 8,
+  "action": "delete",
+  "before": "// General"
+ },
+ {
+  "file": "eslint.config.js",
+  "line": 23,
+  "id": 7,
+  "action": "delete",
+  "before": "// Formatting"
+ },
+ {
+  "file": "eslint.config.js",
+  "line": 18,
+  "id": 6,
+  "action": "delete",
+  "before": "// TypeScript"
+ },
+ {
+  "file": "eslint.config.js",
+  "line": 7,
+  "id": 5,
+  "action": "delete",
+  "before": "// Vue"
+ },
+ {
+  "file": "layouts/blog.vue",
+  "line": 2,
+  "id": 9,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 117,
+  "id": 26,
+  "action": "line_to_block+reword",
+  "before": "// The integrated dev/build vue-tsc check runs against the root tsconfig\n// only, whose generated `include` pulls in server/**/*.ts but doesn't\n// exclude it - so every server/ file fails with false \"Cannot find\n// name 'defineEventHandler'\" etc. errors (Nitro's server-only globals\n// aren't in scope there). server/tsconfig.json already type-checks\n// that directory correctly via editor tooling; disable the integrated\n// check rather than have it report 24 false positives every dev start.",
+  "after": "/**\n     * The integrated dev/build vue-tsc check runs against the root tsconfig\n     * only, whose generated `include` pulls in every server/ .ts file but doesn't\n     * exclude it - so every server/ file fails with false \"Cannot find\n     * name 'defineEventHandler'\" etc. errors (Nitro's server-only globals\n     * aren't in scope there). server/tsconfig.json already type-checks\n     * that directory correctly via editor tooling; disable the integrated\n     * check rather than have it report 24 false positives every dev start.\n     */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 109,
+  "id": 25,
+  "action": "line_to_block",
+  "before": "// @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)\n// auto-redirects `/` to `/en` for visitors with an English browser\n// locale - not something asked for here (only a manual switcher was),\n// and a surprising behavior change for every real visitor on a live\n// site. Disabled to keep this node's diff to exactly what was scoped.",
+  "after": "/**\n     * @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)\n     * auto-redirects `/` to `/en` for visitors with an English browser\n     * locale - not something asked for here (only a manual switcher was),\n     * and a surprising behavior change for every real visitor on a live\n     * site. Disabled to keep this node's diff to exactly what was scoped.\n     */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 88,
+  "id": 23,
+  "action": "line_to_block",
+  "before": "// UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are\n// filename-style, e.g. \"_resume.ts\" - part of the code-editor metaphor,\n// deliberately NOT translated, same as nobody translates a real file\n// name in an IDE). `vi` (the site's original language, 100% of current\n// traffic) keeps its existing unprefixed URLs; only `en` gets a\n// `/en/*` prefix - see i18n-foundation node in\n// agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why\n// `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.",
+  "after": "/**\n   * UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are\n   * filename-style, e.g. \"_resume.ts\" - part of the code-editor metaphor,\n   * deliberately NOT translated, same as nobody translates a real file\n   * name in an IDE). `vi` (the site's original language, 100% of current\n   * traffic) keeps its existing unprefixed URLs; only `en` gets a\n   * `/en/*` prefix - see i18n-foundation node in\n   * agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why\n   * `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.\n   */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 73,
+  "id": 22,
+  "action": "line_to_block",
+  "before": "// @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these\n// options merge with that. Defaults to dark (existing look) until the user\n// explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css\n// for the `.dark`/`.light` palettes this class selects between.",
+  "after": "/**\n   * @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these\n   * options merge with that. Defaults to dark (existing look) until the user\n   * explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css\n   * for the `.dark`/`.light` palettes this class selects between.\n   */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 7,
+  "id": 20,
+  "action": "line_to_block",
+  "before": "// The active UI theme. A theme is a folder under `themes/<name>/` providing:\n// - `pages/` - one subfolder per route content (resumeObject, github, contact,\n//   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.\n//   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file\n//   renders.\n// - `components/` - reusable chrome shared across pages (Panel, Folder,\n//   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),\n//   same `Theme` prefix (e.g. <ThemePanel>).\n// - `layout/` - site-wide chrome outside the page content (Header, Footer),\n//   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).\n// - `tokens.css` - the theme's CSS custom properties (see\n//   themes/portfolio-dev/tokens.css).\n// Swapping UI = add a new themes/<name>/ folder implementing that contract,\n// then change this constant.",
+  "after": "/**\n * The active UI theme. A theme is a folder under `themes/<name>/` providing:\n * - `pages/` - one subfolder per route content (resumeObject, github, contact,\n *   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.\n *   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file\n *   renders.\n * - `components/` - reusable chrome shared across pages (Panel, Folder,\n *   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),\n *   same `Theme` prefix (e.g. <ThemePanel>).\n * - `layout/` - site-wide chrome outside the page content (Header, Footer),\n *   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).\n * - `tokens.css` - the theme's CSS custom properties (see\n *   themes/portfolio-dev/tokens.css).\n * Swapping UI = add a new themes/<name>/ folder implementing that contract,\n * then change this constant.\n */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 3,
+  "id": 19,
+  "action": "delete",
+  "before": "/* import * as dotenv from 'dotenv' */"
+ },
+ {
+  "file": "pages/blogs/[id].vue",
+  "line": 2,
+  "id": 27,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "pages/blogs/index.vue",
+  "line": 2,
+  "id": 28,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "pages/contact.vue",
+  "line": 2,
+  "id": 29,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "pages/github.vue",
+  "line": 2,
+  "id": 30,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 41,
+  "id": 33,
+  "action": "line_to_block",
+  "before": "// Person structured data - a CV site has no page more relevant to attach\n// this to than the resume itself. Every field traces to real, already-shown\n// data (app.config.ts's contact + the resume store's positionDesired) - no\n// fabricated identifiers.",
+  "after": "/**\n * Person structured data - a CV site has no page more relevant to attach\n * this to than the resume itself. Every field traces to real, already-shown\n * data (app.config.ts's contact + the resume store's positionDesired) - no\n * fabricated identifiers.\n */"
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 2,
+  "id": 31,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "pages/projects.vue",
+  "line": 2,
+  "id": 34,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "plugins/ErrorHandler.ts",
+  "line": 1,
+  "id": 35,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/categories.ts",
+  "line": 17,
+  "id": 38,
+  "action": "delete",
+  "before": "// base: 'PostCategories',"
+ },
+ {
+  "file": "server/api/blogs/categories.ts",
+  "line": 1,
+  "id": 37,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/detail/[id].ts",
+  "line": 1,
+  "id": 39,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 1,
+  "id": 40,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 103,
+  "id": 48,
+  "action": "delete",
+  "before": "// Trả file PDF cho client"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 90,
+  "id": 47,
+  "action": "delete",
+  "before": "// Tạo PDF"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 87,
+  "id": 46,
+  "action": "delete",
+  "before": "// Đặt nội dung HTML vào trang"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 81,
+  "id": 45,
+  "action": "delete",
+  "before": "// Khởi tạo Puppeteer và tạo PDF"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 19,
+  "id": 43,
+  "action": "line_to_block",
+  "before": "// Vercel's serverless functions run on Amazon Linux with no system Chrome\n// installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work\n// there (there's nothing for it to point to). @sparticuz/chromium ships a\n// Linux-x64 Chromium binary built specifically for Lambda-style serverless\n// hosts, extracted to /tmp on first use per container. It's Linux-only, so\n// local dev (macOS/Windows) still falls back to the OS-detected/explicit\n// PUPPETEER_EXECUTABLE_PATH path below.",
+  "after": "/**\n * Vercel's serverless functions run on Amazon Linux with no system Chrome\n * installed at any fixed path - PUPPETEER_EXECUTABLE_PATH alone can't work\n * there (there's nothing for it to point to). @sparticuz/chromium ships a\n * Linux-x64 Chromium binary built specifically for Lambda-style serverless\n * hosts, extracted to /tmp on first use per container. It's Linux-only, so\n * local dev (macOS/Windows) still falls back to the OS-detected/explicit\n * PUPPETEER_EXECUTABLE_PATH path below.\n */"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 9,
+  "id": 42,
+  "action": "line_to_block",
+  "before": "// defineCachedEventHandler's on-disk cache does not round-trip binary\n// Buffer bodies correctly in this Nitro version (see #29) - it serializes\n// them as plain per-byte-indexed JSON objects instead of raw bytes. Cache\n// the generated PDF in memory instead; resume data changes rarely, and\n// this still bounds how often a full headless Chrome launch is triggered.\n// Keyed per template+lang (issue #206) so a cached classic body is never\n// served for an ATS request or vice versa.",
+  "after": "/**\n * defineCachedEventHandler's on-disk cache does not round-trip binary\n * Buffer bodies correctly in this Nitro version (see #29) - it serializes\n * them as plain per-byte-indexed JSON objects instead of raw bytes. Cache\n * the generated PDF in memory instead; resume data changes rarely, and\n * this still bounds how often a full headless Chrome launch is triggered.\n * Keyed per template+lang (issue #206) so a cached classic body is never\n * served for an ATS request or vice versa.\n */"
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 9,
+  "id": 50,
+  "action": "line_to_block",
+  "before": "// GitHub returns 401/403 for an invalid or expired token; fall back to an\n// unauthenticated request rather than failing the whole page in that case.",
+  "after": "/**\n * GitHub returns 401/403 for an invalid or expired token; fall back to an\n * unauthenticated request rather than failing the whole page in that case.\n */"
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 1,
+  "id": 49,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/resume.ts",
+  "line": 1,
+  "id": 51,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/plugins/RenderHTML.ts",
+  "line": 1,
+  "id": 52,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/routes/robots.txt.ts",
+  "line": 1,
+  "id": 53,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: robots.txt - previously an empty static file in public/;\n * moved to a server route so it can point crawlers at /sitemap.xml using\n * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a\n * 4th hardcoded copy of the production domain.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: robots.txt - previously an empty static file in public/;\n * moved to a server route so it can point crawlers at /sitemap.xml using\n * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a\n * 4th hardcoded copy of the production domain.\n */"
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 1,
+  "id": 54,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: RSS 2.0 feed for /blogs, sourced from the same cached\n * post fetch as /api/blogs/posts.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: RSS 2.0 feed for /blogs, sourced from the same cached\n * post fetch as /api/blogs/posts.\n */"
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 1,
+  "id": 56,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: sitemap.xml covering the static routes plus one <url> per\n * blog post, sourced from the same cached post fetch as /api/blogs/posts.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: sitemap.xml covering the static routes plus one <url> per\n * blog post, sourced from the same cached post fetch as /api/blogs/posts.\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 60,
+  "id": 62,
+  "action": "line_to_block",
+  "before": "// Mirrors the `{ status = false, data = null, errors = [], message = '' }`\n// destructuring defaults already used at every fetch site — same\n// tolerance for a missing wrapper field, but now enforces the actual\n// shape of whichever field IS present.",
+  "after": "/**\n * Mirrors the `{ status = false, data = null, errors = [], message = '' }`\n * destructuring defaults already used at every fetch site — same\n * tolerance for a missing wrapper field, but now enforces the actual\n * shape of whichever field IS present.\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 44,
+  "id": 61,
+  "action": "line_to_block",
+  "before": "// The existing `APIFormatResponse<string[]>` cast on this endpoint\n// (`server/api/blogs/categories.ts`, pre-this-change) was already wrong —\n// the real API returns full category objects (confirmed live\n// 2026-09-06), and the actual consumer (`themes/portfolio-dev/components/\n// PostCategories.vue`'s `Category` interface) already expects objects,\n// not bare strings. Schema follows the real shape + the real consumer,\n// not the stale cast.",
+  "after": "/**\n * The existing `APIFormatResponse<string[]>` cast on this endpoint\n * (`server/api/blogs/categories.ts`, pre-this-change) was already wrong —\n * the real API returns full category objects (confirmed live\n * 2026-09-06), and the actual consumer (`themes/portfolio-dev/components/\n * PostCategories.vue`'s `Category` interface) already expects objects,\n * not bare strings. Schema follows the real shape + the real consumer,\n * not the stale cast.\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 34,
+  "id": 60,
+  "action": "line_to_block",
+  "before": "// The real shape of the blog API's `data` field for a post list — a page\n// of posts plus pagination metadata, NOT a bare `Post[]` (see the trap in\n// `agent-hub/doctrine/domains/PROJECT.md`).",
+  "after": "/**\n * The real shape of the blog API's `data` field for a post list — a page\n * of posts plus pagination metadata, NOT a bare `Post[]` (see the trap in\n * `agent-hub/doctrine/domains/PROJECT.md`).\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 14,
+  "id": 59,
+  "action": "line_to_block",
+  "before": "// `isPublic` is declared on the `Post` TS type but the real API never\n// returns it (confirmed live 2026-09-06: actual posts carry a `status`\n// string, e.g. \"publish\", instead) and nothing in the app reads\n// `post.isPublic` (`grep -rn \"isPublic\"` across themes/stores/pages: 0\n// matches) — kept optional here rather than required so real data\n// validates instead of 502ing on a field the API was never sending.",
+  "after": "/**\n * `isPublic` is declared on the `Post` TS type but the real API never\n * returns it (confirmed live 2026-09-06: actual posts carry a `status`\n * string, e.g. \"publish\", instead) and nothing in the app reads\n * `post.isPublic` (`grep -rn \"isPublic\"` across themes/stores/pages: 0\n * matches) — kept optional here rather than required so real data\n * validates instead of 502ing on a field the API was never sending.\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 1,
+  "id": 58,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: Runtime schema validation (zod) for the external blog\n * API's responses. The TS types in `types/blog.ts`/`types/index.ts` are\n * compile-time only and don't catch the external API changing shape\n * silently at runtime (issue #141) — a shape mismatch here now fails\n * loudly with a clear 502 instead of propagating an undefined/wrong-\n * shaped value into the theme layer.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Runtime schema validation (zod) for the external blog\n * API's responses. The TS types in `types/blog.ts`/`types/index.ts` are\n * compile-time only and don't catch the external API changing shape\n * silently at runtime (issue #141) — a shape mismatch here now fails\n * loudly with a clear 502 instead of propagating an undefined/wrong-\n * shaped value into the theme layer.\n */"
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 25,
+  "id": 65,
+  "action": "line_to_block",
+  "before": "// The blog API (Render free tier) cold-starts in 20-30s after\n// inactivity; Vercel's own serverless function timeout kills the whole\n// request well before 3 retries against that cold start can matter,\n// producing a raw 504 instead of this app's own error handling. A\n// bounded 6s timeout with no retry (retrying just repeats the same\n// slow wait) lets this throw and get caught by the caller, which can\n// still respond within the function's time budget. defineCachedFunction\n// does not cache a rejected call, so a timeout here doesn't poison the\n// cache for the full maxAge - the next request tries again fresh.",
+  "after": "/**\n     * The blog API (Render free tier) cold-starts in 20-30s after\n     * inactivity; Vercel's own serverless function timeout kills the whole\n     * request well before 3 retries against that cold start can matter,\n     * producing a raw 504 instead of this app's own error handling. A\n     * bounded 6s timeout with no retry (retrying just repeats the same\n     * slow wait) lets this throw and get caught by the caller, which can\n     * still respond within the function's time budget. defineCachedFunction\n     * does not cache a rejected call, so a timeout here doesn't poison the\n     * cache for the full maxAge - the next request tries again fresh.\n     */"
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 1,
+  "id": 64,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 110,
+  "id": 73,
+  "action": "delete",
+  "before": "// ---"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 104,
+  "id": 72,
+  "action": "delete",
+  "before": "// Thông tin công việc"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 71,
+  "id": 71,
+  "action": "delete",
+  "before": "// Thông tin cơ bản"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 65,
+  "id": 70,
+  "action": "delete",
+  "before": "/**\n * format data\n * @param {*} RECORD\n * @returns\n */"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 62,
+  "id": 69,
+  "action": "delete",
+  "before": "/* res.send(html); */"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 41,
+  "id": 68,
+  "action": "delete",
+  "before": "/**\n   * render HTML\n   */"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 27,
+  "id": 67,
+  "action": "delete",
+  "before": "/**\n   * get data format\n   */"
+ },
+ {
+  "file": "server/utils/createPDF.ts",
+  "line": 14,
+  "id": 66,
+  "action": "line_to_block",
+  "before": "// Note: `description`/`introduction` are intentionally left unescaped — they are\n// rich-text HTML by design elsewhere in the app (rendered via v-html).",
+  "after": "/**\n * Note: `description`/`introduction` are intentionally left unescaped — they are\n * rich-text HTML by design elsewhere in the app (rendered via v-html).\n */"
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 92,
+  "id": 76,
+  "action": "line_to_block",
+  "before": "// The raw API returns this as an object or an array of one (see types/resume-api.ts).",
+  "after": "/** The raw API returns this as an object or an array of one (see types/resume-api.ts). */"
+ },
+ {
+  "file": "server/utils/createPDFAts.ts",
+  "line": 51,
+  "id": 75,
+  "action": "line_to_block",
+  "before": "// Rich-text descriptions come from the owner's own resume API (same trust\n// model as createPDF.ts, which inserts them raw). Here they're reduced to a\n// plain allow-list of tags with every attribute dropped, so inline styles/\n// classes/spans can't reintroduce columns, colors or letter-spacing that\n// trip ATS parsers.",
+  "after": "/**\n * Rich-text descriptions come from the owner's own resume API (same trust\n * model as createPDF.ts, which inserts them raw). Here they're reduced to a\n * plain allow-list of tags with every attribute dropped, so inline styles/\n * classes/spans can't reintroduce columns, colors or letter-spacing that\n * trip ATS parsers.\n */"
+ },
+ {
+  "file": "stores/resume.ts",
+  "line": 1,
+  "id": 79,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 67,
+  "id": 88,
+  "action": "line_to_block",
+  "before": "// Semantic tokens for the active UI theme (see themes/<name>/tokens.css).\n// Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to\n// re-skin every component that uses `theme-*` classes.",
+  "after": "/**\n         * Semantic tokens for the active UI theme (see themes/<name>/tokens.css).\n         * Swapping the value of ACTIVE_THEME in nuxt.config.ts is enough to\n         * re-skin every component that uses `theme-*` classes.\n         */"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 57,
+  "id": 87,
+  "action": "delete",
+  "before": "// padding: '10px',"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 41,
+  "id": 86,
+  "action": "delete",
+  "before": "/* colors: {\n\t\t\ttransparent: 'transparent',\n\t\t\tcurrent: 'currentColor',\n\t\t\twhite: '#ffffff',\n\t\t\tdarkness: '#23272d',\n\t\t\tred: generateColorScale('#fe3d57'),\n\t\t\tpink: generateColorScale('#ec4899'),\n\t\t\tgreen: generateColorScale('#42b883'),\n\t\t\tblue: generateColorScale('#38b2ac'),\n\t\t\tsky: generateColorScale('#61dafb'),\n\t\t\tviolet: generateColorScale('#18315a'),\n\t\t\tdark: generateColorScale('#333333'),\n\t\t\torange: generateColorScale('#C66828'),\n\t\t}, */"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 15,
+  "id": 84,
+  "action": "delete",
+  "before": "// '100', '200', ..., '900'"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 13,
+  "id": 83,
+  "action": "delete",
+  "before": "// Điều chỉnh độ sáng/tối"
+ },
+ {
+  "file": "tailwind.config.js",
+  "line": 11,
+  "id": 82,
+  "action": "delete",
+  "before": "// Các mức độ màu từ 100 đến 900 (thêm sáng hoặc tối)"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PageHeading.vue",
+  "line": 2,
+  "id": 94,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PostCategories.vue",
+  "line": 2,
+  "id": 96,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 30,
+  "id": 101,
+  "action": "line_to_block",
+  "before": "// `status` is already 'success' here (reused from the cached fetch above)\n// only when we're displaying stale data from a previous visit - kick off a\n// background refresh so it gets replaced with fresh data once it arrives.\n// Nuxt's page Suspense/transition setup can call onMounted twice for the\n// same mount, so guard with a flag scoped to this component instance\n// (not to the in-flight request, which may already have finished by the\n// time the second onMounted call happens).",
+  "after": "/**\n * `status` is already 'success' here (reused from the cached fetch above)\n * only when we're displaying stale data from a previous visit - kick off a\n * background refresh so it gets replaced with fresh data once it arrives.\n * Nuxt's page Suspense/transition setup can call onMounted twice for the\n * same mount, so guard with a flag scoped to this component instance\n * (not to the in-flight request, which may already have finished by the\n * time the second onMounted call happens).\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 2,
+  "id": 99,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/contact/Index.vue",
+  "line": 2,
+  "id": 103,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitRepos.vue",
+  "line": 15,
+  "id": 105,
+  "action": "delete",
+  "before": "// Filter"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitRepos.vue",
+  "line": 2,
+  "id": 104,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 2,
+  "id": 106,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/Index.vue",
+  "line": 2,
+  "id": 108,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/part/Item.vue",
+  "line": 31,
+  "id": 109,
+  "action": "line_to_block",
+  "before": "// toLocaleDateString() with no options resolves the calendar date in the\n// RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real\n// browser client (e.g. UTC+7) can compute a different date for the same\n// instant when it falls near a UTC day boundary, causing a Vue hydration\n// mismatch. Pinning timeZone: 'UTC' makes server and client always agree,\n// since modelValue.updated_at is already a UTC ISO timestamp.",
+  "after": "/**\n * toLocaleDateString() with no options resolves the calendar date in the\n * RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real\n * browser client (e.g. UTC+7) can compute a different date for the same\n * instant when it falls near a UTC day boundary, causing a Vue hydration\n * mismatch. Pinning timeZone: 'UTC' makes server and client always agree,\n * since modelValue.updated_at is already a UTC ISO timestamp.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Author.vue",
+  "line": 2,
+  "id": 110,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 2,
+  "id": 111,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: Giscus (GitHub Discussions) comment widget, synced with\n * the site's dark/light color mode.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Giscus (GitHub Discussions) comment widget, synced with\n * the site's dark/light color mode.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Detail.vue",
+  "line": 2,
+  "id": 114,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Item.vue",
+  "line": 6,
+  "id": 116,
+  "action": "delete",
+  "before": "/* import { convertNumberToDate } from '@/utils/index'; */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Item.vue",
+  "line": 1,
+  "id": 115,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Loading.vue",
+  "line": 2,
+  "id": 117,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/projects/Index.vue",
+  "line": 2,
+  "id": 118,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 71,
+  "id": 123,
+  "action": "line_to_block",
+  "before": "// `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,\n// no Vue binding needed for plain navigation) so it stays clickable.",
+  "after": "/**\n * `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,\n * no Vue binding needed for plain navigation) so it stays clickable.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 56,
+  "id": 122,
+  "action": "reword",
+  "before": "// Drop every tag except <strong>/<b>, then split ON those tags — String.split\n// with a non-capturing... actually a matching regex naturally alternates\n// [plain, bold, plain, bold, ...] since each strong/b pair produces one\n// split boundary pair, with no marker characters needed.",
+  "after": "// Drop every tag except <strong>/<b>, then split on those tags - the split naturally alternates [plain,\n  // bold, plain, bold, ...] since each strong/b pair produces one boundary pair, so no marker characters are\n  // needed."
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 51,
+  "id": 121,
+  "action": "line_to_block+reword",
+  "before": "// Renders a sentence as literal Markdown source: <strong>/<b> becomes visible\n// **bold** syntax instead of actually-rendered bold HTML. A private-use\n// marker keeps the bold boundaries intact through HTML-escaping, then gets\n// swapped for a dimmed \"**\" + bold text (Markdown syntax-highlighting look).",
+  "after": "/**\n * Renders a sentence as literal Markdown source: <strong>/<b> becomes visible **bold** syntax instead of\n * actually-rendered bold HTML, with a dimmed \"**\" around bold text (Markdown syntax-highlighting look).\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 15,
+  "id": 120,
+  "action": "line_to_block",
+  "before": "// Splits an HTML string into \"sentences\" only at points where no tag is\n// currently open, so inline markup (e.g. <strong>) never gets broken across lines.",
+  "after": "/**\n * Splits an HTML string into \"sentences\" only at points where no tag is\n * currently open, so inline markup (e.g. <strong>) never gets broken across lines.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 2,
+  "id": 119,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Educations.vue",
+  "line": 2,
+  "id": 125,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Experiences.vue",
+  "line": 2,
+  "id": 126,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n *\n * Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled\n * to look like a Pug source listing (indentation only, tag.class\n * shorthand, no closing tags). The visible \"tag\"/\".class\" glyphs are\n * decorative aria-hidden spans before the real text, and line numbers\n * come from a CSS counter (not literal text) — so a screen reader still\n * hears \"heading: Frontend Developer\", \"list, 6 items\", etc. instead of\n * literal punctuation.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description:\n *\n * Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled\n * to look like a Pug source listing (indentation only, tag.class\n * shorthand, no closing tags). The visible \"tag\"/\".class\" glyphs are\n * decorative aria-hidden spans before the real text, and line numbers\n * come from a CSS counter (not literal text) — so a screen reader still\n * hears \"heading: Frontend Developer\", \"list, 6 items\", etc. instead of\n * literal punctuation.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 16,
+  "id": 128,
+  "action": "line_to_block",
+  "before": "// Real, computed-from-data summary (not a hardcoded number) so a recruiter\n// can see experience length + current role without clicking into the\n// Experience tab first (issue #179). `store.experiences` is already sorted\n// most-recent-first, so [0] is the current/latest role and the last item\n// holds the earliest startDate.",
+  "after": "/**\n * Real, computed-from-data summary (not a hardcoded number) so a recruiter\n * can see experience length + current role without clicking into the\n * Experience tab first (issue #179). `store.experiences` is already sorted\n * most-recent-first, so [0] is the current/latest role and the last item\n * holds the earliest startDate.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 2,
+  "id": 127,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Index.vue",
+  "line": 2,
+  "id": 129,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Languages.vue",
+  "line": 2,
+  "id": 130,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 2,
+  "id": 131,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 11,
+  "id": 134,
+  "action": "line_to_block",
+  "before": "// Declared on the type but the real API never actually returns it\n// (confirmed live 2026-09-06 while adding runtime validation, issue\n// #141) and nothing in the app reads `post.isPublic` — kept optional\n// to match reality instead of a field that was never really there.",
+  "after": "/**\n   * Declared on the type but the real API never actually returns it\n   * (confirmed live 2026-09-06 while adding runtime validation, issue\n   * #141) and nothing in the app reads `post.isPublic` — kept optional\n   * to match reality instead of a field that was never really there.\n   */"
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 1,
+  "id": 133,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/codeLine.ts",
+  "line": 1,
+  "id": 136,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/github.ts",
+  "line": 1,
+  "id": 138,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/index.ts",
+  "line": 1,
+  "id": 139,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 13,
+  "id": 141,
+  "action": "line_to_block",
+  "before": "// The raw API can return generalInformation as an object or an array of\n// one - callers normalize it to a single GeneralInformation object.",
+  "after": "/**\n   * The raw API can return generalInformation as an object or an array of\n   * one - callers normalize it to a single GeneralInformation object.\n   */"
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 1,
+  "id": 140,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 138,
+  "id": 144,
+  "action": "line_to_block",
+  "before": "// `link`/`images` dropped for the same reason as `Certificate` above\n// (issue #142) — `createPDF.ts` never reads either field.",
+  "after": "/**\n * `link`/`images` dropped for the same reason as `Certificate` above\n * (issue #142) — `createPDF.ts` never reads either field.\n */"
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 124,
+  "id": 143,
+  "action": "line_to_block",
+  "before": "// `link`/`images` intentionally dropped (issue #142): `server/utils/\n// createPDF.ts` is the only consumer of this type anywhere in the repo\n// (`grep -rn \"\\bCertificate\\b\"` confirms) and never reads either field\n// (`grep -n \"\\.link\\b\\|\\.images\\b\" createPDF.ts`: 0 matches) — dead type\n// surface, not a behavior change (interfaces have no runtime footprint).",
+  "after": "/**\n * `link`/`images` intentionally dropped (issue #142): `server/utils/\n * createPDF.ts` is the only consumer of this type anywhere in the repo\n * (`grep -rn \"\\bCertificate\\b\"` confirms) and never reads either field\n * (`grep -n \"\\.link\\b\\|\\.images\\b\" createPDF.ts`: 0 matches) — dead type\n * surface, not a behavior change (interfaces have no runtime footprint).\n */"
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 1,
+  "id": 142,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 22,
+  "id": 152,
+  "action": "delete",
+  "before": "// Đệ quy để sao chép các thuộc tính"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 20,
+  "id": 151,
+  "action": "delete",
+  "before": "// Duyệt qua tất cả các thuộc tính của obj"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 17,
+  "id": 150,
+  "action": "delete",
+  "before": "// Tạo một bản sao mới, sử dụng Array.isArray để kiểm tra nếu obj là mảng"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 12,
+  "id": 149,
+  "action": "delete",
+  "before": "// Kiểm tra nếu obj không phải là đối tượng hoặc là null"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 1,
+  "id": 147,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/convertNumberToDate.ts",
+  "line": 1,
+  "id": 153,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/htmlCodeLines.ts",
+  "line": 1,
+  "id": 155,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/index.ts",
+  "line": 1,
+  "id": 157,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/jsonCodeLines.ts",
+  "line": 1,
+  "id": 158,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 13,
+  "id": 162,
+  "action": "delete",
+  "before": "// Sử dụng RegEx để tìm và loại bỏ tất cả các thẻ HTML"
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 7,
+  "id": 161,
+  "action": "delete",
+  "before": "/**\n * @param input - string\n * @returns string\n * */"
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 1,
+  "id": 160,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ },
+ {
+  "file": "utils/themeBadgeUi.ts",
+  "line": 1,
+  "id": 163,
+  "action": "header_trim",
+  "removed_lines": [
+   "* Date: `--/--`"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description: Overrides Nuxt UI's `<UBadge>` default `{color}` variant\n * (which never picks up the `--theme-*` CSS custom properties) with\n * `--theme-accent`, so a badge follows the active theme/Dracula editor-\n * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop\n * merges via tailwind-merge per class-modifier group, so the `dark:`\n * variant needs its own explicit override too, or the default\n * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.\n * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s\n * topic badges - previously two identical copies of this same object.\n */",
+  "after": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Overrides Nuxt UI's `<UBadge>` default `{color}` variant\n * (which never picks up the `--theme-*` CSS custom properties) with\n * `--theme-accent`, so a badge follows the active theme/Dracula editor-\n * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop\n * merges via tailwind-merge per class-modifier group, so the `dark:`\n * variant needs its own explicit override too, or the default\n * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.\n * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s\n * topic badges - previously two identical copies of this same object.\n */"
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 1,
+  "id": 164,
+  "action": "header_block_to_line",
+  "removed_lines": [
+   "* Date: `--/--`",
+   "* Description:"
+  ],
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `--/--`\n * Description:\n */",
+  "after": "// Author: Đạt Võ - https://github.com/datvt243"
+ }
+]
