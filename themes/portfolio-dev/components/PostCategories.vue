@@ -14,7 +14,7 @@ interface Category {
 }
 
 const { t } = useI18n()
-const { data = [], status, error } = await useAsyncData<Category[]>(() => fetchWithRetry('/api/blogs/categories'))
+const { data, status, error } = await useAsyncData<Category[]>(async () => (await fetchWithRetry<Category[]>('/api/blogs/categories')) ?? [])
 
 const query = inject<{ category: Ref<string>; page: Ref<number>; perPage: Ref<number> }>('query')
 const category = toRef(query?.category || '')

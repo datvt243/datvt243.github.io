@@ -17,12 +17,12 @@
  * very first response, before any locale is known) - override it per real
  * active locale so <html lang> matches what's actually rendered (e.g. "en"
  * under the /en/* prefix), instead of always claiming Vietnamese.
- * addSeoAttributes was previously omitted here because it triggered an
+ * seo (formerly addSeoAttributes) was previously omitted here because it triggered an
  * "I18n baseUrl is required" build warning - nuxt.config.ts's i18n.baseUrl
  * is now a real value (server/utils/siteUrl.ts's SITE_URL), so canonical +
  * hreflang alternate <link> tags can be generated for real.
  */
-const i18nHead = useLocaleHead({ addSeoAttributes: true })
+const i18nHead = useLocaleHead({ seo: true })
 useHead(() => ({
   htmlAttrs: {
     lang: i18nHead.value.htmlAttrs?.lang,
