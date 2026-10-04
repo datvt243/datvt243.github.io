@@ -19,7 +19,7 @@ export default defineCachedEventHandler(
 
     const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`)
 
-    const { status, data, errors, message } = parseBlogApiResponse(postResponseSchema, raw, `post detail ${id}`)
+    const { status, data, errors, message } = parseBlogApiResponse({ schema: postResponseSchema, raw, context: `post detail ${id}` })
 
     return {
       status,
