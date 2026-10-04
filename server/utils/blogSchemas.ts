@@ -88,7 +88,7 @@ export const categoriesResponseSchema = apiFormatResponseSchema(categoriesSchema
  * `throw createError({ statusCode: 502, ... })` for a failed external
  * call) instead of letting a shape mismatch silently propagate.
  */
-export function parseBlogApiResponse<T extends z.ZodTypeAny>(schema: T, raw: unknown, context: string): z.infer<T> {
+export function parseBlogApiResponse<T extends z.ZodTypeAny>({ schema, raw, context }: { schema: T; raw: unknown; context: string }): z.infer<T> {
   const result = schema.safeParse(raw)
 
   if (!result.success) {

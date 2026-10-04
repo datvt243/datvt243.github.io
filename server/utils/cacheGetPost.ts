@@ -45,7 +45,7 @@ export const cacheGetPosts = defineCachedFunction(
       },
     )
 
-    const { status, data } = parseBlogApiResponse(paginatedPostsResponseSchema, raw, 'posts list')
+    const { status, data } = parseBlogApiResponse({ schema: paginatedPostsResponseSchema, raw, context: 'posts list' })
 
     if (!status || !data) return emptyResult(query)
     return data
