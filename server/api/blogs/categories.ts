@@ -8,7 +8,7 @@ export default defineCachedEventHandler(
   async (event) => {
     const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`)
 
-    const { status, data } = parseBlogApiResponse(categoriesResponseSchema, raw, 'categories')
+    const { status, data } = parseBlogApiResponse({ schema: categoriesResponseSchema, raw, context: 'categories' })
 
     return status ? data : []
   },

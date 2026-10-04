@@ -121,7 +121,7 @@ const _helper = () => {
       return `${m < 9 ? `0${m}` : m}/${y}`
     }
 
-    const getTime = ((startDate, endDate, isCurrent) => {
+    const getTime = (({ startDate, endDate, isCurrent }) => {
       const _start = formatDate(startDate)
       if (!endDate) {
         return _start
@@ -129,7 +129,7 @@ const _helper = () => {
 
       const _end = isCurrent ? 'Hiện tại' : formatDate(endDate)
       return `${_start} - ${_end}`
-    })(startDate, endDate, isCurrent)
+    })({ startDate, endDate, isCurrent })
 
     const getSkills = ((skillList: string[] = []) => {
       return skillList.length ? `<div class="skills">${skillList.map((s) => escapeHtml(s)).join(', ')}</div>` : ''
@@ -174,14 +174,14 @@ const _helper = () => {
         socialMedia: { github = '', linkedin = '', website = '' },
       } = props
 
-      const getInfo = (phone: string, email: string, address: string) => {
+      const getInfo = ({ phone, email, address }: { phone: string; email: string; address: string }) => {
         let _result = ''
         address && (_result += escapeHtml(address))
         email && (_result += ` - <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`)
         phone && (_result += ` - <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a>`)
         return _result
       }
-      const getWebsite = (github: string = '', linkedin: string = '', website: string = '') => {
+      const getWebsite = ({ github = '', linkedin = '', website = '' }: { github?: string; linkedin?: string; website?: string }) => {
         let _result = ''
         github && (_result += `<a href="${escapeHtml(github)}">${escapeHtml(github)}</a>`)
         linkedin && (_result += ` - <a href="${escapeHtml(linkedin)}">${escapeHtml(linkedin)}</a>`)
@@ -193,8 +193,8 @@ const _helper = () => {
                 <div class="box">
                     <div class="text-center" style="margin-bottom: 10px">
                         <div class="full-name">${escapeHtml(firstName)} ${escapeHtml(lastName)}</div>
-                        <div class="info mb-0">${getInfo(phone, email, address)}</div>
-                        <div class="website">${getWebsite(github, linkedin, website)}</div>
+                        <div class="info mb-0">${getInfo({ phone, email, address })}</div>
+                        <div class="website">${getWebsite({ github, linkedin, website })}</div>
                     </div>
                     <div class="description">${introduction}</div>
                 </div>`

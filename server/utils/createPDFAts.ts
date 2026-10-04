@@ -73,13 +73,35 @@ const formatMonthYear = (val: number | null | undefined): string => {
   return `${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
 }
 
-const formatRange = (start: number | null | undefined, end: number | null | undefined, isCurrent: boolean, h: Headings): string => {
+const formatRange = ({
+  start,
+  end,
+  isCurrent,
+  h,
+}: {
+  start: number | null | undefined
+  end: number | null | undefined
+  isCurrent: boolean
+  h: Headings
+}): string => {
   const from = formatMonthYear(start)
   if (!end && !isCurrent) return from
   return `${from} – ${isCurrent ? h.present : formatMonthYear(end)}`
 }
 
-const entry = (title: string, meta: string, body = '', stack: string[] = [], stackLabel = ''): string => `
+const entry = ({
+  title,
+  meta,
+  body = '',
+  stack = [],
+  stackLabel = '',
+}: {
+  title: string
+  meta: string
+  body?: string
+  stack?: string[]
+  stackLabel?: string
+}): string => `
   <div class="entry">
     <p class="entry-title">${title}</p>
     ${meta ? `<p class="entry-meta">${escapeHtml(meta)}</p>` : ''}
@@ -144,38 +166,50 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
   const experienceHtml = [...experiences]
     .sort((a, b) => b.startDate - a.startDate)
     .map((e) =>
-      entry(`${escapeHtml(e.position)} — ${escapeHtml(e.company)}`, formatRange(e.startDate, e.endDate, e.isCurrent, h), e.description, e.skills, h.stack),
+      entry({
+        title: `${escapeHtml(e.position)} — ${escapeHtml(e.company)}`,
+        meta: formatRange({ start: e.startDate, end: e.endDate, isCurrent: e.isCurrent, h }),
+        body: e.description,
+        stack: e.skills,
+        stackLabel: h.stack,
+      }),
     )
     .join('')
 
   const projectHtml = projects
     .map((p) =>
-      entry(
-        `${escapeHtml(p.name)}${p.position ? ` — ${escapeHtml(p.position)}` : ''}`,
-        formatRange(p.startDate, p.endDate, p.isWorking, h),
-        p.description,
-        p.technology,
-        h.stack,
-      ),
+      entry({
+        title: `${escapeHtml(p.name)}${p.position ? ` — ${escapeHtml(p.position)}` : ''}`,
+        meta: formatRange({ start: p.startDate, end: p.endDate, isCurrent: p.isWorking, h }),
+        body: p.description,
+        stack: p.technology,
+        stackLabel: h.stack,
+      }),
     )
     .join('')
 
   const educationHtml = educations
-    .map((e) => entry(`${escapeHtml(e.major)} — ${escapeHtml(e.school)}`, formatRange(e.startDate, e.endDate, e.isCurrent, h), e.description))
+    .map((e) =>
+      entry({
+        title: `${escapeHtml(e.major)} — ${escapeHtml(e.school)}`,
+        meta: formatRange({ start: e.startDate, end: e.endDate, isCurrent: e.isCurrent, h }),
+        body: e.description,
+      }),
+    )
     .join('')
 
   const certificateHtml = certificates
     .map((c) =>
-      entry(
-        `${escapeHtml(c.name)} — ${escapeHtml(c.organization)}`,
-        formatRange(c.startDate, c.isNoExpiration ? null : c.endDate, c.isNoExpiration, h),
-        c.description,
-      ),
+      entry({
+        title: `${escapeHtml(c.name)} — ${escapeHtml(c.organization)}`,
+        meta: formatRange({ start: c.startDate, end: c.isNoExpiration ? null : c.endDate, isCurrent: c.isNoExpiration, h }),
+        body: c.description,
+      }),
     )
     .join('')
 
   const awardHtml = awards
-    .map((a) => entry(`${escapeHtml(a.name)} — ${escapeHtml(a.organization)}`, formatMonthYear(a.issueDate), a.description))
+    .map((a) => entry({ title: `${escapeHtml(a.name)} — ${escapeHtml(a.organization)}`, meta: formatMonthYear(a.issueDate), body: a.description }))
     .join('')
 
   const languageHtml = foreignLanguages.length

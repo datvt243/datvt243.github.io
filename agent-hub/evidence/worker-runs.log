@@ -19,3 +19,5 @@
 2026-10-04T00:11:11Z role=verifier outcome=SEAL node=comment-cleanup-standardize rerun=partial hub_bytes_before=134641 hub_bytes_after=136310
 2026-10-04T11:03:33Z role=verifier outcome=SEAL node=comment-style-followup rerun=partial hub_bytes_before=136310 hub_bytes_after=137859
 2026-10-04T11:07:24Z role=verifier outcome=SEAL node=author-github-see-line rerun=partial hub_bytes_before=138445 hub_bytes_after=138920
+2026-10-04T12:05:42Z role=verifier outcome=REOPEN node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=139629
+2026-10-04T12:08:42Z role=verifier outcome=SEAL node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=140218
