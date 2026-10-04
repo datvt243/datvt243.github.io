@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { GitUser } from '@/types/github'
@@ -12,11 +11,13 @@ const props = defineProps<{
 	user: GitUser
 }>()
 
-// Plain-text interpolation (unlike the v-html it replaces) doesn't go
-// through the browser's HTML parser, which otherwise silently normalizes
-// "\r\n" to "\n" - without this, a bio containing CRLF line endings
-// hydration-mismatches (SSR HTML gets browser-normalized to "\n" before
-// Vue compares it against the client's freshly computed "\r\n" string).
+/**
+ * Plain-text interpolation (unlike the v-html it replaces) doesn't go
+ * through the browser's HTML parser, which otherwise silently normalizes
+ * "\r\n" to "\n" - without this, a bio containing CRLF line endings
+ * hydration-mismatches (SSR HTML gets browser-normalized to "\n" before
+ * Vue compares it against the client's freshly computed "\r\n" string).
+ */
 const bioText = computed(() => props.user.bio?.replace(/\r\n?/g, '\n'))
 </script>
 <template>

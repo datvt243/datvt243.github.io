@@ -1,7 +1,6 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 /**
@@ -9,17 +8,13 @@
  * @returns Object | Array | string ...
  * */
 export function cloneDeep<T>(obj: T): T {
-  // Kiểm tra nếu obj không phải là đối tượng hoặc là null
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
 
-  // Tạo một bản sao mới, sử dụng Array.isArray để kiểm tra nếu obj là mảng
   const copy = (Array.isArray(obj) ? [] : {}) as T
 
-  // Duyệt qua tất cả các thuộc tính của obj
   for (const key in obj) {
-    // Đệ quy để sao chép các thuộc tính
     copy[key] = cloneDeep(obj[key])
   }
 

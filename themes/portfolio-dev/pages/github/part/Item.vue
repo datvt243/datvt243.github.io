@@ -28,12 +28,14 @@ const getFieldValue = (field: keyof GitRepos): string => {
   return props.modelValue[field]
 }
 
-// toLocaleDateString() with no options resolves the calendar date in the
-// RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real
-// browser client (e.g. UTC+7) can compute a different date for the same
-// instant when it falls near a UTC day boundary, causing a Vue hydration
-// mismatch. Pinning timeZone: 'UTC' makes server and client always agree,
-// since modelValue.updated_at is already a UTC ISO timestamp.
+/**
+ * toLocaleDateString() with no options resolves the calendar date in the
+ * RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real
+ * browser client (e.g. UTC+7) can compute a different date for the same
+ * instant when it falls near a UTC day boundary, causing a Vue hydration
+ * mismatch. Pinning timeZone: 'UTC' makes server and client always agree,
+ * since modelValue.updated_at is already a UTC ISO timestamp.
+ */
 const updatedOnLabel = computed(() =>
   new Date(props.modelValue.updated_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
 )

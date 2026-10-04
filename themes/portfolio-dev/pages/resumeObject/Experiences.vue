@@ -1,16 +1,14 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
- *
- * Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled
+ * @file Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled
  * to look like a Pug source listing (indentation only, tag.class
  * shorthand, no closing tags). The visible "tag"/".class" glyphs are
  * decorative aria-hidden spans before the real text, and line numbers
  * come from a CSS counter (not literal text) — so a screen reader still
  * hears "heading: Frontend Developer", "list, 6 items", etc. instead of
  * literal punctuation.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 const store = useResumeStore()

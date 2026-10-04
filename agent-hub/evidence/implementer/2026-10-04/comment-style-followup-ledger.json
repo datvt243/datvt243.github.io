@@ -1,0 +1,586 @@
+[
+ {
+  "file": "components/ListRender.vue",
+  "line": 2,
+  "id": 1,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "composables/debounceRef.ts",
+  "line": 1,
+  "id": 2,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "composables/useDownloadResume.ts",
+  "line": 1,
+  "id": 3,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Shared CV-download logic, extracted so both the Hero (top\n * of the page) and the About tab's own button can trigger the same fetch/\n * blob/download flow without duplicating it (issue #179). Also drives a\n * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't\n * look like a silently broken button. `template: 'ats'` (issue #206) asks\n * for the single-column ATS-parser-friendly variant, in the current locale.\n */",
+  "after": "/**\n * @file Shared CV-download logic, extracted so both the Hero (top\n * of the page) and the About tab's own button can trigger the same fetch/\n * blob/download flow without duplicating it (issue #179). Also drives a\n * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't\n * look like a silently broken button. `template: 'ats'` (issue #206) asks\n * for the single-column ATS-parser-friendly variant, in the current locale.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "layouts/blog.vue",
+  "line": 2,
+  "id": 5,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 108,
+  "id": 19,
+  "action": "multiline_line_to_block",
+  "before": "// Same production origin as server/utils/siteUrl.ts's SITE_URL (shared\n// constant, not a separate hardcoded copy) - required by useLocaleHead()\n// (used in app.vue to set <html lang> per active locale) to generate\n// valid hreflang/canonical link values instead of a build warning.",
+  "after": "/**\n     * Same production origin as server/utils/siteUrl.ts's SITE_URL (shared\n     * constant, not a separate hardcoded copy) - required by useLocaleHead()\n     * (used in app.vue to set <html lang> per active locale) to generate\n     * valid hreflang/canonical link values instead of a build warning.\n     */"
+ },
+ {
+  "file": "nuxt.config.ts",
+  "line": 51,
+  "id": 16,
+  "action": "multiline_line_to_block",
+  "before": "// Silences the \"legacy-js-api\" deprecation warning Dart Sass\n// prints on every dev/build - opts into sass-embedded's newer API.",
+  "after": "/**\n           * Silences the \"legacy-js-api\" deprecation warning Dart Sass\n           * prints on every dev/build - opts into sass-embedded's newer API.\n           */"
+ },
+ {
+  "file": "pages/blogs/[id].vue",
+  "line": 2,
+  "id": 22,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "pages/blogs/index.vue",
+  "line": 2,
+  "id": 23,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "pages/contact.vue",
+  "line": 2,
+  "id": 24,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "pages/github.vue",
+  "line": 2,
+  "id": 25,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 22,
+  "id": 27,
+  "action": "multiline_line_to_block",
+  "before": "// No dedicated social-share banner exists yet - reusing the real profile\n// photo (already used as the hero avatar) so shares at least render a real\n// image instead of none, per the `no-og-image` finding (issue #179).",
+  "after": "/**\n * No dedicated social-share banner exists yet - reusing the real profile\n * photo (already used as the hero avatar) so shares at least render a real\n * image instead of none, per the `no-og-image` finding (issue #179).\n */"
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 2,
+  "id": 26,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "pages/projects.vue",
+  "line": 2,
+  "id": 29,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "plugins/ErrorHandler.ts",
+  "line": 1,
+  "id": 30,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "plugins/VisitTracker.client.ts",
+  "line": 1,
+  "id": 31,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Date: `01/09/2026`\n * Description: Records a resume visit (count/timestamp/geo/IP, per\n * candidate) via the backend's dedicated `POST /api/me/:email/visit`\n * endpoint (see resume-nodejs-api's `add-visit-tracking` node).\n *\n * Client-only (`.client.ts` suffix, never runs during SSR/ISR render):\n * the backend resolves the visitor's IP/location from the request that\n * reaches it, so this must fire from the real visitor's browser, not from\n * this app's own Nitro server (which would report the server's own IP,\n * and would only fire once per ISR cache window instead of once per real\n * visit). Fire-and-forget: a failed/unreachable call must never block\n * rendering or throw - only logged.\n */",
+  "after": "/**\n * Date: `01/09/2026`\n * @file Records a resume visit (count/timestamp/geo/IP, per\n * candidate) via the backend's dedicated `POST /api/me/:email/visit`\n * endpoint (see resume-nodejs-api's `add-visit-tracking` node).\n *\n * Client-only (`.client.ts` suffix, never runs during SSR/ISR render):\n * the backend resolves the visitor's IP/location from the request that\n * reaches it, so this must fire from the real visitor's browser, not from\n * this app's own Nitro server (which would report the server's own IP,\n * and would only fire once per ISR cache window instead of once per real\n * visit). Fire-and-forget: a failed/unreachable call must never block\n * rendering or throw - only logged.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/api/blogs/categories.ts",
+  "line": 1,
+  "id": 32,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/api/blogs/detail/[id].ts",
+  "line": 1,
+  "id": 33,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 13,
+  "id": 35,
+  "action": "multiline_line_to_block",
+  "before": "// Blog API unreachable/cold-starting - degrade to an empty page instead\n// of a 500/504 (see cacheGetPost.ts's timeout comment).",
+  "after": "/**\n     * Blog API unreachable/cold-starting - degrade to an empty page instead\n     * of a 500/504 (see cacheGetPost.ts's timeout comment).\n     */"
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 1,
+  "id": 34,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/api/generate-pdf.ts",
+  "line": 74,
+  "id": 38,
+  "action": "multiline_line_to_block",
+  "before": "// The API returns this as an object or an array of one - the old\n// array-only check turned the real object shape into {}, silently\n// dropping skills/languages from the PDF.",
+  "after": "/**\n     * The API returns this as an object or an array of one - the old\n     * array-only check turned the real object shape into {}, silently\n     * dropping skills/languages from the PDF.\n     */"
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 1,
+  "id": 39,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/api/resume.ts",
+  "line": 1,
+  "id": 41,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/plugins/RenderHTML.ts",
+  "line": 1,
+  "id": 42,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/routes/robots.txt.ts",
+  "line": 1,
+  "id": 43,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: robots.txt - previously an empty static file in public/;\n * moved to a server route so it can point crawlers at /sitemap.xml using\n * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a\n * 4th hardcoded copy of the production domain.\n */",
+  "after": "/**\n * @file robots.txt - previously an empty static file in public/;\n * moved to a server route so it can point crawlers at /sitemap.xml using\n * the same SITE_URL constant as sitemap.xml.ts/rss.xml.ts instead of a\n * 4th hardcoded copy of the production domain.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 21,
+  "id": 45,
+  "action": "multiline_line_to_block",
+  "before": "// Degrade to an empty feed instead of a 504 if the blog API is cold (see\n// cacheGetPost.ts's timeout comment) - an empty RSS response is a far\n// better reader experience than a hard server error.",
+  "after": "/**\n   * Degrade to an empty feed instead of a 504 if the blog API is cold (see\n   * cacheGetPost.ts's timeout comment) - an empty RSS response is a far\n   * better reader experience than a hard server error.\n   */"
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 1,
+  "id": 44,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: RSS 2.0 feed for /blogs, sourced from the same cached\n * post fetch as /api/blogs/posts.\n */",
+  "after": "/**\n * @file RSS 2.0 feed for /blogs, sourced from the same cached\n * post fetch as /api/blogs/posts.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 14,
+  "id": 47,
+  "action": "multiline_line_to_block",
+  "before": "// Degrade to static-routes-only instead of a 504 if the blog API is cold\n// (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs\n// for one crawl is far better than the crawler getting no sitemap at all.",
+  "after": "/**\n   * Degrade to static-routes-only instead of a 504 if the blog API is cold\n   * (see cacheGetPost.ts's timeout comment) - a sitemap missing post URLs\n   * for one crawl is far better than the crawler getting no sitemap at all.\n   */"
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 1,
+  "id": 46,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: sitemap.xml covering the static routes plus one <url> per\n * blog post, sourced from the same cached post fetch as /api/blogs/posts.\n */",
+  "after": "/**\n * @file sitemap.xml covering the static routes plus one <url> per\n * blog post, sourced from the same cached post fetch as /api/blogs/posts.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 1,
+  "id": 48,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Runtime schema validation (zod) for the external blog\n * API's responses. The TS types in `types/blog.ts`/`types/index.ts` are\n * compile-time only and don't catch the external API changing shape\n * silently at runtime (issue #141) — a shape mismatch here now fails\n * loudly with a clear 502 instead of propagating an undefined/wrong-\n * shaped value into the theme layer.\n */",
+  "after": "/**\n * @file Runtime schema validation (zod) for the external blog\n * API's responses. The TS types in `types/blog.ts`/`types/index.ts` are\n * compile-time only and don't catch the external API changing shape\n * silently at runtime (issue #141) — a shape mismatch here now fails\n * loudly with a clear 502 instead of propagating an undefined/wrong-\n * shaped value into the theme layer.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 1,
+  "id": 54,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "stores/resume.ts",
+  "line": 1,
+  "id": 62,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PageHeading.vue",
+  "line": 2,
+  "id": 72,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PostCategories.vue",
+  "line": 2,
+  "id": 74,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 43,
+  "id": 80,
+  "action": "multiline_line_to_block",
+  "before": "// Keep showing the (possibly stale) list during the background refresh\n// instead of flashing back to the ListRender loading state.",
+  "after": "/**\n * Keep showing the (possibly stale) list during the background refresh\n * instead of flashing back to the ListRender loading state.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 20,
+  "id": 78,
+  "action": "multiline_line_to_block",
+  "before": "// Show whatever we fetched last time for these params instantly (no\n// blank/loading flash), then silently refetch below and overwrite it -\n// Nuxt's own default getCachedData only reads from the SSR/static payload,\n// which isn't populated for plain client-side re-navigation.",
+  "after": "/**\n   * Show whatever we fetched last time for these params instantly (no\n   * blank/loading flash), then silently refetch below and overwrite it -\n   * Nuxt's own default getCachedData only reads from the SSR/static payload,\n   * which isn't populated for plain client-side re-navigation.\n   */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 2,
+  "id": 77,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/contact/Index.vue",
+  "line": 2,
+  "id": 81,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitRepos.vue",
+  "line": 2,
+  "id": 82,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 11,
+  "id": 84,
+  "action": "multiline_line_to_block",
+  "before": "// Plain-text interpolation (unlike the v-html it replaces) doesn't go\n// through the browser's HTML parser, which otherwise silently normalizes\n// \"\\r\\n\" to \"\\n\" - without this, a bio containing CRLF line endings\n// hydration-mismatches (SSR HTML gets browser-normalized to \"\\n\" before\n// Vue compares it against the client's freshly computed \"\\r\\n\" string).",
+  "after": "/**\n * Plain-text interpolation (unlike the v-html it replaces) doesn't go\n * through the browser's HTML parser, which otherwise silently normalizes\n * \"\\r\\n\" to \"\\n\" - without this, a bio containing CRLF line endings\n * hydration-mismatches (SSR HTML gets browser-normalized to \"\\n\" before\n * Vue compares it against the client's freshly computed \"\\r\\n\" string).\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 2,
+  "id": 83,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/Index.vue",
+  "line": 2,
+  "id": 85,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Author.vue",
+  "line": 2,
+  "id": 87,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 72,
+  "id": 90,
+  "action": "multiline_line_to_block",
+  "before": "// containerRef sits inside <ClientOnly>, which doesn't render its real\n// slot content until one tick after this component's own onMounted -\n// without this, containerRef.value is still null here and loadGiscus()\n// silently no-ops (isConfigured guard passes, container guard doesn't).",
+  "after": "/**\n   * containerRef sits inside <ClientOnly>, which doesn't render its real\n   * slot content until one tick after this component's own onMounted -\n   * without this, containerRef.value is still null here and loadGiscus()\n   * silently no-ops (isConfigured guard passes, container guard doesn't).\n   */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 8,
+  "id": 89,
+  "action": "multiline_line_to_block",
+  "before": "// Repo name is a fixed, deterministic constant for this site (same\n// convention as SITE_URL in server/routes/{rss,sitemap}.xml.ts) - only\n// the opaque IDs below need real values from https://giscus.app's config\n// generator, which requires GitHub Discussions enabled + the Giscus\n// GitHub App installed on the repo first (a manual, one-time operator\n// step - see root CLAUDE.md).",
+  "after": "/**\n * Repo name is a fixed, deterministic constant for this site (same\n * convention as SITE_URL in server/routes/{rss,sitemap}.xml.ts) - only\n * the opaque IDs below need real values from https://giscus.app's config\n * generator, which requires GitHub Discussions enabled + the Giscus\n * GitHub App installed on the repo first (a manual, one-time operator\n * step - see root CLAUDE.md).\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 2,
+  "id": 88,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Giscus (GitHub Discussions) comment widget, synced with\n * the site's dark/light color mode.\n */",
+  "after": "/**\n * @file Giscus (GitHub Discussions) comment widget, synced with\n * the site's dark/light color mode.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Detail.vue",
+  "line": 2,
+  "id": 91,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Item.vue",
+  "line": 2,
+  "id": 92,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Loading.vue",
+  "line": 2,
+  "id": 93,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/projects/Index.vue",
+  "line": 2,
+  "id": 94,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 81,
+  "id": 100,
+  "action": "multiline_line_to_block",
+  "before": "// API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those\n// block wrappers first so the depth-based sentence splitter below isn't gated off\n// for the whole string by one never-closing tag.",
+  "after": "/**\n   * API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those\n   * block wrappers first so the depth-based sentence splitter below isn't gated off\n   * for the whole string by one never-closing tag.\n   */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 54,
+  "id": 98,
+  "action": "multiline_line_to_block",
+  "before": "// Drop every tag except <strong>/<b>, then split on those tags - the split naturally alternates [plain,\n// bold, plain, bold, ...] since each strong/b pair produces one boundary pair, so no marker characters are\n// needed.",
+  "after": "/**\n   * Drop every tag except <strong>/<b>, then split on those tags - the split naturally alternates [plain,\n   * bold, plain, bold, ...] since each strong/b pair produces one boundary pair, so no marker characters are\n   * needed.\n   */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 2,
+  "id": 95,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Educations.vue",
+  "line": 2,
+  "id": 101,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Experiences.vue",
+  "line": 2,
+  "id": 102,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description:\n *\n * Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled\n * to look like a Pug source listing (indentation only, tag.class\n * shorthand, no closing tags). The visible \"tag\"/\".class\" glyphs are\n * decorative aria-hidden spans before the real text, and line numbers\n * come from a CSS counter (not literal text) — so a screen reader still\n * hears \"heading: Frontend Developer\", \"list, 6 items\", etc. instead of\n * literal punctuation.\n */",
+  "after": "/**\n * @file Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled\n * to look like a Pug source listing (indentation only, tag.class\n * shorthand, no closing tags). The visible \"tag\"/\".class\" glyphs are\n * decorative aria-hidden spans before the real text, and line numbers\n * come from a CSS counter (not literal text) — so a screen reader still\n * hears \"heading: Frontend Developer\", \"list, 6 items\", etc. instead of\n * literal punctuation.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 2,
+  "id": 103,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Index.vue",
+  "line": 2,
+  "id": 105,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Languages.vue",
+  "line": 2,
+  "id": 106,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 8,
+  "id": 108,
+  "action": "multiline_line_to_block",
+  "before": "// Only maps to logos actually present under public/svg/ — skill names come\n// from the API as free text, so unmatched skills just render without an icon\n// rather than guessing/faking one.",
+  "after": "/**\n * Only maps to logos actually present under public/svg/ — skill names come\n * from the API as free text, so unmatched skills just render without an icon\n * rather than guessing/faking one.\n */"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 2,
+  "id": 107,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 1,
+  "id": 109,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/codeLine.ts",
+  "line": 1,
+  "id": 112,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/github.ts",
+  "line": 1,
+  "id": 114,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/index.ts",
+  "line": 1,
+  "id": 115,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 1,
+  "id": 116,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 1,
+  "id": 118,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 1,
+  "id": 123,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/convertNumberToDate.ts",
+  "line": 1,
+  "id": 125,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/htmlCodeLines.ts",
+  "line": 1,
+  "id": 127,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/index.ts",
+  "line": 1,
+  "id": 129,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/jsonCodeLines.ts",
+  "line": 1,
+  "id": 130,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 1,
+  "id": 132,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/themeBadgeUi.ts",
+  "line": 1,
+  "id": 133,
+  "action": "header_block_to_jsdoc",
+  "before": "/**\n * Author: Đạt Võ - https://github.com/datvt243\n * Description: Overrides Nuxt UI's `<UBadge>` default `{color}` variant\n * (which never picks up the `--theme-*` CSS custom properties) with\n * `--theme-accent`, so a badge follows the active theme/Dracula editor-\n * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop\n * merges via tailwind-merge per class-modifier group, so the `dark:`\n * variant needs its own explicit override too, or the default\n * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.\n * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s\n * topic badges - previously two identical copies of this same object.\n */",
+  "after": "/**\n * @file Overrides Nuxt UI's `<UBadge>` default `{color}` variant\n * (which never picks up the `--theme-*` CSS custom properties) with\n * `--theme-accent`, so a badge follows the active theme/Dracula editor-\n * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop\n * merges via tailwind-merge per class-modifier group, so the `dark:`\n * variant needs its own explicit override too, or the default\n * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.\n * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s\n * topic badges - previously two identical copies of this same object.\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 1,
+  "id": 134,
+  "action": "header_line_to_jsdoc",
+  "before": "// Author: Đạt Võ - https://github.com/datvt243",
+  "after": "/**\n * @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)\n */"
+ }
+]

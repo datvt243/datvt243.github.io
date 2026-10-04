@@ -1,12 +1,12 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: Shared CV-download logic, extracted so both the Hero (top
+ * @file Shared CV-download logic, extracted so both the Hero (top
  * of the page) and the About tab's own button can trigger the same fetch/
  * blob/download flow without duplicating it (issue #179). Also drives a
  * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't
  * look like a silently broken button. `template: 'ats'` (issue #206) asks
  * for the single-column ATS-parser-friendly variant, in the current locale.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 export function useDownloadResume() {

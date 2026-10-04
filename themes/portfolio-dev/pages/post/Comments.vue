@@ -1,17 +1,19 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: Giscus (GitHub Discussions) comment widget, synced with
+ * @file Giscus (GitHub Discussions) comment widget, synced with
  * the site's dark/light color mode.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
-// Repo name is a fixed, deterministic constant for this site (same
-// convention as SITE_URL in server/routes/{rss,sitemap}.xml.ts) - only
-// the opaque IDs below need real values from https://giscus.app's config
-// generator, which requires GitHub Discussions enabled + the Giscus
-// GitHub App installed on the repo first (a manual, one-time operator
-// step - see root CLAUDE.md).
+/**
+ * Repo name is a fixed, deterministic constant for this site (same
+ * convention as SITE_URL in server/routes/{rss,sitemap}.xml.ts) - only
+ * the opaque IDs below need real values from https://giscus.app's config
+ * generator, which requires GitHub Discussions enabled + the Giscus
+ * GitHub App installed on the repo first (a manual, one-time operator
+ * step - see root CLAUDE.md).
+ */
 const GISCUS_REPO = 'datvt243/datvt243.github.io'
 
 const { t, locale } = useI18n()
@@ -70,10 +72,12 @@ watch(
 )
 
 onMounted(async () => {
-  // containerRef sits inside <ClientOnly>, which doesn't render its real
-  // slot content until one tick after this component's own onMounted -
-  // without this, containerRef.value is still null here and loadGiscus()
-  // silently no-ops (isConfigured guard passes, container guard doesn't).
+  /**
+   * containerRef sits inside <ClientOnly>, which doesn't render its real
+   * slot content until one tick after this component's own onMounted -
+   * without this, containerRef.value is still null here and loadGiscus()
+   * silently no-ops (isConfigured guard passes, container guard doesn't).
+   */
   await nextTick()
   loadGiscus()
 })

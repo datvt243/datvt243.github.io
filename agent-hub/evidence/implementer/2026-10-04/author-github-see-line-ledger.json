@@ -1,0 +1,350 @@
+[
+ {
+  "file": "composables/useDownloadResume.ts",
+  "line": 8,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "composables/debounceRef.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "layouts/blog.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/blogs/[id].vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "components/ListRender.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/github.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/categories.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "plugins/VisitTracker.client.ts",
+  "line": 14,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/github.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/routes/rss.xml.ts",
+  "line": 4,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/routes/robots.txt.ts",
+  "line": 6,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/utils/cacheGetPost.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/contact.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "stores/resume.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/blogs/index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "plugins/ErrorHandler.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "pages/projects.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/posts.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/blogs/Index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/blogs/detail/[id].ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/plugins/RenderHTML.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitUser.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/api/resume.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/utils/blogSchemas.ts",
+  "line": 8,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Author.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "server/routes/sitemap.xml.ts",
+  "line": 4,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Loading.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PostCategories.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/AboutMe.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/components/PageHeading.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/contact/Index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/GitRepos.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/codeLine.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/github/Index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/index.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Comments.vue",
+  "line": 5,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Item.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/projects/Index.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/cloneDeep.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/post/Detail.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Hero.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Educations.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/htmlCodeLines.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Experiences.vue",
+  "line": 10,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Languages.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/themeBadgeUi.ts",
+  "line": 11,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "themes/portfolio-dev/pages/resumeObject/Skills.vue",
+  "line": 3,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/blog.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/github.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/resume-document.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/convertNumberToDate.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "types/resume-api.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/index.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/removeHtmlTags.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/tsCodeLines.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ },
+ {
+  "file": "utils/jsonCodeLines.ts",
+  "line": 2,
+  "before": "* @author Đạt Võ <votan.it@gmail.com> (https://github.com/datvt243)",
+  "after": "* @author Đạt Võ <votan.it@gmail.com>\n* @see https://github.com/datvt243"
+ }
+]

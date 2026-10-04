@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { Resume } from '@/types/resume-document'
@@ -23,9 +22,11 @@ const seoTitle = computed(() => {
   return firstName || lastName ? `Resume ${firstName} ${lastName}`.trim() : 'Võ Tấn CV'
 })
 const seoDescription = computed(() => removeHtmlTags(data.value?.introduction || ''))
-// No dedicated social-share banner exists yet - reusing the real profile
-// photo (already used as the hero avatar) so shares at least render a real
-// image instead of none, per the `no-og-image` finding (issue #179).
+/**
+ * No dedicated social-share banner exists yet - reusing the real profile
+ * photo (already used as the hero avatar) so shares at least render a real
+ * image instead of none, per the `no-og-image` finding (issue #179).
+ */
 const ogImageUrl = computed(() => `${publicConfig.SITE_URL}/Avatar.png`)
 
 useSeoMeta({
@@ -38,10 +39,12 @@ useSeoMeta({
   twitterImage: ogImageUrl,
 })
 
-// Person structured data - a CV site has no page more relevant to attach
-// this to than the resume itself. Every field traces to real, already-shown
-// data (app.config.ts's contact + the resume store's positionDesired) - no
-// fabricated identifiers.
+/**
+ * Person structured data - a CV site has no page more relevant to attach
+ * this to than the resume itself. Every field traces to real, already-shown
+ * data (app.config.ts's contact + the resume store's positionDesired) - no
+ * fabricated identifiers.
+ */
 useHead({
   script: [
     {

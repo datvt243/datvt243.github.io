@@ -1,23 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-/* import * as dotenv from 'dotenv' */
-
 import { SITE_URL } from './server/utils/siteUrl'
 
-// The active UI theme. A theme is a folder under `themes/<name>/` providing:
-// - `pages/` - one subfolder per route content (resumeObject, github, contact,
-//   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.
-//   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file
-//   renders.
-// - `components/` - reusable chrome shared across pages (Panel, Folder,
-//   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),
-//   same `Theme` prefix (e.g. <ThemePanel>).
-// - `layout/` - site-wide chrome outside the page content (Header, Footer),
-//   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).
-// - `tokens.css` - the theme's CSS custom properties (see
-//   themes/portfolio-dev/tokens.css).
-// Swapping UI = add a new themes/<name>/ folder implementing that contract,
-// then change this constant.
+/**
+ * The active UI theme. A theme is a folder under `themes/<name>/` providing:
+ * - `pages/` - one subfolder per route content (resumeObject, github, contact,
+ *   projects, blogs, post), auto-imported with the `Theme` prefix (e.g.
+ *   <ThemeGithub>, <ThemePostDetail>) - these are what each `pages/*.vue` file
+ *   renders.
+ * - `components/` - reusable chrome shared across pages (Panel, Folder,
+ *   NavItem, FilterFolder, CodeBlock, CornerFrame, PageHeading, PostCategories),
+ *   same `Theme` prefix (e.g. <ThemePanel>).
+ * - `layout/` - site-wide chrome outside the page content (Header, Footer),
+ *   rendered directly by app.vue, same `Theme` prefix (e.g. <ThemeHeader>).
+ * - `tokens.css` - the theme's CSS custom properties (see
+ *   themes/portfolio-dev/tokens.css).
+ * Swapping UI = add a new themes/<name>/ folder implementing that contract,
+ * then change this constant.
+ */
 const ACTIVE_THEME = 'portfolio-dev'
 
 export default defineNuxtConfig({
@@ -48,8 +48,10 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          // Silences the "legacy-js-api" deprecation warning Dart Sass
-          // prints on every dev/build - opts into sass-embedded's newer API.
+          /**
+           * Silences the "legacy-js-api" deprecation warning Dart Sass
+           * prints on every dev/build - opts into sass-embedded's newer API.
+           */
           api: 'modern-compiler',
         },
       },
@@ -70,10 +72,12 @@ export default defineNuxtConfig({
   },
 
   css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
-  // @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these
-  // options merge with that. Defaults to dark (existing look) until the user
-  // explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css
-  // for the `.dark`/`.light` palettes this class selects between.
+  /**
+   * @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these
+   * options merge with that. Defaults to dark (existing look) until the user
+   * explicitly toggles - see themes/<name>/settings-colors-theme/{dark,light}.css
+   * for the `.dark`/`.light` palettes this class selects between.
+   */
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
@@ -85,14 +89,16 @@ export default defineNuxtConfig({
     '~/components',
   ],
   modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/ui', '@nuxt/icon', '@nuxt/eslint', '@nuxtjs/i18n'],
-  // UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are
-  // filename-style, e.g. "_resume.ts" - part of the code-editor metaphor,
-  // deliberately NOT translated, same as nobody translates a real file
-  // name in an IDE). `vi` (the site's original language, 100% of current
-  // traffic) keeps its existing unprefixed URLs; only `en` gets a
-  // `/en/*` prefix - see i18n-foundation node in
-  // agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why
-  // `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.
+  /**
+   * UI-chrome-only i18n (nav tab labels in app.config.ts's menuPrimary are
+   * filename-style, e.g. "_resume.ts" - part of the code-editor metaphor,
+   * deliberately NOT translated, same as nobody translates a real file
+   * name in an IDE). `vi` (the site's original language, 100% of current
+   * traffic) keeps its existing unprefixed URLs; only `en` gets a
+   * `/en/*` prefix - see i18n-foundation node in
+   * agent-hub/haven/diagrams/dev-loop.prime-mermaid.md for why
+   * `strategy: 'prefix'` (prefixing `vi` too) was deliberately not chosen.
+   */
   i18n: {
     locales: [
       { code: 'vi', language: 'vi-VN', file: 'vi.json' },
@@ -101,26 +107,32 @@ export default defineNuxtConfig({
     defaultLocale: 'vi',
     strategy: 'prefix_except_default',
     langDir: 'locales',
-    // Same production origin as server/utils/siteUrl.ts's SITE_URL (shared
-    // constant, not a separate hardcoded copy) - required by useLocaleHead()
-    // (used in app.vue to set <html lang> per active locale) to generate
-    // valid hreflang/canonical link values instead of a build warning.
+    /**
+     * Same production origin as server/utils/siteUrl.ts's SITE_URL (shared
+     * constant, not a separate hardcoded copy) - required by useLocaleHead()
+     * (used in app.vue to set <html lang> per active locale) to generate
+     * valid hreflang/canonical link values instead of a build warning.
+     */
     baseUrl: SITE_URL,
-    // @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)
-    // auto-redirects `/` to `/en` for visitors with an English browser
-    // locale - not something asked for here (only a manual switcher was),
-    // and a surprising behavior change for every real visitor on a live
-    // site. Disabled to keep this node's diff to exactly what was scoped.
+    /**
+     * @nuxtjs/i18n's default (`detectBrowserLanguage: { redirectOn: 'root' }`)
+     * auto-redirects `/` to `/en` for visitors with an English browser
+     * locale - not something asked for here (only a manual switcher was),
+     * and a surprising behavior change for every real visitor on a live
+     * site. Disabled to keep this node's diff to exactly what was scoped.
+     */
     detectBrowserLanguage: false,
   },
   typescript: {
-    // The integrated dev/build vue-tsc check runs against the root tsconfig
-    // only, whose generated `include` pulls in server/**/*.ts but doesn't
-    // exclude it - so every server/ file fails with false "Cannot find
-    // name 'defineEventHandler'" etc. errors (Nitro's server-only globals
-    // aren't in scope there). server/tsconfig.json already type-checks
-    // that directory correctly via editor tooling; disable the integrated
-    // check rather than have it report 24 false positives every dev start.
+    /**
+     * The integrated dev/build vue-tsc check runs against the root tsconfig
+     * only, whose generated `include` pulls in every server/ .ts file but doesn't
+     * exclude it - so every server/ file fails with false "Cannot find
+     * name 'defineEventHandler'" etc. errors (Nitro's server-only globals
+     * aren't in scope there). server/tsconfig.json already type-checks
+     * that directory correctly via editor tooling; disable the integrated
+     * check rather than have it report 24 false positives every dev start.
+     */
     typeCheck: false,
   },
   pinia: {

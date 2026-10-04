@@ -1,7 +1,6 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 export interface ProfessionalSkill {
@@ -121,11 +120,13 @@ export interface Reference {
   position: string
 }
 
-// `link`/`images` intentionally dropped (issue #142): `server/utils/
-// createPDF.ts` is the only consumer of this type anywhere in the repo
-// (`grep -rn "\bCertificate\b"` confirms) and never reads either field
-// (`grep -n "\.link\b\|\.images\b" createPDF.ts`: 0 matches) — dead type
-// surface, not a behavior change (interfaces have no runtime footprint).
+/**
+ * `link`/`images` intentionally dropped (issue #142): `server/utils/
+ * createPDF.ts` is the only consumer of this type anywhere in the repo
+ * (`grep -rn "\bCertificate\b"` confirms) and never reads either field
+ * (`grep -n "\.link\b\|\.images\b" createPDF.ts`: 0 matches) — dead type
+ * surface, not a behavior change (interfaces have no runtime footprint).
+ */
 export interface Certificate {
   name: string
   organization: string
@@ -135,8 +136,10 @@ export interface Certificate {
   isNoExpiration: boolean
 }
 
-// `link`/`images` dropped for the same reason as `Certificate` above
-// (issue #142) — `createPDF.ts` never reads either field.
+/**
+ * `link`/`images` dropped for the same reason as `Certificate` above
+ * (issue #142) — `createPDF.ts` never reads either field.
+ */
 export interface Award {
   name: string
   organization: string

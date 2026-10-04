@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 const { t } = useI18n()
@@ -12,8 +11,10 @@ const social = computed(() => store.social)
 
 const { downloadResume, isDisabled, isLoading } = useDownloadResume()
 
-// Splits an HTML string into "sentences" only at points where no tag is
-// currently open, so inline markup (e.g. <strong>) never gets broken across lines.
+/**
+ * Splits an HTML string into "sentences" only at points where no tag is
+ * currently open, so inline markup (e.g. <strong>) never gets broken across lines.
+ */
 function splitHtmlIntoSentences(html: string): string[] {
   const parts: string[] = []
   let depth = 0
@@ -48,15 +49,16 @@ function escapeHtml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
-// Renders a sentence as literal Markdown source: <strong>/<b> becomes visible
-// **bold** syntax instead of actually-rendered bold HTML. A private-use
-// marker keeps the bold boundaries intact through HTML-escaping, then gets
-// swapped for a dimmed "**" + bold text (Markdown syntax-highlighting look).
+/**
+ * Renders a sentence as literal Markdown source: <strong>/<b> becomes visible **bold** syntax instead of
+ * actually-rendered bold HTML, with a dimmed "**" around bold text (Markdown syntax-highlighting look).
+ */
 function toMarkdownLine(sentenceHtml: string): string {
-  // Drop every tag except <strong>/<b>, then split ON those tags — String.split
-  // with a non-capturing... actually a matching regex naturally alternates
-  // [plain, bold, plain, bold, ...] since each strong/b pair produces one
-  // split boundary pair, with no marker characters needed.
+  /**
+   * Drop every tag except <strong>/<b>, then split on those tags - the split naturally alternates [plain,
+   * bold, plain, bold, ...] since each strong/b pair produces one boundary pair, so no marker characters are
+   * needed.
+   */
   const withoutOtherTags = sentenceHtml.replace(/<(?!\/?(?:strong|b)\b)[^>]+>/gi, '')
   const parts = withoutOtherTags.split(/<\/?(?:strong|b)>/gi)
   return parts
@@ -68,8 +70,10 @@ function toMarkdownLine(sentenceHtml: string): string {
     .join('')
 }
 
-// `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,
-// no Vue binding needed for plain navigation) so it stays clickable.
+/**
+ * `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,
+ * no Vue binding needed for plain navigation) so it stays clickable.
+ */
 function markdownLink(text: string, url: string) {
   return (
     `<span class="text-theme-faint">[</span>` +
@@ -79,9 +83,11 @@ function markdownLink(text: string, url: string) {
 }
 
 const bioLines = computed(() => {
-  // API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those
-  // block wrappers first so the depth-based sentence splitter below isn't gated off
-  // for the whole string by one never-closing tag.
+  /**
+   * API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those
+   * block wrappers first so the depth-based sentence splitter below isn't gated off
+   * for the whole string by one never-closing tag.
+   */
   const withoutParagraphs = hero.value.introduction.replace(/<\/?p[^>]*>/gi, '')
   const sentences = splitHtmlIntoSentences(withoutParagraphs).map(toMarkdownLine)
   const socialLines = social.value.links.map(({ name, url }) => markdownLink(name, url))

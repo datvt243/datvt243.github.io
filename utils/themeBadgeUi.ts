@@ -1,7 +1,5 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description: Overrides Nuxt UI's `<UBadge>` default `{color}` variant
+ * @file Overrides Nuxt UI's `<UBadge>` default `{color}` variant
  * (which never picks up the `--theme-*` CSS custom properties) with
  * `--theme-accent`, so a badge follows the active theme/Dracula editor-
  * scope like everything else inside `<ThemePanel>`. Nuxt UI's `ui` prop
@@ -10,6 +8,8 @@
  * `dark:text-{color}-400`/`dark:ring-{color}-400` classes survive.
  * Shared by `projects/Index.vue`'s tech badges and `github/part/Item.vue`'s
  * topic badges - previously two identical copies of this same object.
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 export const accentBadgeUi = {
   variant: {

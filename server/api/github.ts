@@ -1,13 +1,14 @@
 /**
- * Author: Đạt Võ - https://github.com/datvt243
- * Date: `--/--`
- * Description:
+ * @author Đạt Võ <votan.it@gmail.com>
+ * @see https://github.com/datvt243
  */
 
 import type { GitRepos, GitUser } from '@/types/github'
 
-// GitHub returns 401/403 for an invalid or expired token; fall back to an
-// unauthenticated request rather than failing the whole page in that case.
+/**
+ * GitHub returns 401/403 for an invalid or expired token; fall back to an
+ * unauthenticated request rather than failing the whole page in that case.
+ */
 async function fetchGithub<T>(url: string, token?: string): Promise<T> {
   if (!token) return (await $fetch(url)) as T
   try {
