@@ -17,7 +17,18 @@ definePageMeta({
   },
 })
 
-const { data } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id}`)
+const { data, error } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id}`)
+
+/**
+ * Unknown ids (or slugs - links only ever use _id) leave data empty;
+ * show the error page instead of crashing ThemePostDetail on undefined.
+ * Only a real "not found" is a 404 - an upstream outage keeps its own
+ * status so it isn't mistaken for a missing post.
+ */
+if (!data.value?.data) {
+  const statusCode = error.value?.statusCode && error.value.statusCode !== 404 ? error.value.statusCode : 404
+  throw createError({ statusCode, statusMessage: statusCode === 404 ? 'Post not found' : 'Unable to load post', fatal: true })
+}
 
 const postDetail = computed<Post>(() => {
   return data.value?.data as Post
