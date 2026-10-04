@@ -3,7 +3,6 @@ const props = defineProps<{
 	url: string
 }>()
 
-const { github } = useAppConfig()
 const nuxtConfig = useRuntimeConfig()
 
 async function getLanguage() {
@@ -13,7 +12,6 @@ async function getLanguage() {
 }
 
 const data = ref()
-const colors = { Vue: 'green', TypeScript: 'red', CSS: 'violet', default: 'gray' }
 
 onMounted(async () => {
   if (props.url) {

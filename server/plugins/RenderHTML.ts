@@ -4,7 +4,7 @@
  */
 
 export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook('render:html', (html, { event }) => {
+  nitroApp.hooks.hook('render:html', (html) => {
     html.bodyAttrs.push('class="bg-theme-canvas text-theme-text"')
   })
 })

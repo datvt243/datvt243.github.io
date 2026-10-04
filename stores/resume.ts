@@ -13,7 +13,7 @@ export const useResumeStore = defineStore('resume', {
   }),
   actions: {
     async fetchData(): Promise<Resume> {
-      const { success, resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume')
+      const { resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume')
       const _data = resume ? resume : ({} as Resume)
       this.resume = _data
       return _data
