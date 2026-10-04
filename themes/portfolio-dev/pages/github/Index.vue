@@ -12,14 +12,14 @@ const user = computed(() => data.value?.data.user as GitUser)
 const repos = computed(() => data.value?.data.repos as GitRepos[])
 
 const languages = computed(() => {
-  return [...new Set((repos.value || []).filter((r) => !!r.language).map((r) => r.language))].sort()
+  return [...new Set((repos.value || []).map((r) => r.language).filter((l): l is string => !!l))].sort()
 })
 
 const selected = ref<string[]>([])
 
 const filteredRepos = computed(() => {
   if (!selected.value.length) return repos.value || []
-  return (repos.value || []).filter((r) => selected.value.includes(r.language))
+  return (repos.value || []).filter((r) => !!r.language && selected.value.includes(r.language))
 })
 </script>
 

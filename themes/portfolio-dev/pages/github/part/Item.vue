@@ -7,7 +7,9 @@ const props = defineProps<{
   modelValue: GitRepos
 }>()
 
-const links: { field: keyof GitRepos; icon: string; class: string }[] = [
+type LinkField = 'homepage' | 'html_url'
+
+const links: { field: LinkField; icon: string; class: string }[] = [
   { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword' },
   { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent' },
 ]
@@ -24,7 +26,7 @@ const languageColors: Record<string, string> = {
   Pug: '#a86454',
 }
 
-const getFieldValue = (field: keyof GitRepos): string => {
+const getFieldValue = (field: LinkField): string | null => {
   return props.modelValue[field]
 }
 
