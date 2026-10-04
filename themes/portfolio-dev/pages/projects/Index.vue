@@ -19,6 +19,22 @@ const allTech = computed(() => {
   return [...set].sort()
 })
 
+/**
+ * Temporary placeholder thumbnails (public/images/projects/) for projects
+ * the API has no `images` for yet - keyed by a lowercase name prefix. Real
+ * API images always win; drop an entry once its project gets a screenshot.
+ */
+const PLACEHOLDER_THUMBS: Record<string, string> = {
+  aihr: '/images/projects/aihr.svg',
+  simplemdg: '/images/projects/simplemdg.svg',
+}
+
+function thumbnail(p: { name: string; images: string[] }): string | undefined {
+  if (p.images[0]) return p.images[0]
+  const name = p.name.toLowerCase()
+  return Object.entries(PLACEHOLDER_THUMBS).find(([key]) => name.startsWith(key))?.[1]
+}
+
 const selected = ref<string[]>([])
 
 const filtered = computed(() => {
@@ -43,7 +59,7 @@ const filtered = computed(() => {
           class="flex flex-col sm:flex-row rounded-lg border border-theme-border bg-theme-panel/50 overflow-hidden transition-colors hover:border-theme-accent/40"
         >
           <div class="relative aspect-video sm:aspect-square sm:w-48 shrink-0 bg-theme-panel-subtle/70">
-            <NuxtImg v-if="p.images[0]" :src="p.images[0]" class="w-full h-full object-cover" :alt="p.name" />
+            <NuxtImg v-if="thumbnail(p)" :src="thumbnail(p)" class="w-full h-full object-cover" :alt="p.name" />
             <div v-else class="w-full h-full flex items-center justify-center">
               <UIcon name="fe:file" class="w-8 h-8 text-theme-faint" />
             </div>
