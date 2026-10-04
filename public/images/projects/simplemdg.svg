@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="SimpleMDG">
+  <!-- Temporary placeholder thumbnail (no real screenshot yet). Content kept centered so object-cover crops only background. -->
+  <rect width="480" height="480" fill="#20304b"/>
+  <text x="240" y="262" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64" font-weight="700" fill="#60a5fa">MDG</text>
+</svg>

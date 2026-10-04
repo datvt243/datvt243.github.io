@@ -4,8 +4,11 @@
  * @see https://github.com/datvt243
  */
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { contact } = useAppConfig()
+
+/** Shown without diacritics in EN, as written in VI. */
+const address = computed(() => (locale.value === 'en' ? removeVietnameseTones(contact.address) : contact.address))
 
 const form = reactive({ name: '', email: '', message: '' })
 
@@ -32,7 +35,7 @@ function submitMessage() {
           </li>
           <li class="flex items-center gap-2 text-theme-text-soft">
             <UIcon name="fe:location" class="w-4 h-4 opacity-50 shrink-0" />
-            <span>{{ contact.address }}</span>
+            <span>{{ address }}</span>
           </li>
         </ul>
 

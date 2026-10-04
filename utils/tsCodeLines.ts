@@ -72,3 +72,12 @@ export function buildSkillsTsLines(groups: SkillGroupInput[]): CodeLine[] {
 
   return lines
 }
+
+/** Renders free-text soft skills as a `const personalSkills: string[] = [...]` array. */
+export function buildPersonalSkillsTsLines(names: string[]): CodeLine[] {
+  return [
+    { html: `${kw('const')} personalSkills${punct(':')} ${type('string[]')} ${punct('=')} ${punct('[')}` },
+    ...names.map((name) => ({ html: `${str(name)}${punct(',')}`, indent: 2 })),
+    { html: punct(']') },
+  ]
+}

@@ -39,13 +39,18 @@ export const useResumeStore = defineStore('resume', {
       return (educations || []).map(resumeAdapter.toEducation)
     },
     projects({ resume: { projects } }): ProjectModel[] {
-      return (projects || []).map(resumeAdapter.toProject)
+      /** Most recent first, same as `experiences`; entries without a startDate sink to the end. */
+      return [...(projects || [])].sort((a, b) => (b.startDate || 0) - (a.startDate || 0)).map(resumeAdapter.toProject)
     },
     foreignLanguages(): LanguageModel[] {
       return ((this.generalInformation as GeneralInformation).foreignLanguages || []).map(resumeAdapter.toLanguage)
     },
     skills(): SkillModel[] {
       return ((this.generalInformation as GeneralInformation).professionalSkills || []).map(resumeAdapter.toSkill)
+    },
+    /** Soft skills - the API only gives free-text `name`s (no exp/group). */
+    personalSkills(): string[] {
+      return ((this.generalInformation as GeneralInformation).personalSkills || []).map((s) => s.name).filter(Boolean)
     },
     groups(): string[] {
       return (this.generalInformation as GeneralInformation).professionalSkillsGroup || []

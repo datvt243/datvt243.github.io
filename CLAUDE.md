@@ -123,7 +123,7 @@ independently of the site-wide mode, without touching that subtree's markup.
 
 ### State (Pinia)
 
-- `useResumeStore` — fetches `/api/resume`, exposes getters: `hero`, `contact`, `social`, `experiences`, `educations`, `projects`, `foreignLanguages`, `skills`, `groups`.
+- `useResumeStore` — fetches `/api/resume`, exposes getters: `hero`, `contact`, `social`, `experiences`, `educations`, `projects`, `foreignLanguages`, `skills`, `personalSkills`, `groups`.
 
 ### Layouts
 

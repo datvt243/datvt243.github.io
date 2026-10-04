@@ -4,7 +4,7 @@
  * @see https://github.com/datvt243
  */
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
@@ -82,6 +82,37 @@ function markdownLink(text: string, url: string) {
   )
 }
 
+/**
+ * CV download rendered as one more Markdown link line instead of a separate
+ * button. The <a> keeps a real href (plain navigation still works without
+ * JS), but clicks are intercepted by onBioClick below so the normal
+ * downloadResume() flow (toast, loading/disabled state) runs. While loading
+ * or after a failure it renders as plain, non-clickable text.
+ */
+const DOWNLOAD_ICON =
+  '<svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+
+function downloadCvLine() {
+  const url = `/api/generate-pdf?lang=${locale.value}`
+  const label = isLoading.value ? t('resume.downloadingCv') : t('resume.downloadCv')
+  const text =
+    isLoading.value || isDisabled.value
+      ? `<span class="text-theme-muted">${DOWNLOAD_ICON}${escapeHtml(label)}</span>`
+      : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword hover:underline">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
+  return (
+    `<span class="text-theme-faint">[</span>${text}` +
+    `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
+  )
+}
+
+function onBioClick(event: MouseEvent) {
+  const target = event.target as HTMLElement | null
+  if (!target?.closest('[data-download-cv]')) return
+  event.preventDefault()
+  downloadResume()
+}
+
 const bioLines = computed(() => {
   /**
    * API wraps introduction in <p>...</p> (sometimes multiple paragraphs); strip those
@@ -97,39 +128,15 @@ const bioLines = computed(() => {
     ...sentences,
     '',
     ...socialLines,
+    '',
+    downloadCvLine(),
   ]
 })
 
 </script>
 
 <template>
-  <div>
+  <div @click="onBioClick">
     <ThemeCodeBlock :lines="bioLines" class="mb-4" />
-
-    <div class="flex flex-wrap gap-3">
-      <button
-        type="button"
-        class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
-        :disabled="isDisabled || isLoading"
-        @click="downloadResume()"
-      >
-        <span class="flex items-center space-x-2">
-          <UIcon name="fe:download" class="w-5 h-5" />
-          <span class="uppercase font-theme-mono text-sm">{{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}</span>
-        </span>
-      </button>
-      <button
-        type="button"
-        class="btn border-theme-border-subtle border rounded-md p-4 text-theme-muted hover:border-theme-accent hover:text-theme-accent transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-theme-border-subtle disabled:hover:text-theme-muted"
-        :title="t('resume.downloadCvAtsHint')"
-        :disabled="isDisabled || isLoading"
-        @click="downloadResume('ats')"
-      >
-        <span class="flex items-center space-x-2">
-          <UIcon name="fe:document" class="w-5 h-5" />
-          <span class="uppercase font-theme-mono text-sm">{{ t('resume.downloadCvAts') }}</span>
-        </span>
-      </button>
-    </div>
   </div>
 </template>

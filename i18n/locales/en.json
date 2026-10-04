@@ -7,21 +7,19 @@
     "switchLanguage": "Switch language"
   },
   "footer": {
-    "findMeIn": "find me in:",
-    "visitDisclosure": "Visits are logged (IP/location) for the owner's own analytics"
+    "findMeIn": "find me in:"
   },
   "resume": {
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
     "downloadingCv": "Downloading CV...",
-    "downloadCvAts": "ATS CV",
-    "downloadCvAtsHint": "Plain single-column version, easier for applicant tracking systems to parse",
     "downloadCvSuccess": "CV downloaded!",
     "downloadCvError": "Couldn't download the CV. Please try again.",
     "openToWork": "Open to work",
     "contactMe": "Contact me",
-    "experienceSummary": "{years}+ years experience — most recently at {company}"
+    "experienceSummary": "{years}+ years experience — most recently at {company}",
+    "familiarWith": "Familiar with"
   },
   "projects": {
     "seoTitle": "Projects",
