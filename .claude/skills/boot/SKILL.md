@@ -1,42 +1,79 @@
 ---
 name: boot
-description: Orientation 60 giây cho agent-hub của datvt243.github.io — đọc doctrine + diagram + evidence gần nhất, KHÔNG sửa gì. Trigger: /boot
+description: "Orientation for the datvt243.github.io agent-hub. Read NORTHSTAR, doctrine, diagrams, and the most recent evidence notes; report a 6-line status. Use at the very start of every working session on this project, even for small edits. Makes NO changes."
 ---
 
-# /boot
+# /boot — 60-second orientation
 
-Chỉ đọc, không sửa gì. 7 bước, theo đúng thứ tự:
+You are in a READ role here, not a worker role. Do not modify any file
+during this step — read and report only.
 
-1. `agent-hub/NORTHSTAR.md`
-2. Root `CLAUDE.md` (project thật: stack/architecture/commands)
-3. `agent-hub/CLAUDE.md` (hợp đồng hub) — [GUARD, thêm 2026-08-31] KHÔNG tự
-   `cat`/`Read` file này: harness tự bơm lại toàn bộ nội dung file này qua
-   nested-CLAUDE.md `<system-reminder>` ngay khi bước 1 chạm vào bất kỳ
-   file nào dưới `agent-hub/` — đọc tay ở đây chỉ tạo ra 1 bản trùng thứ 2
-   trong context. Chỉ đọc tay nếu bản tự bơm đó không xuất hiện trong
-   phiên này.
-4. `agent-hub/doctrine/MEMORY.md`
-5. `agent-hub/doctrine/domains/PROJECT.md`
-6. `agent-hub/haven/diagrams/*.prime-mermaid.md` — mọi node + PM status.
-   [thêm 2026-09-02] Nếu tồn tại `haven/diagrams/index.md` (epic sharding,
-   opt-in) → CHỈ đọc `index.md` + (các) epic file có `active: true`, không
-   đọc mọi epic mỗi phiên.
-7. `agent-hub/haven/workers/*/MEMORY.md` (nếu có) + 5 evidence note gần
-   nhất trong `agent-hub/evidence/implementer/` và `agent-hub/evidence/verifier/`
-   — dùng đúng lệnh sau để liệt kê (KHÔNG dùng `ls -lat` trực tiếp, đã ghi
-   nhận trả sai thư mục trong sandbox thực tế):
-   `find <dir> -maxdepth 1 -type f -name "*.md" -exec ls -t {} + | head -5`
+## Steps (exact order, don't skip any)
+1. Read `agent-hub/NORTHSTAR.md`.
+1b. Read the root `CLAUDE.md` (the real project contract: stack,
+   architecture, commands) — project hand-patch, kept on sync.
+2. Recall the 5 forbidden states and the seal gate from `agent-hub/CLAUDE.md`
+   — [GUARD, added 2026-08-30] don't explicitly `cat`/`Read` it yourself:
+   the harness auto-injects this file's full content as a nested-CLAUDE.md
+   `<system-reminder>` the moment step 1 touches anything under
+   `agent-hub/`, so an explicit read here just duplicates the same content
+   a second time in context. Read it directly only if that auto-injection
+   didn't happen this session (e.g. it's missing from context after step 1).
+3. Read `agent-hub/doctrine/MEMORY.md` — get the repo path and exact
+   commands (test/build/dev — report any `<<FILL>>` still open).
+4. Read `agent-hub/doctrine/domains/PROJECT.md` — especially the Traps
+   table, don't repeat a known bug.
+5. Read every file in `agent-hub/haven/diagrams/` EXCEPT any file whose
+   name contains `archive` (`dev-loop-archive.md`,
+   `dev-loop-archive-2026-08.md`...) — those are cold storage by design
+   (see the diagram file's own token-discipline note + `hub-tokens.md`),
+   reading them here every session defeats the point of archiving. List
+   nodes + current PM status from the non-archive file(s) only.
+   [added 2026-09-02] EXCEPTION — if `haven/diagrams/index.md` exists
+   (opt-in epic sharding, see `kit/agent-hub-templates.md` §9️⃣.3), read
+   ONLY `index.md` + the epic file(s) marked `active: true` in it, not
+   every epic. Report node counts from those only; other epics exist but
+   are out of scope for this session's status line.
+6. Read `agent-hub/haven/workers/` — confirm there are exactly 2 workers:
+   implementer, verifier.
+7. Read at most the 5 most recent evidence notes (newest file by date) in
+   `agent-hub/evidence/implementer/` and `agent-hub/evidence/verifier/`. If
+   a directory is empty, note "no evidence notes yet". To list them, use
+   `find <dir> -mindepth 2 -maxdepth 2 -type f -name "*.md" -exec ls -t {} + | head -5`
+   — note `-mindepth 2`: real evidence notes live one level deeper than
+   `<dir>` itself, under a per-date subfolder (`evidence/implementer/
+   <date>/*.md`), not directly inside it; `-maxdepth 1` here always
+   returns zero results.
+   — [GUARD, added 2026-08-30] NOT `ls -lat <dir>` directly: observed
+   returning the wrong directory's listing (e.g. the repo root instead of
+   the target `evidence/` subfolder) in a real sandboxed session — a
+   shell/alias quirk, not a project-specific issue. `find` is the
+   proven-reliable form; use it for any other "list files by recency in a
+   directory" step this hub ever needs, not just this one.
 
-Sau đó báo cáo **đúng 6 dòng**, không hơn không kém:
-
+## Report format — EXACTLY 6 lines, no more, no less
 ```
-🎯 Northstar: <one sentence từ NORTHSTAR.md>
-✅ Forbidden: <none active | liệt kê state đang vi phạm nếu có>
+🎯 Northstar: <one sentence from NORTHSTAR.md>
+✅ Forbidden: <none active | name of the active state, if any>
 📊 Diagrams: <N nodes = X sealed, Y pending, Z in_progress>
 🔧 Workers: implementer, verifier
-📝 Last action: <tóm tắt evidence note mới nhất, kèm ngày>
-🚧 Blockers: <none | liệt kê <<FILL>> hoặc env var còn thiếu>
+📝 Last action: <node — SEAL|REOPEN, date, short quote from the latest evidence note, or "none yet">
+🚧 Blockers: <list of open <<FILL>> in doctrine/MEMORY.md or doctrine/domains/PROJECT.md, or "none">
 ```
 
-Không tự ý làm thêm gì sau report này — chờ lệnh `/worker` hoặc `/todo` tiếp
-theo từ operator.
+## Rules
+- Do NOT re-scan the whole source tree — the doctrine already holds the
+  ground truth you need.
+- Do NOT fill in `<<FILL>>` values yourself during `/boot` — just report
+  them as a blocker.
+- If a load-bearing file (`NORTHSTAR.md`, `doctrine/MEMORY.md`,
+  `doctrine/domains/PROJECT.md`, `haven/diagrams/dev-loop.prime-mermaid.md`)
+  can't be read, stop immediately and report the error instead of guessing
+  its content.
+- After the report, be ready to take `/worker implementer "<task>"`,
+  `/worker verifier "<task>"`, `/todo "<task>"` (or `/todo #<issue>`), or
+  `/ship`.
+- If step 5 flags the active diagram over ~15KB (or `/hub-tokens` reports
+  it), that's a real signal to run an archive pass — see the diagram
+  file's own token-discipline note. `/boot` itself never edits anything;
+  archiving is a separate, explicit action.

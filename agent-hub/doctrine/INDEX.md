@@ -11,6 +11,8 @@
 | `domains/PROJECT.md` | This project's own ground truth (including traps inherited from `agent-hub/histories/`) | Before implementing |
 | `standards/edit-verification.md` | The rule against claiming things you haven't observed | Before reporting "done" |
 | `standards/recipes.md` | What a recipe is, when to write one | When repeating a process for the 2nd time |
+| `standards/initiative-scoping.md` | Measure exhaustively by rule+file before/after a multi-phase count-based initiative | Before carving up any "clean up X across the codebase" effort into phases |
+| `standards/code-comments.md` | What a source comment may say + its style, plus project opt-ins (file header, object params) | Before writing/changing any comment or function signature |
 
 ## The three kinds of knowledge here
 | Kind | Home | Example |

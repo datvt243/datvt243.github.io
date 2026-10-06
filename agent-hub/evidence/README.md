@@ -18,15 +18,15 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
   back when writing `worker-runs.log`, don't skip it
 - `## Diff` — table of files | file | why |
 - `## Command` — the verbatim command from `doctrine/MEMORY.md` (`npm run
-  build`, `npm run lint` — NEVER `npm test`, this project has no test
-  suite)
+  build`, `npm run lint`, + the `Typecheck` row — NEVER `npm test`, this
+  project has no test suite)
 - `## Output` — verbatim, not your own paraphrase
 - `## Browser verification` — only needed if the node changes visual/
   behavior: screenshot path or a citeable computed style via Chrome CDP,
   or clearly write "N/A — no visual change" if not applicable
 - `## Acceptance` — a table | Criterion | Evidence | (evidence points to
   a specific line of output — don't just say "build's fine", must quote
-  it verbatim)
+  it verbatim); always has a "comments per code-comments.md" row
 - `## Noticed, not done` — things noticed outside scope but not fixed
 - `## Seal gate` — record the approval if there was an outward-facing
   action, or "none"

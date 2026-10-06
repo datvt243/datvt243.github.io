@@ -33,16 +33,20 @@ HUB="$ROOT/agent-hub"
 bytes_glob() { find $1 -maxdepth "${2:-99}" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.yml" \) 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' '; }
 bytes_glob_exclude() { find "$1" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.yml" \) ! -iname "*archive*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' '; }
 row() { local label="$1" b="$2"; local t=$(( b / 4 )); printf "  %-40s %9d B  ~%8d tok\n" "$label" "$b" "$t"; }
+check_threshold_bytes() {
+  local label="$1" b="$2" threshold="$3" hint="$4"
+  local kb=$(( threshold / 1024 ))
+  if [ "$b" -gt "$threshold" ]; then
+    echo "  ⚠ $label is ${b}B (>${kb}KB threshold) — $hint"
+  else
+    echo "  ✓ $label is ${b}B, under the ${kb}KB threshold"
+  fi
+}
 check_threshold() {
   local file="$1" threshold="$2" hint="$3"
   [ -f "$file" ] || return
   local b; b=$(wc -c < "$file" | tr -d ' ')
-  local kb=$(( threshold / 1024 ))
-  if [ "$b" -gt "$threshold" ]; then
-    echo "  ⚠ $(basename "$file") is ${b}B (>${kb}KB threshold) — $hint"
-  else
-    echo "  ✓ $(basename "$file") is ${b}B, under the ${kb}KB threshold"
-  fi
+  check_threshold_bytes "$(basename "$file")" "$b" "$threshold" "$hint"
 }
 
 echo "agent-hub token report — $(date +%Y-%m-%d)  [$ROOT]"
@@ -91,24 +95,22 @@ if [ -f "$DIAG_FILE" ]; then
   FULL_SEALED=$(grep -cE '\| SEALED \|' "$DIAG_FILE" 2>/dev/null)
   POINTER_SEALED=$(grep -cE '— archived, see' "$DIAG_FILE" 2>/dev/null)
   REAL_SEALED=$(( FULL_SEALED - POINTER_SEALED ))
+  check_threshold_bytes "dev-loop.prime-mermaid.md" "$DB" 15360 \
+    "$REAL_SEALED full SEALED entries not yet archived, see rows below"
   if [ "$DB" -gt 15360 ]; then
-    echo "  ⚠ dev-loop.prime-mermaid.md is ${DB}B (>15KB threshold), $REAL_SEALED full SEALED entries not yet archived."
     echo "    Ready-to-move rows (copy each VERBATIM into dev-loop-archive.md's"
     echo "    PM status table, then replace it here with a compact pointer row"
     echo "    '| node | state | date — archived, see dev-loop-archive.md. Evidence: ... |'):"
     grep -E '\| SEALED \|' "$DIAG_FILE" 2>/dev/null | grep -vE '— archived, see' | sed 's/^/      /'
   else
-    echo "  ✓ dev-loop.prime-mermaid.md is ${DB}B, under the 15KB threshold ($REAL_SEALED full SEALED entries, $POINTER_SEALED archived pointers)"
+    echo "    ($REAL_SEALED full SEALED entries, $POINTER_SEALED archived pointers)"
   fi
 fi
 check_threshold "$HUB/doctrine/domains/PROJECT.md" 15360 \
   "consider moving Traps/Decisions rows older than the current work session to doctrine/domains/PROJECT-archive.md"
 DOCTRINE_THRESHOLD=51200
-if [ "$DOCTRINE_B" -gt "$DOCTRINE_THRESHOLD" ]; then
-  echo "  ⚠ doctrine/ as a whole is ${DOCTRINE_B}B (>$((DOCTRINE_THRESHOLD/1024))KB threshold) — aggregate signal, no single archive destination. Check which file grew: domains/PROJECT.md over 15KB → archive via PROJECT-archive.md (see above); MEMORY.md/SOUL.md/INDEX.md/standards/*.md over 8KB → anomaly, not an archive candidate (see step 4 below)."
-else
-  echo "  ✓ doctrine/ as a whole is ${DOCTRINE_B}B, under the $((DOCTRINE_THRESHOLD/1024))KB threshold"
-fi
+check_threshold_bytes "doctrine/ as a whole" "$DOCTRINE_B" "$DOCTRINE_THRESHOLD" \
+  "aggregate signal, no single archive destination. Check which file grew: domains/PROJECT.md over 15KB → archive via PROJECT-archive.md (see above); MEMORY.md/SOUL.md/INDEX.md/standards/*.md over 8KB → anomaly, not an archive candidate (see step 4 below)."
 check_threshold "$HUB/evidence/worker-runs.log" 15360 \
   "consider moving lines older than the current work session to evidence/worker-runs-archive.log (see evidence/README.md's archiving convention)"
 echo
@@ -116,7 +118,7 @@ echo "  Static reference files (should stay small by design — no accumulating"
 echo "  list to archive; growth here likely means misplaced content, not a"
 echo "  normal archive candidate):"
 for f in "$HUB/doctrine/MEMORY.md" "$HUB/doctrine/SOUL.md" "$HUB/doctrine/INDEX.md" \
-         "$HUB/doctrine/standards/edit-verification.md" "$HUB/doctrine/standards/recipes.md"; do
+         "$HUB/doctrine/standards/"*.md; do
   check_threshold "$f" 8192 \
     "unexpected growth for a static file — check for a Correction that belongs in the worker's own MEMORY.md, or a Decision that belongs in PROJECT.md, before creating a dedicated archive file for this one"
 done
