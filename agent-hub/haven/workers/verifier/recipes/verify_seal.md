@@ -88,14 +88,17 @@ verdict versus just auditing the note. Not a bug, but not what
    it directly only if it's actually missing from context after step 2.
 4. Check the command in the note matches `doctrine/MEMORY.md` (`npm run
    build`, `npm run lint` — verbatim, not a made-up command like `npm
-   test`).
+   test`) — plus its `Typecheck` row [added 2026-10-07]; no typecheck
+   output in the note → REOPEN, `EDIT_UNVERIFIED`.
 5. Check whether the output has been truncated/hidden (`...`,
    "truncated") → REOPEN if so.
 6. If the node has a visual/behavior part: check whether the UI-
    verification evidence via Chrome CDP is concrete (screenshot/computed
    style that can be cited) — REOPEN if it's just a vague "looks fine".
 7. Go through acceptance criteria ONE BY ONE — any criterion missing
-   evidence = REOPEN, write it clearly into "missing".
+   evidence = REOPEN, write it clearly into "missing". Always includes the
+   "comments per code-comments.md" row (see that standard's
+   Enforcement), even if the node's own criteria don't list it.
 8. Scan all 5 forbidden states.
 9. Check the SEAL GATE — is there a recorded approval in the note if the
    diff is outward-facing?

@@ -1,7 +1,7 @@
 ---
 name: todo
 description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "<task>"|#<issue-number> [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
-argument-hint: "<task>"|#<issue-number> [--ship]
+argument-hint: "<task>|#<issue-number> [--ship]"
 ---
 
 # /todo "<task>"|#<issue-number> [--ship]
@@ -25,9 +25,14 @@ lượt tách biệt.
       - Từ đây, `<task>` cho phần còn lại của lượt `/todo` này là title +
         body của issue vừa resolve (đủ context cho implementer/verifier),
         không chỉ là arg gốc gõ vào.
-   2. **Tính tên branch**: `<number>-<slug>`, `<slug>` = 3 từ đầu của issue
-      title, viết thường, ký tự không phải chữ/số gộp thành `-`. VD issue
-      #42 "Fix login redirect loop" → `42-fix-login-redirect`.
+   2. **Tính tên branch**: [sync 2026-10-07] check `doctrine/domains/PROJECT.md`
+      first for a documented branch-naming convention. This project
+      documents `bug/<issue_number>`/`feature/<issue_number>` — use it
+      exactly (`bug/` for a bug, `feature/` otherwise; unclear → ask), so
+      the branch matches what `.claude/commands/ship.md`'s guard expects.
+      Only if PROJECT.md documents none: `<number>-<slug>`, `<slug>` = 3
+      từ đầu của issue title, viết thường, ký tự không phải chữ/số gộp
+      thành `-`.
    3. **Resolve base branch**: đọc `doctrine/domains/PROJECT.md` (git
       workflow của project: `staging` là nhánh tích hợp, `main` chỉ nhận
       code qua `/release`) — base branch mặc định là `staging`, không bao
@@ -42,7 +47,7 @@ lượt tách biệt.
       trước — nếu đã có branch link sẵn (đang làm tiếp việc cũ) → checkout
       branch đó, `git pull` thêm (lấy update remote nếu có), không tạo
       branch thứ 2 cho cùng issue. Nếu chưa có → `gh issue develop <number>
-      --checkout --base <base> --name <number>-<slug>` — tạo branch từ base
+      --checkout --base <base> --name <branch từ bước 2>` — tạo branch từ base
       vừa sync ở bước 4, link vào issue trên GitHub, và checkout, trong 1
       lệnh thật. Lỗi git-level (dirty tree, base ref không tồn tại...) →
       dừng, báo lỗi thật verbatim, không tự force/stash/discard thay
@@ -103,12 +108,12 @@ không tự triển khai lại ở đây) — `/todo` không có hard rule riên
 | Verifier không tìm thấy evidence note của lượt 1 | Dừng, báo lỗi — không tự đoán lượt 1 đã làm gì |
 | Task đòi hỏi outward-facing action ngay giữa lượt 1 | SEAL GATE trong recipe `implement.md` vẫn dừng lại chờ approval như bình thường, `/todo` không bỏ qua bước này |
 | Có `--ship` nhưng vòng lặp dừng ở `blocked`/`failed`/hết retry (chưa SEAL) | Không gọi `/ship` — chưa có gì để ship |
-| Có `--ship`, đã SEAL, nhưng `/ship` tự từ chối (vd build đỏ) | Báo lỗi thật của `/ship` — SEAL ở bước 5 vẫn giữ nguyên, chỉ bước ship thất bại |
+| Có `--ship`, đã SEAL, nhưng `/ship` tự từ chối (vd push bị reject, hoặc guard riêng của project trong `/ship`) | Báo lỗi thật của `/ship` — SEAL ở bước 5 vẫn giữ nguyên, chỉ bước ship thất bại |
 
 ## Runtime
 `/todo "<task>"|#<issue-number> [--ship]`. Trước tiên resolve (hoặc tạo)
 GitHub issue, sync base branch (`fetch`+`checkout`+`pull`, không bao giờ
-dùng bản local cũ), rồi checkout branch `<number>-<slug>` riêng của nó qua
+dùng bản local cũ), rồi checkout branch riêng của nó (tên theo bước 1.2) qua
 `gh issue develop` — chưa gọi worker nào trước khi xong phần này. Phần còn
 lại giống hệt gọi tay `/worker implementer` rồi `/worker verifier`
 (subagent) nối tiếp, lặp lại khi REOPEN, rồi — chỉ khi có `--ship` và vòng
