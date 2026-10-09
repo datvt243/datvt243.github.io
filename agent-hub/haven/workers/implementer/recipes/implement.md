@@ -13,10 +13,14 @@
    style/idiom (e.g. the `Theme*` prefix tag convention, semantic Tailwind
    tokens `bg-theme-*`/`text-theme-*` instead of literal colors).
 3. Smallest diff — only change what the acceptance criteria require.
+   Any comment added/changed follows `doctrine/standards/code-comments.md`
+   (incl. its enabled opt-ins).
 4. SEAL GATE before an outward-facing action (commit/push/delete file/open
    PR) — stop, show the diff, wait for approval.
 5. Run the EXACT command from `doctrine/MEMORY.md`: `npm run build` then
-   `npm run lint` — copy it verbatim, don't guess.
+   `npm run lint` — copy it verbatim, don't guess. [added 2026-10-07]
+   Plus the `Typecheck` row of `doctrine/MEMORY.md` — `nuxt build` strips
+   types without checking them, so build+lint is NOT a typecheck.
 6. READ THE OUTPUT BACK verbatim — an uncited claim = `EDIT_UNVERIFIED`.
 7. If the change has a visual/behavior part the user would see: check the
    real UI via Chrome CDP port 9888 (`curl -s
@@ -50,6 +54,8 @@
 | `npm run build` fails | `reopened_by_build`, write the error verbatim into evidence, don't guess a fix if the root cause isn't clear |
 | Build fails/flakes, not reliably reproducible | Suspect cache first (`rm -rf node_modules/.cache .nuxt .output`), check the related trap in `doctrine/domains/PROJECT.md` before concluding |
 | A needed env var for build/run is missing | `blocked`, don't fake a value |
+| `Typecheck` row in `doctrine/MEMORY.md` is missing/`<<FILL>>` | `blocked` — except the node whose task IS adding that command |
+| Typecheck reports errors the diff didn't introduce | Don't fix them in this diff (`SmallestDiff`) — prove they pre-exist (same count on the base branch), list under `## Noticed, not done` |
 
 ## Runtime
 `/worker implementer "<task>"` or pass 1 of `/todo "<task>"`.

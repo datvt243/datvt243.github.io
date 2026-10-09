@@ -31,6 +31,24 @@ task → /worker implementer → find/create a node on the diagram → run build
 `/todo "<task>"` runs the exact loop above in one command, still 2 separate
 passes.
 
+**Scoping a multi-phase, measured-by-count initiative** (lint rules, type
+coverage, dependency upgrades, security findings — anything framed as "N
+problems to fix") is a special case of the default loop: before writing
+the first phase description, measure exhaustively (`--format json` or
+equivalent, grouped by rule/category AND file) — never by grep sampling
+or a single un-decomposed total. After the LAST phase, re-run that SAME
+full measurement and diff the before/after counts, instead of trusting
+each phase's own narrower verification command to stand in for the
+initiative's own stated goal. See `doctrine/standards/initiative-scoping.md`.
+
+**Every diff** also: (1) any comment it adds/changes follows
+`doctrine/standards/code-comments.md` (WHY not WHAT, `//` vs `/** */`,
+no `(#N)` refs, plus whatever project opt-ins that file enables);
+(2) if the project has TypeScript, runs the `Typecheck` command from
+`doctrine/MEMORY.md` and cites its output — a clean build/test that
+doesn't type-check is not a typecheck. Missing either in the evidence
+note = `EDIT_UNVERIFIED`.
+
 ## Forbidden states (Cost = KILL — stop immediately, do not continue on your own)
 | State | Means |
 |---|---|
