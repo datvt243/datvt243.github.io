@@ -69,6 +69,7 @@ export default {
           accent: themeColor('--theme-accent'),
           'accent-soft': themeColor('--theme-accent-soft'),
           'accent-contrast': themeColor('--theme-accent-contrast'),
+          kbd: themeColor('--theme-kbd'),
           'code-text': themeColor('--theme-code-text'),
           'code-line-number': themeColor('--theme-code-line-number'),
           'code-keyword': themeColor('--theme-code-keyword'),

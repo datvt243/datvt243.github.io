@@ -23,6 +23,7 @@ const socialMedia = [
             :key="social.name"
             :href="social.link"
             target="_blank"
+            rel="noopener noreferrer"
             class="hover:text-theme-text transition-colors"
             :aria-label="social.name"
           >
@@ -31,7 +32,7 @@ const socialMedia = [
           <span class="hidden md:inline text-theme-faint">&middot;</span>
           <span class="hidden md:inline">&copy; {{ currentYear }} datvt243</span>
         </div>
-        <a href="https://github.com/datvt243" target="_blank" class="flex items-center gap-1.5 hover:text-theme-text transition-colors">
+        <a href="https://github.com/datvt243" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-theme-text transition-colors">
           <span>@datvt243</span>
           <UIcon name="grommet-icons:github" class="w-4 h-4" />
         </a>

@@ -11,6 +11,7 @@ const { t, locale, locales, setLocale } = useI18n()
 const localePath = useLocalePath()
 
 const isOpen = ref(false)
+const isKeyHelpOpen = ref(false)
 
 const isActive = (link: string) => route.path === localePath(link)
 const toggleColorMode = () => {
@@ -32,9 +33,9 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
       <div class="flex items-stretch">
         <NuxtLink
           :to="localePath('/')"
-          class="flex shrink-0 items-center border-r border-theme-border pr-4 py-3 text-theme-muted hover:text-theme-text-strong transition-colors"
+          class="flex lg:hidden shrink-0 items-center border-r border-theme-border pr-4 py-3 text-theme-muted hover:text-theme-text-strong transition-colors"
         >
-          <label class="text-bold">_datvt243</label>
+          <span class="text-bold" translate="no">_datvt243</span>
         </NuxtLink>
 
         <nav class="hidden lg:flex items-stretch grow">
@@ -49,7 +50,8 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
                 : 'text-theme-muted hover:text-theme-text-strong'
             "
           >
-            {{ route_.page }}
+            <span translate="no">{{ route_.page }}</span>
+            <ThemeKbd aria-hidden="true" class="ml-2 px-1 text-[10px] leading-4">g{{ route_.key }}</ThemeKbd>
           </NuxtLink>
           <div class="grow" />
           <NuxtLink
@@ -62,13 +64,23 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
                 : 'text-theme-muted hover:text-theme-text-strong'
             "
           >
-            {{ contactTab.page }}
+            <span translate="no">{{ contactTab.page }}</span>
+            <ThemeKbd aria-hidden="true" class="ml-2 px-1 text-[10px] leading-4">g{{ contactTab.key }}</ThemeKbd>
           </NuxtLink>
         </nav>
 
         <button
+          class="hidden lg:flex items-center border-l border-theme-border px-4 text-theme-muted hover:text-theme-text-strong transition-colors"
+          :aria-label="t('keyNav.title')"
+          :title="`${t('keyNav.title')} (?)`"
+          @click="isKeyHelpOpen = true"
+        >
+          <ThemeKbd class="px-1.5 text-xs">?</ThemeKbd>
+        </button>
+
+        <button
           class="flex items-center border-l border-theme-border px-4 text-theme-muted hover:text-theme-text-strong transition-colors uppercase text-xs font-bold"
-          :aria-label="t('header.switchLanguage')"
+          :aria-label="`${locale.toUpperCase()}, ${t('header.switchLanguage')}`"
           @click="toggleLocale"
         >
           {{ locale }}
@@ -112,6 +124,8 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
             </ul>
           </div>
         </USlideover>
+
+        <ThemeKeyNav v-model="isKeyHelpOpen" />
       </div>
     </UContainer>
   </header>

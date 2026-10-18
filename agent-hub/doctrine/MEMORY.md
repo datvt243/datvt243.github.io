@@ -22,6 +22,7 @@
 | Build (static) | `npm run generate` | repo root |
 | Lint (check) | `npm run lint` | repo root |
 | Lint (autofix) | `npm run lint:fix` | repo root |
+| Typecheck | `npx nuxi typecheck` | repo root |
 | Run locally | `npm run dev` | repo root |
 | Preview build | `npm run preview` | repo root |
 

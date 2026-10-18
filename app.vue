@@ -1,5 +1,14 @@
 <template>
   <div class="wrapper-app">
+    <!-- Focus moved in JS rather than via the #hash: a hash in the URL makes the router's scrollBehavior
+         fight later in-page scrolls (e.g. the resume tab autoscroll). href stays for no-JS. -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:border focus:border-theme-accent focus:bg-theme-panel focus:px-3 focus:py-2 focus:font-theme-mono focus:text-sm focus:text-theme-text-strong"
+      @click.prevent="skipToContent"
+    >
+      {{ t('a11y.skipToContent') }}
+    </a>
     <NuxtLoadingIndicator :height="3" color="repeating-linear-gradient(to right, #fb923c 0%, #f97316 50%, #fb923c 100%)" />
     <div class="flex flex-col min-h-screen">
       <ThemeHeader />
@@ -22,13 +31,20 @@
  * is now a real value (server/utils/siteUrl.ts's SITE_URL), so canonical +
  * hreflang alternate <link> tags can be generated for real.
  */
+const { t } = useI18n()
+const skipToContent = () => document.getElementById('main-content')?.focus()
+const colorMode = useColorMode()
 const i18nHead = useLocaleHead({ seo: true })
 useHead(() => ({
   htmlAttrs: {
     lang: i18nHead.value.htmlAttrs?.lang,
   },
   link: i18nHead.value.link,
-  meta: i18nHead.value.meta,
+  meta: [
+    ...(i18nHead.value.meta ?? []),
+    // Matches --theme-canvas (settings-colors-theme/*.css) so mobile browser chrome blends with the page.
+    { name: 'theme-color', content: colorMode.value === 'light' ? '#ffffff' : '#020617' },
+  ],
 }))
 </script>
 

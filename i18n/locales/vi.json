@@ -6,6 +6,17 @@
     "closeMenu": "Đóng menu",
     "switchLanguage": "Chuyển ngôn ngữ"
   },
+  "keyNav": {
+    "title": "Phím tắt",
+    "goTo": "Đi tới",
+    "scrollDown": "Cuộn xuống",
+    "scrollUp": "Cuộn lên",
+    "top": "Lên đầu trang",
+    "bottom": "Xuống cuối trang",
+    "help": "Bật/tắt bảng trợ giúp",
+    "onThisPage": "Trên trang này",
+    "extensionNote": "Đang dùng Vimium hoặc extension tương tự? Nhấn \"i\" trước để nhường phím cho trang (Esc để thoát), hoặc thêm site này vào danh sách loại trừ của extension."
+  },
   "footer": {
     "findMeIn": "Tìm mình ở:"
   },
@@ -13,7 +24,7 @@
     "greeting": "Xin chào! Tôi là",
     "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
-    "downloadingCv": "Đang tải CV...",
+    "downloadingCv": "Đang tải CV…",
     "downloadCvSuccess": "Đã tải xong CV!",
     "downloadCvError": "Không thể tải CV. Vui lòng thử lại.",
     "openToWork": "Đang tìm việc",
@@ -34,7 +45,7 @@
     "seoDescription": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "intro": "Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.",
     "show": "Hiển thị:",
-    "readMore": "Đọc thêm ...",
+    "readMore": "Đọc thêm…",
     "noCategories": "Không có chuyên mục nào",
     "categoriesLoadError": "Không tải được danh sách chuyên mục."
   },
@@ -56,10 +67,13 @@
   "github": {
     "seoTitle": "Github",
     "seoDescription": "Hồ sơ GitHub và các repository của Võ Tấn Đạt (datvt243).",
-    "searchPlaceholder": "Tìm tên repo...",
+    "searchPlaceholder": "Tìm tên repo…",
     "followers": "người theo dõi",
     "following": "đang theo dõi",
     "noData": "Không có dữ liệu",
     "updatedOn": "Cập nhật vào"
+  },
+  "a11y": {
+    "skipToContent": "Bỏ qua tới nội dung chính"
   }
 }

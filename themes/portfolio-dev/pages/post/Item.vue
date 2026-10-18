@@ -41,7 +41,7 @@ const getURL = computed(() => {
         <p
           class="text-2xl mb-2 font-bold capitalize leading-8 tracking-tight"
         >
-          <NuxtLink :to="getURL" class="text-theme-text hover:text-theme-accent transition-all">
+          <NuxtLink :to="getURL" class="text-theme-text hover:text-theme-accent transition-colors">
             {{ modelValue.title }}
           </NuxtLink>
         </p>

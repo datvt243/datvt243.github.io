@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * @file Renders each job as real semantic HTML (article/h3/p/time/ul/li) styled
+ * @file Renders each job as real semantic HTML (article/h2/p/time/ul/li) styled
  * to look like a Pug source listing (indentation only, tag.class
  * shorthand, no closing tags). The visible "tag"/".class" glyphs are
  * decorative aria-hidden spans before the real text, and line numbers
@@ -32,9 +32,9 @@ function pugTag(name: string, cls?: string) {
       <article class="experience">
         <div class="code-line" aria-hidden="true"><span class="line-content" v-html="pugTag('article', 'experience')" /></div>
 
-        <h3 class="code-line depth-1 position">
-          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h3', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
-        </h3>
+        <h2 class="code-line depth-1 position">
+          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
+        </h2>
         <p class="code-line depth-1">
           <span class="line-content tagged"
           ><span aria-hidden="true" class="tag-label" v-html="pugTag('p', 'company')" /><span class="tag-text">{{ el.company }}</span></span
@@ -119,7 +119,7 @@ function pugTag(name: string, cls?: string) {
 
 /**
  * Only the heading text is enlarged - sizing the whole line would also
- * scale its `ch`-based indent and push the `h3` glyph right of its
+ * scale its `ch`-based indent and push the `h2` glyph right of its
  * siblings (`p`, `time`).
  */
 .position {

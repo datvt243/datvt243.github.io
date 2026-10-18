@@ -29,7 +29,7 @@ const bioText = computed(() => props.user.bio?.replace(/\r\n?/g, '\n'))
       <p class="space-x-1 flex items-center">
         <a
           :href="props.user.html_url"
-          class="font-bold text-theme-accent hover:text-theme-accent-soft transition-all"
+          class="font-bold text-theme-accent hover:text-theme-accent-soft transition-colors"
         >{{ props.user.name }}</a
         >
         <UIcon name="fe:link-external" class="w-4 h-4 opacity-35" />

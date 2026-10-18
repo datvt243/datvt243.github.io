@@ -6,6 +6,17 @@
     "closeMenu": "Close menu",
     "switchLanguage": "Switch language"
   },
+  "keyNav": {
+    "title": "Keyboard shortcuts",
+    "goTo": "Go to",
+    "scrollDown": "Scroll down",
+    "scrollUp": "Scroll up",
+    "top": "Go to top",
+    "bottom": "Go to bottom",
+    "help": "Toggle this help",
+    "onThisPage": "On this page",
+    "extensionNote": "Using Vimium or a similar extension? Press \"i\" first to pass keys to this page (Esc to leave), or exclude this site in the extension."
+  },
   "footer": {
     "findMeIn": "find me in:"
   },
@@ -13,7 +24,7 @@
     "greeting": "Hi there! I am",
     "aboutMeHeading": "About me",
     "downloadCv": "Download CV",
-    "downloadingCv": "Downloading CV...",
+    "downloadingCv": "Downloading CV…",
     "downloadCvSuccess": "CV downloaded!",
     "downloadCvError": "Couldn't download the CV. Please try again.",
     "openToWork": "Open to work",
@@ -34,7 +45,7 @@
     "seoDescription": "Articles, tutorials, snippets, rants, and everything else.",
     "intro": "Articles, tutorials, snippets, rants, and everything else.",
     "show": "Show:",
-    "readMore": "Read more ...",
+    "readMore": "Read more…",
     "noCategories": "No categories",
     "categoriesLoadError": "Couldn't load categories."
   },
@@ -56,10 +67,13 @@
   "github": {
     "seoTitle": "Github",
     "seoDescription": "GitHub profile and repositories of Võ Tấn Đạt (datvt243).",
-    "searchPlaceholder": "Search repos name...",
+    "searchPlaceholder": "Search repos name…",
     "followers": "followers",
     "following": "following",
     "noData": "NO data",
     "updatedOn": "Updated on"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content"
   }
 }

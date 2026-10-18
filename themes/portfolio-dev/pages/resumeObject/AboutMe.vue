@@ -77,7 +77,7 @@ function toMarkdownLine(sentenceHtml: string): string {
 function markdownLink(text: string, url: string) {
   return (
     `<span class="text-theme-faint">[</span>` +
-    `<a href="${escapeHtml(url)}" target="_blank" class="text-theme-code-keyword hover:underline">${escapeHtml(text)}</a>` +
+    `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-theme-code-keyword hover:underline">${escapeHtml(text)}</a>` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
   )
 }

@@ -24,7 +24,7 @@ provide('query', {
 </script>
 
 <template>
-  <main class="grow p-0 layout-blog">
+  <main id="main-content" tabindex="-1" class="grow p-0 layout-blog">
     <UContainer>
       <ThemePanel>
         <template #sidebar>

@@ -65,7 +65,7 @@ defineProps<{
           <div class="pt-4 xl:pt-8">
             <NuxtLink
               to="/blogs"
-              class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-all"
+              class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors"
               :aria-label="t('post.backToBlog')"
             >
               <span class="flex items-center space-x-2">

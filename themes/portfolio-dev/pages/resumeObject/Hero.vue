@@ -5,7 +5,7 @@
  */
 
 const { t } = useI18n()
-const { contact } = useAppConfig()
+const localePath = useLocalePath()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const { downloadResume, isDisabled, isLoading } = useDownloadResume()
@@ -42,7 +42,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
   <div class="grid gap-10 lg:grid-cols-[1fr_auto] items-center py-10 font-theme-mono">
     <div>
       <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }} <span class="text-theme-text">_</span></p>
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance">
         {{ hero.fullName }}
       </h1>
       <span
@@ -52,21 +52,27 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
         <span class="w-2 h-2 rounded-full bg-theme-accent" />
         {{ t('resume.openToWork') }}
       </span>
-      <a
-        :href="`mailto:${contact.email}`"
+      <NuxtLink
+        :to="localePath('/contact')"
+        data-shortcut="c"
+        :data-shortcut-label="t('resume.contactMe')"
         class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
       >
         <UIcon name="fe:mail" class="w-4 h-4" />
         {{ t('resume.contactMe') }}
-      </a>
+        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
+      </NuxtLink>
       <button
         type="button"
         class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
         :disabled="isDisabled || isLoading"
+        data-shortcut="d"
+        :data-shortcut-label="t('resume.downloadCv')"
         @click="downloadResume()"
       >
         <UIcon name="fe:download" class="w-4 h-4" />
         {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
+        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">d</ThemeKbd>
       </button>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
@@ -80,7 +86,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
           :key="tech.icon"
           class="flex items-center gap-2 h-11 px-3 rounded-lg border border-theme-border-subtle bg-theme-panel text-sm text-theme-text-soft transition-colors hover:border-theme-accent/50"
         >
-          <NuxtImg :src="`svg/${tech.icon}.svg`" class="w-6 h-6 object-contain" alt="" />
+          <NuxtImg :src="`svg/${tech.icon}.svg`" width="24" height="24" class="w-6 h-6 object-contain" alt="" />
           {{ tech.name }}
         </li>
       </ul>
@@ -91,7 +97,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
           :key="tech.icon"
           class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-theme-border-subtle bg-theme-panel/60 text-xs text-theme-muted transition-colors hover:border-theme-accent/50"
         >
-          <NuxtImg :src="`svg/${tech.icon}.svg`" class="w-4 h-4 object-contain" alt="" />
+          <NuxtImg :src="`svg/${tech.icon}.svg`" width="16" height="16" class="w-4 h-4 object-contain" alt="" />
           {{ tech.name }}
         </li>
       </ul>
@@ -99,7 +105,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
 
     <div class="hidden lg:block">
       <ThemeCornerFrame>
-        <NuxtImg src="Avatar.png" width="240" height="240" class="rounded-lg" alt="Avatar" />
+        <NuxtImg src="Avatar.png" width="240" height="240" class="rounded-lg" alt="" />
       </ThemeCornerFrame>
     </div>
   </div>
