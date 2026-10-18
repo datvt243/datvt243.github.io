@@ -54,19 +54,25 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
       </span>
       <a
         :href="`mailto:${contact.email}`"
+        data-shortcut="c"
+        :data-shortcut-label="t('resume.contactMe')"
         class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
       >
         <UIcon name="fe:mail" class="w-4 h-4" />
         {{ t('resume.contactMe') }}
+        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
       </a>
       <button
         type="button"
         class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
         :disabled="isDisabled || isLoading"
+        data-shortcut="d"
+        :data-shortcut-label="t('resume.downloadCv')"
         @click="downloadResume()"
       >
         <UIcon name="fe:download" class="w-4 h-4" />
         {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
+        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">d</ThemeKbd>
       </button>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}

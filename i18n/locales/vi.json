@@ -6,6 +6,17 @@
     "closeMenu": "Đóng menu",
     "switchLanguage": "Chuyển ngôn ngữ"
   },
+  "keyNav": {
+    "title": "Phím tắt",
+    "goTo": "Đi tới",
+    "scrollDown": "Cuộn xuống",
+    "scrollUp": "Cuộn lên",
+    "top": "Lên đầu trang",
+    "bottom": "Xuống cuối trang",
+    "help": "Bật/tắt bảng trợ giúp",
+    "onThisPage": "Trên trang này",
+    "extensionNote": "Đang dùng Vimium hoặc extension tương tự? Nhấn \"i\" trước để nhường phím cho trang (Esc để thoát), hoặc thêm site này vào danh sách loại trừ của extension."
+  },
   "footer": {
     "findMeIn": "Tìm mình ở:"
   },

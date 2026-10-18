@@ -28,11 +28,12 @@ const activeLabel = computed(() => sections.find((s) => s.key === active.value)?
 
         <template #sidebar>
           <ThemeFolder label="personal-info">
-            <li v-for="s in sections" :key="s.key">
-              <ThemeNavItem :active="active === s.key" @click="active = s.key">
+            <li v-for="(s, i) in sections" :key="s.key">
+              <ThemeNavItem :active="active === s.key" :data-shortcut="String(i + 1)" :data-shortcut-label="s.label" @click="active = s.key">
                 <span class="flex items-center gap-2">
                   <UIcon :name="s.icon" class="w-3.5 h-3.5 opacity-50 shrink-0" />
                   {{ s.label }}
+                  <ThemeKbd aria-hidden="true" class="ml-auto px-1 text-[10px] leading-4">{{ i + 1 }}</ThemeKbd>
                 </span>
               </ThemeNavItem>
             </li>
