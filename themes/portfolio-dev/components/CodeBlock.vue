@@ -24,7 +24,7 @@ function toLine(line: string | CodeLine): CodeLine {
     <div v-for="(line, i) in lines" :key="i" class="flex gap-4">
       <span class="text-theme-faint select-none w-6 text-right shrink-0">{{ i + 1 }}</span>
       <span
-        class="text-theme-text-soft min-w-0"
+        class="text-theme-text-soft min-w-0 [overflow-wrap:anywhere]"
         :style="{ paddingLeft: `${toLine(line).indent || 0}ch` }"
         v-html="toLine(line).html"
       />

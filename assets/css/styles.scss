@@ -2,7 +2,7 @@
   &-opacity {
     &-enter {
       &-active {
-        transition: all 0.4s;
+        transition: opacity 0.4s, filter 0.4s;
       }
       &-from {
         opacity: 0;
@@ -11,7 +11,7 @@
     }
     &-leave {
       &-active {
-        transition: all 0.4s;
+        transition: opacity 0.4s, filter 0.4s;
       }
       &-to {
         opacity: 0;
@@ -22,7 +22,7 @@
   &-filter {
     &-enter {
       &-active {
-        transition: all 0.4s;
+        transition: filter 0.4s;
       }
       &-from {
         filter: grayscale(1);
@@ -30,7 +30,7 @@
     }
     &-leave {
       &-active {
-        transition: all 0.4s;
+        transition: filter 0.4s;
       }
       &-to {
         filter: grayscale(1);
@@ -41,7 +41,7 @@
   &-group {
     &-enter-active,
     &-leave-active {
-      transition: all 0.5s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     &-enter-from,
     &-leave-to {
