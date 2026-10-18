@@ -21,3 +21,8 @@
 2026-10-04T11:07:24Z role=verifier outcome=SEAL node=author-github-see-line rerun=partial hub_bytes_before=138445 hub_bytes_after=138920
 2026-10-04T12:05:42Z role=verifier outcome=REOPEN node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=139629
 2026-10-04T12:08:42Z role=verifier outcome=SEAL node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=140218
+2026-10-18T13:51:41Z role=verifier outcome=SEAL node=vim-key-nav rerun=partial hub_bytes_before=149019 hub_bytes_after=150217
+2026-10-18T14:04:17Z role=verifier outcome=SEAL node=vim-key-nav-hint rerun=partial hub_bytes_before=150789 hub_bytes_after=150784
+2026-10-18T14:08:29Z role=verifier outcome=SEAL node=vim-key-nav-extension-note rerun=partial hub_bytes_before=150784 hub_bytes_after=151501
+2026-10-18T14:27:31Z role=verifier outcome=SEAL node=vim-key-nav-tab-badges rerun=partial hub_bytes_before=152157 hub_bytes_after=152152
+2026-10-18T14:39:01Z role=verifier outcome=SEAL node=vim-key-nav-page-shortcuts rerun=partial hub_bytes_before=152152 hub_bytes_after=153378

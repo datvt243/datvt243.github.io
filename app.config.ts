@@ -5,22 +5,27 @@ export default defineAppConfig({
     {
       page: '_resume',
       link: '/',
+      key: 'r',
     },
     {
       page: '_projects',
       link: '/projects',
+      key: 'p',
     },
     {
       page: '_github',
       link: '/github',
+      key: 'h',
     },
     {
       page: '_blogs',
       link: '/blogs',
+      key: 'b',
     },
     {
       page: '_contact',
       link: '/contact',
+      key: 'c',
     },
   ],
   contact: {

@@ -6,6 +6,17 @@
     "closeMenu": "Close menu",
     "switchLanguage": "Switch language"
   },
+  "keyNav": {
+    "title": "Keyboard shortcuts",
+    "goTo": "Go to",
+    "scrollDown": "Scroll down",
+    "scrollUp": "Scroll up",
+    "top": "Go to top",
+    "bottom": "Go to bottom",
+    "help": "Toggle this help",
+    "onThisPage": "On this page",
+    "extensionNote": "Using Vimium or a similar extension? Press \"i\" first to pass keys to this page (Esc to leave), or exclude this site in the extension."
+  },
   "footer": {
     "findMeIn": "find me in:"
   },
