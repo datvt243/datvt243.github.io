@@ -73,8 +73,10 @@ A theme has three auto-imported dirs (all `Theme`-prefixed, split for discoverab
   rendered directly by `app.vue`: `Header.vue` (top nav, tag `ThemeHeader`),
   `Footer.vue` (status bar, tag `ThemeFooter`).
 - `themes/portfolio-dev/components/` — reusable chrome shared across the `pages/`
-  content: `PostCategories.vue`, `PageHeading.vue`, and the 6 primitives
-  (`Panel`, `Folder`, `NavItem`, `FilterFolder`, `CodeBlock`, `CornerFrame`).
+  content: `PostCategories.vue`, `PageHeading.vue`, the 6 primitives
+  (`Panel`, `Folder`, `NavItem`, `FilterFolder`, `CodeBlock`, `CornerFrame`),
+  plus `KeyNav.vue` (keyboard navigation, see below) and `Kbd.vue` (the one
+  shortcut-badge style).
 - Semantic Tailwind classes (`bg-theme-panel`, `border-theme-border`,
   `text-theme-muted`, `text-theme-accent`, `font-theme-mono`, …) — defined in
   `tailwind.config.js` as `rgb(var(--theme-x) / <alpha-value>)`, backed by CSS
@@ -120,6 +122,26 @@ property inheritance, this needed zero changes to Folder/NavItem/
 FilterFolder/CodeBlock/PostCategories/Experiences.vue. The same technique —
 a class + a scoped override block — is the way to re-skin any other subtree
 independently of the site-wide mode, without touching that subtree's markup.
+The flip side: anything that must look the same inside and outside the panel
+needs its own token that the Dracula file doesn't override — that's why
+shortcut badges use `--theme-kbd` (same value as accent) instead of
+`--theme-accent`, which turns purple inside `<ThemePanel>`.
+
+**Keyboard navigation (Vim-style)**: `ThemeKeyNav` (mounted once by
+`ThemeHeader`, which also owns its `v-model` so the header's `?` button opens
+the same help overlay) handles one global `keydown`: `g`+`menuPrimary[].key`
+(`app.config.ts`: r/p/h/b/c) navigates via `localePath`, `j`/`k` scroll,
+`gg`/`G` top/bottom, `?` toggles the overlay. Keys are ignored while typing in
+a form field or with Ctrl/Meta/Alt held. Page-level shortcuts are declared in
+markup, not registered in JS: give any visible clickable element
+`data-shortcut="<key>"` + `data-shortcut-label="<text>"` and KeyNav will
+`focus()`+`click()` it and list it in the overlay (resume hero: `c` contact,
+`d` download CV; personal-info tabs: `1`–`5`; GitHub repo search: `/`). A
+matched page key is `preventDefault`ed so `/` isn't typed into the field it
+focuses, and `Esc` inside any form field blurs it. Don't reuse a single key
+already taken by a global motion (g/j/k/G/?). Browser extensions like Vimium
+swallow these keys before the page sees them — test in a clean or incognito
+profile (see `agent-hub/doctrine/domains/PROJECT.md` Traps).
 
 ### State (Pinia)
 
