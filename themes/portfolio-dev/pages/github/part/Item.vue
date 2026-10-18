@@ -47,7 +47,7 @@ const updatedOnLabel = computed(() =>
   <div class="git-repos-item font-theme-mono">
     <div class="flex items-start justify-between gap-4">
       <p class="flex items-center flex-wrap gap-2">
-        <a :href="modelValue.html_url" target="_blank" rel="noopener noreferrer" class="text-theme-text font-bold text-lg hover:text-theme-accent transition-all">
+        <a :href="modelValue.html_url" target="_blank" rel="noopener noreferrer" class="text-theme-text font-bold text-lg hover:text-theme-accent transition-colors">
           {{ modelValue.name }}
         </a>
         <span class="px-2 py-0.5 rounded-full border border-theme-border-subtle text-theme-muted text-xs leading-none">
@@ -57,7 +57,7 @@ const updatedOnLabel = computed(() =>
       <ul class="flex gap-2 shrink-0">
         <template v-for="el in links">
           <li v-if="getFieldValue(el.field)" :key="el.field">
-            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-all']" target="_blank">
+            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-opacity']" target="_blank" rel="noopener noreferrer">
               <UIcon :name="`${el.icon}`" class="w-5 h-5" />
             </a>
           </li>

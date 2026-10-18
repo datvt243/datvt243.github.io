@@ -17,6 +17,7 @@ const open = ref(props.defaultOpen)
   <div>
     <button
       type="button"
+      :aria-expanded="open"
       class="flex items-center gap-1.5 text-xs uppercase tracking-widest text-theme-faint mb-3 font-theme-mono"
       @click="open = !open"
     >

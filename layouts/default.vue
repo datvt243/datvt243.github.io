@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main class="grow p-0">
+  <main id="main-content" tabindex="-1" class="grow p-0">
     <slot/>
   </main>
 </template>

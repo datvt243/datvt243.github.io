@@ -35,7 +35,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
           :to="localePath('/')"
           class="flex lg:hidden shrink-0 items-center border-r border-theme-border pr-4 py-3 text-theme-muted hover:text-theme-text-strong transition-colors"
         >
-          <label class="text-bold">_datvt243</label>
+          <span class="text-bold" translate="no">_datvt243</span>
         </NuxtLink>
 
         <nav class="hidden lg:flex items-stretch grow">
@@ -50,7 +50,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
                 : 'text-theme-muted hover:text-theme-text-strong'
             "
           >
-            {{ route_.page }}
+            <span translate="no">{{ route_.page }}</span>
             <ThemeKbd aria-hidden="true" class="ml-2 px-1 text-[10px] leading-4">g{{ route_.key }}</ThemeKbd>
           </NuxtLink>
           <div class="grow" />
@@ -64,7 +64,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
                 : 'text-theme-muted hover:text-theme-text-strong'
             "
           >
-            {{ contactTab.page }}
+            <span translate="no">{{ contactTab.page }}</span>
             <ThemeKbd aria-hidden="true" class="ml-2 px-1 text-[10px] leading-4">g{{ contactTab.key }}</ThemeKbd>
           </NuxtLink>
         </nav>
@@ -80,7 +80,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
 
         <button
           class="flex items-center border-l border-theme-border px-4 text-theme-muted hover:text-theme-text-strong transition-colors uppercase text-xs font-bold"
-          :aria-label="t('header.switchLanguage')"
+          :aria-label="`${locale.toUpperCase()}, ${t('header.switchLanguage')}`"
           @click="toggleLocale"
         >
           {{ locale }}

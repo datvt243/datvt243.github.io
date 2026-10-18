@@ -2,7 +2,7 @@
 
 <template>
   <div class="container">
-    <main class="my-4">
+    <main id="main-content" tabindex="-1" class="my-4">
       <slot/>
     </main>
   </div>
