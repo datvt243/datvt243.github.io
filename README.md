@@ -34,6 +34,27 @@ served under an `/en/*` prefix (e.g. `/en/blogs`).
 
 ---
 
+## Keyboard Shortcuts
+
+Vim-style navigation, no mouse needed. Press `?` (or the `?` button in the
+header) to see every shortcut available on the current page.
+
+| Keys | Action |
+|---|---|
+| `gr` `gp` `gh` `gb` `gc` | Go to Resume / Projects / GitHub / Blogs / Contact |
+| `j` / `k` | Scroll down / up |
+| `gg` / `G` | Jump to top / bottom |
+| `c` / `d` | Resume page: contact me / download CV |
+| `1`–`5` | Resume page: switch personal-info tab |
+| `/` / `Esc` | GitHub page: focus / leave the repo search box |
+| `?` | Toggle the shortcut help overlay |
+
+Shortcuts are disabled while typing in a form field. If a browser extension
+such as Vimium captures these keys, press `i` to pass keys to the page, or
+exclude this site in the extension's settings.
+
+---
+
 ## Feeds
 
 | Route | Description |

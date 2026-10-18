@@ -33,7 +33,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
       <div class="flex items-stretch">
         <NuxtLink
           :to="localePath('/')"
-          class="flex shrink-0 items-center border-r border-theme-border pr-4 py-3 text-theme-muted hover:text-theme-text-strong transition-colors"
+          class="flex lg:hidden shrink-0 items-center border-r border-theme-border pr-4 py-3 text-theme-muted hover:text-theme-text-strong transition-colors"
         >
           <label class="text-bold">_datvt243</label>
         </NuxtLink>

@@ -35,7 +35,12 @@ const isTyping = (target: EventTarget | null) =>
 
 const onKeydown = (e: KeyboardEvent) => {
   // Modifier combos belong to the browser/OS (Ctrl+F, Cmd+K...), never hijack them.
-  if (e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented || isTyping(e.target)) return
+  if (e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return
+  if (isTyping(e.target)) {
+    // Esc hands the keyboard back to the shortcuts, e.g. after `/` focused a search box.
+    if (e.key === 'Escape') (e.target as HTMLElement).blur()
+    return
+  }
 
   if (e.key === '?') {
     isHelpOpen.value = !isHelpOpen.value
@@ -66,9 +71,12 @@ const onKeydown = (e: KeyboardEvent) => {
     window.scrollTo({ top: document.documentElement.scrollHeight })
   } else {
     const target = visibleShortcuts().find((el) => el.dataset.shortcut === e.key)
+    if (!target) return
+    // Otherwise the key itself lands in a just-focused input (`/` → search box) or opens Firefox quick-find.
+    e.preventDefault()
     // focus() first so the target scrolls into view; click() is a no-op on a disabled button.
-    target?.focus()
-    target?.click()
+    target.focus()
+    target.click()
   }
 }
 

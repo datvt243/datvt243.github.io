@@ -34,6 +34,8 @@ const getRepos = computed(() => {
         color="gray"
         variant="outline"
         :placeholder="t('github.searchPlaceholder')"
+        data-shortcut="/"
+        :data-shortcut-label="t('github.searchPlaceholder')"
         :ui="{
           base: 'font-theme-mono',
           color: {
@@ -43,7 +45,11 @@ const getRepos = computed(() => {
             },
           },
         }"
-      />
+      >
+        <template #trailing>
+          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">/</ThemeKbd>
+        </template>
+      </UInput>
     </div>
     <div v-if="props.repos" class="clearfix overflow-hidden">
       <TransitionGroup name="transition-group" tag="ul" class="list">
