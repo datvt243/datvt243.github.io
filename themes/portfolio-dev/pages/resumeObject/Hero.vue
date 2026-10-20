@@ -32,9 +32,10 @@ const familiarStack = [
  * clicking into the Experience tab first (issue #179). Years come from the
  * owner-entered `generalInformation.yearsOfExperience` rather than being
  * derived from the earliest experience startDate. `store.experiences` is
- * sorted most-recent-first, so [0] is the current/latest role.
+ * sorted most-recent-first, so the first non-career-break entry is the
+ * current/latest role (a career break has no company to name).
  */
-const currentExperience = computed(() => store.experiences[0] || null)
+const currentExperience = computed(() => store.experiences.find((e) => !e.isCareerBreak) || null)
 const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperience || 0)
 </script>
 

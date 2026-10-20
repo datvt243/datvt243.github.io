@@ -30,7 +30,22 @@
     "openToWork": "Open to work",
     "contactMe": "Contact me",
     "experienceSummary": "{years}+ years experience — most recently at {company}",
-    "familiarWith": "Familiar with"
+    "familiarWith": "Familiar with",
+    "careerBreak": "Career break",
+    "careerBreakTypes": {
+      "careerTransition": "Career transition",
+      "caregiving": "Caregiving",
+      "fullTimeParenting": "Full-time parenting",
+      "gapYear": "Gap year",
+      "healthAndWellbeing": "Health and well-being",
+      "layoff": "Layoff or position eliminated",
+      "personalGoal": "Personal goal pursuit",
+      "professionalDevelopment": "Professional development",
+      "relocation": "Relocation",
+      "retirement": "Retirement",
+      "travel": "Travel",
+      "voluntaryWork": "Voluntary work"
+    }
   },
   "projects": {
     "seoTitle": "Projects",

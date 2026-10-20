@@ -41,6 +41,8 @@ export class ResumeAdapter {
       isCurrent: Boolean(raw.isCurrent),
       description: raw.description ?? '',
       skills: raw.skills ?? [],
+      isCareerBreak: Boolean(raw.isCareerBreak),
+      careerBreakType: raw.careerBreakType ?? '',
     })
   }
 

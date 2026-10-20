@@ -11,8 +11,15 @@
  * @see https://github.com/datvt243
  */
 
+const { t, te } = useI18n()
 const store = useResumeStore()
 const experiences = computed(() => store.experiences)
+
+/** "Career break — Travel"; an empty/unknown type falls back to just "Career break". */
+function careerBreakTitle(type: string) {
+  const key = `resume.careerBreakTypes.${type}`
+  return type && te(key) ? `${t('resume.careerBreak')} — ${t(key)}` : t('resume.careerBreak')
+}
 
 const tagName = (s: string) => `<span class="tag-name">${s}</span>`
 const className = (s: string) => `<span class="class-name">.${s}</span>`
@@ -33,9 +40,10 @@ function pugTag(name: string, cls?: string) {
         <div class="code-line" aria-hidden="true"><span class="line-content" v-html="pugTag('article', 'experience')" /></div>
 
         <h2 class="code-line depth-1 position">
-          <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
+          <span v-if="el.isCareerBreak" class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'career-break')" /><span class="tag-text">{{ careerBreakTitle(el.careerBreakType) }}</span></span>
+          <span v-else class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
         </h2>
-        <p class="code-line depth-1">
+        <p v-if="!el.isCareerBreak" class="code-line depth-1">
           <span class="line-content tagged"
           ><span aria-hidden="true" class="tag-label" v-html="pugTag('p', 'company')" /><span class="tag-text">{{ el.company }}</span></span
           >

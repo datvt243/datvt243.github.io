@@ -57,6 +57,8 @@ export interface Experience extends BaseDocument {
   updatedAt: string
   candidateId: string
   skills: string[]
+  isCareerBreak?: boolean
+  careerBreakType?: string
 }
 
 export interface Education extends BaseDocument {
