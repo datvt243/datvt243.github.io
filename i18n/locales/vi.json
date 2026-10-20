@@ -30,7 +30,22 @@
     "openToWork": "Đang tìm việc",
     "contactMe": "Liên hệ",
     "experienceSummary": "{years}+ năm kinh nghiệm — gần đây nhất tại {company}",
-    "familiarWith": "Đã làm quen với"
+    "familiarWith": "Đã làm quen với",
+    "careerBreak": "Nghỉ việc tạm thời",
+    "careerBreakTypes": {
+      "careerTransition": "Chuyển đổi nghề nghiệp",
+      "caregiving": "Chăm sóc người thân",
+      "fullTimeParenting": "Chăm sóc con toàn thời gian",
+      "gapYear": "Năm nghỉ (gap year)",
+      "healthAndWellbeing": "Sức khoẻ",
+      "layoff": "Bị cắt giảm nhân sự",
+      "personalGoal": "Theo đuổi mục tiêu cá nhân",
+      "professionalDevelopment": "Phát triển chuyên môn",
+      "relocation": "Chuyển nơi ở",
+      "retirement": "Nghỉ hưu",
+      "travel": "Du lịch",
+      "voluntaryWork": "Hoạt động tình nguyện"
+    }
   },
   "projects": {
     "seoTitle": "Dự án",

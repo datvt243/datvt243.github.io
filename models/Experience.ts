@@ -10,6 +10,9 @@ export class ExperienceModel extends BaseModel {
   isCurrent = false
   description = ''
   skills: string[] = []
+  isCareerBreak = false
+  /** One of the 12 LinkedIn career-break keys (`resume.careerBreakTypes.*` in i18n), or `''`. */
+  careerBreakType = ''
 
   /** `<li>` items extracted from the raw HTML description. */
   get descriptionItems(): string[] {
