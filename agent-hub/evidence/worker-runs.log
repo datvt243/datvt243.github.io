@@ -38,3 +38,4 @@
 2026-10-18T19:42:25Z role=implementer outcome=sealed_pending_verifier node=hero-contact-to-page hub_bytes_before=156292
 2026-10-18T19:50:20Z role=verifier outcome=SEAL node=ui-review-239 rerun=partial hub_bytes_before=156292 hub_bytes_after=156912
 2026-10-18T19:50:20Z role=verifier outcome=SEAL node=hero-contact-to-page rerun=partial hub_bytes_before=156292 hub_bytes_after=156912
+2026-10-20T17:39:28Z role=verifier outcome=SEAL node=experience-career-break rerun=none hub_bytes_before=156912 hub_bytes_after=157755

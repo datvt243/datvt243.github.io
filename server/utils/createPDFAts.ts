@@ -8,6 +8,8 @@
  * hold. The only CV template (the old classic `createPDF.ts` was removed).
  */
 import type { Resume, GeneralInformation, ProfessionalSkill, Certificate, Award } from '@/types/resume-document'
+import viLocale from '@/i18n/locales/vi.json'
+import enLocale from '@/i18n/locales/en.json'
 
 export type AtsLang = 'vi' | 'en'
 
@@ -121,6 +123,7 @@ export type AtsRecord = Partial<Omit<Resume, 'generalInformation'>> & {
 
 export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
   const h = HEADINGS[lang]
+  const { careerBreak, careerBreakTypes }: { careerBreak: string, careerBreakTypes: Record<string, string> } = (lang === 'en' ? enLocale : viLocale).resume
   const {
     firstName = '',
     lastName = '',
@@ -167,7 +170,9 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
     .sort((a, b) => b.startDate - a.startDate)
     .map((e) =>
       entry({
-        title: `${escapeHtml(e.position)} — ${escapeHtml(e.company)}`,
+        title: e.isCareerBreak
+          ? escapeHtml([careerBreak, Object.hasOwn(careerBreakTypes, e.careerBreakType ?? '') && careerBreakTypes[e.careerBreakType!]].filter(Boolean).join(' — '))
+          : `${escapeHtml(e.position)} — ${escapeHtml(e.company)}`,
         meta: formatRange({ start: e.startDate, end: e.endDate, isCurrent: e.isCurrent, h }),
         body: e.description,
         stack: e.skills,
