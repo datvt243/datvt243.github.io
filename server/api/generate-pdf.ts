@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core'
 import os from 'os'
 import chromium from '@sparticuz/chromium'
-import type { ResumeAPIResponse, GeneralInformation } from '@/types'
+import type { GeneralInformation } from '@/types'
 
 import { pageRenderAts, type AtsLang } from '~/server/utils/createPDFAts'
 
@@ -61,13 +61,7 @@ export default defineEventHandler(async (event) => {
     return cached.buffer
   }
 
-  const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
-
-  const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
-
-  if (!success || !data) {
-    throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
-  }
+  const data = await fetchResume()
 
   if (data) {
     /**
