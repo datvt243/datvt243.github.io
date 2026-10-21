@@ -3,19 +3,11 @@
  * @see https://github.com/datvt243
  */
 
-import type { ResumeAPIResponse } from '@/types'
-
 export default defineCachedEventHandler(
-  async () => {
-    const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
-
-    const { success = false, data } = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
-
-    return {
-      success,
-      resume: data,
-    }
-  },
+  async () => ({
+    success: true,
+    resume: await fetchResume(),
+  }),
   {
     name: 'api-resume',
     getKey() {
