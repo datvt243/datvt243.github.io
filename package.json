@@ -27,7 +27,7 @@
         "dotenv": "^16.6.1",
         "nuxt": "^3.21.11",
         "pinia": "^4.1.0",
-        "puppeteer-core": "^23.8.0",
+        "puppeteer-core": "~25.11.0",
         "tinycolor2": "^1.6.0",
         "vue": "latest",
         "vue-router": "latest",
