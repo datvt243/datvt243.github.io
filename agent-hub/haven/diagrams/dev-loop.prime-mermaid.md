@@ -93,4 +93,5 @@ PM status directly to "undo" an existing SEAL.
 | `experience-career-break` | SEALED | 2026-10-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-20/experience-career-break-{plan,diff}.md`. |
 | `resume-api-error-standard` | SEALED | 2026-10-21 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-21/resume-api-error-standard-{plan,diff}.md`. |
 | `claude-md-refactor` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/claude-md-refactor-seal.md`. |
+| `deps-nuxt-image-2` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-nuxt-image-2-seal.md`. |
 | `deps-pinia-4` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-pinia-4-seal.md`. |
