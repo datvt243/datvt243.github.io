@@ -15,11 +15,16 @@ Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 3 SSR app with IS
 ## Commands
 
 ```bash
-npm run dev       # dev server
-npm run build     # SSR build
-npm run generate  # static site
-npm run preview   # preview build
+npm run dev         # dev server
+npm run build       # SSR build
+npm run generate    # static site
+npm run preview     # preview build
+npm run lint        # eslint (npm run lint:fix to autofix)
+npx nuxi typecheck  # build strips types without checking them
 ```
+
+No test suite. "Verified" = clean build + lint + typecheck, plus a real
+browser check for UI changes (run `/browser` first).
 
 ## Architecture
 
@@ -30,118 +35,33 @@ npm run preview   # preview build
 | `/` | ISR 60s | `/api/resume` |
 | `/github` | ISR 60s | `/api/github` |
 | `/contact` | prerender | `app.config.ts` |
+| `/projects` | none (no routeRule) | `useResumeStore` |
 | `/blogs` | ISR 60s | `/api/blogs/posts` |
 | `/blogs/[id]` | ISR true | `/api/blogs/detail/[id]` |
 
 ### Server API (`server/api/`)
 
-All handlers use `defineCachedEventHandler` (maxAge 12 days) except `/api/blogs/posts` (1h, keyed by page/perPage/category) and `/api/generate-pdf` (plain handler with a module-level in-memory cache, 1 day - `defineCachedEventHandler` doesn't correctly cache its binary PDF body).
+- All handlers use `defineCachedEventHandler` (maxAge 12 days), except:
+  - `/api/blogs/posts` — 1h, keyed by page/perPage/category.
+  - `/api/generate-pdf` — plain handler + module-level in-memory cache (1 day);
+    `defineCachedEventHandler` doesn't correctly cache its binary PDF body.
+- External APIs:
+  - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
+  - Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`
+  - GitHub: `https://api.github.com/users/${GITHUB_USER}`
 
-External APIs:
-- Resume: `${NODE_API}/api/me/${MY_EMAIL}`
-- Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`
-- GitHub: `https://api.github.com/users/${GITHUB_USER}`
+### UI layer
 
-### Components
-
-- `components/ListRender.vue` — the only component left outside the theme: a generic
-  status-driven slot dispatcher (500ms-delay loading state), reusable by any theme.
-- Everything else presentational lives under `themes/portfolio-dev/` (`pages/`,
-  `layout/`, `components/` — see below) — `pages/*.vue` are thin loaders with no
-  theme-specific markup.
-
-### UI Theme (`themes/`)
-
-The site's entire visual/presentational layer is a swappable theme, not hardcoded into
-`pages/` — including what used to be "content" components (resumeObject/github/post
-listings), since their JSON/file-tree/code-block metaphor is itself an editor-theme
-choice, not neutral markup. Every `pages/*.vue` file is just `definePageMeta` +
-`useSeoMeta` (+ route-param-driven fetches, e.g. `blogs/[id].vue`'s
-`useFetch('/api/blogs/detail/${id}')`) rendering exactly one `Theme*`-prefixed component:
-
-- `pages/index.vue` → `ThemeResumeObject`, `pages/github.vue` → `ThemeGithub`,
-  `pages/contact.vue` → `ThemeContact`, `pages/projects.vue` → `ThemeProjects`,
-  `pages/blogs/index.vue` → `ThemeBlogs`, `pages/blogs/[id].vue` → `ThemePostDetail`.
-
-A theme has three auto-imported dirs (all `Theme`-prefixed, split for discoverability):
-
-- `themes/portfolio-dev/pages/` — one subfolder per route content
-  (`resumeObject/`, `github/`, `post/`, `contact/`, `projects/`, `blogs/`), each
-  owning its own data fetching (`useFetch`/`useAsyncData`/`useResumeStore`) and
-  markup — these are exactly what the `pages/*.vue → Theme*` list above renders.
-- `themes/portfolio-dev/layout/` — site-wide chrome outside page content,
-  rendered directly by `app.vue`: `Header.vue` (top nav, tag `ThemeHeader`),
-  `Footer.vue` (status bar, tag `ThemeFooter`).
-- `themes/portfolio-dev/components/` — reusable chrome shared across the `pages/`
-  content: `PostCategories.vue`, `PageHeading.vue`, the 6 primitives
-  (`Panel`, `Folder`, `NavItem`, `FilterFolder`, `CodeBlock`, `CornerFrame`),
-  plus `KeyNav.vue` (keyboard navigation, see below) and `Kbd.vue` (the one
-  shortcut-badge style).
-- Semantic Tailwind classes (`bg-theme-panel`, `border-theme-border`,
-  `text-theme-muted`, `text-theme-accent`, `font-theme-mono`, …) — defined in
-  `tailwind.config.js` as `rgb(var(--theme-x) / <alpha-value>)`, backed by CSS
-  custom properties from the active theme's `tokens.css`.
-
-Nuxt's directory-based component naming does the prefixing automatically regardless
-of which of the three dirs a file lives in (e.g.
-`themes/portfolio-dev/pages/resumeObject/Hero.vue` → `<ThemeResumeObjectHero>`,
-`themes/portfolio-dev/layout/Header.vue` → `<ThemeHeader>`), per the `components:`
-entry in `nuxt.config.ts`.
-
-The active theme is the `ACTIVE_THEME` constant in `nuxt.config.ts`, currently
-`'portfolio-dev'` (`themes/portfolio-dev/`). Adding a new theme = create
-`themes/<name>/` with a `tokens.css` (same CSS variable names as
-`themes/portfolio-dev/tokens.css`, new values) and `pages/`+`layout/`+`components/`
-trees providing a component for every tag each `pages/*.vue` file (and `app.vue`)
-renders, then flip `ACTIVE_THEME`. No file under the top-level `pages/` needs to
-change.
-
-**Color mode (light/dark)** is an orthogonal axis to the theme itself — same
-component tree, different `--theme-*` values. `tokens.css` is a thin aggregator
-that `@import`s per-mode files from `settings-colors-theme/` (`dark.css`,
-`light.css`), each scoped to a `.dark`/`.light` class — this is the one place
-to look to reskin the palette (all values are `R G B` triplets, e.g.
-`234 88 12`, required by Tailwind's `rgb(var(--theme-x) / <alpha-value>)`
-opacity-modifier pattern in `tailwind.config.js` — don't switch to hex without
-also reworking every `bg-theme-*/50`-style opacity usage). `@nuxt/ui`
-auto-installs `@nuxtjs/color-mode` (forced `classSuffix: ''`), which puts that
-class on `<html>` and exposes the `useColorMode()` composable (used by
-`ThemeHeader`'s toggle button); `nuxt.config.ts`'s `colorMode` key sets
-`preference`/`fallback` to `'dark'` so existing users see no change until they
-opt into light. Adding another full-site mode = a new
-`settings-colors-theme/<name>.css` scoped to `.<name>` + one `@import` line +
-wiring it into the toggle.
-
-**Editor-scoped palette**: `settings-colors-theme/editor-dracula.css` is a
-different kind of file — not a 3rd full-site mode, but a Dracula override
-scoped to `.dark .editor-scope`/`.light .editor-scope` that re-skins only
-`<ThemePanel>`'s subtree (Panel.vue's root carries `editor-scope`), riding on
-top of whichever mode above is active. Because every descendant inside
-`<ThemePanel>` already reads `--theme-*`/`--theme-code-*` via CSS custom
-property inheritance, this needed zero changes to Folder/NavItem/
-FilterFolder/CodeBlock/PostCategories/Experiences.vue. The same technique —
-a class + a scoped override block — is the way to re-skin any other subtree
-independently of the site-wide mode, without touching that subtree's markup.
-The flip side: anything that must look the same inside and outside the panel
-needs its own token that the Dracula file doesn't override — that's why
-shortcut badges use `--theme-kbd` (same value as accent) instead of
-`--theme-accent`, which turns purple inside `<ThemePanel>`.
-
-**Keyboard navigation (Vim-style)**: `ThemeKeyNav` (mounted once by
-`ThemeHeader`, which also owns its `v-model` so the header's `?` button opens
-the same help overlay) handles one global `keydown`: `g`+`menuPrimary[].key`
-(`app.config.ts`: r/p/h/b/c) navigates via `localePath`, `j`/`k` scroll,
-`gg`/`G` top/bottom, `?` toggles the overlay. Keys are ignored while typing in
-a form field or with Ctrl/Meta/Alt held. Page-level shortcuts are declared in
-markup, not registered in JS: give any visible clickable element
-`data-shortcut="<key>"` + `data-shortcut-label="<text>"` and KeyNav will
-`focus()`+`click()` it and list it in the overlay (resume hero: `c` contact,
-`d` download CV; personal-info tabs: `1`–`5`; GitHub repo search: `/`). A
-matched page key is `preventDefault`ed so `/` isn't typed into the field it
-focuses, and `Esc` inside any form field blurs it. Don't reuse a single key
-already taken by a global motion (g/j/k/G/?). Browser extensions like Vimium
-swallow these keys before the page sees them — test in a clean or incognito
-profile (see `agent-hub/doctrine/domains/PROJECT.md` Traps).
+- `pages/*.vue` are thin loaders: only `definePageMeta` + `useSeoMeta` (+
+  route-param fetches) rendering exactly one `Theme*` component. Never put
+  markup there.
+- All presentational code lives in `themes/<ACTIVE_THEME>/` (`ACTIVE_THEME`
+  in `nuxt.config.ts`, currently `portfolio-dev`). Theme structure, color
+  mode, Dracula palette and keyboard navigation: `.claude/rules/theme.md`
+  (auto-loads when touching `themes/**`, `pages/**`, `app.vue`,
+  `tailwind.config.js`).
+- `components/ListRender.vue` — the only component outside the theme: a
+  generic status-driven slot dispatcher (500ms-delay loading state).
 
 ### State (Pinia)
 
@@ -164,68 +84,46 @@ PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium binary path for PDF generation (r
 GISCUS_CATEGORY=             # GitHub Discussions category name for blog comments (e.g. "Comments")
 GISCUS_CATEGORY_ID=          # Discussions category ID from https://giscus.app's config generator
 GISCUS_REPO_ID=              # Repo ID from https://giscus.app's config generator
-DEPLOY_HOOK_URL=             # Optional: POSTed by `/release` after tagging main. Unset by default — no deploy target is configured yet, `/release` skips the deploy step with a "not configured" message instead of failing
-SITE_URL=                    # Optional: canonical production origin for sitemap.xml/rss.xml/i18n hreflang (server/utils/siteUrl.ts). Defaults to https://resume-nuxt-vert.vercel.app if unset — the real live domain, not the datvt243.github.io repo-name domain (that serves an unrelated static page)
+DEPLOY_HOOK_URL=             # Optional: POSTed by `/release` after tagging main; unset → deploy step skipped, not failed
+SITE_URL=                    # Optional: canonical origin for sitemap.xml/rss.xml/hreflang (server/utils/siteUrl.ts); defaults to https://resume-nuxt-vert.vercel.app — NOT datvt243.github.io (that serves an unrelated static page)
 ```
 
-`GISCUS_*` power the comment widget on `/blogs/[id]` (`ThemePostComments`,
-`themes/portfolio-dev/pages/post/Comments.vue`). Unset by default — the
-widget renders a "not configured" placeholder instead of a broken embed
-until an operator does, once, in order: (1) enable GitHub Discussions on
-this repo, (2) install the Giscus GitHub App
-(`github.com/apps/giscus/installations/new`), (3) run
-https://giscus.app's config generator against this repo to get the real
-`GISCUS_CATEGORY_ID`/`GISCUS_REPO_ID` values. The repo name itself
-(`datvt243/datvt243.github.io`) is a hardcoded constant in the component,
-not an env var — it never changes.
+- `GISCUS_*` unset (current state) → `ThemePostComments`
+  (`themes/portfolio-dev/pages/post/Comments.vue`) renders a "not
+  configured" placeholder instead of a broken embed. The repo name
+  `datvt243/datvt243.github.io` is a hardcoded constant there, not an env var.
 
-## Agent-Hub (`agent-hub/`)
+<!--
+Giscus one-time operator setup, in order:
+1. Enable GitHub Discussions on this repo.
+2. Install the Giscus GitHub App: github.com/apps/giscus/installations/new
+3. Run https://giscus.app's config generator against this repo to get the
+   real GISCUS_CATEGORY_ID / GISCUS_REPO_ID values.
+-->
 
-Bug fix / feature work in this repo goes through **agent-hub**
-(`agent-hub/README.md`) — a doctrine/haven/evidence hub with two separated
-roles, **implementer** (writes the diff) and **verifier** (independently
-checks it before anything is marked done). This replaced
-`start-work`/`finish-work`/`merge-work` and the `agent-hub/histories/`
-work-log convention on 2026-08-16 (see `agent-hub/doctrine/domains/PROJECT.md`'s
-Decisions table for why). `/ship` was recreated afterward for quick,
-untracked changes only (docs/config, not node-tracked code work). As of
-2026-08-30 it commits and pushes without a separate approval prompt —
-invoking the command is itself the operator's go-ahead — and its `--merge`
-flag also opens a PR and squash-merges it, always with `--delete-branch`
-(both `bug/*` and `feature/*` are deletable after merge, per the branch
-convention below). It still refuses to push directly to `main` **or**
-`staging` — as of 2026-08-30 that's enforced server-side by real GitHub
-branch protection on both (PR required, `enforce_admins` on, no required
-approval count so `/ship --merge`/`/todo` can still self-merge), not just
-local convention. This is narrower than the seal gate that `agent-hub`'s
-own `/worker`/`/todo` flow enforces for tracked code work — that flow
-still always stops before any outward-facing action.
+## Agent-Hub (`agent-hub/`) & git workflow
 
-```
-/boot                              # 60s orientation, reads doctrine + diagram + evidence, no edits
-/worker implementer "<task>"       # pick a node, smallest diff, build+lint, evidence note
-/worker verifier "<task>"          # independent check → SEAL or REOPEN
-/todo "<task>"                     # both of the above in one command, still 2 separate passes
-/release [patch|minor|major]       # staging → main: merge, tag vX.Y.Z, deploy if configured
-```
-
-Git mechanics (as of 2026-08-30, see `agent-hub/doctrine/domains/
-PROJECT.md`'s Decisions table for why): never push directly to `main` or
-`staging` — both are GitHub-protected, PR-only. `staging` is the
-integration branch: branch `bug/<issue_number>` or
-`feature/<issue_number>` off `staging` (not `main`), open a PR into
-`staging` referencing the issue (`Closes #<n>`). `main` is production —
-it ONLY ever receives code from `staging`, via `/release` (merges
-`staging` into `main`, tags `vX.Y.Z`, deploys if a deploy target is
-configured) or a manual `staging`→`main` PR. `bug/*` and `feature/*`
-branches may both be deleted after merge (as of 2026-08-30 — previously
-`feature/*` was kept forever). For UI checks, run `/browser` first (see
-`agent-hub/doctrine/domains/PROJECT.md`'s "Browser verification" section)
-instead of driving Chrome/CDP by hand.
-
-`agent-hub/histories/` (the old dated work-log files) is kept as-is for
-historical reference — not deleted, no longer the active audit trail. New
-audit trail lives in `agent-hub/evidence/`.
+- Tracked bug/feature code work goes through **agent-hub**
+  (`agent-hub/README.md`): an **implementer** writes the diff, a separate
+  **verifier** independently SEALs or REOPENs it.
+  ```
+  /boot                          # orientation, read-only
+  /worker implementer "<task>"   # smallest diff, build+lint, evidence note
+  /worker verifier "<task>"      # independent check → SEAL or REOPEN
+  /todo "<task>"                 # both passes in one command
+  /release [patch|minor|major]   # staging → main: merge, tag vX.Y.Z, deploy if configured
+  ```
+- `/ship` is only for quick, untracked changes (docs/config).
+- Never push directly to `main` or `staging` — both are GitHub-protected, PR-only.
+- Branch `bug/<issue_number>` or `feature/<issue_number>` off `staging`
+  (not `main`); open the PR into `staging` with `Closes #<n>`. Both branch
+  kinds may be deleted after merge.
+- `main` is production and only receives code from `staging`, via
+  `/release` or a manual `staging`→`main` PR.
+- Audit trail lives in `agent-hub/evidence/`. `agent-hub/histories/` is the
+  legacy work log — keep, don't write to it.
+- Why each convention exists: Decisions table in
+  `agent-hub/doctrine/domains/PROJECT.md`.
 
 ## Known Issues
 

@@ -1,5 +1,5 @@
 /**
- * Design tokens for the active UI theme (see CLAUDE.md's "UI Theme" section).
+ * Design tokens for the active UI theme (see .claude/rules/theme.md).
  * Color values are split per color mode under `settings-colors-theme/`
  * (`dark.css`, `light.css`, ...) so the `.dark`/`.light` class
  * @nuxtjs/color-mode puts on <html> (see nuxt.config.ts's `colorMode`

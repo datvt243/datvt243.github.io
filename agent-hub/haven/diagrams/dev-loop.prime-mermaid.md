@@ -69,7 +69,6 @@ flowchart TD
 
 
 
-| `fix-generate-pdf-vercel-chromium` | SEALED | 2026-09-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-09-20/fix-generate-pdf-vercel-chromium-seal.md`. |
 
 | `cv-download-toast` | SEALED | 2026-09-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-09-20/cv-download-toast-seal.md`. |
 
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `hero-contact-to-page` | SEALED | 2026-10-19 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-19/hero-contact-to-page-diff.md`. |
 | `experience-career-break` | SEALED | 2026-10-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-20/experience-career-break-{plan,diff}.md`. |
 | `resume-api-error-standard` | SEALED | 2026-10-21 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-21/resume-api-error-standard-{plan,diff}.md`. |
+| `claude-md-refactor` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/claude-md-refactor-seal.md`. |

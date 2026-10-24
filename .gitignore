@@ -29,7 +29,8 @@ logs
 
 .vscode
 
-# Claude Code: ignore local/personal config, but keep shared custom commands/skills tracked
+# Claude Code: ignore local/personal config, but keep shared custom commands/skills/rules tracked
 .claude/*
 !.claude/commands/
 !.claude/skills/
+!.claude/rules/

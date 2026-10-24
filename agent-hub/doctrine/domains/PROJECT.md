@@ -13,7 +13,7 @@ the root `CLAUDE.md`'s content.
 | Language/runtime | TypeScript, Nuxt 3 / Vue 3 SSR |
 | Entry point | `app.vue` (chrome) + `pages/*.vue` (thin loaders, each file renders exactly one `Theme*` component) |
 | Data store | No DB — all data comes from external APIs (resume Node API, blog API, GitHub API) |
-| Theme system | `themes/<name>/` swappable via `ACTIVE_THEME` in `nuxt.config.ts` — see the "UI Theme" section of root `CLAUDE.md` |
+| Theme system | `themes/<name>/` swappable via `ACTIVE_THEME` in `nuxt.config.ts` — see `.claude/rules/theme.md` (path-scoped, moved out of root `CLAUDE.md`) |
 
 ## Invariants (things that never happen here)
 - **Never push directly to `main` or `staging`** — both are real
