@@ -27,6 +27,7 @@
   --theme-accent-soft: 249 115 22; /* orange-500 */
   --theme-accent-contrast: 255 255 255; /* white, for text on an accent-colored background */
   --theme-kbd: 234 88 12; /* = accent, but never overridden by editor-dracula.css, so shortcut badges stay one color */
+  --theme-success: 22 101 52; /* green-800 - green-700 fell to 4.38:1 on its own /10 tint */
 
   /* code syntax highlighting (Skills/Experiences/Educations resume sections) -
      darker shade of the same hue as dark.css's pastel value, for readable

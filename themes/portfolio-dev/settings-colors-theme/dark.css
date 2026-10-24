@@ -30,6 +30,7 @@
   --theme-accent-soft: 253 186 116; /* orange-300 */
   --theme-accent-contrast: 2 6 23; /* slate-950, for text on an accent-colored background */
   --theme-kbd: 251 146 60; /* = accent, but never overridden by editor-dracula.css, so shortcut badges stay one color */
+  --theme-success: 74 222 128; /* green-400, positive status (open-to-work chip) */
 
   /* code syntax highlighting (Skills/Experiences/Educations resume sections) */
   --theme-code-text: 203 213 225; /* slate-300, Experiences.vue base body text */
