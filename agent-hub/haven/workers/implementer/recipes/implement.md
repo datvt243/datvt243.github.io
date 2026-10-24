@@ -29,6 +29,10 @@
    --user-data-dir="$HOME/.chrome-debug-profile"`), connect with
    `puppeteer-core`. Prefer real click-based navigation over
    `Page.navigate` when testing cache/hydration behavior.
+7b. [synced 2026-10-24] `grep` the active diagram for other not-yet-SEALED
+   rows citing the same issue (`#<n>`)/task. Each goes in the note under
+   `## Supersedes` (this node finishes its work → `verify_seal` retires it)
+   or `## Still open` (1-line reason). None → `## Supersedes: none`.
 8. Only report `sealed_pending_verifier` when ALL criteria pass with
    evidence (clean build + clean lint + UI verification if needed).
 9. If you hit a new bug/trap (in the same style as the existing traps in

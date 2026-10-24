@@ -12,6 +12,16 @@ Ship the pending changes in this repo, in this order:
    the integration branch now; `main` only ever receives code via
    `/release`). This guard is never skipped, `--merge` or not.
 
+0.5. **SealedOnly (code changes only)** [synced from agent-hub-init
+   2026-10-24]: if `git status --short` touches code (anything outside
+   `*.md`, `agent-hub/`, `.claude/`, and config-only files like
+   `.gitignore`/`.env.example`), find the matching node in
+   `agent-hub/haven/diagrams/` (active file, or `grep` its slug in
+   `dev-loop-archive.md`). Missing or not `SEALED` → stop, point to
+   `/todo` / `/worker verifier`. `SEALED` but no verifier note under
+   `agent-hub/evidence/verifier/` → stop (`NO_EVIDENCE`). Docs/config-only
+   diffs skip this step — that's what this command is for.
+
 1. **Lint-fix changed files.** Get the changed files (`git status --short`,
    covering both staged and unstaged) and run `npx eslint --fix` on the
    subset ESLint covers in this repo (`.vue`/`.ts`/`.js` — see
@@ -29,7 +39,7 @@ Ship the pending changes in this repo, in this order:
    -u origin <branch>` (plain `git push` if the branch already has an
    upstream). If the push is rejected (e.g. non-fast-forward), stop and
    report it plainly rather than force-pushing — that failure is not
-   something to route around.
+   something to route around. Same for hooks: never `--no-verify`.
 
 4. **No `--merge` flag → stop here.** Report the commit (`git log -1
    --stat`) and the push result, and mention that re-running with `--merge`

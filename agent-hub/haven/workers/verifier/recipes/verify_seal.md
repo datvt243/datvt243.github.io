@@ -99,6 +99,9 @@ verdict versus just auditing the note. Not a bug, but not what
    evidence = REOPEN, write it clearly into "missing". Always includes the
    "comments per code-comments.md" row (see that standard's
    Enforcement), even if the node's own criteria don't list it.
+7b. [synced 2026-10-24] An open row for the same issue exists on the active
+   diagram but the note has no `## Supersedes`/`## Still open` line for it
+   → REOPEN (implement's Supersedes check skipped).
 8. Scan all 5 forbidden states.
 9. Check the SEAL GATE — is there a recorded approval in the note if the
    diff is outward-facing?
@@ -111,6 +114,16 @@ verdict versus just auditing the note. Not a bug, but not what
     → SEALED) — never reorder, move, or re-sort rows in the table
     (`AppendOnly`); this keeps `agent-hub/.gitattributes`' `merge=union`
     able to merge cleanly across branches.
+    [added 2026-10-24] COLLAPSE ON SEAL, same in-place row: (a) append
+    the node's full row (state SEALED) verbatim to the END of
+    `haven/diagrams/dev-loop-archive.md` (create if absent); (b) replace
+    the active row in place with `| node | SEALED | <date> — archived,
+    see dev-loop-archive.md. Evidence: <this verdict note path> |`;
+    (c) if the active PM status now holds more than 20 such pointer
+    rows, delete the oldest ones (full row already in the archive).
+    (d) each row the note lists under `## Supersedes`: append it verbatim to
+    the archive under `## Superseded by \`<this node>\` (<date>)`, then
+    delete it from the active file — no pointer.
 13. Write the verdict into
     `evidence/verifier/<date>/<slug>-{seal|reopen}.md`.
 13a. [added 2026-09-02] In that note, include the `## Isolation proof`
@@ -144,7 +157,7 @@ verdict versus just auditing the note. Not a bug, but not what
 | Failure | Handling |
 |---|---|
 | No evidence note exists | REOPEN, `NO_EVIDENCE` |
-| The node doesn't exist on any diagram | REOPEN, `forbidden_hit: node_unknown` |
+| The node doesn't exist on any diagram | `grep` its slug in `dev-loop-archive.md` first — found SEALED there → treat as already SEALED; otherwise REOPEN, `forbidden_hit: node_unknown` |
 | The node is already SEALED | Don't overwrite — it must be a new node |
 | The note claims "tests pass" | REOPEN immediately — this project has no test suite, that phrase is itself a sign of `EDIT_UNVERIFIED` |
 
