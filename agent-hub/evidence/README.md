@@ -27,6 +27,9 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 - `## Acceptance` — a table | Criterion | Evidence | (evidence points to
   a specific line of output — don't just say "build's fine", must quote
   it verbatim); always has a "comments per code-comments.md" row
+- `## Supersedes` / `## Still open` — [synced 2026-10-24] other open rows
+  for the same issue: retired on SEAL, or kept open with a reason; `none`
+  if there are none
 - `## Noticed, not done` — things noticed outside scope but not fixed
 - `## Seal gate` — record the approval if there was an outward-facing
   action, or "none"

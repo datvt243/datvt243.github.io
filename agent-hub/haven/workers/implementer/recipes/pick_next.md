@@ -22,6 +22,23 @@
 3. Find the earliest PENDING node on the critical path.
 4. No match → don't make something up; clearly report "no PENDING node",
    stop.
+   [added 2026-10-24] Before adding a new node, `grep` its slug in
+   `dev-loop-archive.md` — sealed pointers get dropped from the active
+   file (`verify_seal` step 12c), so a taken slug may only be there;
+   taken → pick a new slug.
+   [synced 2026-10-24] Also `grep` the active diagram for a not-yet-SEALED
+   row of the same task/issue (`#<n>`) — found → resume THAT row in place
+   (state + Notes pointer), never add a "recheck" node beside it (LAI-13's
+   new-node rule covers SEALED nodes only).
+4b. [synced 2026-10-24, analyze-lite / Layer 1.5] Self-check the picked
+   node's acceptance criteria before coding — not a verify pass, no state
+   change, no separate evidence. Block on exactly 3 error classes:
+   - Ambiguity: vague adjective ("fast", "clean") with no measurement/command.
+   - Underspecification: no pass/fail condition mapping to a command in
+     `doctrine/MEMORY.md`.
+   - Coverage gap: criteria point to no file/anchor that will change.
+   Found one → rewrite the criteria on the node first; the evidence note
+   adds `## Acceptance criteria clarified: <before> → <after>`.
 5. Locate code anchors via grep — real paths in the Nuxt repo (`pages/`,
    `themes/<ACTIVE_THEME>/`, `server/api/`, `components/`, `stores/`...),
    don't invent them.
