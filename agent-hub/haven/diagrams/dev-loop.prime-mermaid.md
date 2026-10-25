@@ -71,10 +71,6 @@ flowchart TD
 
 
 
-| `github-updated-date-tz` | SEALED | 2026-09-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-09-20/github-updated-date-tz-seal.md`. |
-| `ats-cv-template-local` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/ats-cv-template-local-seal.md`. |
-| `comment-cleanup-standardize` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/comment-cleanup-standardize-seal.md`. |
-| `comment-style-followup` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/comment-style-followup-seal.md`. |
 | `author-github-see-line` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/author-github-see-line-seal.md`. |
 | `object-parameter-rule` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/object-parameter-rule-seal.md`. |
 | `vim-key-nav` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-{plan,diff}.md`. |
@@ -97,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `deps-puppeteer-25` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-puppeteer-25-seal.md`. |
 | `deps-nuxt-image-2` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-nuxt-image-2-seal.md`. |
 | `deps-pinia-4` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-pinia-4-seal.md`. |
+| `deps-i18n-10` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-i18n-10-seal.md`. |

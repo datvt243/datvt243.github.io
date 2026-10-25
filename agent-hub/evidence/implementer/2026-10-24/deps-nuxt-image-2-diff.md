@@ -74,3 +74,10 @@ Dev server (port 4002, v2): identical image table; `img responses >=400: none`; 
 
 ## Seal gate
 none — no commit/push/PR.
+
+---
+
+## Correction (added 2026-10-24 by the implementer of `deps-i18n-10`, #261)
+The `## Output` claim above — `grep -i "sharp\|[@nuxt/image]"` on the build log → **no match** — was wrong in what it implied. The pattern `\[@nuxt/image\]` only matched lines prefixed `[@nuxt/image]`; @nuxt/image 2.2.0 introduced 12 build lines of a different shape that it missed:
+` WARN  [plugin node-resolve] Could not resolve import "nuxt/server" in .../node_modules/@nuxt/image/dist/runtime/server/utils/image.js using exports defined in .../node_modules/nuxt/package.json.` + `"nuxt/server" is imported by ... but could not be resolved – treating it as an external dependency.`
+Counts: v1 baseline build (`i0b.log`) 0 → v2 build (`i1b.log`) 12. Cause: v2's new server-side `useImage` util imports `nuxt/server`, an export that only exists in Nuxt 4 (Nuxt 3.21's `package.json` `exports` has no `server` key). Impact: none at runtime — `grep -r 'nuxt/server' .output/server` → no match (tree-shaken; the repo never calls server-side `useImage`). Goes away with #263 (Nuxt 4). The sharp-warning finding itself stands.
