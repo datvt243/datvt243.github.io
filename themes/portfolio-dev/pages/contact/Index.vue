@@ -46,7 +46,7 @@ function submitMessage() {
               :href="link"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 px-2 py-1.5 rounded text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50 transition-colors"
+              class="flex items-center gap-2 px-2 py-1.5 rounded-sm text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50 transition-colors"
             >
               <UIcon :name="`grommet-icons:${name.toLowerCase() === 'website' ? 'globe' : name}`" class="w-4 h-4" />
               <span class="capitalize">{{ name }}</span>
@@ -65,7 +65,7 @@ function submitMessage() {
             type="text"
             :placeholder="t('contact.namePlaceholder')"
             required
-            class="w-full rounded bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-theme-accent"
+            class="w-full rounded-sm bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-hidden focus-visible:ring-1 focus-visible:ring-theme-accent"
           />
         </div>
         <div>
@@ -76,7 +76,7 @@ function submitMessage() {
             type="email"
             placeholder="you@example.com"
             required
-            class="w-full rounded bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-theme-accent"
+            class="w-full rounded-sm bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-hidden focus-visible:ring-1 focus-visible:ring-theme-accent"
           />
         </div>
         <div>
@@ -87,12 +87,12 @@ function submitMessage() {
             rows="5"
             :placeholder="t('contact.messagePlaceholder')"
             required
-            class="w-full rounded bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-theme-accent resize-y"
+            class="w-full rounded-sm bg-theme-panel-subtle/50 border border-theme-border-subtle px-3 py-2 text-sm text-theme-text placeholder:text-theme-faint focus:border-theme-accent/50 focus:outline-hidden focus-visible:ring-1 focus-visible:ring-theme-accent resize-y"
           />
         </div>
         <button
           type="submit"
-          class="inline-flex items-center gap-2 rounded bg-theme-accent px-4 py-2 text-sm font-semibold text-theme-accent-contrast hover:bg-theme-accent-soft transition-colors font-theme-mono"
+          class="inline-flex items-center gap-2 rounded-sm bg-theme-accent px-4 py-2 text-sm font-semibold text-theme-accent-contrast hover:bg-theme-accent-soft transition-colors font-theme-mono"
         >
           submit-message
           <UIcon name="fe:paper-plane" class="w-4 h-4" />

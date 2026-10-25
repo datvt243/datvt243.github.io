@@ -37,13 +37,6 @@ export default defineNuxtConfig({
     pageTransition: { name: 'transition-opacity', mode: 'out-in' },
   },
 
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
-
   runtimeConfig: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     PUPPETEER_EXECUTABLE_PATH: process.env.PUPPETEER_EXECUTABLE_PATH,
@@ -58,7 +51,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/tailwindcss.css', '~/assets/css/styles.scss'],
+  css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/main.css', '~/assets/css/styles.scss'],
   /**
    * @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these
    * options merge with that. Defaults to dark (existing look) until the user
@@ -69,6 +62,9 @@ export default defineNuxtConfig({
     preference: 'dark',
     fallback: 'dark',
   },
+  // Fira Code already loads from font-face.scss's Google Fonts @import;
+  // @nuxt/fonts' generated @font-face would land before it and void it.
+  ui: { fonts: false },
   components: [
     { path: `~/themes/${ACTIVE_THEME}/pages`, prefix: 'Theme' },
     { path: `~/themes/${ACTIVE_THEME}/layout`, prefix: 'Theme' },

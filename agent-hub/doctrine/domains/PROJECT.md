@@ -1,7 +1,7 @@
 # doctrine/domains/PROJECT.md ★ — ground truth of datvt243.github.io
 
 ## What is it
-Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 3 SSR app with ISR
+Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 4 SSR app with ISR
 caching, running in real production (not a demo). Full details on the
 stack/routes/theme system live in the root `CLAUDE.md` — this file only
 records what CANNOT be inferred from reading the code, and doesn't repeat
@@ -10,7 +10,7 @@ the root `CLAUDE.md`'s content.
 ## Stack + shape
 | Thing | Value |
 |---|---|
-| Language/runtime | TypeScript, Nuxt 3 / Vue 3 SSR |
+| Language/runtime | TypeScript, Nuxt 4 / Vue 3 SSR |
 | Entry point | `app.vue` (chrome) + `pages/*.vue` (thin loaders, each file renders exactly one `Theme*` component) |
 | Data store | No DB — all data comes from external APIs (resume Node API, blog API, GitHub API) |
 | Theme system | `themes/<name>/` swappable via `ACTIVE_THEME` in `nuxt.config.ts` — see `.claude/rules/theme.md` (path-scoped, moved out of root `CLAUDE.md`) |
@@ -83,6 +83,8 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | `npm install <pkg>@<newer-version>` fails outright with `TypeError: Cannot read properties of null (reading 'edgesOut')`, thrown inside `@npmcli/arborist/lib/arborist/build-ideal-tree.js` | An internal bug in npm `10.8.2` (bundled with Node 20, the shell's default) resolving a newer peer-dependency set — hit bumping `nuxt` to `3.21.11`, which pulls in a newer `@vitejs/devtools-*` peer chain than the installed lockfile had | Run the install under Node ≥24/npm ≥11 instead (`nvm use 24`, already required for `npm run lint` per the `Object.groupBy` trap above) — same workaround, one more reason to default to it for any dependency-version-bump work, not just lint |
 | Merging two feature PRs that both got SEALED around the same time conflicts inside `haven/diagrams/dev-loop.prime-mermaid.md`'s PM status table — both branches append their new node's row at the same spot (end of the table) | Each implementer pass only sees its own branch's diagram state when appending a row; git can't 3-way-merge two insertions at the identical location | Resolve by keeping BOTH rows (never drop one — `LAI-13`), ordered chronologically by date; re-run build+lint after resolving since the conflict can also touch a shared code file (e.g. both PRs edited the same `.vue`) even when that file auto-merges cleanly |
 | Keyboard-shortcut UI checks via the shared `:9888` debug Chrome see no `keydown` at all: CDP-typed keys never reach the page's listeners, while synthetic `dispatchEvent` keydowns work | `$HOME/.chrome-debug-profile` has extensions installed, including Vimium C (`hfjbmagddngcpeloejdejnfgbamkjaeg`), which swallows vim-style keys (`j`/`k`/`g`/`?`) before the page sees them and also causes extra main-frame navigations that detach puppeteer frames | For any keyboard-input check, `puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, userDataDir: <fresh temp dir> })` (no extensions) instead of `connect`-ing to `:9888` — or stay on `:9888` but open an incognito context (`(await puppeteer.connect(...)).createBrowserContext()`), where Vimium C isn't allowed (its `Secure Preferences` entry has no `incognito: true`) |
+| `puppeteer-core` bumped on its own (e.g. a blanket `^` range or `npm audit fix`) silently desyncs from `@sparticuz/chromium` — each puppeteer **minor** targets a different Chrome major (25.10 → Chrome 152, 25.11 → 153, 25.12 → 154), and `@sparticuz/chromium`'s major IS the Chrome major it ships on Vercel | Before #260 the repo paired `puppeteer-core@23.8.0` (Chrome 131) with `@sparticuz/chromium@153` — 22 majors apart; it worked by luck of CDP compatibility, not by design | Keep `puppeteer-core` pinned with `~` to the minor whose `lib/puppeteer/revisions.js` `chrome:` major equals `@sparticuz/chromium`'s major; bump both together, never one alone (sparticuz README: pick the chromium version matching puppeteer's supported Chrome) |
+| `@nuxt/schema` devDependency pinned `~3.21.11` (= the installed `nuxt`) looks like dead weight | `@nuxt/ui@3` depends on `@nuxt/schema@4` directly; without the pin npm hoists 4.x to the root, Nuxt 3's generated `.nuxt/tsconfig.json` maps `@nuxt/schema` there, and `nuxi typecheck` fails on `nuxt.config.ts`'s `$development.nitro.storage` (schema 4's nitro type falls back to a minimal shape without a Nuxt-4 server builder) — found in #262 | Resolved in #263: on Nuxt 4 every module dedupes to one `@nuxt/schema@4.x`, pin dropped. If a future module drags in a mismatched schema major again, pin it to the installed `nuxt`. |
 
 ## Decisions, with reasoning
 > A decision recorded without its reason will get "cleaned up" by some

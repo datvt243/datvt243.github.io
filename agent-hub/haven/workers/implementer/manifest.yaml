@@ -3,7 +3,7 @@ version: 0.1.0
 display_role: Implementer
 description: >
   Turns a task into the smallest diff that makes a diagram node qualify as
-  done, on datvt243.github.io's Nuxt 3 SSR codebase. Locate the node first,
+  done, on datvt243.github.io's Nuxt 4 SSR codebase. Locate the node first,
   read before writing, follow edit-verification so it never self-claims
   something into `EDIT_UNVERIFIED`. This project has no test suite —
   "done" means a clean build+lint, and for visual changes, a real UI

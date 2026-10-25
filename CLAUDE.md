@@ -2,12 +2,12 @@
 
 ## Project
 
-Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 3 SSR app with ISR caching.
+Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 4 SSR app with ISR caching.
 
 ## Stack
 
-- Nuxt 3 · Vue 3 · TypeScript
-- TailwindCSS v3 + @nuxt/ui v2 + @nuxt/icon
+- Nuxt 4 · Vue 3 · TypeScript
+- TailwindCSS v4 + @nuxt/ui v4 + @nuxt/icon
 - Pinia (stores in `stores/`)
 - puppeteer-core (PDF resume download)
 - sass (global styles in `assets/css/`)
@@ -59,7 +59,7 @@ browser check for UI changes (run `/browser` first).
   in `nuxt.config.ts`, currently `portfolio-dev`). Theme structure, color
   mode, Dracula palette and keyboard navigation: `.claude/rules/theme.md`
   (auto-loads when touching `themes/**`, `pages/**`, `app.vue`,
-  `tailwind.config.js`).
+  `assets/css/main.css`).
 - `components/ListRender.vue` — the only component outside the theme: a
   generic status-driven slot dispatcher (500ms-delay loading state).
 

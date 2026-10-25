@@ -22,7 +22,7 @@ export function useDownloadResume() {
     const notification = toast.add({
       title: t('resume.downloadingCv'),
       icon: 'i-fe-download',
-      timeout: 0,
+      duration: 0,
     })
 
     try {
@@ -34,8 +34,8 @@ export function useDownloadResume() {
         toast.update(notification.id, {
           title: t('resume.downloadCvError'),
           icon: 'i-fe-warning',
-          color: 'red',
-          timeout: 5000,
+          color: 'error',
+          duration: 5000,
         })
         return
       }
@@ -50,16 +50,16 @@ export function useDownloadResume() {
       toast.update(notification.id, {
         title: t('resume.downloadCvSuccess'),
         icon: 'i-fe-check-circle',
-        color: 'green',
-        timeout: 4000,
+        color: 'success',
+        duration: 4000,
       })
     } catch {
       isDisabled.value = true
       toast.update(notification.id, {
         title: t('resume.downloadCvError'),
         icon: 'i-fe-warning',
-        color: 'red',
-        timeout: 5000,
+        color: 'error',
+        duration: 5000,
       })
     } finally {
       isLoading.value = false

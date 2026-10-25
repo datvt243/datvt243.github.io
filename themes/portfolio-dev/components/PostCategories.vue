@@ -28,7 +28,7 @@ const category = toRef(query?.category || '')
         <NuxtLink
           :to="`/blogs?category=${cate.slug}`"
           :aria-label="`View posts tagged ${cate.name}`"
-          class="flex items-center gap-2 w-full px-2 py-1.5 rounded text-sm transition-colors"
+          class="flex items-center gap-2 w-full px-2 py-1.5 rounded-sm text-sm transition-colors"
           :class="category === cate.slug ? 'bg-theme-panel-subtle text-theme-text' : 'text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50'"
         >
           <UIcon name="fe:hash" class="w-3.5 h-3.5 opacity-50 shrink-0" />

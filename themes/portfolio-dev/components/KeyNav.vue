@@ -96,29 +96,31 @@ const motions = computed(() => [
 </script>
 
 <template>
-  <UModal v-model="isHelpOpen" :ui="{ background: 'bg-theme-panel', ring: 'ring-1 ring-theme-border' }">
-    <div class="p-5 font-theme-mono text-sm text-theme-text">
-      <h2 class="mb-4 text-theme-text-strong font-bold">{{ t('keyNav.title') }}</h2>
-      <ul class="space-y-2">
-        <li v-for="item in menuPrimary" :key="item.link" class="flex items-center justify-between gap-4">
-          <span class="text-theme-muted">{{ t('keyNav.goTo') }} {{ item.page }}</span>
-          <ThemeKbd class="px-1.5">g{{ item.key }}</ThemeKbd>
-        </li>
-        <li v-for="m in motions" :key="m.keys" class="flex items-center justify-between gap-4">
-          <span class="text-theme-muted">{{ m.label }}</span>
-          <ThemeKbd class="px-1.5">{{ m.keys }}</ThemeKbd>
-        </li>
-      </ul>
-      <template v-if="pageShortcuts.length">
-        <h3 class="mt-4 mb-2 text-theme-text-strong font-bold">{{ t('keyNav.onThisPage') }}</h3>
+  <UModal v-model:open="isHelpOpen" :title="t('keyNav.title')" :ui="{ content: 'bg-theme-panel ring-theme-border' }">
+    <template #content>
+      <div class="p-5 font-theme-mono text-sm text-theme-text">
+        <h2 class="mb-4 text-theme-text-strong font-bold">{{ t('keyNav.title') }}</h2>
         <ul class="space-y-2">
-          <li v-for="s in pageShortcuts" :key="s.keys" class="flex items-center justify-between gap-4">
-            <span class="text-theme-muted">{{ s.label }}</span>
-            <ThemeKbd class="px-1.5">{{ s.keys }}</ThemeKbd>
+          <li v-for="item in menuPrimary" :key="item.link" class="flex items-center justify-between gap-4">
+            <span class="text-theme-muted">{{ t('keyNav.goTo') }} {{ item.page }}</span>
+            <ThemeKbd class="px-1.5">g{{ item.key }}</ThemeKbd>
+          </li>
+          <li v-for="m in motions" :key="m.keys" class="flex items-center justify-between gap-4">
+            <span class="text-theme-muted">{{ m.label }}</span>
+            <ThemeKbd class="px-1.5">{{ m.keys }}</ThemeKbd>
           </li>
         </ul>
-      </template>
-      <p class="mt-4 border-t border-theme-border pt-3 text-xs text-theme-muted">{{ t('keyNav.extensionNote') }}</p>
-    </div>
+        <template v-if="pageShortcuts.length">
+          <h3 class="mt-4 mb-2 text-theme-text-strong font-bold">{{ t('keyNav.onThisPage') }}</h3>
+          <ul class="space-y-2">
+            <li v-for="s in pageShortcuts" :key="s.keys" class="flex items-center justify-between gap-4">
+              <span class="text-theme-muted">{{ s.label }}</span>
+              <ThemeKbd class="px-1.5">{{ s.keys }}</ThemeKbd>
+            </li>
+          </ul>
+        </template>
+        <p class="mt-4 border-t border-theme-border pt-3 text-xs text-theme-muted">{{ t('keyNav.extensionNote') }}</p>
+      </div>
+    </template>
   </UModal>
 </template>

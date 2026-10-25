@@ -46,35 +46,37 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance">
         {{ hero.fullName }}
       </h1>
-      <span
-        v-if="hero.openToWork"
-        class="inline-flex items-center gap-2 mt-4 px-3 py-1 rounded-full border border-theme-accent/30 bg-theme-accent/10 text-sm text-theme-accent"
-      >
-        <span class="w-2 h-2 rounded-full bg-theme-accent" />
-        {{ t('resume.openToWork') }}
-      </span>
-      <NuxtLink
-        :to="localePath('/contact')"
-        data-shortcut="c"
-        :data-shortcut-label="t('resume.contactMe')"
-        class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
-      >
-        <UIcon name="fe:mail" class="w-4 h-4" />
-        {{ t('resume.contactMe') }}
-        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
-      </NuxtLink>
-      <button
-        type="button"
-        class="inline-flex items-center gap-2 mt-4 ml-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
-        :disabled="isDisabled || isLoading"
-        data-shortcut="d"
-        :data-shortcut-label="t('resume.downloadCv')"
-        @click="downloadResume()"
-      >
-        <UIcon name="fe:download" class="w-4 h-4" />
-        {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
-        <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">d</ThemeKbd>
-      </button>
+      <div class="flex flex-wrap items-center gap-2 mt-4">
+        <span
+          v-if="hero.openToWork"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-success/30 bg-theme-success/10 text-sm text-theme-success"
+        >
+          <span class="w-2 h-2 rounded-full bg-theme-success" />
+          {{ t('resume.openToWork') }}
+        </span>
+        <NuxtLink
+          :to="localePath('/contact')"
+          data-shortcut="c"
+          :data-shortcut-label="t('resume.contactMe')"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
+        >
+          <UIcon name="fe:mail" class="w-4 h-4" />
+          {{ t('resume.contactMe') }}
+          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
+        </NuxtLink>
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
+          :disabled="isDisabled || isLoading"
+          data-shortcut="d"
+          :data-shortcut-label="t('resume.downloadCv')"
+          @click="downloadResume()"
+        >
+          <UIcon name="fe:download" class="w-4 h-4" />
+          {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
+          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">d</ThemeKbd>
+        </button>
+      </div>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>

@@ -29,21 +29,16 @@ const getRepos = computed(() => {
     <div class="search mb-3">
       <UInput
         v-model="search"
-        size="sm"
+        size="md"
         icon="fe:search"
-        color="gray"
+        color="neutral"
         variant="outline"
+        class="w-full"
         :placeholder="t('github.searchPlaceholder')"
         data-shortcut="/"
         :data-shortcut-label="t('github.searchPlaceholder')"
         :ui="{
-          base: 'font-theme-mono',
-          color: {
-            gray: {
-              outline:
-                'shadow-none bg-theme-panel/50 dark:bg-theme-panel/50 text-theme-text-strong dark:text-theme-text-strong ring-1 ring-inset ring-theme-border-subtle dark:ring-theme-border-subtle focus:ring-1 focus:ring-theme-accent dark:focus:ring-theme-accent',
-            },
-          },
+          base: 'font-theme-mono shadow-none bg-theme-panel/50 text-theme-text-strong ring-1 ring-inset ring-theme-border-subtle focus-visible:ring-1 focus-visible:ring-theme-accent focus-visible:outline-none',
         }"
       >
         <template #trailing>

@@ -62,9 +62,9 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
         <p>{{ t('blogs.intro') }}</p>
       </div>
       <div class="">
-        <div class="flex items-center space-x-4 border border-theme-border-subtle rounded pl-3">
+        <div class="flex items-center space-x-4 border border-theme-border-subtle rounded-sm pl-3">
           <div class="leading-none text-sm">{{ t('blogs.show') }}</div>
-          <USelect v-model="perPage" :options="[10, 20, 30, 40, 50]"  variant="none" />
+          <USelect v-model="perPage" :items="[10, 20, 30, 40, 50]" variant="none" />
         </div>
       </div>
     </div>
@@ -83,7 +83,14 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
       </template>
     </ListRender>
     <div class="mt-4 flex justify-center">
-      <UPagination v-model="page" :page-count="perPage" :total="total" :active-button="{ color: 'orange' }" />
+      <!-- v4's solid-button focus outline is 25% opacity; keep v3's solid one on the active page -->
+      <UPagination
+        v-model:page="page"
+        :items-per-page="perPage"
+        :total="total"
+        active-color="secondary"
+        :ui="{ item: 'aria-[current=page]:focus-visible:outline-2 aria-[current=page]:focus-visible:outline-offset-2 aria-[current=page]:focus-visible:outline-secondary' }"
+      />
     </div>
 
   </div>

@@ -1,10 +1,10 @@
 <template>
-  <div class="wrapper-app">
+  <UApp class="wrapper-app">
     <!-- Focus moved in JS rather than via the #hash: a hash in the URL makes the router's scrollBehavior
          fight later in-page scrolls (e.g. the resume tab autoscroll). href stays for no-JS. -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:border focus:border-theme-accent focus:bg-theme-panel focus:px-3 focus:py-2 focus:font-theme-mono focus:text-sm focus:text-theme-text-strong"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-sm focus:border focus:border-theme-accent focus:bg-theme-panel focus:px-3 focus:py-2 focus:font-theme-mono focus:text-sm focus:text-theme-text-strong"
       @click.prevent="skipToContent"
     >
       {{ t('a11y.skipToContent') }}
@@ -17,8 +17,7 @@
       </NuxtLayout>
       <ThemeFooter />
     </div>
-    <UNotifications />
-  </div>
+  </UApp>
 </template>
 <script setup lang="ts">
 /**

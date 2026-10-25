@@ -49,7 +49,7 @@ export function buildSkillsTsLines(groups: SkillGroupInput[]): CodeLine[] {
 
   lines.push({ html: `${kw('enum')} ${type('SkillGroup')} ${punct('{')}` })
   groups.forEach((g, i) => {
-    lines.push({ html: `${type(ids[i])} ${punct('=')} ${str(g.label)}${punct(',')}`, indent: 2 })
+    lines.push({ html: `${type(ids[i]!)} ${punct('=')} ${str(g.label)}${punct(',')}`, indent: 2 })
   })
   lines.push({ html: punct('}') })
   lines.push({ html: '' })
@@ -60,7 +60,7 @@ export function buildSkillsTsLines(groups: SkillGroupInput[]): CodeLine[] {
     )}${punct('>')} ${punct('=')} ${punct('{')}`,
   })
   groups.forEach((g, i) => {
-    lines.push({ html: `${punct('[')}${type('SkillGroup')}${punct('.')}${type(ids[i])}${punct(']:')} ${punct('[')}`, indent: 2 })
+    lines.push({ html: `${punct('[')}${type('SkillGroup')}${punct('.')}${type(ids[i]!)}${punct(']:')} ${punct('[')}`, indent: 2 })
     g.skills.forEach((s) => {
       const trailingComment = s.exp ? ` ${comment(`${s.exp}+ years`)}` : ''
       const icon = s.icon ? `${skillIcon(s.icon)} ` : ''

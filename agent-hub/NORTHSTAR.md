@@ -9,7 +9,7 @@ dna: datvt243_portfolio_hub
 > Northstar is what does NOT change when everything else does.
 
 ## One sentence
-Keep every change to Đạt's Nuxt 3 portfolio/blog backed by independently
+Keep every change to Đạt's Nuxt 4 portfolio/blog backed by independently
 verified evidence, so an agent in a later session (or the same Claude in a
 later session) doesn't have to re-scan the code or trust old notes to know
 what's actually done.

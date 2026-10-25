@@ -53,7 +53,7 @@ const getURL = computed(() => {
           </li>
         </ul>
       </div>
-      <div class="prose max-w-none text-theme-muted">
+      <div class="leading-7 text-theme-muted">
         {{ getExcerpt }}
       </div>
       <p>
