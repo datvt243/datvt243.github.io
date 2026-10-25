@@ -11,7 +11,7 @@
 export function extractListItems(html?: string): string[] {
   const src = html || ''
   const items = [...src.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map((m) =>
-    m[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+    m[1]!.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
   )
   if (items.length) return items.filter(Boolean)
   const plain = src.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()

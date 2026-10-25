@@ -2,11 +2,11 @@
 
 ## Project
 
-Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 3 SSR app with ISR caching.
+Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 4 SSR app with ISR caching.
 
 ## Stack
 
-- Nuxt 3 · Vue 3 · TypeScript
+- Nuxt 4 · Vue 3 · TypeScript
 - TailwindCSS v4 + @nuxt/ui v3 + @nuxt/icon
 - Pinia (stores in `stores/`)
 - puppeteer-core (PDF resume download)

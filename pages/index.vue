@@ -4,7 +4,6 @@
  * @see https://github.com/datvt243
  */
 
-import type { Resume } from '@/types/resume-document'
 import { removeHtmlTags } from '@/utils'
 
 const resumeStore = useResumeStore()
@@ -15,7 +14,7 @@ definePageMeta({
   layout: 'default',
 })
 
-const { data, error } = await useAsyncData<Resume>(`api-resume`, async () => await resumeStore.fetchData())
+const { data, error } = await useResumeData()
 
 const seoTitle = computed(() => {
   const { firstName = '', lastName = '' } = data.value || {}

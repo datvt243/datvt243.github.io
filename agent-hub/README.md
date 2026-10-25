@@ -1,6 +1,6 @@
 # agent-hub — datvt243.github.io
 
-Markdown hub for Đạt's Nuxt 3 portfolio/blog project. Fully replaces the old
+Markdown hub for Đạt's Nuxt 4 portfolio/blog project. Fully replaces the old
 convention (`.claude/commands/{start-work,finish-work,merge-work,ship}.md` +
 `agent-hub/histories/` as the primary audit trail) as of 2026-08-16, moving to
 a discipline of **implementer writes / verifier grades independently**,
