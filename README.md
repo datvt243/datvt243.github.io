@@ -84,7 +84,7 @@ Phím tắt tạm tắt khi đang gõ trong ô nhập. Nếu extension như Vimi
 
 ## Công nghệ
 
-Nuxt 4 (SSR + ISR) · Vue 3 + TypeScript · TailwindCSS v4 + @nuxt/ui v3 · Pinia · puppeteer-core (xuất PDF) · @nuxtjs/i18n
+Nuxt 4 (SSR + ISR) · Vue 3 + TypeScript · TailwindCSS v4 + @nuxt/ui v4 · Pinia · puppeteer-core (xuất PDF) · @nuxtjs/i18n
 
 ## Đóng góp & quy trình git
 

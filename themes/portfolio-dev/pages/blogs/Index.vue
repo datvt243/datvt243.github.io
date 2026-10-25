@@ -83,7 +83,14 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
       </template>
     </ListRender>
     <div class="mt-4 flex justify-center">
-      <UPagination v-model:page="page" :items-per-page="perPage" :total="total" active-color="secondary" />
+      <!-- v4's solid-button focus outline is 25% opacity; keep v3's solid one on the active page -->
+      <UPagination
+        v-model:page="page"
+        :items-per-page="perPage"
+        :total="total"
+        active-color="secondary"
+        :ui="{ item: 'aria-[current=page]:focus-visible:outline-2 aria-[current=page]:focus-visible:outline-offset-2 aria-[current=page]:focus-visible:outline-secondary' }"
+      />
     </div>
 
   </div>

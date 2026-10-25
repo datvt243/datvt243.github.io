@@ -7,7 +7,7 @@ Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 4 SSR app with IS
 ## Stack
 
 - Nuxt 4 · Vue 3 · TypeScript
-- TailwindCSS v4 + @nuxt/ui v3 + @nuxt/icon
+- TailwindCSS v4 + @nuxt/ui v4 + @nuxt/icon
 - Pinia (stores in `stores/`)
 - puppeteer-core (PDF resume download)
 - sass (global styles in `assets/css/`)
