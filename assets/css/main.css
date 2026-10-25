@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Semantic tokens for the active UI theme (see themes/<name>/tokens.css).
+ * `inline` is required: it emits `rgb(var(--theme-x))` straight into each
+ * utility instead of a `--color-theme-x` resolved once at :root, so the
+ * `.dark`/`.light`/`.editor-scope` overrides of `--theme-x` still re-skin
+ * their subtree. Values stay `R G B` triplets; opacity modifiers like
+ * `bg-theme-panel/50` work via color-mix().
+ */
+@theme inline {
+  --font-theme-mono: var(--theme-font-mono);
+
+  --color-theme-canvas: rgb(var(--theme-canvas));
+  --color-theme-panel: rgb(var(--theme-panel));
+  --color-theme-panel-subtle: rgb(var(--theme-panel-subtle));
+  --color-theme-editor: rgb(var(--theme-editor));
+  --color-theme-border: rgb(var(--theme-border));
+  --color-theme-border-subtle: rgb(var(--theme-border-subtle));
+  --color-theme-border-faint: rgb(var(--theme-border-faint));
+  --color-theme-text: rgb(var(--theme-text));
+  --color-theme-text-strong: rgb(var(--theme-text-strong));
+  --color-theme-text-soft: rgb(var(--theme-text-soft));
+  --color-theme-muted: rgb(var(--theme-muted));
+  --color-theme-faint: rgb(var(--theme-faint));
+  --color-theme-accent: rgb(var(--theme-accent));
+  --color-theme-accent-soft: rgb(var(--theme-accent-soft));
+  --color-theme-accent-contrast: rgb(var(--theme-accent-contrast));
+  --color-theme-kbd: rgb(var(--theme-kbd));
+  --color-theme-success: rgb(var(--theme-success));
+  --color-theme-code-text: rgb(var(--theme-code-text));
+  --color-theme-code-line-number: rgb(var(--theme-code-line-number));
+  --color-theme-code-keyword: rgb(var(--theme-code-keyword));
+  --color-theme-code-key: rgb(var(--theme-code-key));
+  --color-theme-code-type: rgb(var(--theme-code-type));
+  --color-theme-code-string: rgb(var(--theme-code-string));
+  --color-theme-code-punct: rgb(var(--theme-code-punct));
+  --color-theme-code-comment: rgb(var(--theme-code-comment));
+  --color-theme-code-tag: rgb(var(--theme-code-tag));
+  --color-theme-code-title: rgb(var(--theme-code-title));
+}
+
+/* v4 defaults borders to currentColor; keep v3's gray-200 for bare `border` utilities. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+/* @nuxt/ui v3's base layer adds `antialiased` to <body>; v2 didn't, and the
+   thinner grayscale glyphs read worse on the dark canvas. */
+@layer base {
+  body {
+    @apply subpixel-antialiased;
+  }
+}
+
+/* v4 dropped preflight's `cursor: pointer` on buttons; keep v3's behavior. */
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* @nuxt/ui v2's global ui.css, which v3 dropped: dark scrollbars/canvas via the
+   <html> color-scheme, green link focus outline, green text selection. */
+@layer base {
+  .dark {
+    color-scheme: dark;
+  }
+  a:focus-visible {
+    @apply outline-primary;
+  }
+  ::selection {
+    @apply bg-primary/40;
+  }
+}

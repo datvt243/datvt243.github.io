@@ -28,7 +28,7 @@ function handleError() {
               <h1 class="my-2 font-bold text-2xl">Looks like you've found the doorway to the great nothing</h1>
               <p class="my-3">Sorry about that! Please visit our Homepage to get where you need to go.</p>
               <button
-                class="sm:w-full lg:w-auto my-2 border rounded md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-none focus:ring-2 focus:ring-theme-accent focus:ring-opacity-50"
+                class="sm:w-full lg:w-auto my-2 border rounded-sm md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-hidden focus:ring-2 focus:ring-theme-accent/50"
                 @click="handleError"
               >
                 Take me there!
@@ -45,7 +45,7 @@ function handleError() {
             <h2 class="text-8xl">{{ props.error.statusCode }}</h2>
             <p>Something wrong here</p>
             <button
-                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-sm"
                 @click="handleError"
             >
                 Clear errors

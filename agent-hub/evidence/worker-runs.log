@@ -48,3 +48,6 @@
 2026-10-24T15:31:40Z role=verifier outcome=SEAL node=hero-actions-align rerun=partial hub_bytes_before=76703 hub_bytes_after=76705
 2026-10-24T15:55:49Z role=verifier outcome=REOPEN node=deps-i18n-10 rerun=none hub_bytes_before=77958 hub_bytes_after=78811
 2026-10-24T19:23:06Z role=verifier outcome=SEAL node=deps-i18n-10 rerun=none hub_bytes_before=77958 hub_bytes_after=77390
+2026-10-24T20:21:24Z role=verifier outcome=REOPEN node=deps-nuxt-ui-3-tw4 rerun=full hub_bytes_before=78833 hub_bytes_after=79372
+2026-10-24T20:43:31Z role=verifier outcome=REOPEN node=deps-nuxt-ui-3-tw4 rerun=partial hub_bytes_before=78833 hub_bytes_after=79372
+2026-10-24T20:57:51Z role=verifier outcome=SEAL node=deps-nuxt-ui-3-tw4 rerun=partial hub_bytes_before=78833 hub_bytes_after=77941

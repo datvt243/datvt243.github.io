@@ -71,7 +71,6 @@ flowchart TD
 
 
 
-| `author-github-see-line` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/author-github-see-line-seal.md`. |
 | `object-parameter-rule` | SEALED | 2026-10-04 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-04/object-parameter-rule-seal.md`. |
 | `vim-key-nav` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-{plan,diff}.md`. |
 | `vim-key-nav-hint` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-hint-{plan,diff}.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `deps-nuxt-image-2` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-nuxt-image-2-seal.md`. |
 | `deps-pinia-4` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/deps-pinia-4-seal.md`. |
 | `deps-i18n-10` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-i18n-10-seal.md`. |
+| `deps-nuxt-ui-3-tw4` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-ui-3-tw4-seal.md`. |

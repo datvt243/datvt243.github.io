@@ -42,8 +42,10 @@ export default defineAppConfig({
   },
 
   ui: {
+    // secondary = the literal orange UPagination's active page has always used
+    colors: { secondary: 'orange', neutral: 'gray' },
     container: {
-      constrained: 'mx-auto max-w-screen-lg px-3 py-6 md:py-8 lg:py-10',
+      base: 'w-full mx-auto max-w-(--breakpoint-lg) px-3 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-10',
     },
   },
 })

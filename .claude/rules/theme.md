@@ -3,7 +3,7 @@ paths:
   - "themes/**"
   - "pages/**"
   - "app.vue"
-  - "tailwind.config.js"
+  - "assets/css/main.css"
 ---
 
 # UI Theme (`themes/`)
@@ -31,8 +31,10 @@ JSON/file-tree/code-block metaphor is itself an editor-theme choice.
   `<ThemeResumeObjectHero>`.
 - Use semantic Tailwind classes (`bg-theme-panel`, `border-theme-border`,
   `text-theme-muted`, `text-theme-accent`, `font-theme-mono`, …), never
-  literal colors. Defined in `tailwind.config.js` as
-  `rgb(var(--theme-x) / <alpha-value>)`, backed by the theme's `tokens.css`.
+  literal colors. Defined in `assets/css/main.css`'s `@theme inline` block
+  as `rgb(var(--theme-x))`, backed by the theme's `tokens.css`. Keep it
+  `inline` — plain `@theme` resolves the colors once at `:root` and the
+  `.dark`/`.light`/`.editor-scope` overrides stop re-skinning subtrees.
 - New theme = `themes/<name>/` with a `tokens.css` (same CSS variable names,
   new values) + `pages/`/`layout/`/`components/` providing every tag that
   `pages/*.vue` and `app.vue` render, then flip `ACTIVE_THEME`. No file in

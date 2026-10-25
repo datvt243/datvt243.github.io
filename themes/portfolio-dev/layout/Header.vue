@@ -29,7 +29,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
 
 <template>
   <header class="border-b border-theme-border bg-theme-panel font-theme-mono text-sm">
-    <UContainer :ui="{ constrained: 'mx-auto max-w-screen-lg px-3 py-0 md:py-0 lg:py-0' }">
+    <UContainer class="py-0 md:py-0 lg:py-0">
       <div class="flex items-stretch">
         <NuxtLink
           :to="localePath('/')"
@@ -101,28 +101,30 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
           <UIcon name="fe:bar" class="w-5 h-5" />
         </button>
 
-        <USlideover v-model="isOpen">
-          <div class="p-4 flex-1 bg-theme-panel font-theme-mono">
-            <button
-              class="flex lg:hidden absolute end-5 top-5 z-10 text-theme-text-soft hover:text-theme-text"
-              :aria-label="t('header.closeMenu')"
-              @click="isOpen = false"
-            >
-              <UIcon name="fe:close" class="w-5 h-5" />
-            </button>
-            <ul class="space-y-1 pt-14">
-              <li v-for="route_ in menuPrimary" :key="`m-${route_.link}`">
-                <NuxtLink
-                  :to="localePath(route_.link)"
-                  class="block rounded px-3 py-2 transition-colors"
-                  :class="isActive(route_.link) ? 'text-theme-text bg-theme-panel-subtle' : 'text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50'"
-                  @click="isOpen = false"
-                >
-                  {{ route_.page }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
+        <USlideover v-model:open="isOpen" :title="t('header.openMenu')" :ui="{ content: 'bg-theme-panel' }">
+          <template #content>
+            <div class="p-4 flex-1 bg-theme-panel font-theme-mono">
+              <button
+                class="flex lg:hidden absolute inset-e-5 top-5 z-10 text-theme-text-soft hover:text-theme-text"
+                :aria-label="t('header.closeMenu')"
+                @click="isOpen = false"
+              >
+                <UIcon name="fe:close" class="w-5 h-5" />
+              </button>
+              <ul class="space-y-1 pt-14">
+                <li v-for="route_ in menuPrimary" :key="`m-${route_.link}`">
+                  <NuxtLink
+                    :to="localePath(route_.link)"
+                    class="block rounded-sm px-3 py-2 transition-colors"
+                    :class="isActive(route_.link) ? 'text-theme-text bg-theme-panel-subtle' : 'text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50'"
+                    @click="isOpen = false"
+                  >
+                    {{ route_.page }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+          </template>
         </USlideover>
 
         <ThemeKeyNav v-model="isKeyHelpOpen" />

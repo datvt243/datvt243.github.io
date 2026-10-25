@@ -13,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="container-block !pt-0">
+  <div class="mx-auto max-w-(--breakpoint-lg) px-3 pb-28">
     <article
       class="mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mb-8 pb-4 border-b border-theme-border font-theme-mono"
     >
@@ -31,7 +31,7 @@ defineProps<{
           </dl>
           <div>
             <h1
-              class="text-theme-accent text-3xl font-bold leading-9 tracking-wide sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+              class="text-theme-accent text-3xl font-bold leading-9 tracking-wide sm:text-4xl sm:leading-10 md:text-5xl md:leading-none"
             >
               {{ modelValue.title }}
             </h1>
@@ -65,7 +65,7 @@ defineProps<{
           <div class="pt-4 xl:pt-8">
             <NuxtLink
               to="/blogs"
-              class="btn border-theme-accent border rounded-md p-4 text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors"
+              class="inline-block px-4 py-2 tracking-widest font-bold sm:only:text-sm border-theme-accent border rounded-md text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors"
               :aria-label="t('post.backToBlog')"
             >
               <span class="flex items-center space-x-2">

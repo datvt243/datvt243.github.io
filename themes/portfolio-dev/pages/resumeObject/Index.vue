@@ -69,7 +69,7 @@ onMounted(() => {
               <li>
                 <NuxtLink
                   to="/contact"
-                  class="flex items-center gap-2 w-full px-2 py-1.5 rounded text-sm transition-colors text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50"
+                  class="flex items-center gap-2 w-full px-2 py-1.5 rounded-sm text-sm transition-colors text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50"
                 >
                   <UIcon name="heroicons:code-bracket-square" class="w-3.5 h-3.5 opacity-50 shrink-0" />
                   _contact.ts
