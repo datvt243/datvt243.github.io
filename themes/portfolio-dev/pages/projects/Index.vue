@@ -8,7 +8,7 @@ import { accentBadgeUi } from '~/utils'
 
 const { t } = useI18n()
 const store = useResumeStore()
-await useAsyncData('api-resume', async () => await store.fetchData())
+await useResumeData()
 const projects = computed(() => store.projects || [])
 
 const allTech = computed(() => {

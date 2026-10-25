@@ -13,7 +13,7 @@ const sections = [
 ]
 const route = useRoute()
 const router = useRouter()
-const active = ref(sections[0].key)
+const active = ref(sections[0]!.key)
 const activeLabel = computed(() => sections.find((s) => s.key === active.value)?.label ?? active.value)
 
 // Scroll to the content's tab row, not the panel: on mobile the sidebar stacks above the content.
@@ -21,7 +21,7 @@ const fileTab = ref<HTMLElement>()
 const select = async (key: string) => {
   active.value = key
   // Tab lives in the URL (?tab=skills) so a section can be linked to; the default tab keeps the clean URL.
-  await router.replace({ query: { ...route.query, tab: key === sections[0].key ? undefined : key } })
+  await router.replace({ query: { ...route.query, tab: key === sections[0]!.key ? undefined : key } })
   // Wait for the new tab to render, else the scroll is clamped to the old (shorter) page height.
   await nextTick()
   const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -34,7 +34,7 @@ onMounted(() => {
   const deepLinked = tabFromUrl()
   if (deepLinked) select(deepLinked)
   // Keeps the tab in sync when the query changes without a remount (Back/Forward, `gr` clearing ?tab).
-  watch(() => route.query.tab, () => (active.value = tabFromUrl() ?? sections[0].key))
+  watch(() => route.query.tab, () => (active.value = tabFromUrl() ?? sections[0]!.key))
 })
 </script>
 
