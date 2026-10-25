@@ -38,7 +38,7 @@ const getRepos = computed(() => {
         data-shortcut="/"
         :data-shortcut-label="t('github.searchPlaceholder')"
         :ui="{
-          base: 'font-theme-mono shadow-none bg-theme-panel/50 text-theme-text-strong ring-1 ring-inset ring-theme-border-subtle focus-visible:ring-1 focus-visible:ring-theme-accent',
+          base: 'font-theme-mono shadow-none bg-theme-panel/50 text-theme-text-strong ring-1 ring-inset ring-theme-border-subtle focus-visible:ring-1 focus-visible:ring-theme-accent focus-visible:outline-none',
         }"
       >
         <template #trailing>

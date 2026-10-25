@@ -53,3 +53,4 @@
 2026-10-24T20:57:51Z role=verifier outcome=SEAL node=deps-nuxt-ui-3-tw4 rerun=partial hub_bytes_before=78833 hub_bytes_after=77941
 2026-10-25T05:09:23Z role=verifier outcome=REOPEN node=deps-nuxt-4 rerun=partial hub_bytes_before=77921 hub_bytes_after=79296
 2026-10-25T05:29:44Z role=verifier outcome=SEAL node=deps-nuxt-4 rerun=partial hub_bytes_before=77921 hub_bytes_after=77992
+2026-10-25T06:12:29Z role=verifier outcome=SEAL node=deps-nuxt-ui-4-icon-2 rerun=partial hub_bytes_before=77992 hub_bytes_after=78002
