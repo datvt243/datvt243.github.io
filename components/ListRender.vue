@@ -37,7 +37,7 @@ watch(
       <ul v-if="props.data?.length" class="list space-y-5">
         <slot/>
       </ul>
-      <div v-else class="no-data center p-8 bg-theme-panel-subtle text-theme-muted rounded">
+      <div v-else class="no-data center p-8 bg-theme-panel-subtle text-theme-muted rounded-sm">
         <p class="text-xl uppercase text-center font-bold">No data</p>
       </div>
     </template>

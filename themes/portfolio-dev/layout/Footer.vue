@@ -14,7 +14,7 @@ const socialMedia = [
 
 <template>
   <footer class="border-t-2 border-theme-accent bg-theme-panel font-theme-mono text-xs text-theme-muted">
-    <UContainer :ui="{ constrained: 'mx-auto max-w-screen-lg px-3 py-0 md:py-0 lg:py-0' }">
+    <UContainer class="py-0 md:py-0 lg:py-0">
       <div class="py-2.5 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="hidden sm:inline">{{ t('footer.findMeIn') }}</span>

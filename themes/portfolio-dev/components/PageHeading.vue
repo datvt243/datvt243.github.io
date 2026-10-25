@@ -19,7 +19,7 @@ withDefaults(
 <template>
   <div class="space-y-2 pb-8 pt-6 md:space-y-5">
     <h1
-      class="text-3xl sm:text-4xl md:text-5xl text-theme-text uppercase tracking-wider font-extrabold leading-normal"
+      class="text-3xl leading-normal sm:text-4xl sm:leading-10 md:text-5xl md:leading-none text-theme-text uppercase tracking-wider font-extrabold"
       v-html="text"
     />
   </div>

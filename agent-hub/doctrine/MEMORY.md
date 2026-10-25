@@ -38,7 +38,7 @@ to "pass" — never claim "tests pass".
 | Language/runtime | TypeScript, Node — Nuxt 3 / Vue 3 SSR |
 | Package manager | npm (`package-lock.json` present) |
 | Test runner | None |
-| CSS | TailwindCSS v3 + `@nuxt/ui` v2 + sass |
+| CSS | TailwindCSS v4 + `@nuxt/ui` v3 + sass |
 | State | Pinia (`stores/`) |
 
 ## The default way to work

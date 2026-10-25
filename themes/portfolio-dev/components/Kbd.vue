@@ -10,5 +10,5 @@
 </script>
 
 <template>
-  <kbd class="rounded border border-theme-border font-theme-mono text-theme-kbd"><slot /></kbd>
+  <kbd class="rounded-sm border border-theme-border font-theme-mono text-theme-kbd"><slot /></kbd>
 </template>

@@ -1,7 +1,7 @@
 /**
  * Dark mode (default) design tokens — RGB triplets of the slate/orange shades
  * the site already used (Tailwind defaults), exposed as CSS custom properties
- * so `tailwind.config.js` and the other mode files stay palette-agnostic.
+ * so `assets/css/main.css` and the other mode files stay palette-agnostic.
  * Applied via the `.dark` class @nuxtjs/color-mode puts on <html>; `:root` is
  * also included so this is the fallback if no class has been applied yet.
  */

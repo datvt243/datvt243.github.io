@@ -62,9 +62,9 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
         <p>{{ t('blogs.intro') }}</p>
       </div>
       <div class="">
-        <div class="flex items-center space-x-4 border border-theme-border-subtle rounded pl-3">
+        <div class="flex items-center space-x-4 border border-theme-border-subtle rounded-sm pl-3">
           <div class="leading-none text-sm">{{ t('blogs.show') }}</div>
-          <USelect v-model="perPage" :options="[10, 20, 30, 40, 50]"  variant="none" />
+          <USelect v-model="perPage" :items="[10, 20, 30, 40, 50]" variant="none" />
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
       </template>
     </ListRender>
     <div class="mt-4 flex justify-center">
-      <UPagination v-model="page" :page-count="perPage" :total="total" :active-button="{ color: 'orange' }" />
+      <UPagination v-model:page="page" :items-per-page="perPage" :total="total" active-color="secondary" />
     </div>
 
   </div>
