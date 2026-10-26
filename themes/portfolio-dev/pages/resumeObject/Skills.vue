@@ -53,15 +53,21 @@ function skillIcon(name: string): string | undefined {
   return SKILL_ICONS[name.toLowerCase().replace(/[^a-z0-9]/g, '')]
 }
 
+/**
+ * Groups come from the skills themselves, not only `professionalSkillsGroup`:
+ * the API can return that list empty or incomplete, and a skill whose group
+ * isn't listed must still render. Listed groups keep their order, 'Other' goes last.
+ */
 const groupedSkills = computed(() => {
-  const result: { label: string; skills: { name: string; exp?: number; icon?: string }[] }[] = []
-  for (const gr of store.groups) {
-    const filtered = store.skills.filter((s) => s.group === gr)
-    if (filtered.length) result.push({ label: gr, skills: filtered.map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })) })
-  }
-  const rest = store.skills.filter((s) => s.group === 'Other')
-  if (rest.length) result.push({ label: 'Other', skills: rest.map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })) })
-  return result
+  const labels = [...new Set([...store.groups, ...store.skills.map((s) => s.group)])].sort(
+    (a, b) => Number(a === 'Other') - Number(b === 'Other'),
+  )
+  return labels
+    .map((label) => ({
+      label,
+      skills: store.skills.filter((s) => s.group === label).map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })),
+    }))
+    .filter((group) => group.skills.length)
 })
 
 const lines = computed(() => {
