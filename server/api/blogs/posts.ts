@@ -4,7 +4,7 @@
  */
 
 import type { PaginatedPosts } from '@/types'
-import { cacheGetPosts, emptyResult } from '~/server/utils/cacheGetPost'
+import { cacheGetPosts } from '~/server/utils/cacheGetPost'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
@@ -12,12 +12,13 @@ export default defineEventHandler(async (event) => {
   let result: PaginatedPosts
   try {
     result = await cacheGetPosts(query)
-  } catch {
+  } catch (cause) {
     /**
-     * Blog API unreachable/cold-starting - degrade to an empty page instead
-     * of a 500/504 (see cacheGetPost.ts's timeout comment).
+     * Blog API unreachable/cold-starting (see cacheGetPost.ts's timeout
+     * comment). A controlled 503, not an empty list: an empty 200 would be
+     * ISR-cached as the real blog page and replace the last good one.
      */
-    result = emptyResult(query)
+    throw createError({ statusCode: 503, statusMessage: 'Unable to load posts', cause })
   }
 
   return {

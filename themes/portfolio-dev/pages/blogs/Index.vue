@@ -13,7 +13,7 @@ const page = toRef(query?.page || 1)
 const perPage = toRef(query?.perPage || 20)
 
 const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
-const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
+const postsFetch = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
   key: fetchKey,
   query: {
     page: page,
@@ -28,6 +28,17 @@ const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/
    */
   getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key],
 })
+const { data, status, refresh } = postsFetch
+/**
+ * A failed server render must end as a 5xx so ISR keeps serving the last
+ * good blog page; in the browser the list's own error state + retry is enough.
+ */
+if (import.meta.server) {
+  await postsFetch
+  if (postsFetch.error.value) {
+    throw createError({ statusCode: postsFetch.error.value.statusCode || 503, statusMessage: 'Unable to load posts', fatal: true })
+  }
+}
 /**
  * `status` is already 'success' here (reused from the cached fetch above)
  * only when we're displaying stale data from a previous visit - kick off a
