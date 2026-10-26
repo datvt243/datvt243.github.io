@@ -64,3 +64,6 @@
 2026-10-26T13:18:28Z role=verifier outcome=SEAL node=resume-experience-first rerun=partial hub_bytes_before=77904 hub_bytes_after=77905
 2026-10-26T13:25:17Z role=verifier outcome=REOPEN node=pdf-ats-polish rerun=full hub_bytes_before=77905 hub_bytes_after=78125
 2026-10-26T13:26:46Z role=verifier outcome=SEAL node=pdf-ats-polish rerun=partial hub_bytes_before=77905 hub_bytes_after=77904
+2026-10-26T13:28:03Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=full hub_bytes_before=77905 hub_bytes_after=78097
+2026-10-26T13:31:25Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=78097
+2026-10-26T13:37:32Z role=verifier outcome=SEAL node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=77920
