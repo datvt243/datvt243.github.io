@@ -44,7 +44,12 @@ export async function fetchResume(): Promise<ResumeAPIResponse['data']> {
 
   let res: ResumeAPIResponse | undefined
   try {
-    res = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`)
+    /**
+     * Fail fast inside the function's time budget (a cold upstream otherwise
+     * ends as the platform's raw 504) and never retry: retrying a 429 or a
+     * cold start only repeats the same wait and burns the rate limit.
+     */
+    res = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`, { timeout: 8000, retry: 0 })
   } catch (cause) {
     throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data', cause })
   }
