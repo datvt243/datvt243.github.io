@@ -8,8 +8,9 @@
 2. Recipes (`haven/workers/*/recipes/`) are saved reasoning — replay them
    instead of re-deriving from scratch.
 3. A worker's actions must be really observable (build/lint output,
-   screenshots via Chrome CDP), not "imagined." This project has no test
-   suite — don't imagine test results.
+   screenshots via Chrome CDP), not "imagined." The unit suite (`npm test`)
+   covers only a few pure functions — never imagine test results, and never
+   let them stand in for build/lint/typecheck/UI checks.
 4. Every outward-facing action (commit/push/PR/delete file) needs operator
    approval — no exceptions, even when `/todo` runs both passes automatically.
 5. Evidence or it didn't happen. Confidence is not output.

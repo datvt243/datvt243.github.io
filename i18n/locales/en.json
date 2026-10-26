@@ -1,5 +1,6 @@
 {
   "header": {
+    "mainNav": "Main",
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode",
     "openMenu": "Open menu",
@@ -86,9 +87,20 @@
     "followers": "followers",
     "following": "following",
     "noData": "NO data",
-    "updatedOn": "Updated on"
+    "updatedOn": "Updated on",
+    "repoWebsite": "{name} website",
+    "repoSource": "{name} on GitHub"
   },
   "a11y": {
     "skipToContent": "Skip to main content"
+  },
+  "error": {
+    "loadError": "Couldn't load this content.",
+    "retry": "Try again",
+    "notFoundTitle": "This page doesn't exist",
+    "notFoundText": "The link may be broken, or the page has moved.",
+    "serverTitle": "Something went wrong on our side",
+    "serverText": "The data source may be waking up or briefly unavailable. Please try again in a moment.",
+    "home": "Go to the homepage"
   }
 }

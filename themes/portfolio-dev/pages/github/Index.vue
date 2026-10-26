@@ -25,6 +25,7 @@ const filteredRepos = computed(() => {
 
 <template>
   <UContainer class="py-6">
+    <h1 class="sr-only">{{ $t('github.seoTitle') }}</h1>
     <ThemePanel>
       <template #sidebar>
         <ThemeGithubGitUser :user="user" />

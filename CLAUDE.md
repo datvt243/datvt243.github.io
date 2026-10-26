@@ -21,10 +21,13 @@ npm run generate    # static site
 npm run preview     # preview build
 npm run lint        # eslint (npm run lint:fix to autofix)
 npx nuxi typecheck  # build strips types without checking them
+npm test            # Vitest unit tests (tests/), pure functions only
 ```
 
-No test suite. "Verified" = clean build + lint + typecheck, plus a real
-browser check for UI changes (run `/browser` first).
+Unit tests cover only a few pure functions (skill grouping, the resume
+field whitelist, the adapter); they don't replace the rest. "Verified" =
+clean build + lint + typecheck + `npm test`, plus a real browser check for
+UI changes (run `/browser` first).
 
 ## Architecture
 
@@ -45,6 +48,8 @@ browser check for UI changes (run `/browser` first).
   - `/api/blogs/posts` — 1h, keyed by page/perPage/category.
   - `/api/generate-pdf` — plain handler + module-level in-memory cache (1 day);
     `defineCachedEventHandler` doesn't correctly cache its binary PDF body.
+  - `/api/visit` (POST) — uncached relay for `VisitTracker.client.ts`; the
+    backend has no CORS for a direct browser call.
 - External APIs:
   - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
   - Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`
@@ -108,7 +113,7 @@ Giscus one-time operator setup, in order:
   **verifier** independently SEALs or REOPENs it.
   ```
   /boot                          # orientation, read-only
-  /worker implementer "<task>"   # smallest diff, build+lint, evidence note
+  /worker implementer "<task>"   # smallest diff, build+lint+typecheck+test, evidence note
   /worker verifier "<task>"      # independent check → SEAL or REOPEN
   /todo "<task>"                 # both passes in one command
   /release [patch|minor|major]   # staging → main: merge, tag vX.Y.Z, deploy if configured

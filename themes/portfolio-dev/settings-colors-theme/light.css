@@ -20,13 +20,13 @@
   --theme-text-strong: 30 41 59; /* slate-800 */
   --theme-text-soft: 51 65 85; /* slate-700 */
   --theme-muted: 100 116 139; /* slate-500 */
-  --theme-faint: 148 163 184; /* slate-400 */
+  --theme-faint: 100 116 139; /* slate-500 - slate-400 was 2.6:1 on white */
 
   /* accent (darker orange shades for contrast on a light background) */
-  --theme-accent: 234 88 12; /* orange-600 */
-  --theme-accent-soft: 249 115 22; /* orange-500 */
+  --theme-accent: 194 65 12; /* orange-700 - orange-600 was 3.4:1 on the header, under 4.5:1 for text */
+  --theme-accent-soft: 154 52 18; /* orange-800 - darker, not lighter: orange-500 text was 2.8:1 on white */
   --theme-accent-contrast: 255 255 255; /* white, for text on an accent-colored background */
-  --theme-kbd: 234 88 12; /* = accent, but never overridden by editor-dracula.css, so shortcut badges stay one color */
+  --theme-kbd: 194 65 12; /* = accent, but never overridden by editor-dracula.css, so shortcut badges stay one color */
   --theme-success: 22 101 52; /* green-800 - green-700 fell to 4.38:1 on its own /10 tint */
 
   /* code syntax highlighting (Skills/Experiences/Educations resume sections) -

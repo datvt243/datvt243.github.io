@@ -1,6 +1,6 @@
 {
     "name": "nuxt-app",
-    "version": "1.5.1",
+    "version": "1.6.0",
     "private": true,
     "type": "module",
     "engines": {
@@ -14,7 +14,8 @@
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "test": "vitest run"
     },
     "dependencies": {
         "@iconify-json/fe": "^1.2.4",
@@ -43,6 +44,7 @@
         "sass-embedded": "^1.100.0",
         "tailwindcss": "^4.3.3",
         "typescript": "^5.9.3",
+        "vitest": "^5.0.5",
         "vue-tsc": "^2.2.12"
     },
     "overrides": {

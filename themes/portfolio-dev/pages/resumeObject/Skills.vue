@@ -4,7 +4,7 @@
  * @see https://github.com/datvt243
  */
 
-import { buildPersonalSkillsTsLines, buildSkillsTsLines } from '@/utils/index'
+import { buildPersonalSkillsTsLines, buildSkillsTsLines, groupSkills } from '@/utils/index'
 
 const store = useResumeStore()
 
@@ -53,22 +53,12 @@ function skillIcon(name: string): string | undefined {
   return SKILL_ICONS[name.toLowerCase().replace(/[^a-z0-9]/g, '')]
 }
 
-/**
- * Groups come from the skills themselves, not only `professionalSkillsGroup`:
- * the API can return that list empty or incomplete, and a skill whose group
- * isn't listed must still render. Listed groups keep their order, 'Other' goes last.
- */
-const groupedSkills = computed(() => {
-  const labels = [...new Set([...store.groups, ...store.skills.map((s) => s.group)])].sort(
-    (a, b) => Number(a === 'Other') - Number(b === 'Other'),
-  )
-  return labels
-    .map((label) => ({
-      label,
-      skills: store.skills.filter((s) => s.group === label).map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })),
-    }))
-    .filter((group) => group.skills.length)
-})
+const groupedSkills = computed(() =>
+  groupSkills(store.groups, store.skills).map(({ label, skills }) => ({
+    label,
+    skills: skills.map((s) => ({ name: s.name, exp: s.yearsOfExperience, icon: skillIcon(s.name) })),
+  })),
+)
 
 const lines = computed(() => {
   const result = buildSkillsTsLines(groupedSkills.value)

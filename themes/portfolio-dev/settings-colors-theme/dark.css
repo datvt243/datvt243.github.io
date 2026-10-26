@@ -23,7 +23,7 @@
   --theme-text-strong: 226 232 240; /* slate-200 */
   --theme-text-soft: 203 213 225; /* slate-300 */
   --theme-muted: 148 163 184; /* slate-400 */
-  --theme-faint: 100 116 139; /* slate-500 */
+  --theme-faint: 117 131 152; /* slate-500 lightened to 4.6:1 on panel (slate-500 itself was 4.2:1 on canvas) */
 
   /* accent */
   --theme-accent: 251 146 60; /* orange-400 */

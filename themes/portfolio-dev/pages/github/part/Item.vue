@@ -9,9 +9,9 @@ const props = defineProps<{
 
 type LinkField = 'homepage' | 'html_url'
 
-const links: { field: LinkField; icon: string; class: string }[] = [
-  { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword' },
-  { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent' },
+const links: { field: LinkField; icon: string; class: string; label: string }[] = [
+  { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword', label: 'github.repoWebsite' },
+  { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent', label: 'github.repoSource' },
 ]
 
 const languageColors: Record<string, string> = {
@@ -36,10 +36,14 @@ const getFieldValue = (field: LinkField): string | null => {
  * browser client (e.g. UTC+7) can compute a different date for the same
  * instant when it falls near a UTC day boundary, causing a Vue hydration
  * mismatch. Pinning timeZone: 'UTC' makes server and client always agree,
- * since modelValue.updated_at is already a UTC ISO timestamp.
+ * since modelValue.pushed_at is already a UTC ISO timestamp.
+ *
+ * pushed_at, not updated_at: the list is sorted by last push, and updated_at
+ * also moves on non-code edits (description, stars), so the shown dates
+ * would be out of order.
  */
 const updatedOnLabel = computed(() =>
-  new Date(props.modelValue.updated_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
+  new Date(props.modelValue.pushed_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
 )
 </script>
 
@@ -57,7 +61,7 @@ const updatedOnLabel = computed(() =>
       <ul class="flex gap-2 shrink-0">
         <template v-for="el in links">
           <li v-if="getFieldValue(el.field)" :key="el.field">
-            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-opacity']" target="_blank" rel="noopener noreferrer">
+            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-opacity']" :aria-label="t(el.label, { name: modelValue.name })" target="_blank" rel="noopener noreferrer">
               <UIcon :name="`${el.icon}`" class="w-5 h-5" />
             </a>
           </li>

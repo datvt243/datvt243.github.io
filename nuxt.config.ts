@@ -126,17 +126,38 @@ export default defineNuxtConfig({
    * Resume routes must stay ISR (including the `/en` prefixed ones): when the
    * resume API fails, Vercel keeps serving the last good render instead of an
    * error, as long as the failed render ends as a 5xx (see useResumeData).
+   * Same for the blog. Every rule needs its `/en` twin: routeRules match the
+   * path, and the English pages live under the `/en` prefix.
    */
   routeRules: {
+    /**
+     * Baseline headers only. No script-src CSP yet: Nuxt's inline config,
+     * importmap and color-mode scripts would each need a hash (ISR rules out
+     * per-request nonces), regenerated on every build, and 'unsafe-inline'
+     * would void it. frame-ancestors only limits who may frame this site,
+     * so the Giscus iframe it embeds is unaffected.
+     */
+    '/**': {
+      headers: {
+        'Content-Security-Policy': "frame-ancestors 'none'",
+        'X-Frame-Options': 'DENY',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+      },
+    },
     '/': { isr: 60 },
     '/en': { isr: 60 },
     '/projects': { isr: 60 },
     '/en/projects': { isr: 60 },
     '/api/resume': { isr: 60 },
     '/github': { isr: 60 },
+    '/en/github': { isr: 60 },
     '/contact': { prerender: true },
+    '/en/contact': { prerender: true },
     '/blogs': { isr: 60 },
+    '/en/blogs': { isr: 60 },
     '/blogs/**': { isr: true },
+    '/en/blogs/**': { isr: true },
   },
 
   $development: {

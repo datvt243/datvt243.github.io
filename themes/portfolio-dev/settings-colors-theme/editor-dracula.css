@@ -45,7 +45,7 @@
   --theme-text-strong: 248 248 242; /* #f8f8f2 Foreground */
   --theme-text-soft: 211 215 223; /* interpolated Foreground->Comment @25% */
   --theme-muted: 166 174 199; /* interpolated Foreground->Comment @50% */
-  --theme-faint: 98 114 164; /* #6272a4 Comment */
+  --theme-faint: 154 164 193; /* Comment lightened: #6272a4 is 2.5:1 on the panel, too faint for text */
 
   /* accent (UI chrome inside the editor: buttons/links/focus) */
   --theme-accent: 189 147 249; /* #bd93f9 Purple */
@@ -60,7 +60,7 @@
   --theme-code-type: 139 233 253; /* #8be9fd Cyan */
   --theme-code-string: 241 250 140; /* #f1fa8c Yellow */
   --theme-code-punct: 166 174 199; /* interpolated, de-emphasized vs keywords */
-  --theme-code-comment: 98 114 164; /* #6272a4 Comment */
+  --theme-code-comment: 134 146 183; /* Comment lightened to 4.6:1 on Background (#6272a4 is 3:1) */
   --theme-code-tag: 255 121 198; /* #ff79c6 Pink, same role as keyword */
   --theme-code-title: 248 248 242; /* #f8f8f2 Foreground */
 }
@@ -82,22 +82,22 @@
   --theme-text-strong: 40 42 54;
   --theme-text-soft: 55 60 82; /* interpolated Background->Comment @25% */
   --theme-muted: 69 78 109; /* interpolated Background->Comment @50% */
-  --theme-faint: 98 114 164; /* #6272a4 Comment - same value works on light too */
+  --theme-faint: 85 99 143; /* Comment darkened to 4.6:1 on the light panel */
 
   /* accent */
   --theme-accent: 124 58 204; /* Purple, darkened for contrast on light bg */
-  --theme-accent-soft: 155 89 230; /* Purple, lighter hover variant */
+  --theme-accent-soft: 127 73 189; /* Purple hover variant, kept >= 4.5:1 on light (link text) */
   --theme-accent-contrast: 255 255 255; /* white text on the dark accent bg */
 
   /* code syntax highlighting */
   --theme-code-text: 40 42 54;
-  --theme-code-line-number: 98 114 164; /* #6272a4 Comment */
-  --theme-code-keyword: 219 42 142; /* Pink, darkened */
+  --theme-code-line-number: 85 99 143; /* = faint */
+  --theme-code-keyword: 184 35 119; /* Pink, darkened to 4.6:1 on the light panel */
   --theme-code-key: 13 138 54; /* Green, darkened */
-  --theme-code-type: 8 145 178; /* Cyan, darkened */
+  --theme-code-type: 13 110 137; /* Cyan, darkened to 4.6:1 on the light panel */
   --theme-code-string: 122 110 20; /* Yellow, darkened to olive/amber for contrast */
   --theme-code-punct: 69 78 109;
-  --theme-code-comment: 98 114 164; /* #6272a4 Comment - same value works on light too */
-  --theme-code-tag: 219 42 142; /* Pink, same role as keyword */
+  --theme-code-comment: 85 99 143; /* = faint */
+  --theme-code-tag: 184 35 119; /* Pink, same role as keyword */
   --theme-code-title: 40 42 54;
 }

@@ -5,11 +5,12 @@
  */
 
 const { t, locale } = useI18n()
+const { resumeContentLang } = useAppConfig()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
 
-const { downloadResume, isDisabled, isLoading } = useDownloadResume()
+const { downloadResume, isLoading } = useDownloadResume()
 
 /**
  * Splits an HTML string into "sentences" only at points where no tag is
@@ -73,11 +74,13 @@ function toMarkdownLine(sentenceHtml: string): string {
 /**
  * `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,
  * no Vue binding needed for plain navigation) so it stays clickable.
+ * Underlined, not just colored: inside a sentence the color alone sits too
+ * close to the body text to mark it as a link.
  */
 function markdownLink(text: string, url: string) {
   return (
     `<span class="text-theme-faint">[</span>` +
-    `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-theme-code-keyword hover:underline">${escapeHtml(text)}</a>` +
+    `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-theme-code-keyword underline underline-offset-2">${escapeHtml(text)}</a>` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
   )
 }
@@ -86,8 +89,8 @@ function markdownLink(text: string, url: string) {
  * CV download rendered as one more Markdown link line instead of a separate
  * button. The <a> keeps a real href (plain navigation still works without
  * JS), but clicks are intercepted by onBioClick below so the normal
- * downloadResume() flow (toast, loading/disabled state) runs. While loading
- * or after a failure it renders as plain, non-clickable text.
+ * downloadResume() flow (toast, loading state) runs. While loading it
+ * renders as plain, non-clickable text.
  */
 const DOWNLOAD_ICON =
   '<svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -97,9 +100,9 @@ function downloadCvLine() {
   const url = `/api/generate-pdf?lang=${locale.value}`
   const label = isLoading.value ? t('resume.downloadingCv') : t('resume.downloadCv')
   const text =
-    isLoading.value || isDisabled.value
+    isLoading.value
       ? `<span class="text-theme-muted">${DOWNLOAD_ICON}${escapeHtml(label)}</span>`
-      : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword hover:underline">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
+      : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword underline underline-offset-2">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
   return (
     `<span class="text-theme-faint">[</span>${text}` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
@@ -120,7 +123,7 @@ const bioLines = computed(() => {
    * for the whole string by one never-closing tag.
    */
   const withoutParagraphs = hero.value.introduction.replace(/<\/?p[^>]*>/gi, '')
-  const sentences = splitHtmlIntoSentences(withoutParagraphs).map(toMarkdownLine)
+  const sentences = splitHtmlIntoSentences(withoutParagraphs).map((sentence) => `<span lang="${resumeContentLang}">${toMarkdownLine(sentence)}</span>`)
   const socialLines = social.value.links.map(({ name, url }) => markdownLink(name, url))
   return [
     `<span class="text-theme-faint"># </span><span class="font-bold text-theme-text">${escapeHtml(t('resume.aboutMeHeading'))}</span>`,

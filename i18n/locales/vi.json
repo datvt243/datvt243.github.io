@@ -1,5 +1,6 @@
 {
   "header": {
+    "mainNav": "Điều hướng chính",
     "switchToLight": "Chuyển sang chế độ sáng",
     "switchToDark": "Chuyển sang chế độ tối",
     "openMenu": "Mở menu",
@@ -86,9 +87,20 @@
     "followers": "người theo dõi",
     "following": "đang theo dõi",
     "noData": "Không có dữ liệu",
-    "updatedOn": "Cập nhật vào"
+    "updatedOn": "Cập nhật vào",
+    "repoWebsite": "Website {name}",
+    "repoSource": "{name} trên GitHub"
   },
   "a11y": {
     "skipToContent": "Bỏ qua tới nội dung chính"
+  },
+  "error": {
+    "loadError": "Không tải được nội dung này.",
+    "retry": "Thử lại",
+    "notFoundTitle": "Trang này không tồn tại",
+    "notFoundText": "Liên kết có thể bị hỏng, hoặc trang đã được chuyển đi.",
+    "serverTitle": "Đã có lỗi phía máy chủ",
+    "serverText": "Nguồn dữ liệu có thể đang khởi động hoặc tạm thời gián đoạn. Vui lòng thử lại sau giây lát.",
+    "home": "Về trang chủ"
   }
 }

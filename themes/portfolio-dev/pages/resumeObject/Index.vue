@@ -4,13 +4,15 @@
  * @see https://github.com/datvt243
  */
 
+// First = default tab: experience is what a recruiter looks for, and the hero already covers about-me.
 const sections = [
+  { key: 'experience', label: 'experiences.pug', icon: 'heroicons:code-bracket' },
   { key: 'about-me', label: 'about-me.md', icon: 'heroicons:document-text' },
   { key: 'skills', label: 'skills.ts', icon: 'heroicons:code-bracket-square' },
-  { key: 'experience', label: 'experiences.pug', icon: 'heroicons:code-bracket' },
   { key: 'education', label: 'educations.json', icon: 'heroicons:queue-list' },
   { key: 'languages', label: 'languages.json', icon: 'heroicons:queue-list' },
 ]
+const { resumeContentLang } = useAppConfig()
 const route = useRoute()
 const router = useRouter()
 const active = ref(sections[0]!.key)
@@ -82,7 +84,7 @@ onMounted(() => {
         <ThemeResumeObjectAboutMe v-show="active === 'about-me'" />
         <ThemeResumeObjectSkills v-show="active === 'skills'" />
         <ThemeResumeObjectExperiences v-show="active === 'experience'" />
-        <ThemeResumeObjectEducations v-show="active === 'education'" />
+        <ThemeResumeObjectEducations v-show="active === 'education'" :lang="resumeContentLang" />
         <ThemeResumeObjectLanguages v-show="active === 'languages'" />
       </ThemePanel>
     </div>

@@ -18,7 +18,7 @@
 | Kind | Home | Example |
 |---|---|---|
 | About the hub | `SOUL.md` / `MEMORY.md` | The exact build/lint command |
-| About the domain/project | `domains/PROJECT.md` | This project's own invariants (never push to main, no test suite...) |
+| About the domain/project | `domains/PROJECT.md` | This project's own invariants (never push to main, narrow unit suite...) |
 | About how to work | `standards/*.md` | The required recipe format |
 
 A fact in the wrong drawer is a fact nobody trusts.

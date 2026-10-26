@@ -13,7 +13,7 @@ const page = toRef(query?.page || 1)
 const perPage = toRef(query?.perPage || 20)
 
 const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
-const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
+const postsFetch = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
   key: fetchKey,
   query: {
     page: page,
@@ -28,6 +28,17 @@ const { data, status, refresh } = useFetch<APIFormatResponse<PaginatedPosts>>(`/
    */
   getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key],
 })
+const { data, status, refresh } = postsFetch
+/**
+ * A failed server render must end as a 5xx so ISR keeps serving the last
+ * good blog page; in the browser the list's own error state + retry is enough.
+ */
+if (import.meta.server) {
+  await postsFetch
+  if (postsFetch.error.value) {
+    throw createError({ statusCode: postsFetch.error.value.statusCode || 503, statusMessage: 'Unable to load posts', fatal: true })
+  }
+}
 /**
  * `status` is already 'success' here (reused from the cached fetch above)
  * only when we're displaying stale data from a previous visit - kick off a
@@ -63,12 +74,12 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
       </div>
       <div class="">
         <div class="flex items-center space-x-4 border border-theme-border-subtle rounded-sm pl-3">
-          <div class="leading-none text-sm">{{ t('blogs.show') }}</div>
-          <USelect v-model="perPage" :items="[10, 20, 30, 40, 50]" variant="none" />
+          <div id="blogs-per-page" class="leading-none text-sm">{{ t('blogs.show') }}</div>
+          <USelect v-model="perPage" :items="[10, 20, 30, 40, 50]" variant="none" aria-labelledby="blogs-per-page" />
         </div>
       </div>
     </div>
-    <ListRender :status="listStatus" :data="blogs">
+    <ListRender :status="listStatus" :data="blogs" @retry="refresh()">
       <template #default>
         <li v-for="post in blogs" :key="post._id" class="p-4 border border-theme-border rounded-lg transition-colors hover:border-theme-accent/40">
           <ThemePostItem :model-value="post" />

@@ -3,10 +3,11 @@
 
 ## The rule
 Only report something as complete once the output has actually been
-produced and read back — not once you think the edit is correct. This
-project has NO test suite; "output" means the verbatim `npm run build`/
-`npm run lint` result, and for visual changes, a real screenshot/DOM query
-via Chrome CDP (port 9888).
+produced and read back — not once you think the edit is correct. The unit
+suite (`npm test`) covers only a few pure functions; "output" means the
+verbatim `npm run build`/`npm run lint`/`npx nuxi typecheck`/`npm test`
+result, and for visual changes, a real screenshot/DOM query via Chrome CDP
+(port 9888).
 
 ## Not evidence vs Evidence
 | Not evidence | Evidence |
@@ -14,7 +15,7 @@ via Chrome CDP (port 9888).
 | "This fix should probably solve the bug" | Ran `npm run build`, read the real output |
 | "Build should pass now" | Verbatim log — build has no errors, no warning was skipped |
 | "UI is probably correct" | Real screenshot/computed style via Chrome CDP, cited concretely (e.g. a readable `rgb(...)` color) |
-| "Tests pass" | NEVER use this phrase — the project has no test suite |
+| "Tests pass" (as proof a feature works) | The verbatim `npm test` output — and it only proves the few pure functions it covers |
 
 ## Why reasoning doesn't count
 Reasoning about code is not running code. Models tend to trust their own
@@ -33,6 +34,6 @@ Can't verify it yet → report `blocked`. No "probably fine" exception.
 running/checking it.
 
 ## Enforcement
-Implementer: hard rule `TestsBeforeDone` (here meaning build+lint before
-done). Verifier: hard rule `EvidencePerAction` — a claim without enough
+Implementer: hard rule `TestsBeforeDone` (here meaning build + lint +
+typecheck + `npm test` before done). Verifier: hard rule `EvidencePerAction` — a claim without enough
 evidence → REOPEN. Related: `EDIT_UNVERIFIED`.

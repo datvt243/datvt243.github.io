@@ -3,7 +3,7 @@
  * @author Đạt Võ <votan.it@gmail.com>
  * @see https://github.com/datvt243
  */
-import { formatDate } from '~/utils'
+import { accentBadgeUi, formatDate } from '~/utils'
 import type { Post } from '~/types'
 
 const { t } = useI18n()
@@ -48,7 +48,7 @@ const getURL = computed(() => {
         <ul class="flex flex-wrap gap-2">
           <li v-for="(tag, i) in (modelValue.tags || [])" :key="`tag-${i}`">
             <NuxtLink :to="getURL">
-              <UBadge :label="tag" variant="outline" />
+              <UBadge :label="tag" variant="outline" :ui="accentBadgeUi" />
             </NuxtLink>
           </li>
         </ul>

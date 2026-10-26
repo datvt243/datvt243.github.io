@@ -87,9 +87,10 @@ verdict versus just auditing the note. Not a bug, but not what
    under `agent-hub/`; reading it again here duplicates that content. Read
    it directly only if it's actually missing from context after step 2.
 4. Check the command in the note matches `doctrine/MEMORY.md` (`npm run
-   build`, `npm run lint` — verbatim, not a made-up command like `npm
-   test`) — plus its `Typecheck` row [added 2026-10-07]; no typecheck
-   output in the note → REOPEN, `EDIT_UNVERIFIED`.
+   build`, `npm run lint`, `npm test` — verbatim, not a made-up command) —
+   plus its `Typecheck` row [added 2026-10-07]; no typecheck or `npm test`
+   output in the note → REOPEN, `EDIT_UNVERIFIED` [`npm test` added
+   2026-10-26].
 5. Check whether the output has been truncated/hidden (`...`,
    "truncated") → REOPEN if so.
 6. If the node has a visual/behavior part: check whether the UI-
@@ -159,7 +160,7 @@ verdict versus just auditing the note. Not a bug, but not what
 | No evidence note exists | REOPEN, `NO_EVIDENCE` |
 | The node doesn't exist on any diagram | `grep` its slug in `dev-loop-archive.md` first — found SEALED there → treat as already SEALED; otherwise REOPEN, `forbidden_hit: node_unknown` |
 | The node is already SEALED | Don't overwrite — it must be a new node |
-| The note claims "tests pass" | REOPEN immediately — this project has no test suite, that phrase is itself a sign of `EDIT_UNVERIFIED` |
+| The note claims "tests pass" without the verbatim `npm test` output, or as proof a page/feature works | REOPEN — the unit suite covers only a few pure functions; that claim is a sign of `EDIT_UNVERIFIED` |
 
 ## Runtime
 `/worker verifier "<task or note>"` or pass 2 of `/todo "<task>"`.

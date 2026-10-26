@@ -5,10 +5,19 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
+const { t } = useI18n()
+const localePath = useLocalePath()
+const isNotFound = computed(() => props.error.statusCode === 404)
+
 function handleError() {
   clearError({
-    redirect: '/',
+    redirect: localePath('/'),
   })
+}
+
+// A full reload, not clearError(): the failed page must be server-rendered again.
+function retry() {
+  window.location.reload()
 }
 </script>
 
@@ -25,20 +34,27 @@ function handleError() {
           </div>
           <div class="clearfix my-6">
             <div class="">
-              <h1 class="my-2 font-bold text-2xl">Looks like you've found the doorway to the great nothing</h1>
-              <p class="my-3">Sorry about that! Please visit our Homepage to get where you need to go.</p>
+              <h1 class="my-2 font-bold text-2xl">{{ isNotFound ? t('error.notFoundTitle') : t('error.serverTitle') }}</h1>
+              <p class="my-3">{{ isNotFound ? t('error.notFoundText') : t('error.serverText') }}</p>
+              <button
+                v-if="!isNotFound"
+                class="sm:w-full lg:w-auto my-2 mr-2 border rounded-sm md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-hidden focus:ring-2 focus:ring-theme-accent/50"
+                @click="retry"
+              >
+                {{ t('error.retry') }}
+              </button>
               <button
                 class="sm:w-full lg:w-auto my-2 border rounded-sm md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-hidden focus:ring-2 focus:ring-theme-accent/50"
                 @click="handleError"
               >
-                Take me there!
+                {{ t('error.home') }}
               </button>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <NuxtImg src="error.png" />
+        <NuxtImg src="error.png" alt="" />
       </div>
     </div>
     <!-- <div class="error-page w-[400px] mx-auto">

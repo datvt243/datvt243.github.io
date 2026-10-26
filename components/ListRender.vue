@@ -9,6 +9,8 @@ const props = defineProps<{
 	data: readonly unknown[] | null
 	message?: string
 }>()
+const emit = defineEmits<{ retry: [] }>()
+const { t } = useI18n()
 
 const isLoading = ref(false)
 const loadingAfterMillisecond = 500
@@ -27,7 +29,11 @@ watch(
 
 <template>
   <div class="list-render">
-    <template v-if="props.status !== 'success'">
+    <div v-if="props.status === 'error'" role="alert" class="p-8 text-center text-theme-muted bg-theme-panel-subtle rounded-sm space-y-4">
+      <p>{{ props.message || t('error.loadError') }}</p>
+      <UButton color="neutral" variant="outline" icon="i-fe-sync" @click="emit('retry')">{{ t('error.retry') }}</UButton>
+    </div>
+    <template v-else-if="props.status !== 'success'">
       <template v-if="$slots.loading">
         <slot v-if="isLoading" name="loading"/>
       </template>
