@@ -156,4 +156,33 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+/**
+ * On a phone the gutter, tag labels and indents left the text about half
+ * the screen. They are decoration, so they go first; list items get a plain
+ * "- " marker instead so they don't run together, and the "// next
+ * experience" comment stays as the separator between jobs.
+ */
+@media (width < 48rem) {
+  .code-line::before,
+  .tag-label,
+  .code-line[aria-hidden='true']:not(.comment) {
+    display: none;
+  }
+  .depth-1 .line-content {
+    padding-left: 0;
+  }
+  /* Hanging indent: wrapped lines align under the text, not the marker. */
+  .depth-2 .line-content {
+    padding-left: 2ch;
+    text-indent: -2ch;
+  }
+  .depth-2 .tag-text::before {
+    content: '- ';
+    color: rgb(var(--theme-muted));
+  }
+  .comment {
+    margin-top: 1rem;
+  }
+}
 </style>
