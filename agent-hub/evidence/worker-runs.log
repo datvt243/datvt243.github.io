@@ -60,3 +60,5 @@
 2026-10-26T12:58:52Z role=verifier outcome=SEAL node=visit-tracker-proxy rerun=partial hub_bytes_before=77964 hub_bytes_after=77940
 2026-10-26T13:05:50Z role=verifier outcome=SEAL node=error-states-retry rerun=full hub_bytes_before=77940 hub_bytes_after=77923
 2026-10-26T13:12:03Z role=verifier outcome=SEAL node=blog-isr-fallback rerun=full hub_bytes_before=77923 hub_bytes_after=77904
+2026-10-26T13:17:21Z role=verifier outcome=REOPEN node=resume-experience-first rerun=full hub_bytes_before=77904 hub_bytes_after=78081
+2026-10-26T13:18:28Z role=verifier outcome=SEAL node=resume-experience-first rerun=partial hub_bytes_before=77904 hub_bytes_after=77905

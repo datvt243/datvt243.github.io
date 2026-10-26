@@ -4,10 +4,11 @@
  * @see https://github.com/datvt243
  */
 
+// First = default tab: experience is what a recruiter looks for, and the hero already covers about-me.
 const sections = [
+  { key: 'experience', label: 'experiences.pug', icon: 'heroicons:code-bracket' },
   { key: 'about-me', label: 'about-me.md', icon: 'heroicons:document-text' },
   { key: 'skills', label: 'skills.ts', icon: 'heroicons:code-bracket-square' },
-  { key: 'experience', label: 'experiences.pug', icon: 'heroicons:code-bracket' },
   { key: 'education', label: 'educations.json', icon: 'heroicons:queue-list' },
   { key: 'languages', label: 'languages.json', icon: 'heroicons:queue-list' },
 ]
