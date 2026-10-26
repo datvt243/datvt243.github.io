@@ -30,9 +30,10 @@ the root `CLAUDE.md`'s content.
 - **`bug/*` and `feature/*` branches may both be deleted after merging**
   (as of 2026-08-30 — operator explicitly changed this from the old
   `feature/*`-never-deleted convention, see Decisions table below).
-- **No automated test suite** — "verified" means `npm run build` clean +
-  `npm run lint` clean + a real UI check (see the Browser verification
-  section). Never claim "tests pass".
+- **Unit tests are narrow** — `npm test` (Vitest) covers a few pure
+  functions only. "Verified" means `npm run build` + `npm run lint` +
+  `npx nuxi typecheck` + `npm test` clean + a real UI check (see the
+  Browser verification section). "Tests pass" never stands in for that.
 - **`server/plugins/RenderHTML.ts`** must never set a literal color
   (a Tailwind class like `bg-slate-950`) — must use a theme token
   (`bg-theme-*`), otherwise it invisibly breaks light mode (this really
@@ -103,6 +104,7 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 | 2026-08-30 | `main` protected via real GitHub branch protection (`enforce_admins: true`, PR required, 0 required approvals) | User asked to make "never push directly to `main`" actually enforced, not just a written convention agents could forget/skip. Confirmed via AskUserQuestion to leave required approvals at 0 rather than ≥1, specifically because GitHub disallows a PR author approving their own PR — requiring ≥1 would have blocked `/ship --merge`/`/todo`'s self-merge (same GitHub account opens and merges the PR), breaking the exact automation this session built | Requiring ≥1 approval — rejected because it would silently break `/ship --merge`/`/todo`'s self-merge automation with no second reviewer account available |
 | 2026-08-30 | New `staging` branch off `main`, same branch protection as `main`. All `bug/*`/`feature/*` work now branches off `staging` (not `main`); `main` only receives code from `staging`, via a new `/release` command | User wanted a real integration branch separating in-progress work from production, so `main` always reflects what was actually released, not whatever was last merged | Keeping the single-branch `main`-only model — rejected, user explicitly asked for `staging` |
 | 2026-08-30 | `/release` merges `staging`→`main` via a regular merge (not squash) so `main` keeps staging's individual commit history, tags `vX.Y.Z` (semver, starting `1.0.0`), attempts a `DEPLOY_HOOK_URL` webhook and skips with a clear message if unset, then syncs the version bump back to `staging` | User confirmed via AskUserQuestion: semver over date-based tags, and "skip + placeholder" over configuring a real deploy target on the spot (none exists yet — no CI/CD, no deploy config found in the repo) | Date-based tags (`v2026.08.30`) — rejected in favor of semver; blocking `/release` until a real deploy target is configured — rejected, deploy is optional/best-effort for now |
+| 2026-10-26 | Added Vitest (`npm test`, `tests/`) for 3 pure units (skill grouping, `fetchResume` field whitelist + no-retry, `ResumeAdapter`), and `npx nuxi typecheck` + `npm test` to CI; plain Vitest with `@`/`~` aliases, no `@nuxt/test-utils` | #300 (operator chose "Typecheck CI + Vitest"): two P0 bugs (#281 skills groups vanished, #280 PII fields leaked) were logic a 10-line test catches; build/lint can't. Kept to pure functions so tests need no Nuxt runtime; Nitro globals are stubbed per test. Not a substitute for browser verification | `@nuxt/test-utils` (Nuxt runtime in tests): heavier and slower, not needed for pure functions. Component/e2e suite: out of proportion for a one-person portfolio |
 
 ## Legacy reference
 `agent-hub/histories/2026-08-11.md` and `2026-08-13.md` — detailed

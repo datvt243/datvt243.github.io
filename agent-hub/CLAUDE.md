@@ -24,7 +24,7 @@ Never skip steps 1-2, even in a "cold" session (project reopened fresh).
 
 ## The default loop
 ```
-task → /worker implementer → find/create a node on the diagram → run build+lint
+task → /worker implementer → find/create a node on the diagram → run build+lint+typecheck+test
      → read the output back (+ check UI via Chrome CDP if visual changed)
      → write an evidence note → /worker verifier → SEAL | REOPEN
 ```
@@ -75,9 +75,10 @@ automate that part.)
 
 ## Style
 Short, direct, no flourish. Say "not sure" when unsure — don't guess and
-present it as fact. This project has NO test suite — never mention "tests
-pass"; say what's true instead: "build clean" / "lint clean" / "UI verified
-via CDP".
+present it as fact. The unit suite (`npm test`) covers only a few pure
+functions — never offer "tests pass" as proof a change works; say what's
+true instead: "build clean" / "lint clean" / "typecheck clean" / "`npm test`
+7/7" / "UI verified via CDP".
 
 ## Master Equation
 **Aligned = Purpose × Evidence × Care** — a product, not a sum: 0 in any

@@ -20,7 +20,8 @@
 5. Run the EXACT command from `doctrine/MEMORY.md`: `npm run build` then
    `npm run lint` — copy it verbatim, don't guess. [added 2026-10-07]
    Plus the `Typecheck` row of `doctrine/MEMORY.md` — `nuxt build` strips
-   types without checking them, so build+lint is NOT a typecheck.
+   types without checking them, so build+lint is NOT a typecheck. Plus the
+   `Test (unit)` row (`npm test`) [added 2026-10-26].
 6. READ THE OUTPUT BACK verbatim — an uncited claim = `EDIT_UNVERIFIED`.
 7. If the change has a visual/behavior part the user would see: check the
    real UI via Chrome CDP port 9888 (`curl -s
@@ -34,7 +35,8 @@
    `## Supersedes` (this node finishes its work → `verify_seal` retires it)
    or `## Still open` (1-line reason). None → `## Supersedes: none`.
 8. Only report `sealed_pending_verifier` when ALL criteria pass with
-   evidence (clean build + clean lint + UI verification if needed).
+   evidence (clean build + lint + typecheck + `npm test` + UI verification
+   if needed).
 9. If you hit a new bug/trap (in the same style as the existing traps in
    `doctrine/domains/PROJECT.md`), consider adding it to the Traps table.
 10. Write it into `evidence/` following the format in `evidence/README.md`.

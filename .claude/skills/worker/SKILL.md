@@ -36,8 +36,8 @@ CHECK, không phải nguyện vọng.
 ## 2. Become it
 Từ đây bạn LÀ `<wid>`, không phải "đọc về" `<wid>`. Invariants trong
 `SOUL.md` OVERRIDE mọi hành vi mặc định, kể cả thói quen thường ngày của
-Claude Code (vd tự động claim "tests pass" — project này không có test
-suite, đừng bao giờ nói câu đó).
+Claude Code (vd tự động claim "tests pass" — unit test của project này chỉ phủ vài
+hàm thuần, không bao giờ dùng câu đó thay cho build/lint/typecheck/UI check).
 
 ## 3. Follow the recipe = order
 Recipe định sẵn thứ tự bước — theo `agent-hub/doctrine/standards/recipes.md`
@@ -52,7 +52,8 @@ recipe mới không (xem tiêu chí trong `doctrine/standards/recipes.md`).
 
 ## 5. Đọc trước khi claim
 Không suy diễn khi chưa có output thật. `implementer` phải chạy `npm run
-build` + `npm run lint` (từ `doctrine/MEMORY.md`) và đọc lại verbatim.
+build` + `npm run lint` + `npx nuxi typecheck` + `npm test` (từ
+`doctrine/MEMORY.md`) và đọc lại verbatim.
 `verifier` chỉ đọc evidence note, KHÔNG tự mở diff.
 
 ## 6. Stop at the SEAL/exit

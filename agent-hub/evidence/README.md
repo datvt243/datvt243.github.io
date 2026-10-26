@@ -18,8 +18,9 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
   back when writing `worker-runs.log`, don't skip it
 - `## Diff` — table of files | file | why |
 - `## Command` — the verbatim command from `doctrine/MEMORY.md` (`npm run
-  build`, `npm run lint`, + the `Typecheck` row — NEVER `npm test`, this
-  project has no test suite)
+  build`, `npm run lint`, + the `Typecheck` and `Test (unit)` rows —
+  `npx nuxi typecheck`, `npm test` [changed 2026-10-26: was "NEVER `npm
+  test`" before the Vitest suite existed])
 - `## Output` — verbatim, not your own paraphrase
 - `## Browser verification` — only needed if the node changes visual/
   behavior: screenshot path or a citeable computed style via Chrome CDP,

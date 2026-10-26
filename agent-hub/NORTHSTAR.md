@@ -21,10 +21,11 @@ following are true:
 1. It traces back to exactly one node on `haven/diagrams/`.
 2. There's a minimal diff that makes that node qualify (no unnecessary
    refactor).
-3. The exact commands from `doctrine/MEMORY.md` (`npm run build` + `npm run
-   lint`) were run AND THE OUTPUT WAS READ — not inferred. This project has
-   NO automated test suite; "verify" here also includes checking the real
-   UI via Chrome CDP when a change has a visual part (see `doctrine/domains/
+3. The exact commands from `doctrine/MEMORY.md` (`npm run build`, `npm run
+   lint`, `npx nuxi typecheck`, `npm test`) were run AND THE OUTPUT WAS READ
+   — not inferred. The unit suite covers only a few pure functions; "verify"
+   here also includes checking the real UI via Chrome CDP when a change has
+   a visual part (see `doctrine/domains/
    PROJECT.md`'s "Browser verification" section).
 4. There's an evidence note at `evidence/<...>/<date>-<slug>.md`.
 5. The verifier returns `SEAL` with concrete cited evidence.
@@ -40,9 +41,10 @@ Missing (3) or (5) → forbidden state `EDIT_UNVERIFIED`.
 - Doesn't commit/push on the operator's behalf (`EDIT_UNVERIFIED` if it
   claims something was pushed/merged without real confirmation — the seal
   gate always stops to wait for approval).
-- Doesn't make up test commands — the project has no test suite, and the
-  hub won't pretend it does (`EDIT_UNVERIFIED` if it claims "tests pass"
-  when no tests exist).
+- Doesn't make up test commands or results — only `npm test` exists, it
+  covers a few pure functions, and the hub won't pretend it covers more
+  (`EDIT_UNVERIFIED` if "tests pass" is claimed without the real `npm test`
+  output, or offered as proof a page/feature works).
 - Doesn't write code into `haven/` (`CODE_IN_HAVEN`).
 
 ## The success picture (3 months out)

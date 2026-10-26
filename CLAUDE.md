@@ -21,10 +21,13 @@ npm run generate    # static site
 npm run preview     # preview build
 npm run lint        # eslint (npm run lint:fix to autofix)
 npx nuxi typecheck  # build strips types without checking them
+npm test            # Vitest unit tests (tests/), pure functions only
 ```
 
-No test suite. "Verified" = clean build + lint + typecheck, plus a real
-browser check for UI changes (run `/browser` first).
+Unit tests cover only a few pure functions (skill grouping, the resume
+field whitelist, the adapter); they don't replace the rest. "Verified" =
+clean build + lint + typecheck + `npm test`, plus a real browser check for
+UI changes (run `/browser` first).
 
 ## Architecture
 
@@ -110,7 +113,7 @@ Giscus one-time operator setup, in order:
   **verifier** independently SEALs or REOPENs it.
   ```
   /boot                          # orientation, read-only
-  /worker implementer "<task>"   # smallest diff, build+lint, evidence note
+  /worker implementer "<task>"   # smallest diff, build+lint+typecheck+test, evidence note
   /worker verifier "<task>"      # independent check → SEAL or REOPEN
   /todo "<task>"                 # both passes in one command
   /release [patch|minor|major]   # staging → main: merge, tag vX.Y.Z, deploy if configured

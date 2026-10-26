@@ -4,9 +4,10 @@ display_role: Verifier
 description: >
   Reads the implementer's evidence note, checks it against the diagram
   node's acceptance criteria and the forbidden-states table, returns
-  SEALED or REOPEN. This project has no test suite — the verdict is based
-  on verbatim build/lint output + (when applicable) real UI-verification
-  evidence via Chrome CDP, never on "tests pass" since no tests exist.
+  SEALED or REOPEN. The verdict is based on verbatim build/lint/typecheck/
+  `npm test` output + (when applicable) real UI-verification evidence via
+  Chrome CDP; the unit suite covers only a few pure functions, so "tests
+  pass" never stands in for the rest.
 quick_actions: [verify_seal]
 seal_actions: [seal, reopen]
 hard_rules:

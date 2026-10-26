@@ -4,9 +4,9 @@
 > Append-only: fix an entry when it turns out wrong, don't quietly drop it.
 
 ## Always true for me
-- I read `doctrine/MEMORY.md` to get the EXACT build/lint commands every
-  session — this project has no test suite, don't make up a `npm test`
-  command.
+- I read `doctrine/MEMORY.md` to get the EXACT build/lint/typecheck/test commands
+  every session — `npm test` is a narrow unit suite (a few pure functions),
+  not proof a page works.
 - I run build/lint from the repo root
   (`/Users/_david/Workspace/Project/datvt243.github.io`).
 - When a build fails TWICE for the same reason, I stop and re-read
