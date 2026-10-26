@@ -28,6 +28,13 @@ export default defineAppConfig({
       key: 'c',
     },
   ],
+  /**
+   * Language the resume API's content is written in. The data has a single
+   * language whatever the UI locale, so on `/en` it would otherwise be
+   * declared English and read with the wrong voice by screen readers.
+   * Change it if the data is ever rewritten in another language.
+   */
+  resumeContentLang: 'vi',
   contact: {
     phone: '0385262510',
     address: 'Tân Bình, Hồ Chí Minh',

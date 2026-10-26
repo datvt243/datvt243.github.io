@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `hero-contact-to-page` | SEALED | 2026-10-19 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-19/hero-contact-to-page-diff.md`. |
 | `experience-career-break` | SEALED | 2026-10-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-20/experience-career-break-{plan,diff}.md`. |
 | `resume-api-error-standard` | SEALED | 2026-10-21 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-21/resume-api-error-standard-{plan,diff}.md`. |
 | `claude-md-refactor` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/claude-md-refactor-seal.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `blog-isr-fallback` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/blog-isr-fallback-seal.md`. |
 | `resume-experience-first` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-experience-first-seal.md`. |
 | `pdf-ats-polish` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/pdf-ats-polish-seal.md`. |
+| `content-lang-en-routes` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/content-lang-en-routes-seal.md`. |

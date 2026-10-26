@@ -4,6 +4,7 @@
  * @see https://github.com/datvt243
  */
 
+const { resumeContentLang } = useAppConfig()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const store = useResumeStore()
@@ -43,7 +44,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
   <div class="grid gap-10 lg:grid-cols-[1fr_auto] items-center py-10 font-theme-mono">
     <div>
       <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }} <span class="text-theme-text">_</span></p>
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance" :lang="resumeContentLang">
         {{ hero.fullName }}
       </h1>
       <div class="flex flex-wrap items-center gap-2 mt-4">
