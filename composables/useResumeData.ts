@@ -7,7 +7,16 @@
 
 import type { Resume } from '@/types/resume-document'
 
-export function useResumeData() {
+/**
+ * Throws instead of handing back `error`: a failed load must end as a 5xx,
+ * otherwise ISR caches the broken page as a successful 200 and stops serving
+ * the last good one.
+ */
+export async function useResumeData() {
   const store = useResumeStore()
-  return useAsyncData<Resume>('api-resume', () => store.fetchData())
+  const result = await useAsyncData<Resume>('api-resume', () => store.fetchData())
+  if (result.error.value) {
+    throw createError({ statusCode: result.error.value.statusCode || 502, statusMessage: 'Unable to load resume data', fatal: true })
+  }
+  return result
 }

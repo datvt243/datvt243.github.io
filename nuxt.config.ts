@@ -122,8 +122,17 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**'],
   },
 
+  /**
+   * Resume routes must stay ISR (including the `/en` prefixed ones): when the
+   * resume API fails, Vercel keeps serving the last good render instead of an
+   * error, as long as the failed render ends as a 5xx (see useResumeData).
+   */
   routeRules: {
     '/': { isr: 60 },
+    '/en': { isr: 60 },
+    '/projects': { isr: 60 },
+    '/en/projects': { isr: 60 },
+    '/api/resume': { isr: 60 },
     '/github': { isr: 60 },
     '/contact': { prerender: true },
     '/blogs': { isr: 60 },
