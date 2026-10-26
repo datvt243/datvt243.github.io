@@ -8,7 +8,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
-const { downloadResume, isDisabled, isLoading } = useDownloadResume()
+const { downloadResume, isLoading } = useDownloadResume()
 
 /** Main stack, ordered languages → frameworks → tooling; `icon` is a file under public/svg/. */
 const techStack = [
@@ -67,7 +67,7 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
         <button
           type="button"
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
-          :disabled="isDisabled || isLoading"
+          :disabled="isLoading"
           data-shortcut="d"
           :data-shortcut-label="t('resume.downloadCv')"
           @click="downloadResume()"

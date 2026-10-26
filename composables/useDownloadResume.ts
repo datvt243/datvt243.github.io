@@ -14,7 +14,6 @@ export function useDownloadResume() {
   const store = useResumeStore()
   const { t, locale } = useI18n()
   const toast = useToast()
-  const isDisabled = ref(false)
   const isLoading = ref(false)
 
   async function downloadResume() {
@@ -29,8 +28,8 @@ export function useDownloadResume() {
       const response = await fetch(`/api/generate-pdf?lang=${locale.value}`)
 
       const { status } = response
+      // A failure (e.g. a cold server) leaves the button usable: the next click is the retry.
       if (status !== 200) {
-        isDisabled.value = true
         toast.update(notification.id, {
           title: t('resume.downloadCvError'),
           icon: 'i-fe-warning',
@@ -54,7 +53,6 @@ export function useDownloadResume() {
         duration: 4000,
       })
     } catch {
-      isDisabled.value = true
       toast.update(notification.id, {
         title: t('resume.downloadCvError'),
         icon: 'i-fe-warning',
@@ -66,5 +64,5 @@ export function useDownloadResume() {
     }
   }
 
-  return { downloadResume, isDisabled, isLoading }
+  return { downloadResume, isLoading }
 }
