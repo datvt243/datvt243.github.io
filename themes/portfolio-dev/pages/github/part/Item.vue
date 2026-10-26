@@ -9,9 +9,9 @@ const props = defineProps<{
 
 type LinkField = 'homepage' | 'html_url'
 
-const links: { field: LinkField; icon: string; class: string }[] = [
-  { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword' },
-  { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent' },
+const links: { field: LinkField; icon: string; class: string; label: string }[] = [
+  { field: 'homepage', icon: 'fe:globe', class: 'text-theme-code-keyword', label: 'github.repoWebsite' },
+  { field: 'html_url', icon: 'fe:github', class: 'text-theme-accent', label: 'github.repoSource' },
 ]
 
 const languageColors: Record<string, string> = {
@@ -61,7 +61,7 @@ const updatedOnLabel = computed(() =>
       <ul class="flex gap-2 shrink-0">
         <template v-for="el in links">
           <li v-if="getFieldValue(el.field)" :key="el.field">
-            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-opacity']" target="_blank" rel="noopener noreferrer">
+            <a :href="getFieldValue(el?.field) || '#'" :class="[el.class, 'hover:opacity-50 transition-opacity']" :aria-label="t(el.label, { name: modelValue.name })" target="_blank" rel="noopener noreferrer">
               <UIcon :name="`${el.icon}`" class="w-5 h-5" />
             </a>
           </li>

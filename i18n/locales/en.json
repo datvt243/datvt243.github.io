@@ -1,5 +1,6 @@
 {
   "header": {
+    "mainNav": "Main",
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode",
     "openMenu": "Open menu",
@@ -86,7 +87,9 @@
     "followers": "followers",
     "following": "following",
     "noData": "NO data",
-    "updatedOn": "Updated on"
+    "updatedOn": "Updated on",
+    "repoWebsite": "{name} website",
+    "repoSource": "{name} on GitHub"
   },
   "a11y": {
     "skipToContent": "Skip to main content"

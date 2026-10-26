@@ -77,3 +77,4 @@
 2026-10-26T18:06:32Z role=verifier outcome=SEAL node=github-own-repos-recent rerun=partial hub_bytes_before=77920 hub_bytes_after=77895
 2026-10-26T18:22:07Z role=verifier outcome=REOPEN node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80377
 2026-10-26T18:26:22Z role=verifier outcome=SEAL node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80044
+2026-10-26T18:44:54Z role=verifier outcome=SEAL node=a11y-axe-serious rerun=full hub_bytes_before=80026 hub_bytes_after=80022
