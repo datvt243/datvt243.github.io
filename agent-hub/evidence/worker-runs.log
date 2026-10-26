@@ -78,3 +78,4 @@
 2026-10-26T18:22:07Z role=verifier outcome=REOPEN node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80377
 2026-10-26T18:26:22Z role=verifier outcome=SEAL node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80044
 2026-10-26T18:44:54Z role=verifier outcome=SEAL node=a11y-axe-serious rerun=full hub_bytes_before=80026 hub_bytes_after=80022
+2026-10-26T23:07:17Z role=verifier outcome=SEAL node=light-hover-footer-targets rerun=full hub_bytes_before=80042 hub_bytes_after=80060
