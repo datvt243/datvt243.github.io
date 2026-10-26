@@ -67,3 +67,7 @@
 2026-10-26T13:28:03Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=full hub_bytes_before=77905 hub_bytes_after=78097
 2026-10-26T13:31:25Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=78097
 2026-10-26T13:37:32Z role=verifier outcome=SEAL node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=77920
+2026-10-26T13:38:25Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=full hub_bytes_before=77904 hub_bytes_after=79329
+2026-10-26T13:40:49Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80054
+2026-10-26T13:44:01Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80271
+2026-10-26T18:05:52Z role=verifier outcome=SEAL node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80038

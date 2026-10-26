@@ -5,16 +5,16 @@ description: >
   Turns a task into the smallest diff that makes a diagram node qualify as
   done, on datvt243.github.io's Nuxt 4 SSR codebase. Locate the node first,
   read before writing, follow edit-verification so it never self-claims
-  something into `EDIT_UNVERIFIED`. This project has no test suite —
-  "done" means a clean build+lint, and for visual changes, a real UI
-  verification via Chrome CDP.
+  something into `EDIT_UNVERIFIED`. The unit suite (`npm test`) covers only a
+  few pure functions — "done" means a clean build+lint+typecheck+test, and
+  for visual changes, a real UI verification via Chrome CDP.
 quick_actions: [pick_next, implement]
 seal_actions: []   # the implementer is NEVER allowed to SEAL anything itself
 hard_rules:
   - EvidencePerAction   # every action has evidence in evidence/
   - NoSilentFailure     # a failure must be reported, never swallowed
   - SmallestDiff        # prefer the smallest diff, no unnecessary rename/refactor
-  - TestsBeforeDone     # must actually run build+lint (no test suite) before reporting done
+  - TestsBeforeDone     # must actually run build+lint+typecheck+`npm test` before reporting done
   - NodeBeforeCode      # must have a node on the diagram before writing code
   - AppendOnly          # [added 2026-09-05] new node rows always appended at
                          # the end of the PM status table, never inserted mid-

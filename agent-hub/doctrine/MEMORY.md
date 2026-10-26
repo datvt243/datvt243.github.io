@@ -17,7 +17,7 @@
 
 | Purpose | Command | Run from |
 |---|---|---|
-| Test | **NONE** — this project has no automated test suite (no `test` script in `package.json`) | — |
+| Test (unit) | `npm test` (Vitest, `tests/**/*.test.ts`; pure functions only) | repo root |
 | Build (SSR) | `npm run build` | repo root |
 | Build (static) | `npm run generate` | repo root |
 | Lint (check) | `npm run lint` | repo root |
@@ -26,11 +26,13 @@
 | Run locally | `npm run dev` | repo root |
 | Preview build | `npm run preview` | repo root |
 
-**"Verify" replaces the test suite**: `npm run build` must be clean (0
-errors) + `npm run lint` must be clean, AND if the change has a visual/
-user-facing behavior part, the real UI must be checked via Chrome CDP (see
-`domains/PROJECT.md`'s "Browser verification" section). There is no test
-to "pass" — never claim "tests pass".
+**"Verify" is more than the unit tests**: `npm run build` must be clean (0
+errors) + `npm run lint` + `npx nuxi typecheck` + `npm test` must be clean,
+AND if the change has a visual/user-facing behavior part, the real UI must
+be checked via Chrome CDP (see `domains/PROJECT.md`'s "Browser
+verification" section). The unit tests cover only a few pure functions:
+"tests pass" proves those, never a page or a feature — say it only with
+the real `npm test` output, and never as the whole verification.
 
 ## Stack
 | Thing | Value |
@@ -44,7 +46,7 @@ to "pass" — never claim "tests pass".
 ## The default way to work
 `/boot` → `/worker implementer "<task>"` → `/worker verifier "<task>"` (or
 combined as `/todo "<task>"`). Never skip the `/boot` step in a cold
-session, never skip the real build+lint step before reporting
+session, never skip the real build+lint+typecheck+test step before reporting
 `sealed_pending_verifier`.
 
 ## Workers

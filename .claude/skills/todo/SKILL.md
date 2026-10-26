@@ -57,7 +57,7 @@ lượt tách biệt.
       duyệt thứ 2; gate phê duyệt thật duy nhất trong cả chuỗi `/todo` vẫn
       là bước push của `/ship` ở cuối.
 2. **Lượt 1 — implementer**: chạy đúng quy trình `/worker implementer
-   "<task>"` (load bundle → become → pick_next → implement → build+lint
+   "<task>"` (load bundle → become → pick_next → implement → build+lint+typecheck+test
    thật → evidence note), đã đứng trên branch từ bước 1. Dừng ở
    `sealed_pending_verifier`.
    - `blocked`/`failed` → dừng ngay, báo operator, không chạy lượt 2.

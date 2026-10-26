@@ -23,14 +23,15 @@ self-report done), mandatory evidence instead of a free-form daily work-log.
 ## What to read first
 1. `NORTHSTAR.md` — what "done" means
 2. Root `CLAUDE.md` (outside `agent-hub/`) — the real project's stack/architecture
-3. `doctrine/MEMORY.md` — exact build/lint commands (no test suite)
+3. `doctrine/MEMORY.md` — exact build/lint/typecheck/test commands
 4. `doctrine/domains/PROJECT.md` — traps + decisions, including ones distilled
    from the old `histories/`
 
 ## Important notes specific to this project
-- **No automated test suite.** "Verify" = `npm run build` clean +
-  `npm run lint` clean + (if visual changes) real UI check via Chrome CDP
-  port 9888. Never trust or write "tests pass".
+- **Narrow unit suite only** (`npm test`, a few pure functions). "Verify"
+  = `npm run build` + `npm run lint` + `npx nuxi typecheck` + `npm test`
+  clean + (if visual changes) real UI check via Chrome CDP port 9888.
+  "Tests pass" never stands in for that.
 - **`agent-hub/histories/`** is still kept as-is (2 files, 2026-08-11 and
   2026-08-13) — NOT deleted, just no longer where new audit trail gets
   written. The durable lessons in it have been distilled into

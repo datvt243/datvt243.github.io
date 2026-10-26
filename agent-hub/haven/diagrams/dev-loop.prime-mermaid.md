@@ -17,7 +17,7 @@ flowchart TD
     impl --> outward{Touches outward-facing?}
     outward -- yes --> gate[SEAL GATE<br/>show diff, wait for approval]
     gate --> build
-    outward -- no --> build[npm run build + npm run lint<br/>from doctrine/MEMORY.md]
+    outward -- no --> build[npm run build + lint + typecheck + test<br/>from doctrine/MEMORY.md]
     build --> visual{Changes visual/behavior?}
     visual -- yes --> cdp[Check real UI via Chrome CDP :9888]
     visual -- no --> readback
@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `experience-career-break` | SEALED | 2026-10-20 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-20/experience-career-break-{plan,diff}.md`. |
 | `resume-api-error-standard` | SEALED | 2026-10-21 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-21/resume-api-error-standard-{plan,diff}.md`. |
 | `claude-md-refactor` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/claude-md-refactor-seal.md`. |
 | `hero-actions-align` | SEALED | 2026-10-24 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-24/hero-actions-align-seal.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `resume-experience-first` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-experience-first-seal.md`. |
 | `pdf-ats-polish` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/pdf-ats-polish-seal.md`. |
 | `content-lang-en-routes` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/content-lang-en-routes-seal.md`. |
+| `ci-typecheck-vitest` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/ci-typecheck-vitest-seal.md`. |
