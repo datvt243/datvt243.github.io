@@ -9,7 +9,7 @@ const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
 
-const { downloadResume, isDisabled, isLoading } = useDownloadResume()
+const { downloadResume, isLoading } = useDownloadResume()
 
 /**
  * Splits an HTML string into "sentences" only at points where no tag is
@@ -86,8 +86,8 @@ function markdownLink(text: string, url: string) {
  * CV download rendered as one more Markdown link line instead of a separate
  * button. The <a> keeps a real href (plain navigation still works without
  * JS), but clicks are intercepted by onBioClick below so the normal
- * downloadResume() flow (toast, loading/disabled state) runs. While loading
- * or after a failure it renders as plain, non-clickable text.
+ * downloadResume() flow (toast, loading state) runs. While loading it
+ * renders as plain, non-clickable text.
  */
 const DOWNLOAD_ICON =
   '<svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -97,7 +97,7 @@ function downloadCvLine() {
   const url = `/api/generate-pdf?lang=${locale.value}`
   const label = isLoading.value ? t('resume.downloadingCv') : t('resume.downloadCv')
   const text =
-    isLoading.value || isDisabled.value
+    isLoading.value
       ? `<span class="text-theme-muted">${DOWNLOAD_ICON}${escapeHtml(label)}</span>`
       : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword hover:underline">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
   return (

@@ -90,5 +90,14 @@
   },
   "a11y": {
     "skipToContent": "Bỏ qua tới nội dung chính"
+  },
+  "error": {
+    "loadError": "Không tải được nội dung này.",
+    "retry": "Thử lại",
+    "notFoundTitle": "Trang này không tồn tại",
+    "notFoundText": "Liên kết có thể bị hỏng, hoặc trang đã được chuyển đi.",
+    "serverTitle": "Đã có lỗi phía máy chủ",
+    "serverText": "Nguồn dữ liệu có thể đang khởi động hoặc tạm thời gián đoạn. Vui lòng thử lại sau giây lát.",
+    "home": "Về trang chủ"
   }
 }

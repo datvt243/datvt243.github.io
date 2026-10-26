@@ -68,7 +68,7 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
         </div>
       </div>
     </div>
-    <ListRender :status="listStatus" :data="blogs">
+    <ListRender :status="listStatus" :data="blogs" @retry="refresh()">
       <template #default>
         <li v-for="post in blogs" :key="post._id" class="p-4 border border-theme-border rounded-lg transition-colors hover:border-theme-accent/40">
           <ThemePostItem :model-value="post" />

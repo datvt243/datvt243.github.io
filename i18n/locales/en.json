@@ -90,5 +90,14 @@
   },
   "a11y": {
     "skipToContent": "Skip to main content"
+  },
+  "error": {
+    "loadError": "Couldn't load this content.",
+    "retry": "Try again",
+    "notFoundTitle": "This page doesn't exist",
+    "notFoundText": "The link may be broken, or the page has moved.",
+    "serverTitle": "Something went wrong on our side",
+    "serverText": "The data source may be waking up or briefly unavailable. Please try again in a moment.",
+    "home": "Go to the homepage"
   }
 }
