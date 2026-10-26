@@ -45,6 +45,8 @@ browser check for UI changes (run `/browser` first).
   - `/api/blogs/posts` — 1h, keyed by page/perPage/category.
   - `/api/generate-pdf` — plain handler + module-level in-memory cache (1 day);
     `defineCachedEventHandler` doesn't correctly cache its binary PDF body.
+  - `/api/visit` (POST) — uncached relay for `VisitTracker.client.ts`; the
+    backend has no CORS for a direct browser call.
 - External APIs:
   - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
   - Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`
