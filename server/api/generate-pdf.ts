@@ -75,7 +75,7 @@ export default defineEventHandler(async (event) => {
       : generalInformation || ({} as GeneralInformation)
   }
 
-  const { email, html: contentHTML } = pageRenderAts(data, lang)
+  const { fileName, html: contentHTML } = pageRenderAts(data, lang)
 
   const { executablePath, args } = await resolveLaunchOptions()
 
@@ -93,12 +93,10 @@ export default defineEventHandler(async (event) => {
 
   await browser.close()
 
-  const safeFilename = (email || 'resume').replace(/[^a-zA-Z0-9._-]/g, '_')
-
-  cache.set(cacheKey, { buffer: pdfBuffer, filename: safeFilename, generatedAt: Date.now() })
+  cache.set(cacheKey, { buffer: pdfBuffer, filename: fileName, generatedAt: Date.now() })
 
   setResponseHeader(event, 'Content-Type', 'application/pdf')
-  setResponseHeader(event, 'Content-Disposition', `attachment; filename="${safeFilename}.pdf"`)
+  setResponseHeader(event, 'Content-Disposition', `attachment; filename="${fileName}.pdf"`)
 
   return pdfBuffer
 })

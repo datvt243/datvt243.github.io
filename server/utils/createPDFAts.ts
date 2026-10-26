@@ -10,6 +10,8 @@
 import type { Resume, GeneralInformation, ProfessionalSkill, Certificate, Award } from '@/types/resume-document'
 import viLocale from '@/i18n/locales/vi.json'
 import enLocale from '@/i18n/locales/en.json'
+import { groupSkills } from '@/utils/groupSkills'
+import { removeVietnameseTones } from '@/utils/removeVietnameseTones'
 
 export type AtsLang = 'vi' | 'en'
 
@@ -158,12 +160,9 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
   const { professionalSkills = [], professionalSkillsGroup = [], foreignLanguages = [] } = generalInformation
   const skillLine = (label: string, list: ProfessionalSkill[]) =>
     list.length ? `<li>${escapeHtml(label)}: ${list.map((s) => escapeHtml(s.name)).join(', ')}</li>` : ''
-  const skills = professionalSkillsGroup.length
-    ? [
-      ...professionalSkillsGroup.map((group) => skillLine(group, professionalSkills.filter((s) => s.group === group))),
-      skillLine(h.other, professionalSkills.filter((s) => !s.group || !professionalSkillsGroup.includes(s.group))),
-    ].join('')
-    : skillLine(h.skills, professionalSkills)
+  const skills = groupSkills(professionalSkillsGroup, professionalSkills)
+    .map(({ label, skills }) => skillLine(label === 'Other' ? h.other : label, skills))
+    .join('')
 
   // Reverse-chronological order is what ATS parsers expect for experience.
   const experienceHtml = [...experiences]
@@ -237,8 +236,8 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
   .headline { font-size: 12pt; margin-top: 2pt; }
   .contact { font-size: 10pt; margin-top: 4pt; }
   .section { margin-top: 12pt; }
-  .heading { font-size: 12pt; font-weight: bold; text-transform: uppercase; border-bottom: 1pt solid #000; padding-bottom: 2pt; }
-  .entry { margin-bottom: 8pt; break-inside: avoid; }
+  .heading { font-size: 12pt; font-weight: bold; text-transform: uppercase; border-bottom: 1pt solid #000; padding-bottom: 2pt; break-after: avoid; }
+  .entry { margin-bottom: 8pt; }
   .entry-title { font-weight: bold; break-after: avoid; }
   .entry-meta { font-style: italic; font-size: 10pt; break-after: avoid; }
   .entry-body p, .entry-body li { margin-bottom: 3pt; }
@@ -262,5 +261,11 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
 </body>
 </html>`
 
-  return { email: email || 'resume', html }
+  // Named after the person, not the email: a recruiter saves many CVs and finds them by name.
+  const fileName = removeVietnameseTones(`${fullName} CV`.trim()).replace(/[^a-zA-Z0-9]+/g, '-')
+  /**
+   * Vercel's bundled Chromium has no font with an arrow glyph, so "→" printed
+   * as a blank box; plain ASCII reads the same to a person and to an ATS.
+   */
+  return { fileName, html: html.replace(/→/g, '->') }
 }
