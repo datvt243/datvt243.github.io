@@ -11,7 +11,6 @@
  */
 
 export function useDownloadResume() {
-  const store = useResumeStore()
   const { t, locale } = useI18n()
   const toast = useToast()
   const isLoading = ref(false)
@@ -43,7 +42,8 @@ export function useDownloadResume() {
       const link = document.createElement('a')
 
       link.href = URL.createObjectURL(blob)
-      link.download = `${store.hero.email || 'download'}.pdf`
+      // The server names the file (person's name, ASCII); reuse it instead of a second naming rule.
+      link.download = response.headers.get('content-disposition')?.match(/filename="(.+)"/)?.[1] || 'resume.pdf'
       link.click()
 
       toast.update(notification.id, {
