@@ -130,6 +130,21 @@ export default defineNuxtConfig({
    * path, and the English pages live under the `/en` prefix.
    */
   routeRules: {
+    /**
+     * Baseline headers only. No script-src CSP yet: Nuxt's inline config,
+     * importmap and color-mode scripts would each need a hash (ISR rules out
+     * per-request nonces), regenerated on every build, and 'unsafe-inline'
+     * would void it. frame-ancestors only limits who may frame this site,
+     * so the Giscus iframe it embeds is unaffected.
+     */
+    '/**': {
+      headers: {
+        'Content-Security-Policy': "frame-ancestors 'none'",
+        'X-Frame-Options': 'DENY',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+      },
+    },
     '/': { isr: 60 },
     '/en': { isr: 60 },
     '/projects': { isr: 60 },

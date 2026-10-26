@@ -71,3 +71,5 @@
 2026-10-26T13:40:49Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80054
 2026-10-26T13:44:01Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80271
 2026-10-26T18:05:52Z role=verifier outcome=SEAL node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80038
+2026-10-26T18:03:05Z role=verifier outcome=REOPEN node=security-headers-baseline rerun=full hub_bytes_before=77920 hub_bytes_after=78120
+2026-10-26T18:06:09Z role=verifier outcome=SEAL node=security-headers-baseline rerun=partial hub_bytes_before=77920 hub_bytes_after=77899
