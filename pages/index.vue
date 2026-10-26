@@ -14,7 +14,7 @@ definePageMeta({
   layout: 'default',
 })
 
-const { data, error } = await useResumeData()
+const { data } = await useResumeData()
 
 const seoTitle = computed(() => {
   const { firstName = '', lastName = '' } = data.value || {}
@@ -67,14 +67,9 @@ const isValid = computed(() => !!data.value && Object.keys(data.value).length)
 
 <template>
   <div class="page-index mx-auto">
-    <template v-if="!error">
-      <UContainer v-if="isValid && data">
-        <ThemeResumeObject />
-      </UContainer>
-    </template>
-    <template v-else>
-      {{ error }}
-    </template>
+    <UContainer v-if="isValid && data">
+      <ThemeResumeObject />
+    </UContainer>
   </div>
 </template>
 
