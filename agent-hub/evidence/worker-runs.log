@@ -55,3 +55,4 @@
 2026-10-25T05:29:44Z role=verifier outcome=SEAL node=deps-nuxt-4 rerun=partial hub_bytes_before=77921 hub_bytes_after=77992
 2026-10-25T06:12:29Z role=verifier outcome=SEAL node=deps-nuxt-ui-4-icon-2 rerun=partial hub_bytes_before=77992 hub_bytes_after=78002
 2026-10-26T12:10:27Z role=verifier outcome=SEAL node=resume-pii-whitelist rerun=partial hub_bytes_before=78002 hub_bytes_after=78000
+2026-10-26T12:16:34Z role=verifier outcome=SEAL node=skills-tab-all-groups rerun=none hub_bytes_before=78000 hub_bytes_after=77980

@@ -71,7 +71,6 @@ flowchart TD
 
 
 
-| `vim-key-nav-extension-note` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-extension-note-{plan,diff}.md`. |
 | `vim-key-nav-tab-badges` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-tab-badges-{plan,diff}.md`. |
 | `vim-key-nav-page-shortcuts` | SEALED | 2026-10-18 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/implementer/2026-10-18/vim-key-nav-page-shortcuts-{plan,diff}.md`. |
 
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `deps-nuxt-4` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-4-seal.md`. |
 | `deps-nuxt-ui-4-icon-2` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-ui-4-icon-2-seal.md`. |
 | `resume-pii-whitelist` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-pii-whitelist-seal.md`. |
+| `skills-tab-all-groups` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/skills-tab-all-groups-seal.md`. |
