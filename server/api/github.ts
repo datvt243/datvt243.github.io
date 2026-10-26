@@ -29,13 +29,14 @@ export default defineCachedEventHandler(
 
     const [user, repos] = await Promise.all([
       fetchGithub<GitUser>(`https://api.github.com/users/${GITHUB_USER}`, GITHUB_TOKEN),
-      fetchGithub<GitRepos[]>(`https://api.github.com/users/${GITHUB_USER}/repos`, GITHUB_TOKEN),
+      fetchGithub<GitRepos[]>(`https://api.github.com/users/${GITHUB_USER}/repos?sort=pushed&per_page=100`, GITHUB_TOKEN),
     ])
 
     return {
       data: {
         user,
-        repos,
+        // Recent own work first; forks are someone else's code and only crowd it out.
+        repos: repos.filter((repo) => !repo.fork),
       },
     }
   },
