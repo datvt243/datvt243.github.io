@@ -36,10 +36,14 @@ const getFieldValue = (field: LinkField): string | null => {
  * browser client (e.g. UTC+7) can compute a different date for the same
  * instant when it falls near a UTC day boundary, causing a Vue hydration
  * mismatch. Pinning timeZone: 'UTC' makes server and client always agree,
- * since modelValue.updated_at is already a UTC ISO timestamp.
+ * since modelValue.pushed_at is already a UTC ISO timestamp.
+ *
+ * pushed_at, not updated_at: the list is sorted by last push, and updated_at
+ * also moves on non-code edits (description, stars), so the shown dates
+ * would be out of order.
  */
 const updatedOnLabel = computed(() =>
-  new Date(props.modelValue.updated_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
+  new Date(props.modelValue.pushed_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
 )
 </script>
 
