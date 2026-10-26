@@ -20,7 +20,7 @@
         <div v-if="$slots.filetab" class="flex items-center gap-2 border-b border-theme-border bg-theme-panel/30 px-4 py-2 text-xs text-theme-muted">
           <slot name="filetab" />
         </div>
-        <div class="p-6 min-h-[300px] overflow-x-auto">
+        <div class="p-4 md:p-6 min-h-[300px] overflow-x-auto">
           <slot />
         </div>
       </div>
