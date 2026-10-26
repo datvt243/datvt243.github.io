@@ -19,7 +19,7 @@
   --theme-text: 15 23 42; /* slate-900 */
   --theme-text-strong: 30 41 59; /* slate-800 */
   --theme-text-soft: 51 65 85; /* slate-700 */
-  --theme-muted: 100 116 139; /* slate-500 */
+  --theme-muted: 71 85 105; /* slate-600 - one step above faint (slate-500), which had to move up to slate-500 for contrast */
   --theme-faint: 100 116 139; /* slate-500 - slate-400 was 2.6:1 on white */
 
   /* accent (darker orange shades for contrast on a light background) */
