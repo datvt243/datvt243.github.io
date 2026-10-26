@@ -21,6 +21,7 @@ function submitMessage() {
 
 <template>
   <UContainer>
+    <h1 class="sr-only">{{ t('contact.seoTitle') }}</h1>
     <ThemePanel>
       <template #sidebar>
         <p class="text-xs uppercase tracking-widest text-theme-faint mb-3 font-theme-mono">contacts</p>

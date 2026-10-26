@@ -38,7 +38,7 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
           <span class="text-bold" translate="no">_datvt243</span>
         </NuxtLink>
 
-        <nav class="hidden lg:flex items-stretch grow">
+        <nav class="hidden lg:flex items-stretch grow" :aria-label="t('header.mainNav')">
           <NuxtLink
             v-for="route_ in mainTabs"
             :key="route_.link"

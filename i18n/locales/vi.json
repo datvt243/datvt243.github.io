@@ -1,5 +1,6 @@
 {
   "header": {
+    "mainNav": "Điều hướng chính",
     "switchToLight": "Chuyển sang chế độ sáng",
     "switchToDark": "Chuyển sang chế độ tối",
     "openMenu": "Mở menu",
@@ -86,7 +87,9 @@
     "followers": "người theo dõi",
     "following": "đang theo dõi",
     "noData": "Không có dữ liệu",
-    "updatedOn": "Cập nhật vào"
+    "updatedOn": "Cập nhật vào",
+    "repoWebsite": "Website {name}",
+    "repoSource": "{name} trên GitHub"
   },
   "a11y": {
     "skipToContent": "Bỏ qua tới nội dung chính"

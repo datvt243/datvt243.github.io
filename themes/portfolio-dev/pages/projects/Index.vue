@@ -47,6 +47,7 @@ const filtered = computed(() => {
 
 <template>
   <UContainer>
+    <h1 class="sr-only">{{ t('projects.seoTitle') }}</h1>
     <ThemePanel>
       <template #sidebar>
         <ThemeFilterFolder v-model="selected" label="projects" :items="allTech" />

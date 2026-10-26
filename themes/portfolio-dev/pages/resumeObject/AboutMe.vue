@@ -74,11 +74,13 @@ function toMarkdownLine(sentenceHtml: string): string {
 /**
  * `[text](url)` Markdown link syntax, still a real <a> (works fine via v-html,
  * no Vue binding needed for plain navigation) so it stays clickable.
+ * Underlined, not just colored: inside a sentence the color alone sits too
+ * close to the body text to mark it as a link.
  */
 function markdownLink(text: string, url: string) {
   return (
     `<span class="text-theme-faint">[</span>` +
-    `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-theme-code-keyword hover:underline">${escapeHtml(text)}</a>` +
+    `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-theme-code-keyword underline underline-offset-2">${escapeHtml(text)}</a>` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
   )
 }
@@ -100,7 +102,7 @@ function downloadCvLine() {
   const text =
     isLoading.value
       ? `<span class="text-theme-muted">${DOWNLOAD_ICON}${escapeHtml(label)}</span>`
-      : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword hover:underline">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
+      : `<a href="${escapeHtml(url)}" data-download-cv class="text-theme-code-keyword underline underline-offset-2">${DOWNLOAD_ICON}${escapeHtml(label)}</a>`
   return (
     `<span class="text-theme-faint">[</span>${text}` +
     `<span class="text-theme-faint">](</span><span class="text-theme-accent-soft">${escapeHtml(url)}</span><span class="text-theme-faint">)</span>`
