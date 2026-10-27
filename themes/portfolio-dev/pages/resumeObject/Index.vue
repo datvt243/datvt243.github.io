@@ -12,7 +12,6 @@ const sections = [
   { key: 'education', label: 'educations.json', icon: 'heroicons:queue-list' },
   { key: 'languages', label: 'languages.json', icon: 'heroicons:queue-list' },
 ]
-const { resumeContentLang } = useAppConfig()
 const route = useRoute()
 const router = useRouter()
 const active = ref(sections[0]!.key)
@@ -84,7 +83,7 @@ onMounted(() => {
         <ThemeResumeObjectAboutMe v-show="active === 'about-me'" />
         <ThemeResumeObjectSkills v-show="active === 'skills'" />
         <ThemeResumeObjectExperiences v-show="active === 'experience'" />
-        <ThemeResumeObjectEducations v-show="active === 'education'" :lang="resumeContentLang" />
+        <ThemeResumeObjectEducations v-show="active === 'education'" />
         <ThemeResumeObjectLanguages v-show="active === 'languages'" />
       </ThemePanel>
     </div>

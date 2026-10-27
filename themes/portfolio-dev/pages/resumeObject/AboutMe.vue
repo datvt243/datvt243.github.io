@@ -5,7 +5,6 @@
  */
 
 const { t, locale } = useI18n()
-const { resumeContentLang } = useAppConfig()
 const store = useResumeStore()
 const hero = computed(() => store.hero)
 const social = computed(() => store.social)
@@ -123,7 +122,7 @@ const bioLines = computed(() => {
    * for the whole string by one never-closing tag.
    */
   const withoutParagraphs = hero.value.introduction.replace(/<\/?p[^>]*>/gi, '')
-  const sentences = splitHtmlIntoSentences(withoutParagraphs).map((sentence) => `<span lang="${resumeContentLang}">${toMarkdownLine(sentence)}</span>`)
+  const sentences = splitHtmlIntoSentences(withoutParagraphs).map((sentence) => toMarkdownLine(sentence))
   const socialLines = social.value.links.map(({ name, url }) => markdownLink(name, url))
   return [
     `<span class="text-theme-faint"># </span><span class="font-bold text-theme-text">${escapeHtml(t('resume.aboutMeHeading'))}</span>`,
