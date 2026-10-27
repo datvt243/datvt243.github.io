@@ -12,9 +12,9 @@ export const useResumeStore = defineStore('resume', {
     resume: {} as Resume,
   }),
   actions: {
-    async fetchData(): Promise<Resume> {
+    async fetchData(lang: string): Promise<Resume> {
       // No implicit retry: each retry of a failed /api/resume is another call to the rate-limited upstream.
-      const { resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume', { retry: 0 })
+      const { resume } = await $fetch<{ success: boolean; resume: Resume }>('/api/resume', { query: { lang }, retry: 0 })
       const _data = resume ? resume : ({} as Resume)
       this.resume = _data
       return _data

@@ -11,7 +11,6 @@
  * @see https://github.com/datvt243
  */
 
-const { resumeContentLang } = useAppConfig()
 const { t, te } = useI18n()
 const store = useResumeStore()
 const experiences = computed(() => store.experiences)
@@ -55,7 +54,7 @@ function pugTag(name: string, cls?: string) {
 
         <template v-if="el.descriptionItems.length">
           <div class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('ul', 'description')" /></div>
-          <ul :lang="resumeContentLang">
+          <ul>
             <li v-for="(point, i) in el.descriptionItems" :key="i" class="code-line depth-2">
               <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('li')" /><span class="tag-text">{{ point }}</span></span>
             </li>
