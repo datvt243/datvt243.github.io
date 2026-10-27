@@ -81,3 +81,5 @@
 2026-10-26T23:07:17Z role=verifier outcome=SEAL node=light-hover-footer-targets rerun=full hub_bytes_before=80042 hub_bytes_after=80060
 2026-10-27T11:26:24Z role=verifier outcome=SEAL node=vue-pin-no-override rerun=full hub_bytes_before=80060 hub_bytes_after=80074
 2026-10-27T11:31:28Z role=verifier outcome=SEAL node=github-no-retry-5xx rerun=full hub_bytes_before=80060 hub_bytes_after=80074
+2026-10-27T11:32:59Z role=verifier outcome=REOPEN node=blog-off-nav rerun=full hub_bytes_before=80060 hub_bytes_after=80318
+2026-10-27T11:35:58Z role=verifier outcome=SEAL node=blog-off-nav rerun=partial hub_bytes_before=80060 hub_bytes_after=80060
