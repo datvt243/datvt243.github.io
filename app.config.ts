@@ -17,11 +17,11 @@ export default defineAppConfig({
       link: '/github',
       key: 'h',
     },
-    {
-      page: '_blogs',
-      link: '/blogs',
-      key: 'b',
-    },
+    /**
+     * No `_blogs` tab: the blog API sleeps when idle (~1 min to wake) and
+     * holds 4 posts from 2024, so it stays reachable at /blogs but out of
+     * the nav and the `gb` shortcut until it has fresh content.
+     */
     {
       page: '_contact',
       link: '/contact',
