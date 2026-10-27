@@ -51,7 +51,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/font-face.scss', '~/assets/css/main.css', '~/assets/css/styles.scss'],
+  css: [`~/themes/${ACTIVE_THEME}/tokens.css`, '~/assets/css/main.css', '~/assets/css/styles.scss'],
   /**
    * @nuxt/ui auto-installs @nuxtjs/color-mode (forcing classSuffix: ''); these
    * options merge with that. Defaults to dark (existing look) until the user
@@ -62,9 +62,15 @@ export default defineNuxtConfig({
     preference: 'dark',
     fallback: 'dark',
   },
-  // Fira Code already loads from font-face.scss's Google Fonts @import;
-  // @nuxt/fonts' generated @font-face would land before it and void it.
-  ui: { fonts: false },
+  /**
+   * Fira Code is self-hosted by @nuxt/fonts (installed by @nuxt/ui, weights
+   * 400-700) instead of a Google Fonts CSS @import, which blocked the first
+   * paint on a second origin. `global` because the family is only named
+   * inside the --theme-font-mono variable, where the CSS scan can't see it.
+   */
+  fonts: {
+    families: [{ name: 'Fira Code', provider: 'google', global: true }],
+  },
   components: [
     { path: `~/themes/${ACTIVE_THEME}/pages`, prefix: 'Theme' },
     { path: `~/themes/${ACTIVE_THEME}/layout`, prefix: 'Theme' },

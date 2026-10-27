@@ -83,3 +83,4 @@
 2026-10-27T11:31:28Z role=verifier outcome=SEAL node=github-no-retry-5xx rerun=full hub_bytes_before=80060 hub_bytes_after=80074
 2026-10-27T11:32:59Z role=verifier outcome=REOPEN node=blog-off-nav rerun=full hub_bytes_before=80060 hub_bytes_after=80318
 2026-10-27T11:35:58Z role=verifier outcome=SEAL node=blog-off-nav rerun=partial hub_bytes_before=80060 hub_bytes_after=80060
+2026-10-27T12:12:06Z role=verifier outcome=SEAL node=font-self-host-cls rerun=full hub_bytes_before=80076 hub_bytes_after=80090
