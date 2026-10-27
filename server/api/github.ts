@@ -5,21 +5,6 @@
 
 import type { GitRepos, GitUser } from '@/types/github'
 
-/**
- * GitHub returns 401/403 for an invalid or expired token; fall back to an
- * unauthenticated request rather than failing the whole page in that case.
- */
-async function fetchGithub<T>(url: string, token?: string): Promise<T> {
-  if (!token) return (await $fetch(url)) as T
-  try {
-    return (await $fetch(url, { headers: { Authorization: `token ${token}` } })) as T
-  } catch (error: unknown) {
-    const statusCode = (error as { statusCode?: number })?.statusCode
-    if (statusCode === 401 || statusCode === 403) return (await $fetch(url)) as T
-    throw error
-  }
-}
-
 export default defineCachedEventHandler(
   async () => {
     const {

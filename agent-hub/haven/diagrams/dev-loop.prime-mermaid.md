@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `deps-i18n-10` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-i18n-10-seal.md`. |
 | `deps-nuxt-ui-3-tw4` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-ui-3-tw4-seal.md`. |
 | `deps-nuxt-4` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-4-seal.md`. |
 | `deps-nuxt-ui-4-icon-2` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-ui-4-icon-2-seal.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `a11y-axe-serious` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/a11y-axe-serious-seal.md`. |
 | `light-hover-footer-targets` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/light-hover-footer-targets-seal.md`. |
 | `vue-pin-no-override` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/vue-pin-no-override-seal.md`. |
+| `github-no-retry-5xx` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/github-no-retry-5xx-seal.md`. |
