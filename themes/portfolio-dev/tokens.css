@@ -17,7 +17,26 @@
 @import './settings-colors-theme/light.css';
 @import './settings-colors-theme/editor-dracula.css';
 
+/**
+ * Courier New resized to Fira Code's metrics (values from fontaine, the
+ * library @nuxt/fonts uses), so text doesn't jump when the web font swaps in.
+ * Hand-written because @nuxt/fonts only derives fallbacks from the font's
+ * category name ("monospace"), which isn't a local font. The unicode-range
+ * skips the Vietnamese block Fira Code has no glyphs for (Ấ, Ạ...), so those
+ * keep falling through to the system font instead of Courier New.
+ */
+@font-face {
+  font-family: 'Fira Code Fallback';
+  src: local('Courier New');
+  size-adjust: 99.9837%;
+  ascent-override: 99.0161%;
+  descent-override: 32.2052%;
+  line-gap-override: 0%;
+  unicode-range: U+0-1E9F, U+1EFA-10FFFF;
+}
+
 :root {
-  --theme-font-mono: 'Fira Code', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+  --theme-font-mono:
+    'Fira Code', 'Fira Code Fallback', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
