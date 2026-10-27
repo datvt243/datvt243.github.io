@@ -72,7 +72,7 @@ Nhấn `?` (hoặc nút `?` trên header) để xem toàn bộ phím tắt của
 
 | Phím | Tác dụng |
 |---|---|
-| `gr` `gp` `gh` `gb` `gc` | Sang Resume / Projects / GitHub / Blogs / Contact |
+| `gr` `gp` `gh` `gc` | Sang Resume / Projects / GitHub / Contact |
 | `j` / `k` | Cuộn xuống / lên |
 | `gg` / `G` | Lên đầu / xuống cuối trang |
 | `c` / `d` | Trang CV: liên hệ / tải CV |

@@ -57,7 +57,7 @@ const getURL = computed(() => {
         {{ getExcerpt }}
       </div>
       <p>
-        <NuxtLink :to="getURL" class="text-theme-accent hover:text-theme-accent-soft text-sm">
+        <NuxtLink :to="getURL" class="text-theme-accent hover:text-theme-accent-soft hover:underline text-sm">
           {{ t('blogs.readMore') }}
         </NuxtLink>
       </p>

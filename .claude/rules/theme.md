@@ -66,7 +66,7 @@ JSON/file-tree/code-block metaphor is itself an editor-theme choice.
 ## Keyboard navigation (Vim-style, `ThemeKeyNav`)
 - Mounted once by `ThemeHeader`, which owns its `v-model` (header `?`
   button opens the same help overlay).
-- Global keys: `g`+`menuPrimary[].key` (`app.config.ts`: r/p/h/b/c)
+- Global keys: `g`+`menuPrimary[].key` (`app.config.ts`: r/p/h/c; `/blogs` is off the nav)
   navigates via `localePath`; `j`/`k` scroll; `gg`/`G` top/bottom; `?`
   toggles the overlay. Ignored while typing in a form field or with
   Ctrl/Meta/Alt held; `Esc` in a form field blurs it.

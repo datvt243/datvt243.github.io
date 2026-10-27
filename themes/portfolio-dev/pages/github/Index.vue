@@ -6,7 +6,14 @@
 
 import type { GitRepos, GitUser } from '~/types/github'
 
-const { data } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>('/api/github')
+const { data, error } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>('/api/github')
+/**
+ * Without data the page can't render. Always a 5xx (even for an upstream
+ * 404), so ISR keeps serving the last good page instead of caching an error.
+ */
+if (error.value) {
+  throw createError({ statusCode: 502, statusMessage: 'Unable to load GitHub data', fatal: true })
+}
 
 const user = computed(() => data.value?.data.user as GitUser)
 const repos = computed(() => data.value?.data.repos as GitRepos[])
