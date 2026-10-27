@@ -88,3 +88,4 @@
 2026-10-27T12:53:05Z role=verifier outcome=SEAL node=experience-skills-text rerun=partial hub_bytes_before=80096 hub_bytes_after=80100
 2026-10-27T12:55:26Z role=verifier outcome=SEAL node=experience-skills-after-desc rerun=partial hub_bytes_before=80100 hub_bytes_after=80114
 2026-10-27T13:08:00Z role=verifier outcome=SEAL node=resume-content-locale rerun=partial hub_bytes_before=80246 hub_bytes_after=80118
+2026-10-27T13:21:58Z role=verifier outcome=SEAL node=vi-glyph-fallback rerun=none hub_bytes_before=80254 hub_bytes_after=80114

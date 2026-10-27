@@ -22,8 +22,9 @@
  * library @nuxt/fonts uses), so text doesn't jump when the web font swaps in.
  * Hand-written because @nuxt/fonts only derives fallbacks from the font's
  * category name ("monospace"), which isn't a local font. The unicode-range
- * skips the Vietnamese block Fira Code has no glyphs for (Ấ, Ạ...), so those
- * keep falling through to the system font instead of Courier New.
+ * stays Latin-1 + punctuation: given ư/ơ and the combining marks, Chrome drew
+ * them and every tone letter Fira Code lacks (ừ, ổ, ạ...) in Courier New as
+ * base + detached mark. Outside it they fall through to the system font whole.
  */
 @font-face {
   font-family: 'Fira Code Fallback';
@@ -32,7 +33,7 @@
   ascent-override: 99.0161%;
   descent-override: 32.2052%;
   line-gap-override: 0%;
-  unicode-range: U+0-1E9F, U+1EFA-10FFFF;
+  unicode-range: U+0-FF, U+2000-206F;
 }
 
 :root {
