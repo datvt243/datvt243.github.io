@@ -84,3 +84,6 @@
 2026-10-27T11:32:59Z role=verifier outcome=REOPEN node=blog-off-nav rerun=full hub_bytes_before=80060 hub_bytes_after=80318
 2026-10-27T11:35:58Z role=verifier outcome=SEAL node=blog-off-nav rerun=partial hub_bytes_before=80060 hub_bytes_after=80060
 2026-10-27T12:12:06Z role=verifier outcome=SEAL node=font-self-host-cls rerun=full hub_bytes_before=80076 hub_bytes_after=80090
+2026-10-27T12:48:23Z role=verifier outcome=SEAL node=experience-skills-inline rerun=partial hub_bytes_before=80090 hub_bytes_after=80096
+2026-10-27T12:53:05Z role=verifier outcome=SEAL node=experience-skills-text rerun=partial hub_bytes_before=80096 hub_bytes_after=80100
+2026-10-27T12:55:26Z role=verifier outcome=SEAL node=experience-skills-after-desc rerun=partial hub_bytes_before=80100 hub_bytes_after=80114

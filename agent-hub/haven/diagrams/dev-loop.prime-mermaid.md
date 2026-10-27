@@ -74,9 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `deps-nuxt-ui-4-icon-2` | SEALED | 2026-10-25 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-25/deps-nuxt-ui-4-icon-2-seal.md`. |
-| `resume-pii-whitelist` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-pii-whitelist-seal.md`. |
-| `skills-tab-all-groups` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/skills-tab-all-groups-seal.md`. |
 | `resume-isr-fallback` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-isr-fallback-seal.md`. |
 | `visit-tracker-proxy` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/visit-tracker-proxy-seal.md`. |
 | `error-states-retry` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/error-states-retry-seal.md`. |
@@ -94,3 +91,6 @@ PM status directly to "undo" an existing SEAL.
 | `github-no-retry-5xx` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/github-no-retry-5xx-seal.md`. |
 | `blog-off-nav` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/blog-off-nav-seal.md`. |
 | `font-self-host-cls` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/font-self-host-cls-seal.md`. |
+| `experience-skills-inline` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/experience-skills-inline-seal.md`. |
+| `experience-skills-text` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/experience-skills-text-seal.md`. |
+| `experience-skills-after-desc` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/experience-skills-after-desc-seal.md`. |

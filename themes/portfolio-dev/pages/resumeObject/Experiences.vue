@@ -53,15 +53,6 @@ function pugTag(name: string, cls?: string) {
           <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('time', 'period')" /><span class="tag-text">{{ el.dateRangeLabel }}</span></span>
         </time>
 
-        <template v-if="el.skills?.length">
-          <div class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('ul', 'skills')" /></div>
-          <ul>
-            <li v-for="skill in el.skills" :key="skill" class="code-line depth-2">
-              <span class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('li')" /><span class="tag-text">{{ skill }}</span></span>
-            </li>
-          </ul>
-        </template>
-
         <template v-if="el.descriptionItems.length">
           <div class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('ul', 'description')" /></div>
           <ul :lang="resumeContentLang">
@@ -70,6 +61,13 @@ function pugTag(name: string, cls?: string) {
             </li>
           </ul>
         </template>
+
+        <!-- Skills are one-word items: one comma-separated line, not one line per li. -->
+        <p v-if="el.skills?.length" class="code-line depth-1">
+          <span class="line-content tagged"
+          ><span aria-hidden="true" class="tag-label" v-html="pugTag('p', 'skills')" /><span class="tag-text">{{ el.skills.join(', ') }}</span></span
+          >
+        </p>
       </article>
     </template>
   </div>
