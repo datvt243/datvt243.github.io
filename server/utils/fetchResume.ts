@@ -35,11 +35,12 @@ const pick = <T extends object>(obj: T, keys: string[]): T =>
   Object.fromEntries(Object.entries(obj).filter(([key]) => keys.includes(key))) as T
 
 /**
- * Fetches the owner's resume from the backend. Any failure (non-2xx, which
+ * Fetches the owner's resume from the backend, its localized text in `lang`
+ * (the backend falls back to `vi` without it). Any failure (non-2xx, which
  * `$fetch` throws on, or a 2xx with `success: false`) becomes a controlled
  * 502 - thrown, not returned, so `defineCachedEventHandler` never caches it.
  */
-export async function fetchResume(): Promise<ResumeAPIResponse['data']> {
+export async function fetchResume(lang: AtsLang = 'vi'): Promise<ResumeAPIResponse['data']> {
   const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
 
   let res: ResumeAPIResponse | undefined
@@ -49,7 +50,7 @@ export async function fetchResume(): Promise<ResumeAPIResponse['data']> {
      * ends as the platform's raw 504) and never retry: retrying a 429 or a
      * cold start only repeats the same wait and burns the rate limit.
      */
-    res = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`, { timeout: 8000, retry: 0 })
+    res = await $fetch<ResumeAPIResponse>(`${NODE_API}/api/me/${MY_EMAIL}`, { query: { lang }, timeout: 8000, retry: 0 })
   } catch (cause) {
     throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data', cause })
   }

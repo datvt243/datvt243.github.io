@@ -29,10 +29,9 @@ export default defineAppConfig({
     },
   ],
   /**
-   * Language the resume API's content is written in. The data has a single
-   * language whatever the UI locale, so on `/en` it would otherwise be
-   * declared English and read with the wrong voice by screen readers.
-   * Change it if the data is ever rewritten in another language.
+   * Language of the resume fields the API does not localize - the owner's
+   * name in Hero. Localized text (introduction, descriptions) is fetched in
+   * the active locale (`?lang=`), so it inherits the page's `lang` instead.
    */
   resumeContentLang: 'vi',
   contact: {

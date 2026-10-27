@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
     return cached.buffer
   }
 
-  const data = await fetchResume()
+  const data = await fetchResume(lang)
 
   if (data) {
     /**

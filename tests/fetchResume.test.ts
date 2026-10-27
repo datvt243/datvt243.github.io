@@ -30,6 +30,13 @@ describe('fetchResume', () => {
     expect(data).toEqual({ firstName: 'Dat', email: 'me@test', generalInformation: [{ positionDesired: 'Frontend' }] })
   })
 
+  it('asks the upstream for the requested language, vi by default', async () => {
+    fetchMock.mockResolvedValue({ success: true, data: {} })
+    await fetchResume('en')
+    await fetchResume()
+    expect(fetchMock.mock.calls.map((call) => call[1].query)).toEqual([{ lang: 'en' }, { lang: 'vi' }])
+  })
+
   it('never retries the rate-limited upstream and fails as a 502', async () => {
     fetchMock.mockRejectedValue(new Error('429'))
     await expect(fetchResume()).rejects.toMatchObject({ statusCode: 502 })
