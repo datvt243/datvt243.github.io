@@ -4,6 +4,7 @@
  */
 
 import { postResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
+import { sanitizePostHtml } from '~/server/utils/sanitizePostHtml'
 
 export default defineCachedEventHandler(
   async (event) => {
@@ -31,7 +32,7 @@ export default defineCachedEventHandler(
 
     return {
       status,
-      data,
+      data: data && { ...data, content: sanitizePostHtml(data.content) },
       errors,
       message,
     }
