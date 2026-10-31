@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `blog-isr-fallback` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/blog-isr-fallback-seal.md`. |
 | `resume-experience-first` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/resume-experience-first-seal.md`. |
 | `pdf-ats-polish` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/pdf-ats-polish-seal.md`. |
 | `content-lang-en-routes` | SEALED | 2026-10-26 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-26/content-lang-en-routes-seal.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `resume-content-locale` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/resume-content-locale-seal.md`. |
 | `vi-glyph-fallback` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/vi-glyph-fallback-seal.md`. |
 | `pages-nojekyll` | SEALED | 2026-10-31 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-31/pages-nojekyll-seal.md`. |
+| `skills-typo-map-drop` | SEALED | 2026-10-31 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-31/skills-typo-map-drop-seal.md`. |
