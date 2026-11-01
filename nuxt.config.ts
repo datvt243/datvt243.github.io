@@ -31,6 +31,7 @@ export default defineNuxtConfig({
         lang: 'vi',
       },
       charset: 'utf-8',
+      titleTemplate: '%s — Võ Tấn Đạt',
       viewport: 'width=device-width, initial-scale=1',
     },
     layoutTransition: { name: 'transition-opacity', mode: 'out-in' },

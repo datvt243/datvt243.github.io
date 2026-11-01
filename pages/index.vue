@@ -21,19 +21,18 @@ const seoTitle = computed(() => {
   return firstName || lastName ? `Resume ${firstName} ${lastName}`.trim() : 'Võ Tấn CV'
 })
 const seoDescription = computed(() => removeHtmlTags(data.value?.introduction || ''))
-/**
- * No dedicated social-share banner exists yet - reusing the real profile
- * photo (already used as the hero avatar) so shares at least render a real
- * image instead of none, per the `no-og-image` finding (issue #179).
- */
-const ogImageUrl = computed(() => `${publicConfig.SITE_URL}/Avatar.png`)
+const ogImageUrl = `${publicConfig.SITE_URL}/og-image.png`
 
 useSeoMeta({
   title: seoTitle,
+  // The home title already carries the name; the global template would repeat it.
+  titleTemplate: '%s',
   ogTitle: seoTitle,
   description: seoDescription,
   ogDescription: seoDescription,
   ogImage: ogImageUrl,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   twitterCard: 'summary_large_image',
   twitterImage: ogImageUrl,
 })
