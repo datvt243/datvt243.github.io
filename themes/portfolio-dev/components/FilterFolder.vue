@@ -7,6 +7,7 @@ const props = defineProps<{
   label: string
   items: string[]
   modelValue: string[]
+  collapseBelowLg?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -23,7 +24,7 @@ function toggle(item: string) {
 
 <template>
   <div>
-    <ThemeFolder :label="label">
+    <ThemeFolder :label="label" :collapse-below-lg="collapseBelowLg">
       <li v-for="item in items" :key="item">
         <ThemeNavItem :active="modelValue.includes(item)" @click="toggle(item)">
           <span class="flex items-center gap-2">

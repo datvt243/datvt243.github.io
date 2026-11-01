@@ -49,7 +49,7 @@ const filtered = computed(() => {
     <h1 class="sr-only">{{ t('projects.seoTitle') }}</h1>
     <ThemePanel>
       <template #sidebar>
-        <ThemeFilterFolder v-model="selected" label="projects" :items="allTech" />
+        <ThemeFilterFolder v-model="selected" label="projects" :items="allTech" collapse-below-lg />
       </template>
 
       <p v-if="!filtered.length" class="text-theme-faint font-theme-mono">{{ t('projects.noMatch') }}</p>
@@ -74,12 +74,12 @@ const filtered = computed(() => {
 
           <div class="flex flex-col grow p-5 min-w-0">
             <p class="font-theme-mono text-sm text-theme-accent mb-2">
-              {{ t('projects.projectLabel') }} {{ i + 1 }} <span class="text-theme-faint">//</span> _{{ p.slug }}
+              {{ t('projects.projectLabel') }} {{ i + 1 }}
             </p>
             <h2 class="text-lg font-bold text-theme-text mb-1">{{ p.name }}</h2>
             <p v-if="p.position" class="text-sm text-theme-muted mb-2">{{ t('projects.role') }}: {{ p.position }}</p>
             <p class="text-xs text-theme-faint font-theme-mono mb-3">{{ p.dateRangeLabel }}</p>
-            <p class="text-sm text-theme-text-soft mb-4 line-clamp-3 max-w-2xl">{{ p.descriptionText }}</p>
+            <p class="text-sm text-theme-text-soft mb-4 max-w-2xl">{{ p.descriptionText }}</p>
             <ul v-if="p.technology.length" class="flex flex-wrap gap-2 mb-4">
               <li v-for="tech in p.technology" :key="tech">
                 <UBadge :label="tech" variant="outline" :ui="accentBadgeUi" />
