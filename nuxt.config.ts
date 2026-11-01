@@ -166,6 +166,16 @@ export default defineNuxtConfig({
     '/en/blogs/**': { isr: true },
   },
 
+  nitro: {
+    /**
+     * sanitize-html is CJS and `require()`s htmlparser2@12, which is ESM-only.
+     * Vercel's runtime loader rejects require(esm) (ERR_REQUIRE_ESM crashes
+     * every SSR function at boot), so bundle it and let Rollup turn the
+     * require into an import.
+     */
+    externals: { inline: ['sanitize-html'] },
+  },
+
   $development: {
     nitro: {
       storage: {
