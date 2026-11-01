@@ -6,7 +6,8 @@ import { categoriesResponseSchema, parseBlogApiResponse } from '~/server/utils/b
 
 export default defineCachedEventHandler(
   async () => {
-    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`)
+    // No retry: a retried 429 is one more call against the upstream's limit.
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`, { retry: 0 })
 
     const { status, data } = parseBlogApiResponse({ schema: categoriesResponseSchema, raw, context: 'categories' })
 

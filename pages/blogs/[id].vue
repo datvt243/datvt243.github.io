@@ -17,7 +17,7 @@ definePageMeta({
   },
 })
 
-const { data, error } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id}`)
+const { data, error } = await useFetch<APIFormatResponse<Post>>(`/api/blogs/detail/${id}`, { retry: 0 })
 
 /**
  * Unknown ids (or slugs - links only ever use _id) leave data empty;
