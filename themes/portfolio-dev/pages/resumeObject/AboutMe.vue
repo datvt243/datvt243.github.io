@@ -45,10 +45,6 @@ function splitHtmlIntoSentences(html: string): string[] {
   return parts
 }
 
-function escapeHtml(str: string): string {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-}
-
 /**
  * Renders a sentence as literal Markdown source: <strong>/<b> becomes visible **bold** syntax instead of
  * actually-rendered bold HTML, with a dimmed "**" around bold text (Markdown syntax-highlighting look).
