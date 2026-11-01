@@ -101,3 +101,5 @@
 2026-11-01T06:52:27Z role=verifier outcome=SEAL node=remove-unused-deps-helpers rerun=none hub_bytes_before=80104 hub_bytes_after=80110
 2026-11-01T07:04:47Z role=verifier outcome=SEAL node=upstream-no-retry-429 rerun=partial hub_bytes_before=80110 hub_bytes_after=80098
 2026-11-01T08:56:09Z role=verifier outcome=SEAL node=sanitize-html-require-esm rerun=partial hub_bytes_before=80098 hub_bytes_after=80116
+2026-11-01T09:17:55Z role=verifier outcome=REOPEN node=resume-isr-allow-lang rerun=none hub_bytes_before=80340 hub_bytes_after=81173
+2026-11-01T09:20:41Z role=verifier outcome=SEAL node=resume-isr-allow-lang rerun=none hub_bytes_before=80340 hub_bytes_after=80785

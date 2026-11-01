@@ -155,7 +155,8 @@ export default defineNuxtConfig({
     '/en': { isr: 60 },
     '/projects': { isr: 60 },
     '/en/projects': { isr: 60 },
-    '/api/resume': { isr: 60 },
+    // Vercel ISR drops the query unless allowed: without this every locale gets the `vi` resume.
+    '/api/resume': { isr: { expiration: 60, allowQuery: ['lang'] } },
     '/github': { isr: 60 },
     '/en/github': { isr: 60 },
     '/contact': { prerender: true },
