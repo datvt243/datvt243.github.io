@@ -13,7 +13,7 @@ during this step — read and report only.
 1b. Read the root `CLAUDE.md` (the real project contract: stack,
    architecture, commands) — project hand-patch, kept on sync.
 2. Recall the 5 forbidden states and the seal gate from `agent-hub/CLAUDE.md`
-   — [GUARD, added 2026-08-30] don't explicitly `cat`/`Read` it yourself:
+   — [GUARD] don't explicitly `cat`/`Read` it yourself:
    the harness auto-injects this file's full content as a nested-CLAUDE.md
    `<system-reminder>` the moment step 1 touches anything under
    `agent-hub/`, so an explicit read here just duplicates the same content
@@ -29,7 +29,7 @@ during this step — read and report only.
    (see the diagram file's own token-discipline note + `hub-tokens.md`),
    reading them here every session defeats the point of archiving. List
    nodes + current PM status from the non-archive file(s) only.
-   [added 2026-09-02] EXCEPTION — if `haven/diagrams/index.md` exists
+   EXCEPTION — if `haven/diagrams/index.md` exists
    (opt-in epic sharding, see `kit/agent-hub-templates.md` §9️⃣.3), read
    ONLY `index.md` + the epic file(s) marked `active: true` in it, not
    every epic. Report node counts from those only; other epics exist but
@@ -44,7 +44,7 @@ during this step — read and report only.
    `<dir>` itself, under a per-date subfolder (`evidence/implementer/
    <date>/*.md`), not directly inside it; `-maxdepth 1` here always
    returns zero results.
-   — [GUARD, added 2026-08-30] NOT `ls -lat <dir>` directly: observed
+   — [GUARD] NOT `ls -lat <dir>` directly: observed
    returning the wrong directory's listing (e.g. the repo root instead of
    the target `evidence/` subfolder) in a real sandboxed session — a
    shell/alias quirk, not a project-specific issue. `find` is the

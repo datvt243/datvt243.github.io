@@ -3,7 +3,7 @@
 - Output: `{node, diagram, current_state, acceptance: string[],
   files: string[], blocked_by: string|null}`
 
-> [GUARD, added 2026-08-31] If `/boot` already ran in THIS SAME session,
+> [GUARD] If `/boot` already ran in THIS SAME session,
 > `NORTHSTAR.md` / root `CLAUDE.md` / `doctrine/MEMORY.md` /
 > `doctrine/domains/PROJECT.md` / `haven/diagrams/` are already in context
 > from that pass — steps 1-2 below REUSE that content, don't `Read` it
@@ -22,7 +22,7 @@
 3. Find the earliest PENDING node on the critical path.
 4. No match → don't make something up; clearly report "no PENDING node",
    stop.
-   [added 2026-10-24] Before adding a new node, `grep` its slug in
+   Before adding a new node, `grep` its slug in
    `dev-loop-archive.md` — sealed pointers get dropped from the active
    file (`verify_seal` step 12c), so a taken slug may only be there;
    taken → pick a new slug.
@@ -45,8 +45,7 @@
 6. Declare blockers if a needed env var (`.env.example` lists:
    `MY_EMAIL`, `NODE_API`, `GITHUB_TOKEN`, `GITHUB_USER`,
    `PUPPETEER_EXECUTABLE_PATH`) isn't already set.
-7. [added 2026-09-02] Measure `hub_bytes_before`: run `/hub-tokens`'s
-   script, take the "= per-session total" line's byte count. Write it into
+7. Measure `hub_bytes_before` — the "per-session total", with the exact command in `evidence/README.md` (Format — worker-runs.log). Write it into
    the evidence note at step 8 — the verifier reads this back to compute
    the hub-size delta in `worker-runs.log`, not a side task of `/todo`.
 8. Evidence: write `evidence/implementer/<date>/<slug>-plan.md`, including
@@ -58,7 +57,7 @@
 ## Failure branches
 | Failure | Handling |
 |---|---|
-| No diagram matches yet | Create a new node on `haven/diagrams/dev-loop.prime-mermaid.md`, keeping the LAI-13 ratchet format. [added 2026-09-05] Always APPEND the new row at the END of the PM status table, never insert it in the middle — required for `agent-hub/.gitattributes`' `merge=union` to merge cleanly when 2 branches each add a different new node around the same time. |
+| No diagram matches yet | Create a new node on `haven/diagrams/dev-loop.prime-mermaid.md`, keeping the LAI-13 ratchet format. Always APPEND the new row at the END of the PM status table, never insert it in the middle — required for `agent-hub/.gitattributes`' `merge=union` to merge cleanly when 2 branches each add a different new node around the same time. |
 | Task is ambiguous | Stop and ask, don't guess |
 | Task needs an unset env var (e.g. `PUPPETEER_EXECUTABLE_PATH` for PDF) | Report `blocked`, don't fake a value |
 

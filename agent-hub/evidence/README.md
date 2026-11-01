@@ -13,7 +13,7 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 ## Format — implementer note
 - Title (date - node) · Worker · Version · Node (points to the diagram) ·
   Task (verbatim prompt)
-- `## Hub bytes before` — [added 2026-09-02] byte count measured at
+- `## Hub bytes before` — byte count measured at
   `pick_next` step 7, before the diff starts — the verifier reads this
   back when writing `worker-runs.log`, don't skip it
 - `## Diff` — table of files | file | why |
@@ -37,7 +37,7 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 
 ## Format — verifier verdict
 - Worker · Node · New PM status (PENDING/SEALED/REOPEN)
-- `## Isolation proof` — [added 2026-09-02] cites whatever makes this a
+- `## Isolation proof` — cites whatever makes this a
   real separate subagent context from the implementer pass (e.g. the
   Agent tool spawn's `description`/task string). Not a technical
   guarantee (no hook enforces it) — a citeable trail: missing, or
@@ -45,14 +45,14 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
   for later audit. See "Steps" 1b/13a in `recipes/verify_seal.md`.
 - `## Reasoning` — cite evidence for each criterion
 - `## Missing` — only present on REOPEN
-- `## Re-run` — [added 2026-09-02] `none`/`partial`/`full`, declared
+- `## Re-run` — `none`/`partial`/`full`, declared
   honestly per what was actually done (see "Re-run scope" in
   `recipes/verify_seal.md`), with a reason if not `none`. The verifier
   reads this back when writing `worker-runs.log` (step 14) — not
   decorative.
 
 ## Format — worker-runs.log
-- [added 2026-09-02] NOT a narrative note like the ones above — an
+- NOT a narrative note like the ones above — an
   **append-only file, 1 line per implementer or verifier pass that ends**.
   Written by `pick_next.md`/`implement.md`/`verify_seal.md` themselves —
   NOT by `/todo` — so it runs the same whether a task went through `/todo`
@@ -64,8 +64,11 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
   - Verifier (every verdict — SEAL or REOPEN):
     `<ISO timestamp> role=verifier outcome=SEAL|REOPEN node=<slug>
     rerun=none|partial|full hub_bytes_before=<N> hub_bytes_after=<N>`
-  `hub_bytes_*` use this hub's own `/hub-tokens` "per-session total"
-  formula.
+  `hub_bytes_*` = `/hub-tokens`' "per-session total" (root files +
+  doctrine/ + the active diagram + 2 worker bundles; no archives, no
+  evidence/). Measure with exactly this, from the repo root — never `du`
+  or a whole-tree count:
+  `(cd agent-hub && { find . -maxdepth 1 -type f \( -name '*.md' -o -name '*.y*ml' \); find doctrine haven/diagrams -type f \( -name '*.md' -o -name '*.y*ml' \) ! -iname '*archive*'; find haven/workers -type f \( -name '*.md' -o -name '*.y*ml' \); } | xargs cat | wc -c)`
 - One line per round-trip (1 implementer pass → at most 1 verifier
   verdict), not one per node's whole lifetime — a node REOPENed 3 times
   has 3 verifier lines with the same `node=`, greppable by slug.
@@ -77,7 +80,7 @@ Date as `YYYY-mm-dd`, slug is kebab-case taken from the task name.
 - Cold storage — not re-read wholesale every worker session (unlike
   `doctrine/`, the active diagram), only opened when someone audits
   patterns on purpose. NEVER delete a line, even one recording a bad run.
-- **Archiving convention** — [added 2026-09-02] same 15KB threshold/
+- **Archiving convention** — same 15KB threshold/
   mechanism `/hub-tokens` already checks for `doctrine/domains/PROJECT.md`
   and `haven/diagrams/`: once `worker-runs.log` crosses 15KB, move lines
   older than the current work session into `evidence/worker-runs-archive.log`
