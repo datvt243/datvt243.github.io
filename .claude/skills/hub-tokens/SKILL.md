@@ -143,7 +143,7 @@ done
    is `verify_seal` step 12 collapsing each row at SEAL time. A diagram
    flag now means a pre-rule backlog (one-time pass) or a verifier that
    skipped step 12 (check the latest verdict notes).
-4. [added 2026-09-05] If a flag fires on one of the 5 static reference
+4. If a flag fires on one of the 5 static reference
    files (`MEMORY.md`, `SOUL.md`, `INDEX.md`, `standards/*.md`), that's
    NOT an archive signal — those files have no accumulating list and no
    defined archive destination by design. Treat it as an anomaly: read the
@@ -154,7 +154,7 @@ done
    was never meant to grow. [amended 2026-10-24] `standards/*.md` use a
    12KB threshold, not 8KB — a project-specific standard (e.g. a PDF-export
    spec) legitimately grows with the feature it encodes.
-5. [added 2026-09-13] `doctrine/ as a whole` gets its own flag on top of
+5. `doctrine/ as a whole` gets its own flag on top of
    the per-file ones above — `doctrine/` (root files + `domains/` +
    `standards/`, archives excluded) is the single biggest chunk of the
    recurring per-session cost and had no aggregate check before, only
@@ -167,7 +167,7 @@ done
    to catch the case where several files each stayed under their own
    threshold but the directory's total still crept up.
 
-## If this hub uses epic sharding [added 2026-09-02]
+## If this hub uses epic sharding
 If `haven/diagrams/index.md` exists (opt-in, see
 `kit/agent-hub-templates.md` §9️⃣.3), `DIAG_ACTIVE_B` above sums bytes
 across **every** `dev-loop-<epic>.prime-mermaid.md`, not just the one(s)

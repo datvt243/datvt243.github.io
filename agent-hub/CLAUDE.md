@@ -58,6 +58,12 @@ note = `EDIT_UNVERIFIED`.
 | `CODE_IN_HAVEN` | Code (`.ts`/`.vue`/`.js`...) leaking into `haven/` — that's memory only |
 | `DIAGRAM_DRIFT` | Code has changed but the diagram's PM status hasn't been updated to match |
 
+## Project extensions
+- `/ship` here is a project command (`.claude/commands/ship.md`), not the
+  kit skill: invoking it IS the approval for commit + push (project
+  opt-out of the kit's `/ship` approval wait). It still enforces
+  `SealedOnly` for code changes (its step 0.5).
+
 ## Seal gate
 Before any **outward-facing** action — `git commit` · `git push` · opening a
 PR · deleting a file · calling an external API — STOP, show the diff/action
