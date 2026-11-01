@@ -5,14 +5,6 @@
 
 import type { CodeLine } from '@/types/codeLine'
 
-function escapeHtml(str: string): string {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
-
 /**
  * Turns an array of flat key/value records into syntax-highlighted,
  * line-numbered JSON lines, ready for EditorCodeBlock's `lines` prop.

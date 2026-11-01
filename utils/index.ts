@@ -5,6 +5,7 @@
 
 export * from './cloneDeep'
 export * from './convertNumberToDate'
+export * from './escapeHtml'
 export * from './formatDate'
 export * from './fetchWithRetry'
 export * from './groupSkills'
