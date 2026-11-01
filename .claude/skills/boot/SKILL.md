@@ -10,8 +10,6 @@ during this step — read and report only.
 
 ## Steps (exact order, don't skip any)
 1. Read `agent-hub/NORTHSTAR.md`.
-1b. Read the root `CLAUDE.md` (the real project contract: stack,
-   architecture, commands) — project hand-patch, kept on sync.
 2. Recall the 5 forbidden states and the seal gate from `agent-hub/CLAUDE.md`
    — [GUARD] don't explicitly `cat`/`Read` it yourself:
    the harness auto-injects this file's full content as a nested-CLAUDE.md
@@ -75,7 +73,11 @@ during this step — read and report only.
   `/ship`.
 - If step 5 flags the active diagram over ~15KB (or `/hub-tokens` reports
   it), that's a real signal to run an archive pass — see the diagram
-  file's own token-discipline note (normally `verify_seal` step 12
+  file's own token-discipline note (normally `verify_seal` step 11
   archives at SEAL time, so a flag means a pre-rule backlog or a skipped
-  step 12). `/boot` itself never edits anything;
+  step 11). `/boot` itself never edits anything;
   archiving is a separate, explicit action.
+
+## Project extensions
+After step 1, also read the root `CLAUDE.md` (the real project contract:
+stack, architecture, commands).
