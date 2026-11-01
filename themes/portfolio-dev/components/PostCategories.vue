@@ -3,7 +3,6 @@
  * @author Đạt Võ <votan.it@gmail.com>
  * @see https://github.com/datvt243
  */
-import { fetchWithRetry } from '~/utils'
 
 interface Category {
 	_id: string
@@ -14,7 +13,8 @@ interface Category {
 }
 
 const { t } = useI18n()
-const { data, error } = await useAsyncData<Category[]>(async () => (await fetchWithRetry<Category[]>('/api/blogs/categories')) ?? [])
+// No retry: each retry of a failed call is another call to the rate-limited upstream.
+const { data, error } = await useAsyncData<Category[]>(async () => (await $fetch<Category[]>('/api/blogs/categories', { retry: 0 })) ?? [])
 
 const query = inject<{ category: Ref<string>; page: Ref<number>; perPage: Ref<number> }>('query')
 const category = toRef(query?.category || '')

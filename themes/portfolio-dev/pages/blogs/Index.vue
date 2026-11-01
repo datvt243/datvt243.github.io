@@ -15,6 +15,7 @@ const perPage = toRef(query?.perPage || 20)
 const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
 const postsFetch = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
   key: fetchKey,
+  retry: 0,
   query: {
     page: page,
     perPage: perPage,

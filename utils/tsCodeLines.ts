@@ -5,14 +5,6 @@
 
 import type { CodeLine } from '@/types/codeLine'
 
-function escapeHtml(str: string): string {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
-
 /** Turns an arbitrary label into a valid-looking TS identifier (PascalCase, no symbols/spaces). */
 function toIdentifier(label: string): string {
   const id = label

@@ -31,6 +31,7 @@ export default defineNuxtConfig({
         lang: 'vi',
       },
       charset: 'utf-8',
+      titleTemplate: '%s — Võ Tấn Đạt',
       viewport: 'width=device-width, initial-scale=1',
     },
     layoutTransition: { name: 'transition-opacity', mode: 'out-in' },
@@ -137,11 +138,10 @@ export default defineNuxtConfig({
    */
   routeRules: {
     /**
-     * Baseline headers only. No script-src CSP yet: Nuxt's inline config,
-     * importmap and color-mode scripts would each need a hash (ISR rules out
-     * per-request nonces), regenerated on every build, and 'unsafe-inline'
-     * would void it. frame-ancestors only limits who may frame this site,
-     * so the Giscus iframe it embeds is unaffected.
+     * Baseline headers. The script-src policy is per page (a hash of each
+     * inline script), so it's set in `server/plugins/RenderHTML.ts`, not
+     * here. frame-ancestors only limits who may frame this site, so the
+     * Giscus iframe it embeds is unaffected.
      */
     '/**': {
       headers: {

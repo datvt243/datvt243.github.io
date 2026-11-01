@@ -6,7 +6,7 @@
 
 import type { GitRepos, GitUser } from '~/types/github'
 
-const { data, error } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>('/api/github')
+const { data, error } = await useFetch<{ data: { user: GitUser; repos: GitRepos[] } }>('/api/github', { retry: 0 })
 /**
  * Without data the page can't render. Always a 5xx (even for an upstream
  * 404), so ISR keeps serving the last good page instead of caching an error.

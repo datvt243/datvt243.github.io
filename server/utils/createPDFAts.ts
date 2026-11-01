@@ -105,13 +105,17 @@ const entry = ({
   body?: string
   stack?: string[]
   stackLabel?: string
-}): string => `
+}): string => {
+  // Descriptions often end with their own "Stack:" line; a second generated one only adds length.
+  const showStack = stack.length > 0 && !['Stack', stackLabel].some((label) => label && body.includes(`${label}:`))
+  return `
   <div class="entry">
     <p class="entry-title">${title}</p>
     ${meta ? `<p class="entry-meta">${escapeHtml(meta)}</p>` : ''}
     ${body ? `<div class="entry-body">${simplifyRichText(body)}</div>` : ''}
-    ${stack.length ? `<p class="entry-stack">${escapeHtml(stackLabel)}: ${stack.map(escapeHtml).join(', ')}</p>` : ''}
+    ${showStack ? `<p class="entry-stack">${escapeHtml(stackLabel)}: ${stack.map(escapeHtml).join(', ')}</p>` : ''}
   </div>`
+}
 
 const section = (heading: string, body: string): string =>
   body ? `<section class="section"><h2 class="heading">${escapeHtml(heading)}</h2>${body}</section>` : ''
@@ -230,17 +234,18 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
 <title>${escapeHtml(fullName)} CV</title>
 <style>
   * { box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, "Liberation Sans", sans-serif; font-size: 10.5pt; line-height: 1.4; color: #000; margin: 0; }
-  h1, h2, p, ul, ol, li { margin: 0 0 6pt 0; padding: 0; letter-spacing: normal; }
+  body { font-family: Arial, Helvetica, "Liberation Sans", sans-serif; font-size: 10pt; line-height: 1.3; color: #000; margin: 0; }
+  h1, h2, p, ul, ol, li { margin: 0 0 4pt 0; padding: 0; letter-spacing: normal; }
+  li { margin-bottom: 2pt; }
   .name { font-size: 20pt; font-weight: bold; }
   .headline { font-size: 12pt; margin-top: 2pt; }
   .contact { font-size: 10pt; margin-top: 4pt; }
-  .section { margin-top: 12pt; }
+  .section { margin-top: 10pt; }
   .heading { font-size: 12pt; font-weight: bold; text-transform: uppercase; border-bottom: 1pt solid #000; padding-bottom: 2pt; break-after: avoid; }
   .entry { margin-bottom: 8pt; }
   .entry-title { font-weight: bold; break-after: avoid; }
   .entry-meta { font-style: italic; font-size: 10pt; break-after: avoid; }
-  .entry-body p, .entry-body li { margin-bottom: 3pt; }
+  .entry-body p, .entry-body li { margin-bottom: 2pt; }
   .entry-stack { font-size: 10pt; }
   ul, ol { padding-left: 16pt; }
   a { color: #000; text-decoration: underline; }

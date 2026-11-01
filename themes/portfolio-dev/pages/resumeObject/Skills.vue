@@ -43,10 +43,6 @@ const SKILL_ICONS: Record<string, string> = {
   htmlscss: 'html',
   scss: 'sass',
   sass: 'sass',
-  // misspelled as-is in the resume API data - drop once fixed at the source
-  gitlap: 'gitlab',
-  githup: 'github',
-  postmain: 'postman',
 }
 
 function skillIcon(name: string): string | undefined {

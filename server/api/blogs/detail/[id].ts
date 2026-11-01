@@ -4,6 +4,7 @@
  */
 
 import { postResponseSchema, parseBlogApiResponse } from '~/server/utils/blogSchemas'
+import { sanitizePostHtml } from '~/server/utils/sanitizePostHtml'
 
 export default defineCachedEventHandler(
   async (event) => {
@@ -22,7 +23,7 @@ export default defineCachedEventHandler(
      * anything else (unknown id, or a slug) - surface that as our own
      * clean 404 instead of an unhandled FetchError.
      */
-    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`).catch((e) => {
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`, { retry: 0 }).catch((e) => {
       if (e?.statusCode === 404) throw createError({ statusCode: 404, statusMessage: 'Post not found' })
       throw e
     })
@@ -31,7 +32,7 @@ export default defineCachedEventHandler(
 
     return {
       status,
-      data,
+      data: data && { ...data, content: sanitizePostHtml(data.content) },
       errors,
       message,
     }
