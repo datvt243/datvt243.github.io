@@ -96,7 +96,7 @@ if [ -f "$DIAG_FILE" ]; then
   POINTER_SEALED=$(grep -cE '— archived, see' "$DIAG_FILE" 2>/dev/null)
   REAL_SEALED=$(( FULL_SEALED - POINTER_SEALED ))
   check_threshold_bytes "dev-loop.prime-mermaid.md" "$DB" 15360 \
-    "$REAL_SEALED full SEALED entries not yet archived ($POINTER_SEALED pointers; verify_seal step 12 should keep these at 0 full / <=20 pointers — a backlog here predates that rule or means step 12 was skipped), see rows below"
+    "$REAL_SEALED full SEALED entries not yet archived ($POINTER_SEALED pointers; verify_seal step 11 should keep these at 0 full / <=20 pointers — a backlog here predates that rule or means step 11 was skipped), see rows below"
   if [ "$DB" -gt 15360 ]; then
     echo "    Ready-to-move rows (copy each VERBATIM into dev-loop-archive.md's"
     echo "    PM status table, then replace it here with a compact pointer row"
@@ -140,9 +140,9 @@ done
    is the whole remaining effort, so there's no excuse to defer it past the
    current session the way a vague warning invites. [amended 2026-10-24]
    That alone did not hold (3 production hubs at 89-175KB) — the real fix
-   is `verify_seal` step 12 collapsing each row at SEAL time. A diagram
+   is `verify_seal` step 11 collapsing each row at SEAL time. A diagram
    flag now means a pre-rule backlog (one-time pass) or a verifier that
-   skipped step 12 (check the latest verdict notes).
+   skipped step 11 (check the latest verdict notes).
 4. If a flag fires on one of the 5 static reference
    files (`MEMORY.md`, `SOUL.md`, `INDEX.md`, `standards/*.md`), that's
    NOT an archive signal — those files have no accumulating list and no
