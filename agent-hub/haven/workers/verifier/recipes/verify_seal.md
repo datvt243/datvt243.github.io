@@ -15,7 +15,7 @@
   (`NeverVerifyOwnWork`) — in a batch, this applies PER NODE: refuse just
   the self-written node, don't cancel the rest of the batch.
 
-## Batch verify [added 2026-09-05]
+## Batch verify
 The heaviest cost of a verify pass isn't the act of verifying — it's
 reloading the whole bundle + doctrine on every subagent spawn. Batch
 verify pays that cost EXACTLY ONCE for N nodes instead of N times,
@@ -33,7 +33,7 @@ without changing anything about the substance of verifying:
 - `all-pending`: first list every `sealed_pending_verifier` node on
   `dev-loop.prime-mermaid.md`, then run the full procedure below on each.
 
-## Re-run scope [cost-driven, added 2026-09-02]
+## Re-run scope
 Default: AUDIT the note, don't independently re-run `npm run build`/
 `npm run lint`/the CDP script from scratch (including cold-cache rebuilds —
 deleting `.nuxt`/`.output`/cache before rebuilding). `EvidenceOnly` means
@@ -66,7 +66,7 @@ verdict versus just auditing the note. Not a bug, but not what
    blank-context spawn itself run ONCE for the whole batch; if one
    specific node turns out self-written, refuse just that node and
    continue verifying the rest.
-1b. [added 2026-09-02] Record proof this pass is really a separate
+1b. Record proof this pass is really a separate
     subagent context, not a self-report: cite whatever this invocation
     was actually spawned with that the implementer pass didn't have
     (e.g. the `description`/task string passed to the Agent tool for
@@ -80,7 +80,7 @@ verdict versus just auditing the note. Not a bug, but not what
 2. [LOOP STARTS HERE FOR EACH NODE if batch] Read the NOTE — only the
    note, do NOT open the diff directly. (`EvidenceOnly`)
 3. Read the NODE — get the acceptance criteria from `haven/diagrams/`,
-   forbidden states from `agent-hub/CLAUDE.md`. [GUARD, added 2026-08-31]
+   forbidden states from `agent-hub/CLAUDE.md`. [GUARD]
    Don't `Read agent-hub/CLAUDE.md` yourself for this — same mechanism as
    `boot/SKILL.md`: the harness auto-injects this file's full content as a
    nested-CLAUDE.md `<system-reminder>` the moment step 2 touches anything
@@ -88,9 +88,10 @@ verdict versus just auditing the note. Not a bug, but not what
    it directly only if it's actually missing from context after step 2.
 4. Check the command in the note matches `doctrine/MEMORY.md` (`npm run
    build`, `npm run lint`, `npm test` — verbatim, not a made-up command) —
-   plus its `Typecheck` row [added 2026-10-07]; no typecheck or `npm test`
+   plus its `Typecheck` row; no typecheck or `npm test`
    output in the note → REOPEN, `EDIT_UNVERIFIED` [`npm test` added
-   2026-10-26].
+   2026-10-26]. Row has a `baseline:` → the note must cite the
+   count; count above it, or an error in a touched file → REOPEN.
 5. Check whether the output has been truncated/hidden (`...`,
    "truncated") → REOPEN if so.
 6. If the node has a visual/behavior part: check whether the UI-
@@ -110,12 +111,12 @@ verdict versus just auditing the note. Not a bug, but not what
     REOPEN (`SmallestDiff`).
 11. The verdict is exactly one of two: SEAL (every criterion has citeable
     evidence) or REOPEN (even a single important gap is enough).
-12. Only on SEAL: update the ratchet/PM status. [added 2026-09-05]
+12. Only on SEAL: update the ratchet/PM status.
     Update the node's own row IN PLACE (state column PENDING/IN_PROGRESS
     → SEALED) — never reorder, move, or re-sort rows in the table
     (`AppendOnly`); this keeps `agent-hub/.gitattributes`' `merge=union`
     able to merge cleanly across branches.
-    [added 2026-10-24] COLLAPSE ON SEAL, same in-place row: (a) append
+    COLLAPSE ON SEAL, same in-place row: (a) append
     the node's full row (state SEALED) verbatim to the END of
     `haven/diagrams/dev-loop-archive.md` (create if absent); (b) replace
     the active row in place with `| node | SEALED | <date> — archived,
@@ -127,20 +128,19 @@ verdict versus just auditing the note. Not a bug, but not what
     delete it from the active file — no pointer.
 13. Write the verdict into
     `evidence/verifier/<date>/<slug>-{seal|reopen}.md`.
-13a. [added 2026-09-02] In that note, include the `## Isolation proof`
+13a. In that note, include the `## Isolation proof`
     line from step 1b.
-13b. [added 2026-09-02] In that note, declare the real `## Re-run` line:
+13b. In that note, declare the real `## Re-run` line:
     `none` (audit only, the default per "Re-run scope" above), `partial`
     (name which command), or `full` (re-ran build/lint/CDP from cold
     cache) — always with a reason matching one of the 3 exceptions in
     "Re-run scope" if not `none`. Misdeclaring this (e.g. writing `none`
     after actually re-running) breaks the duplicate-cost signal step 14
     depends on.
-14. [added 2026-09-02] Append one line to `evidence/worker-runs.log`
+14. Append one line to `evidence/worker-runs.log`
     (create if missing): take `hub_bytes_before` from the
     `## Hub bytes before` line in the implementer's note (already read in
-    step 2, reuse it — don't read it again); measure `hub_bytes_after` the
-    same way (this hub's `/hub-tokens` per-session total), taken AFTER
+    step 2, reuse it — don't read it again); measure `hub_bytes_after` with the exact command in `evidence/README.md` (Format — worker-runs.log), taken AFTER
     updating PM status in step 12 if SEALED. Format:
     ```
     <ISO timestamp> role=verifier outcome=SEAL|REOPEN node=<slug>
@@ -164,7 +164,7 @@ verdict versus just auditing the note. Not a bug, but not what
 
 ## Runtime
 `/worker verifier "<task or note>"` or pass 2 of `/todo "<task>"`.
-[added 2026-09-05] `/worker verifier "<path1> <path2> ..."` (multiple
+`/worker verifier "<path1> <path2> ..."` (multiple
 evidence note paths) or `/worker verifier all-pending` spawns ONE
 subagent that verifies every queued node independently — use this after
 several small implementer passes have piled up, instead of one

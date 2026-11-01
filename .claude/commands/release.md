@@ -39,11 +39,16 @@ This command is the ONLY path `staging` → `main`.
    build/lint (and test, if this project has one) commands from
    `agent-hub/doctrine/MEMORY.md`, read the output back verbatim. Any
    failure → stop, report it plainly, do NOT open the PR/tag/deploy.
+   Exception: a lint/typecheck row with a `baseline:` (inherited debt) is
+   report-only here — run it on the release branch and on `origin/main`,
+   report both counts ("lint: N errors, main M, +K new"), continue; each
+   diff already passed that check at `/worker verifier`. Build and test
+   failures still stop.
 5. **Open the release PR.**
    `gh pr create --base main --head release/vX.Y.Z --title "Release vX.Y.Z" --body "<commit list from step 0>"`
    — or `--head staging` directly on the first-ever release.
 6. **Wait for real CI, then merge with a real merge commit, not squash.**
-   [added 2026-10-07] First wait for the branch protection's required
+   First wait for the branch protection's required
    checks instead of assuming CI is green — step 4's local gate is the
    first net, this is the second. `--watch` reprints every interval, so
    silence the wait and read the final state once (polling output is
@@ -99,7 +104,8 @@ no separate "show diff, wait" pause between steps.
 | Failure | Handling |
 |---|---|
 | Nothing to release (`origin/main..origin/staging` empty) | Say so, stop |
-| Build or lint fails (step 4) | Stop, report the real output, don't open the PR/tag/deploy |
+| Build, test, or a lint/typecheck with no `baseline:` fails (step 4) | Stop, report the real output, don't open the PR/tag/deploy |
+| Lint/typecheck with a `baseline:` has errors (step 4) | Report counts vs `origin/main`, continue |
 | Required CI check fails (step 6/9) | Stop, don't merge, report `gh run view <run-id> --log-failed` output |
 | Bump type ambiguous and not the first-ever release | Ask (AskUserQuestion), don't guess a breaking change |
 | Deploy hook call fails | Report the real response, don't undo the merge/tag — retry deploy separately |

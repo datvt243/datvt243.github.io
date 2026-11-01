@@ -16,7 +16,7 @@ hard_rules:
   - SmallestDiff        # prefer the smallest diff, no unnecessary rename/refactor
   - TestsBeforeDone     # must actually run build+lint+typecheck+`npm test` before reporting done
   - NodeBeforeCode      # must have a node on the diagram before writing code
-  - AppendOnly          # [added 2026-09-05] new node rows always appended at
+  - AppendOnly          # new node rows always appended at
                          # the end of the PM status table, never inserted mid-
                          # table — required for agent-hub/.gitattributes'
                          # merge=union to merge cleanly across branches

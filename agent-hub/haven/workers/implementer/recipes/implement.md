@@ -18,10 +18,10 @@
 4. SEAL GATE before an outward-facing action (commit/push/delete file/open
    PR) — stop, show the diff, wait for approval.
 5. Run the EXACT command from `doctrine/MEMORY.md`: `npm run build` then
-   `npm run lint` — copy it verbatim, don't guess. [added 2026-10-07]
+   `npm run lint` — copy it verbatim, don't guess.
    Plus the `Typecheck` row of `doctrine/MEMORY.md` — `nuxt build` strips
    types without checking them, so build+lint is NOT a typecheck. Plus the
-   `Test (unit)` row (`npm test`) [added 2026-10-26].
+   `Test (unit)` row (`npm test`).
 6. READ THE OUTPUT BACK verbatim — an uncited claim = `EDIT_UNVERIFIED`.
 7. If the change has a visual/behavior part the user would see: check the
    real UI via Chrome CDP port 9888 (`curl -s
@@ -40,7 +40,7 @@
 9. If you hit a new bug/trap (in the same style as the existing traps in
    `doctrine/domains/PROJECT.md`), consider adding it to the Traps table.
 10. Write it into `evidence/` following the format in `evidence/README.md`.
-11. [added 2026-09-02] ONLY when the result is `blocked` or `failed`
+11. ONLY when the result is `blocked` or `failed`
     (never reaches the verifier) — append one line to
     `evidence/worker-runs.log` (create the file if missing):
     `role=implementer outcome=blocked|failed node=<slug>
@@ -61,7 +61,7 @@
 | Build fails/flakes, not reliably reproducible | Suspect cache first (`rm -rf node_modules/.cache .nuxt .output`), check the related trap in `doctrine/domains/PROJECT.md` before concluding |
 | A needed env var for build/run is missing | `blocked`, don't fake a value |
 | `Typecheck` row in `doctrine/MEMORY.md` is missing/`<<FILL>>` | `blocked` — except the node whose task IS adding that command |
-| Typecheck reports errors the diff didn't introduce | Don't fix them in this diff (`SmallestDiff`) — prove they pre-exist (same count on the base branch), list under `## Noticed, not done` |
+| Lint/typecheck reports errors the diff didn't introduce | Don't fix them in this diff (`SmallestDiff`) — prove they pre-exist (same count on the base branch, or ≤ the row's `baseline:` in `doctrine/MEMORY.md`, none in touched files), list under `## Noticed, not done`; no baseline recorded yet → propose one to the operator, don't write it into `MEMORY.md` yourself |
 
 ## Runtime
 `/worker implementer "<task>"` or pass 1 of `/todo "<task>"`.
