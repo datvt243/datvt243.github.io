@@ -99,3 +99,4 @@
 2026-11-01T06:34:26Z role=verifier outcome=SEAL node=projects-readable-mobile rerun=none hub_bytes_before=80106 hub_bytes_after=80116
 2026-11-01T06:45:35Z role=verifier outcome=SEAL node=seo-titles-og-image rerun=none hub_bytes_before=80116 hub_bytes_after=80104
 2026-11-01T06:52:27Z role=verifier outcome=SEAL node=remove-unused-deps-helpers rerun=none hub_bytes_before=80104 hub_bytes_after=80110
+2026-11-01T07:04:47Z role=verifier outcome=SEAL node=upstream-no-retry-429 rerun=partial hub_bytes_before=80110 hub_bytes_after=80098

@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `mobile-experience-touch-kbd` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/mobile-experience-touch-kbd-seal.md`. |
 | `a11y-axe-serious` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/a11y-axe-serious-seal.md`. |
 | `light-hover-footer-targets` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/light-hover-footer-targets-seal.md`. |
 | `vue-pin-no-override` | SEALED | 2026-10-27 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-10-27/vue-pin-no-override-seal.md`. |
@@ -94,3 +93,4 @@ PM status directly to "undo" an existing SEAL.
 | `projects-readable-mobile` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/projects-readable-mobile-seal.md`. |
 | `seo-titles-og-image` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/seo-titles-og-image-seal.md`. |
 | `remove-unused-deps-helpers` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/remove-unused-deps-helpers-seal.md`. |
+| `upstream-no-retry-429` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/upstream-no-retry-429-seal.md`. |
