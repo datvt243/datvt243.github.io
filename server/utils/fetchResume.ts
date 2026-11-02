@@ -28,6 +28,8 @@ const PUBLIC_GENERAL_FIELDS = [
   'professionalSkills',
   'professionalSkillsGroup',
   'personalSkills',
+  'mainSkills',
+  'familiarSkills',
   'foreignLanguages',
 ]
 

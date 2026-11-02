@@ -53,6 +53,12 @@ export const useResumeStore = defineStore('resume', {
     personalSkills(): string[] {
       return ((this.generalInformation as GeneralInformation).personalSkills || []).map((s) => s.name).filter(Boolean)
     },
+    mainSkills(): string[] {
+      return ((this.generalInformation as GeneralInformation).mainSkills || []).map((s) => s.name).filter(Boolean)
+    },
+    familiarSkills(): string[] {
+      return ((this.generalInformation as GeneralInformation).familiarSkills || []).map((s) => s.name).filter(Boolean)
+    },
     groups(): string[] {
       return (this.generalInformation as GeneralInformation).professionalSkillsGroup || []
     },

@@ -41,6 +41,8 @@ export interface GeneralInformation extends BaseDocument {
   openToWork: boolean
   careerGoal: string
   personalSkills: ProfessionalSkill[]
+  mainSkills?: ProfessionalSkill[]
+  familiarSkills?: ProfessionalSkill[]
   professionalSkills?: ProfessionalSkill[]
   foreignLanguages?: ForeignLanguage[]
   professionalSkillsGroup?: string[]
