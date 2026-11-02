@@ -23,11 +23,17 @@ describe('fetchResume', () => {
         salary: 1000,
         birthday: 1,
         gender: 'x',
-        generalInformation: [{ positionDesired: 'Frontend', maritalStatus: 'single', expectedSalary: 9 }],
+        generalInformation: [
+          { positionDesired: 'Frontend', mainSkills: [{ name: 'Vue' }], familiarSkills: [{ name: 'Go' }], maritalStatus: 'single', expectedSalary: 9 },
+        ],
       },
     })
     const data = await fetchResume()
-    expect(data).toEqual({ firstName: 'Dat', email: 'me@test', generalInformation: [{ positionDesired: 'Frontend' }] })
+    expect(data).toEqual({
+      firstName: 'Dat',
+      email: 'me@test',
+      generalInformation: [{ positionDesired: 'Frontend', mainSkills: [{ name: 'Vue' }], familiarSkills: [{ name: 'Go' }] }],
+    })
   })
 
   it('asks the upstream for the requested language, vi by default', async () => {

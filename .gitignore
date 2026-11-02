@@ -34,3 +34,5 @@ logs
 !.claude/commands/
 !.claude/skills/
 !.claude/rules/
+
+.playwright-mcp

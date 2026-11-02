@@ -30,20 +30,26 @@ export interface SkillGroupInput {
   skills: { name: string; exp?: number; icon?: string }[]
 }
 
+/** Renders the group names as the `skill-group.ts` file: an exported TS `enum SkillGroup`. */
+export function buildSkillGroupTsLines(groups: SkillGroupInput[]): CodeLine[] {
+  return [
+    { html: `${kw('export')} ${kw('enum')} ${type('SkillGroup')} ${punct('{')}` },
+    ...groups.map((g) => ({ html: `${type(toIdentifier(g.label))} ${punct('=')} ${str(g.label)}${punct(',')}`, indent: 2 })),
+    { html: punct('}') },
+  ]
+}
+
 /**
- * Renders grouped skills as a TS `enum` (group names) + a `const`
- * Record<enum, string[]> object (skills per group, with a trailing
- * `// N+ years` comment when known), for EditorCodeBlock's `lines` prop.
+ * Renders grouped skills as the `skills.ts` file: an import of
+ * `SkillGroup` + a `const` Record<SkillGroup, string[]> object (skills per
+ * group, with a trailing `// N+ years` comment when known), for
+ * EditorCodeBlock's `lines` prop.
  */
 export function buildSkillsTsLines(groups: SkillGroupInput[]): CodeLine[] {
   const ids = groups.map((g) => toIdentifier(g.label))
   const lines: CodeLine[] = []
 
-  lines.push({ html: `${kw('enum')} ${type('SkillGroup')} ${punct('{')}` })
-  groups.forEach((g, i) => {
-    lines.push({ html: `${type(ids[i]!)} ${punct('=')} ${str(g.label)}${punct(',')}`, indent: 2 })
-  })
-  lines.push({ html: punct('}') })
+  lines.push({ html: `${kw('import')} ${punct('{')} ${type('SkillGroup')} ${punct('}')} ${kw('from')} ${str('./skill-group')}` })
   lines.push({ html: '' })
 
   lines.push({

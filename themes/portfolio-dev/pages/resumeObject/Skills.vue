@@ -4,50 +4,11 @@
  * @see https://github.com/datvt243
  */
 
-import { buildPersonalSkillsTsLines, buildSkillsTsLines, groupSkills } from '@/utils/index'
+import { buildPersonalSkillsTsLines, buildSkillGroupTsLines, buildSkillsTsLines, groupSkills, skillIcon } from '@/utils/index'
+
+const props = defineProps<{ file: 'skills.ts' | 'skill-group.ts' }>()
 
 const store = useResumeStore()
-
-/**
- * Only maps to logos actually present under public/svg/ — skill names come
- * from the API as free text, so unmatched skills just render without an icon
- * rather than guessing/faking one.
- */
-const SKILL_ICONS: Record<string, string> = {
-  javascript: 'js',
-  typescript: 'typescript',
-  vuejs: 'vue-js',
-  vue: 'vue-js',
-  nuxtjs: 'nuxt-js',
-  nuxt: 'nuxt-js',
-  reactjs: 'react-js',
-  react: 'react-js',
-  nextjs: 'next-js',
-  next: 'next-js',
-  nodejs: 'node-js',
-  node: 'node-js',
-  mongodb: 'mongodb',
-  mongo: 'mongodb',
-  bootstrap: 'bootstrap',
-  tailwindcss: 'tailwindcss',
-  tailwind: 'tailwindcss',
-  git: 'git',
-  sapui5: 'sapui5',
-  pinia: 'pinia',
-  gitlab: 'gitlab',
-  github: 'github',
-  sourcetree: 'sourcetree',
-  mysql: 'mysql',
-  postman: 'postman',
-  html: 'html',
-  htmlscss: 'html',
-  scss: 'sass',
-  sass: 'sass',
-}
-
-function skillIcon(name: string): string | undefined {
-  return SKILL_ICONS[name.toLowerCase().replace(/[^a-z0-9]/g, '')]
-}
 
 const groupedSkills = computed(() =>
   groupSkills(store.groups, store.skills).map(({ label, skills }) => ({
@@ -57,6 +18,7 @@ const groupedSkills = computed(() =>
 )
 
 const lines = computed(() => {
+  if (props.file === 'skill-group.ts') return buildSkillGroupTsLines(groupedSkills.value)
   const result = buildSkillsTsLines(groupedSkills.value)
   if (store.personalSkills.length) result.push({ html: '' }, ...buildPersonalSkillsTsLines(store.personalSkills))
   return result
