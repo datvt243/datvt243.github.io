@@ -4,7 +4,9 @@
  * @see https://github.com/datvt243
  */
 
-import { buildPersonalSkillsTsLines, buildSkillsTsLines, groupSkills, skillIcon } from '@/utils/index'
+import { buildPersonalSkillsTsLines, buildSkillGroupTsLines, buildSkillsTsLines, groupSkills, skillIcon } from '@/utils/index'
+
+const props = defineProps<{ file: 'skills.ts' | 'skill-group.ts' }>()
 
 const store = useResumeStore()
 
@@ -16,6 +18,7 @@ const groupedSkills = computed(() =>
 )
 
 const lines = computed(() => {
+  if (props.file === 'skill-group.ts') return buildSkillGroupTsLines(groupedSkills.value)
   const result = buildSkillsTsLines(groupedSkills.value)
   if (store.personalSkills.length) result.push({ html: '' }, ...buildPersonalSkillsTsLines(store.personalSkills))
   return result

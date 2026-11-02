@@ -16,6 +16,9 @@ const route = useRoute()
 const router = useRouter()
 const active = ref(sections[0]!.key)
 const activeLabel = computed(() => sections.find((s) => s.key === active.value)?.label ?? active.value)
+// The skills section is split into two editor tabs; the group enum is secondary, so skills.ts opens first.
+const skillFiles = ['skills.ts', 'skill-group.ts'] as const
+const skillFile = ref<(typeof skillFiles)[number]>(skillFiles[0])
 
 // Scroll to the content's tab row, not the panel: on mobile the sidebar stacks above the content.
 const fileTab = ref<HTMLElement>()
@@ -47,8 +50,25 @@ onMounted(() => {
       <ThemePanel>
         <template #filetab>
           <span ref="fileTab" class="flex items-center gap-2 scroll-mt-3" translate="no">
-            {{ activeLabel }}
-            <UIcon name="fe:close" class="w-3.5 h-3.5 opacity-40" />
+            <span v-if="active === 'skills'" role="tablist" class="flex items-center gap-4">
+              <button
+                v-for="f in skillFiles"
+                :key="f"
+                type="button"
+                role="tab"
+                :aria-selected="skillFile === f"
+                :class="skillFile === f ? 'text-theme-text-strong' : 'hover:text-theme-text-strong'"
+                class="flex items-center gap-2 transition-colors"
+                @click="skillFile = f"
+              >
+                {{ f }}
+                <UIcon v-if="skillFile === f" name="fe:close" class="w-3.5 h-3.5 opacity-40" />
+              </button>
+            </span>
+            <template v-else>
+              {{ activeLabel }}
+              <UIcon name="fe:close" class="w-3.5 h-3.5 opacity-40" />
+            </template>
           </span>
         </template>
 
@@ -81,7 +101,7 @@ onMounted(() => {
         </template>
 
         <ThemeResumeObjectAboutMe v-show="active === 'about-me'" />
-        <ThemeResumeObjectSkills v-show="active === 'skills'" />
+        <ThemeResumeObjectSkills v-show="active === 'skills'" :file="skillFile" />
         <ThemeResumeObjectExperiences v-show="active === 'experience'" />
         <ThemeResumeObjectEducations v-show="active === 'education'" />
         <ThemeResumeObjectLanguages v-show="active === 'languages'" />
