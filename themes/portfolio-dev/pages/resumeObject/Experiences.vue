@@ -39,9 +39,14 @@ function pugTag(name: string, cls?: string) {
       <article class="experience">
         <div class="code-line" aria-hidden="true"><span class="line-content" v-html="pugTag('article', 'experience')" /></div>
 
-        <h2 class="code-line depth-1 position">
-          <span v-if="el.isCareerBreak" class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'career-break')" /><span class="tag-text">{{ careerBreakTitle(el.careerBreakType) }}</span></span>
-          <span v-else class="line-content tagged"><span aria-hidden="true" class="tag-label" v-html="pugTag('h2', 'position')" /><span class="tag-text">{{ el.position }}</span></span>
+        <!-- Pug piped text: the tag on its own line, the long text below it after "|". -->
+        <h2 class="position">
+          <span class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('h2', el.isCareerBreak ? 'career-break' : 'position')" /></span>
+          <span class="code-line piped">
+            <span class="line-content tagged"
+            ><span aria-hidden="true" class="tag-label pipe">|</span><span class="tag-text">{{ el.isCareerBreak ? careerBreakTitle(el.careerBreakType) : el.position }}</span></span
+            >
+          </span>
         </h2>
         <p v-if="!el.isCareerBreak" class="code-line depth-1">
           <span class="line-content tagged"
@@ -61,11 +66,14 @@ function pugTag(name: string, cls?: string) {
           </ul>
         </template>
 
-        <!-- Skills are one-word items: one comma-separated line, not one line per li. -->
-        <p v-if="el.skills?.length" class="code-line depth-1">
-          <span class="line-content tagged"
-          ><span aria-hidden="true" class="tag-label" v-html="pugTag('p', 'skills')" /><span class="tag-text">{{ el.skills.join(', ') }}</span></span
-          >
+        <!-- Skills are one-word items: one comma-separated piped line, not one line per li. -->
+        <p v-if="el.skills?.length">
+          <span class="code-line depth-1" aria-hidden="true"><span class="line-content" v-html="pugTag('p', 'skills')" /></span>
+          <span class="code-line piped">
+            <span class="line-content tagged"
+            ><span aria-hidden="true" class="tag-label pipe">|</span><span class="tag-text">{{ el.skills.join(', ') }}</span></span
+            >
+          </span>
         </p>
       </article>
     </template>
@@ -119,8 +127,12 @@ function pugTag(name: string, cls?: string) {
 .depth-1 .line-content {
   padding-left: 2ch;
 }
-.depth-2 .line-content {
+.depth-2 .line-content,
+.piped .line-content {
   padding-left: 4ch;
+}
+.pipe {
+  color: rgb(var(--theme-code-punct));
 }
 
 /**
@@ -166,7 +178,8 @@ ul {
   .code-line[aria-hidden='true']:not(.comment) {
     display: none;
   }
-  .depth-1 .line-content {
+  .depth-1 .line-content,
+  .piped .line-content {
     padding-left: 0;
   }
   /* Hanging indent: wrapped lines align under the text, not the marker. */
