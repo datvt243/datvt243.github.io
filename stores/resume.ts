@@ -4,8 +4,8 @@
  */
 
 import type { Resume, GeneralInformation } from '@/types'
-import type { EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/models'
-import { resumeAdapter } from '@/utils/ResumeAdapter'
+import type { EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/utils/ResumeAdapter'
+import { toEducation, toExperience, toHero, toLanguage, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
 
 export const useResumeStore = defineStore('resume', {
   state: () => ({
@@ -27,27 +27,27 @@ export const useResumeStore = defineStore('resume', {
     },
 
     hero({ resume = {} }): HeroModel {
-      return resumeAdapter.toHero(resume, this.generalInformation as GeneralInformation)
+      return toHero(resume, this.generalInformation as GeneralInformation)
     },
 
     social({ resume: { socialMedia } }): SocialMediaModel {
-      return resumeAdapter.toSocialMedia(socialMedia || {})
+      return toSocialMedia(socialMedia || {})
     },
     experiences({ resume: { experiences } }): ExperienceModel[] {
-      return [...(experiences || [])].sort((a, b) => b.startDate - a.startDate).map(resumeAdapter.toExperience)
+      return [...(experiences || [])].sort((a, b) => b.startDate - a.startDate).map(toExperience)
     },
     educations({ resume: { educations } }): EducationModel[] {
-      return (educations || []).map(resumeAdapter.toEducation)
+      return (educations || []).map(toEducation)
     },
     projects({ resume: { projects } }): ProjectModel[] {
       /** Most recent first, same as `experiences`; entries without a startDate sink to the end. */
-      return [...(projects || [])].sort((a, b) => (b.startDate || 0) - (a.startDate || 0)).map(resumeAdapter.toProject)
+      return [...(projects || [])].sort((a, b) => (b.startDate || 0) - (a.startDate || 0)).map(toProject)
     },
     foreignLanguages(): LanguageModel[] {
-      return ((this.generalInformation as GeneralInformation).foreignLanguages || []).map(resumeAdapter.toLanguage)
+      return ((this.generalInformation as GeneralInformation).foreignLanguages || []).map(toLanguage)
     },
     skills(): SkillModel[] {
-      return ((this.generalInformation as GeneralInformation).professionalSkills || []).map(resumeAdapter.toSkill)
+      return ((this.generalInformation as GeneralInformation).professionalSkills || []).map(toSkill)
     },
     /** Soft skills - the API only gives free-text `name`s (no exp/group). */
     personalSkills(): string[] {

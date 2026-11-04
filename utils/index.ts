@@ -3,7 +3,6 @@
  * @see https://github.com/datvt243
  */
 
-export * from './cloneDeep'
 export * from './convertNumberToDate'
 export * from './escapeHtml'
 export * from './formatDate'
