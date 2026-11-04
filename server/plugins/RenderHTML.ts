@@ -8,10 +8,10 @@ export default defineNitroPlugin((nitroApp) => {
     html.bodyAttrs.push('class="bg-theme-canvas text-theme-text"')
   })
 
-  // Report-Only until a release shows no violations; then rename to Content-Security-Policy.
+  // Replaces the routeRules CSP on HTML pages, so it repeats its frame-ancestors.
   nitroApp.hooks.hook('render:response', (response) => {
     if (typeof response.body === 'string' && response.headers?.['content-type']?.includes('text/html')) {
-      response.headers['content-security-policy-report-only'] = scriptCsp(response.body)
+      response.headers['content-security-policy'] = `frame-ancestors 'none'; ${scriptCsp(response.body)}`
     }
   })
 })

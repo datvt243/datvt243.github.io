@@ -108,3 +108,5 @@
 2026-11-02T00:42:54Z role=verifier outcome=REOPEN node=skills-file-tabs rerun=none hub_bytes_before=79741 hub_bytes_after=80455
 2026-11-02T00:44:34Z role=verifier outcome=SEAL node=skills-file-tabs rerun=none hub_bytes_before=79741 hub_bytes_after=79735
 2026-11-02T01:02:39Z role=verifier outcome=SEAL node=experience-pug-piped rerun=none hub_bytes_before=79735 hub_bytes_after=79751
+2026-11-04T17:51:05Z role=verifier outcome=REOPEN node=script-csp-enforce rerun=none hub_bytes_before=79751 hub_bytes_after=80609
+2026-11-04T17:58:00Z role=verifier outcome=SEAL node=script-csp-enforce rerun=partial hub_bytes_before=79751 hub_bytes_after=79751
