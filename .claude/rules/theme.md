@@ -74,7 +74,7 @@ JSON/file-tree/code-block metaphor is itself an editor-theme choice.
   `data-shortcut="<key>"` + `data-shortcut-label="<text>"` to a visible
   clickable element; KeyNav `focus()`+`click()`s it, `preventDefault`s the
   key, and lists it in the overlay. Existing: resume hero `c` contact /
-  `d` download CV, personal-info tabs `1`–`5`, GitHub repo search `/`.
+  `d` download CV, personal-info tabs `1`–`4`, GitHub repo search `/`.
 - Never reuse a key taken by a global motion (g/j/k/G/?).
 - Vimium-like extensions swallow these keys — test in a clean/incognito
   profile (see `agent-hub/doctrine/domains/PROJECT.md` Traps).

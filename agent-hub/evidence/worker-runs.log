@@ -112,3 +112,9 @@
 2026-11-04T17:58:00Z role=verifier outcome=SEAL node=script-csp-enforce rerun=partial hub_bytes_before=79751 hub_bytes_after=79751
 2026-11-04T18:09:49Z role=verifier outcome=SEAL node=resume-plain-mappers rerun=partial hub_bytes_before=79751 hub_bytes_after=79743
 2026-11-04T18:35:26Z role=verifier outcome=SEAL node=api-cache-revalidate rerun=partial hub_bytes_before=79743 hub_bytes_after=79739
+2026-11-05T02:23:17Z role=verifier outcome=REOPEN node=hero-about-me-intro rerun=none hub_bytes_before=79739 hub_bytes_after=80671
+2026-11-05T02:26:48Z role=verifier outcome=SEAL node=hero-about-me-intro rerun=partial hub_bytes_before=79739 hub_bytes_after=79721
+2026-11-05T02:41:43Z role=verifier outcome=SEAL node=hero-avatar-inline rerun=none hub_bytes_before=79721 hub_bytes_after=79715
+2026-11-05T02:45:26Z role=verifier outcome=SEAL node=hero-intro-full-avatar-128 rerun=none hub_bytes_before=79715 hub_bytes_after=79733
+2026-11-05T02:49:00Z role=verifier outcome=SEAL node=hero-avatar-img-tag rerun=none hub_bytes_before=79733 hub_bytes_after=79743
+2026-11-05T02:52:09Z role=verifier outcome=SEAL node=hero-avatar-img-tag-revert rerun=none hub_bytes_before=79743 hub_bytes_after=79755
