@@ -12,6 +12,7 @@ import viLocale from '@/i18n/locales/vi.json'
 import enLocale from '@/i18n/locales/en.json'
 import { groupSkills } from '@/utils/groupSkills'
 import { removeVietnameseTones } from '@/utils/removeVietnameseTones'
+import { compareProjects } from '@/utils/sortProjects'
 
 export type AtsLang = 'vi' | 'en'
 
@@ -187,7 +188,8 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
     )
     .join('')
 
-  const projectHtml = projects
+  const projectHtml = [...projects]
+    .sort(compareProjects)
     .map((p) =>
       entry({
         title: `${escapeHtml(p.name)}${p.position ? ` — ${escapeHtml(p.position)}` : ''}`,

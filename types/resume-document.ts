@@ -85,6 +85,9 @@ export interface Project extends BaseDocument {
   endDate: number
   candidateId: string
   technology: string[]
+  /** Missing on older records → treated as `personal`. */
+  type?: 'company' | 'personal'
+  experienceId?: string | null
 }
 
 export interface Information extends BaseDocument {
