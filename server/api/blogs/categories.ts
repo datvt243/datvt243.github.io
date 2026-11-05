@@ -16,5 +16,7 @@ export default defineCachedEventHandler(
   {
     name: 'api-post-categories',
     maxAge: 60 * 60 * 24 * 12,
+    // Dev always refetches so backend data edits show up without clearing the cache.
+    shouldBypassCache: () => import.meta.dev,
   },
 )
