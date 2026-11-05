@@ -5,7 +5,9 @@
     "switchToDark": "Chuyển sang chế độ tối",
     "openMenu": "Mở menu",
     "closeMenu": "Đóng menu",
-    "switchLanguage": "Chuyển ngôn ngữ"
+    "switchLanguage": "Chuyển ngôn ngữ",
+    "switchToHr": "Chuyển sang chế độ HR (CV thông thường)",
+    "switchToDev": "Chuyển sang chế độ developer"
   },
   "keyNav": {
     "title": "Phím tắt",
@@ -44,6 +46,14 @@
       "retirement": "Nghỉ hưu",
       "travel": "Du lịch",
       "voluntaryWork": "Hoạt động tình nguyện"
+    },
+    "hr": {
+      "experience": "Kinh nghiệm làm việc",
+      "skills": "Kỹ năng",
+      "education": "Học vấn",
+      "languages": "Ngoại ngữ",
+      "other": "Khác",
+      "years": "{n}+ năm"
     }
   },
   "projects": {

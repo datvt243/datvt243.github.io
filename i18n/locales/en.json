@@ -5,7 +5,9 @@
     "switchToDark": "Switch to dark mode",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "switchToHr": "Switch to HR view (plain resume)",
+    "switchToDev": "Switch to developer view"
   },
   "keyNav": {
     "title": "Keyboard shortcuts",
@@ -44,6 +46,14 @@
       "retirement": "Retirement",
       "travel": "Travel",
       "voluntaryWork": "Voluntary work"
+    },
+    "hr": {
+      "experience": "Experience",
+      "skills": "Skills",
+      "education": "Education",
+      "languages": "Languages",
+      "other": "Other",
+      "years": "{n}+ yrs"
     }
   },
   "projects": {
