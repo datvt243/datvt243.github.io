@@ -52,6 +52,8 @@ export const cacheGetPosts = defineCachedFunction(
   },
   {
     maxAge: 60 * 60,
+    // Dev always refetches so backend data edits show up without clearing the cache.
+    shouldBypassCache: () => import.meta.dev,
     name: 'posts',
     getKey: (query: Query) => {
       const page = query.page || 1

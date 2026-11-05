@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
   const cacheKey = lang
 
   const cached = cache.get(cacheKey)
-  if (cached && Date.now() - cached.generatedAt < CACHE_MAX_AGE_MS) {
+  if (!import.meta.dev && cached && Date.now() - cached.generatedAt < CACHE_MAX_AGE_MS) {
     setResponseHeader(event, 'Content-Type', 'application/pdf')
     setResponseHeader(event, 'Content-Disposition', `attachment; filename="${cached.filename}.pdf"`)
     return cached.buffer

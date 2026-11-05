@@ -17,6 +17,12 @@ const isActive = (link: string) => route.path === localePath(link)
 const toggleColorMode = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
+const resumeView = useResumeView()
+// The HR view only exists on `/`, so switching from another page goes there.
+const toggleResumeView = () => {
+  resumeView.value = resumeView.value === 'dev' ? 'hr' : 'dev'
+  if (!isActive('/')) navigateTo(localePath('/'))
+}
 const otherLocale = computed(() => locales.value.find((l) => (typeof l === 'string' ? l : l.code) !== locale.value))
 const toggleLocale = () => {
   const target = typeof otherLocale.value === 'string' ? otherLocale.value : otherLocale.value?.code
@@ -84,6 +90,17 @@ const contactTab = computed(() => menuPrimary.find((r: { link: string }) => r.li
           @click="toggleLocale"
         >
           {{ locale }}
+        </button>
+
+        <button
+          class="flex items-center border-l border-theme-border px-4 text-theme-muted hover:text-theme-text-strong transition-colors uppercase text-xs font-bold"
+          :aria-label="resumeView === 'dev' ? t('header.switchToHr') : t('header.switchToDev')"
+          :title="resumeView === 'dev' ? t('header.switchToHr') : t('header.switchToDev')"
+          @click="toggleResumeView"
+        >
+          <span :class="{ 'text-theme-accent': resumeView === 'dev' }">dev</span>
+          <span class="px-0.5 opacity-50" aria-hidden="true">/</span>
+          <span :class="{ 'text-theme-accent': resumeView === 'hr' }">hr</span>
         </button>
 
         <button
