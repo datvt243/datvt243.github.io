@@ -17,7 +17,8 @@ export type AtsLang = 'vi' | 'en'
 
 const VI_HEADINGS = {
   summary: 'Tóm tắt',
-  skills: 'Kỹ năng',
+  // English in brackets: ATS parsers that only know English section names miss a vi-only skills heading.
+  skills: 'Kỹ năng (Skills)',
   experience: 'Kinh nghiệm làm việc',
   projects: 'Dự án',
   education: 'Học vấn',
