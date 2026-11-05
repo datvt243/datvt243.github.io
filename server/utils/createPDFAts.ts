@@ -276,9 +276,10 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
    * The owner's own `cvFileName` wins; without one, named after the person, not
    * the email: a recruiter saves many CVs and finds them by name. Only
    * `[A-Za-z0-9_-]` survives, so the value can't break the Content-Disposition header.
+   * The language suffix keeps the VI and EN downloads from saving over each other.
    */
   const ownFileName = removeVietnameseTones(cvFileName?.trim() ?? '').replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '')
-  const fileName = ownFileName || removeVietnameseTones(`${fullName} CV`.trim()).replace(/[^a-zA-Z0-9]+/g, '-')
+  const fileName = `${ownFileName || removeVietnameseTones(`${fullName} CV`.trim()).replace(/[^a-zA-Z0-9]+/g, '-')}-${lang.toUpperCase()}`
   /**
    * Vercel's bundled Chromium has no font with an arrow glyph, so "→" printed
    * as a blank box; plain ASCII reads the same to a person and to an ATS.
