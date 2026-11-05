@@ -63,13 +63,13 @@ const introParts = computed(() =>
           type="button"
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-accent/50 text-sm text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-theme-accent"
           :disabled="isLoading"
-          data-shortcut="d"
+          data-shortcut="D"
           :data-shortcut-label="t('resume.downloadCv')"
           @click="downloadResume()"
         >
           <UIcon name="fe:download" class="w-4 h-4" />
           {{ isLoading ? t('resume.downloadingCv') : t('resume.downloadCv') }}
-          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">d</ThemeKbd>
+          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">D</ThemeKbd>
         </button>
       </div>
       <p class="text-2xl text-theme-code-keyword mt-6">

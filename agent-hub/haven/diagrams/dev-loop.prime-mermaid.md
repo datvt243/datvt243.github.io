@@ -74,7 +74,6 @@ flowchart TD
 
 Any regression must be a **new node** (LAI-13) — never edit an old node's
 PM status directly to "undo" an existing SEAL.
-| `sanitize-html-require-esm` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/sanitize-html-require-esm-seal.md`. |
 | `resume-isr-allow-lang` | SEALED | 2026-11-01 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-01/resume-isr-allow-lang-seal.md`. |
 | `resume-isr-allow-lang-live` | PENDING | 2026-11-01 — #361 follow-up, split from `resume-isr-allow-lang` (its acceptance 4 can't be proven before a deploy). Acceptance: on the Vercel preview of `bug/361` (or live after release), `/api/resume?lang=en` returns an introduction starting `Frontend Developer with 4+ years` and `?lang=vi` the VI one, with different etags — both quoted verbatim. Blocked on: push `bug/361` (operator-approved `/ship`). |
 | `visit-ip-geo-check` | PENDING | 2026-11-05 — #398. Acceptance: (1) ≥2 real prod visits from different networks store the visitor's public IP + matching location, quoted from the backend's Visit records; (2) root cause located (relay vs backend), fixed here or linked backend issue; (3) `/api/visit` still returns 204. (2) done: relay correct (h3 1.15.11 `getRequestIP` takes the leftmost XFF entry = client on Vercel); backend `src/candidate_me/index.ts:258` stores `req.ip` with no `trust proxy` → proxy IP — tracked as datvt243/resume-nodejs-api#371. No diff in this repo. #371 fixed (backend PR #372, released v2.6.1 2026-11-05T11:59Z; reads leftmost XFF = what the relay sends). Blocked on: operator's 2 real visits from different networks + the stored Visit records. Evidence: `evidence/implementer/2026-11-05/visit-ip-geo-check-plan.md`. |
@@ -97,3 +96,4 @@ PM status directly to "undo" an existing SEAL.
 | `resume-hr-emphasis` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-hr-emphasis-seal.md`. |
 | `resume-hr-skills-table` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-hr-skills-table-seal.md`. |
 | `resume-hr-icons-exp` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-hr-icons-exp-seal.md`. |
+| `hero-download-shortcut-D` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-download-shortcut-D-seal.md`. |
