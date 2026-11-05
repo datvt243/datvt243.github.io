@@ -19,6 +19,7 @@ const PUBLIC_FIELDS = [
   'projects',
   'certificates',
   'awards',
+  'cvFileName',
 ]
 const PUBLIC_GENERAL_FIELDS = [
   'positionDesired',

@@ -147,6 +147,7 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
     educations = [],
     certificates = [],
     awards = [],
+    cvFileName,
   } = RECORD
   const { github = '', linkedin = '', website = '' } = socialMedia || {}
   const generalInformation: Partial<GeneralInformation> = Array.isArray(generalInformationRaw)
@@ -269,8 +270,13 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
 </body>
 </html>`
 
-  // Named after the person, not the email: a recruiter saves many CVs and finds them by name.
-  const fileName = removeVietnameseTones(`${fullName} CV`.trim()).replace(/[^a-zA-Z0-9]+/g, '-')
+  /**
+   * The owner's own `cvFileName` wins; without one, named after the person, not
+   * the email: a recruiter saves many CVs and finds them by name. Only
+   * `[A-Za-z0-9_-]` survives, so the value can't break the Content-Disposition header.
+   */
+  const ownFileName = removeVietnameseTones(cvFileName?.trim() ?? '').replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '')
+  const fileName = ownFileName || removeVietnameseTones(`${fullName} CV`.trim()).replace(/[^a-zA-Z0-9]+/g, '-')
   /**
    * Vercel's bundled Chromium has no font with an arrow glyph, so "→" printed
    * as a blank box; plain ASCII reads the same to a person and to an ATS.
