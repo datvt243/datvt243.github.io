@@ -28,6 +28,7 @@ const VI_HEADINGS = {
   present: 'Hiện tại',
   other: 'Khác',
   stack: 'Công nghệ',
+  address: 'Địa chỉ',
 }
 type Headings = typeof VI_HEADINGS
 
@@ -45,6 +46,7 @@ const HEADINGS: Record<AtsLang, Headings> = {
     present: 'Present',
     other: 'Other',
     stack: 'Stack',
+    address: 'Address',
   },
 }
 
@@ -154,7 +156,6 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
   const headline = generalInformation.positionDesired || generalInformation.career || ''
 
   const contact = [
-    escapeHtml(address),
     phone && `<a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a>`,
     email && `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`,
     ...[linkedin, github, website].map((url) => url && `<a href="${escapeHtml(url)}">${escapeHtml(url)}</a>`),
@@ -255,6 +256,7 @@ export const pageRenderAts = (RECORD: AtsRecord, lang: AtsLang = 'vi') => {
 <body>
   <h1 class="name">${escapeHtml(fullName)}</h1>
   ${headline ? `<p class="headline">${escapeHtml(headline)}</p>` : ''}
+  ${address ? `<p class="contact">${escapeHtml(h.address)}: ${escapeHtml(address)}</p>` : ''}
   <p class="contact">${contact}</p>
   ${section(h.summary, summary ? `<p>${escapeHtml(summary)}</p>` : '')}
   ${section(h.skills, skills ? `<ul>${skills}</ul>` : '')}
