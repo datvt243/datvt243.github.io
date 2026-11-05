@@ -131,3 +131,4 @@
 2026-11-05T16:04:37Z role=verifier outcome=SEAL node=hero-download-shortcut-D rerun=none hub_bytes_before=81194 hub_bytes_after=81192
 2026-11-05T16:52:52Z role=verifier outcome=SEAL node=pdf-cv-filename rerun=none hub_bytes_before=81192 hub_bytes_after=81180
 2026-11-05T16:59:03Z role=verifier outcome=SEAL node=pdf-project-sort rerun=full hub_bytes_before=81180 hub_bytes_after=81168
+2026-11-05T17:04:14Z role=verifier outcome=SEAL node=pdf-filename-lang rerun=full hub_bytes_before=81168 hub_bytes_after=81170
