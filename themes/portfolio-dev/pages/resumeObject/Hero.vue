@@ -18,24 +18,29 @@ const techStack = computed(() => store.mainSkills.map((name) => ({ name, icon: s
 const familiarStack = computed(() => store.familiarSkills.map((name) => ({ name, icon: skillIcon(name) })))
 
 /**
- * Summary so a recruiter can see experience length + current role without
- * clicking into the Experience tab first (issue #179). Years come from the
- * owner-entered `generalInformation.yearsOfExperience` rather than being
- * derived from the earliest experience startDate. `store.experiences` is
- * sorted most-recent-first, so the first non-career-break entry is the
- * current/latest role (a career break has no company to name).
+ * The API's introduction is HTML. Every tag but <strong>/<b> is dropped, then splitting on those leaves
+ * [plain, bold, plain, ...], so it renders as text interpolation and never needs v-html.
  */
-const currentExperience = computed(() => store.experiences.find((e) => !e.isCareerBreak) || null)
-const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperience || 0)
+const introParts = computed(() =>
+  hero.value.introduction.replace(/<(?!\/?(?:strong|b)\b)[^>]+>/gi, '').split(/<\/?(?:strong|b)>/gi),
+)
 </script>
 
 <template>
-  <div class="grid gap-10 lg:grid-cols-[1fr_auto] items-center py-10 font-theme-mono">
+  <div class="py-10 font-theme-mono">
     <div>
-      <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }} <span class="text-theme-text">_</span></p>
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance" :lang="resumeContentLang">
-        {{ hero.fullName }}
-      </h1>
+      <!-- Avatar sits beside the name, not in its own column, so the title and intro get the full width. -->
+      <div class="flex items-center gap-6">
+        <ThemeCornerFrame class="hidden sm:block shrink-0">
+          <NuxtImg src="Avatar.png" width="128" height="128" class="rounded-lg" alt="" />
+        </ThemeCornerFrame>
+        <div>
+          <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }}<span class="text-theme-text">_</span></p>
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance" :lang="resumeContentLang">
+            {{ hero.fullName }}
+          </h1>
+        </div>
+      </div>
       <div class="flex flex-wrap items-center gap-2 mt-4">
         <span
           v-if="hero.openToWork"
@@ -70,8 +75,11 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>
-      <p v-if="currentExperience && yearsOfExperience" class="text-sm text-theme-muted mt-1">
-        {{ t('resume.experienceSummary', { years: yearsOfExperience, company: currentExperience.company }) }}
+      <p v-if="hero.introduction" class="text-sm leading-relaxed text-theme-muted mt-2">
+        <template v-for="(part, i) in introParts" :key="i">
+          <strong v-if="i % 2" class="font-bold text-theme-text">{{ part }}</strong>
+          <template v-else>{{ part }}</template>
+        </template>
       </p>
       <ul v-if="techStack.length" class="flex flex-wrap gap-2 mt-6">
         <li
@@ -96,12 +104,6 @@ const yearsOfExperience = computed(() => store.generalInformation.yearsOfExperie
           </li>
         </ul>
       </template>
-    </div>
-
-    <div class="hidden lg:block">
-      <ThemeCornerFrame>
-        <NuxtImg src="Avatar.png" width="240" height="240" class="rounded-lg" alt="" />
-      </ThemeCornerFrame>
     </div>
   </div>
 </template>
