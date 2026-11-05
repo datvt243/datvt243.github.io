@@ -23,14 +23,12 @@
   },
   "resume": {
     "greeting": "$ whoami",
-    "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
     "downloadingCv": "Đang tải CV…",
     "downloadCvSuccess": "Đã tải xong CV!",
     "downloadCvError": "Không thể tải CV. Vui lòng thử lại.",
     "openToWork": "Đang tìm việc",
     "contactMe": "Liên hệ",
-    "experienceSummary": "{years}+ năm kinh nghiệm — gần đây nhất tại {company}",
     "familiarWith": "Đã làm quen với",
     "careerBreak": "Nghỉ việc tạm thời",
     "careerBreakTypes": {

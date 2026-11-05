@@ -95,3 +95,8 @@ PM status directly to "undo" an existing SEAL.
 | `resume-plain-mappers` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-plain-mappers-seal.md`. |
 | `api-cache-revalidate` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/api-cache-revalidate-seal.md`. |
 | `hero-greeting-whoami` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-greeting-whoami-seal.md`. |
+| `hero-about-me-intro` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-about-me-intro-seal.md`. |
+| `hero-avatar-inline` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-avatar-inline-seal.md`. |
+| `hero-intro-full-avatar-128` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-intro-full-avatar-128-seal.md`. |
+| `hero-avatar-img-tag` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-avatar-img-tag-seal.md`. |
+| `hero-avatar-img-tag-revert` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-avatar-img-tag-revert-seal.md`. |
