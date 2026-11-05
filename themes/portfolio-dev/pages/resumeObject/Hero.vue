@@ -35,7 +35,7 @@ const introParts = computed(() =>
           <NuxtImg src="Avatar.png" width="128" height="128" class="rounded-lg" alt="" />
         </ThemeCornerFrame>
         <div>
-          <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }} <span class="text-theme-text">_</span></p>
+          <p class="text-theme-accent-soft mb-4">{{ t('resume.greeting') }}<span class="text-theme-text">_</span></p>
           <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-theme-code-tag leading-none text-balance" :lang="resumeContentLang">
             {{ hero.fullName }}
           </h1>
