@@ -22,7 +22,7 @@
     "findMeIn": "Tìm mình ở:"
   },
   "resume": {
-    "greeting": "Xin chào! Tôi là",
+    "greeting": "$ whoami",
     "aboutMeHeading": "Giới thiệu",
     "downloadCv": "Tải CV",
     "downloadingCv": "Đang tải CV…",
