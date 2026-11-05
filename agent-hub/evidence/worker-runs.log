@@ -122,3 +122,8 @@
 2026-11-05T11:33:32Z role=verifier outcome=SEAL node=ats-pdf-address-label rerun=partial hub_bytes_before=80619 hub_bytes_after=79769
 2026-11-05T11:36:59Z role=verifier outcome=SEAL node=ats-pdf-skills-heading rerun=partial hub_bytes_before=80619 hub_bytes_after=79771
 2026-11-05T11:48:28Z role=implementer outcome=blocked node=visit-ip-geo-check hub_bytes_before=79769 verifier_rerun=n/a
+2026-11-05T12:36:06Z role=verifier outcome=SEAL node=resume-hr-view rerun=partial hub_bytes_before=80626 hub_bytes_after=80606
+2026-11-05T12:46:12Z role=verifier outcome=REOPEN node=resume-hr-emphasis rerun=none hub_bytes_before=80606 hub_bytes_after=81374
+2026-11-05T12:49:39Z role=verifier outcome=SEAL node=resume-hr-emphasis rerun=none hub_bytes_before=80606 hub_bytes_after=80596
+2026-11-05T12:49:39Z role=verifier outcome=SEAL node=resume-hr-skills-table rerun=none hub_bytes_before=81374 hub_bytes_after=80596
+2026-11-05T12:53:39Z role=verifier outcome=SEAL node=resume-hr-icons-exp rerun=none hub_bytes_before=80596 hub_bytes_after=80592

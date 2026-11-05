@@ -11,6 +11,7 @@ const sections = [
   { key: 'education', label: 'educations.json', icon: 'heroicons:queue-list' },
   { key: 'languages', label: 'languages.json', icon: 'heroicons:queue-list' },
 ]
+const resumeView = useResumeView()
 const route = useRoute()
 const router = useRouter()
 const active = ref(sections[0]!.key)
@@ -45,7 +46,8 @@ onMounted(() => {
   <div class="clearfix font-theme-mono">
     <ThemeResumeObjectHero />
 
-    <div class="mt-4">
+    <ThemeResumeObjectHr v-if="resumeView === 'hr'" class="mt-4" />
+    <div v-else class="mt-4">
       <ThemePanel>
         <template #filetab>
           <span ref="fileTab" class="flex items-center gap-2 scroll-mt-3" translate="no">
