@@ -1,8 +1,8 @@
 # Dev / HR resume view toggle
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-view-toggle-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #422
 - Anchors: `composables/useResumeView.ts`, `themes/portfolio-dev/layout/Header.vue`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hr.vue`
 
 ## Goal
@@ -52,11 +52,12 @@ to a plain, conventional resume layout.
 ## Open questions
 1. Should the HR choice survive a reload or be linkable (e.g. `?view=hr`)?
    Today it deliberately does not (ISR comment in `useResumeView.ts`), but a
-   recruiter sharing the link gets the Dev view.
+   recruiter sharing the link gets the Dev view. → **Answer (operator 2026-11-07):** Change: `?view=hr`, applied after mount like `?tab` — #422
 2. The toggle is shown on every page, even where it has no local effect;
-   intended (it doubles as a shortcut to `/` in HR view)?
+   intended (it doubles as a shortcut to `/` in HR view)? → **Answer (operator 2026-11-07):** Intended
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-view-toggle-spec.md` | - |

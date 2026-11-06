@@ -1,8 +1,8 @@
 # Keyboard navigation and shortcut help
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/keyboard-navigation-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #438
 - Anchors: `themes/portfolio-dev/components/KeyNav.vue`, `themes/portfolio-dev/components/Kbd.vue`, `themes/portfolio-dev/layout/Header.vue`, `app.config.ts`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hero.vue`, `themes/portfolio-dev/pages/github/GitRepos.vue`, `app.vue`
 
 ## Goal
@@ -49,10 +49,11 @@ without a mouse.
 
 ## Open questions
 1. The `?` header button is hidden below `lg`, so on tablets/phones with a
-   keyboard the help is reachable only via `?`. Intended?
-2. `c` (Contact me on `/`) and `gc` (global contact) both exist. Keep both?
+   keyboard the help is reachable only via `?`. Intended? → **Answer (operator 2026-11-07):** Intended
+2. `c` (Contact me on `/`) and `gc` (global contact) both exist. Keep both? → **Answer (operator 2026-11-07):** Change: keep only `gc`, drop the `c` shortcut — #438
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/keyboard-navigation-spec.md` | - |

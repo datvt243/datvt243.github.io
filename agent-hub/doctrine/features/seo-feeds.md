@@ -1,8 +1,8 @@
 # SEO feeds: RSS, sitemap, robots
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/seo-feeds-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #425, #433
 - Anchors: `server/routes/rss.xml.ts`, `server/routes/sitemap.xml.ts`, `server/routes/robots.txt.ts`, `server/utils/siteUrl.ts`, `server/utils/cacheGetPost.ts`, `nuxt.config.ts`
 
 ## Goal
@@ -42,13 +42,14 @@ Search engines and feed readers discover the site's pages and blog posts.
 
 ## Open questions
 1. The sitemap has no `/en/*` URLs. Should English pages be listed (or via
-   hreflang alternates in the sitemap)?
+   hreflang alternates in the sitemap)? → **Answer (operator 2026-11-07):** Bug — #425
 2. `/blogs` is in the sitemap though it is deliberately out of the nav.
-   Intended?
+   Intended? → **Answer (operator 2026-11-07):** Intended
 3. The RSS channel title/description and `language` are fixed (`vi`) while
-   the description text is English. Intended?
+   the description text is English. Intended? → **Answer (operator 2026-11-07):** Bug: Vietnamese description — #433
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/seo-feeds-spec.md` | - |

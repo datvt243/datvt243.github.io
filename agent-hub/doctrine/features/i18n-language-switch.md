@@ -1,8 +1,8 @@
 # Language switch (vi / en)
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/i18n-language-switch-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #417, #424, #425, #426
 - Anchors: `nuxt.config.ts`, `i18n/locales/vi.json`, `i18n/locales/en.json`, `themes/portfolio-dev/layout/Header.vue`, `app.vue`, `composables/useResumeData.ts`, `server/utils/siteUrl.ts`
 
 ## Goal
@@ -49,15 +49,16 @@ Vietnamese or English.
    blog", the home sidebar `_contact.ts`), dropping `/en` readers to
    Vietnamese URLs. (Blog post links are relative `blogs/<id>` and do keep
    `/en`: live `/en/blogs` renders `href="/en/blogs/<id>"`.) Should every
-   internal link keep the locale?
+   internal link keep the locale? → **Answer (operator 2026-11-07):** Bug: every internal link keeps the locale — #424 (+ #417)
 2. `sitemap.xml` lists only the Vietnamese URLs (no `/en/*`). Intended (see
-   `seo-feeds.md`)?
+   `seo-feeds.md`)? → **Answer (operator 2026-11-07):** Bug: add /en/* — #425
 3. Some strings are hardcoded English outside i18n (FilterFolder "Clear
    filters", ListRender "No data"/"loading ...", category aria-label,
-   contact mail subject). Translate them, or intentional?
+   contact mail subject). Translate them, or intentional? → **Answer (operator 2026-11-07):** Bug: translate — #426
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/i18n-language-switch-spec.md` | - |

@@ -1,8 +1,8 @@
 # Blog post detail with comments
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/blog-post-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #416, #421, #424, #431, #432
 - Anchors: `pages/blogs/[id].vue`, `server/api/blogs/detail/[id].ts`, `server/utils/sanitizePostHtml.ts`, `server/utils/blogSchemas.ts`, `themes/portfolio-dev/pages/post/Detail.vue`, `themes/portfolio-dev/pages/post/Author.vue`, `themes/portfolio-dev/pages/post/Comments.vue`, `nuxt.config.ts`
 
 ## Goal
@@ -56,25 +56,26 @@ Discussions (Giscus).
 
 ## Open questions
 1. `Detail.vue` hardcodes `<time datetime="2023-08-05T00:00:00.000Z">` for
-   every post instead of the post's `createdAt`. Bug?
+   every post instead of the post's `createdAt`. Bug? → **Answer (operator 2026-11-07):** Bug: use createdAt — #431
 2. "Back to the blog" links to `/blogs` without `localePath`, so `/en` readers
-   go back to the Vietnamese list. Bug?
+   go back to the Vietnamese list. Bug? → **Answer (operator 2026-11-07):** Bug — #424
 3. The detail cache uses `name: 'api-resume'` (same name as the resume
-   handler; keys differ: `api-post-<id>`). Copy-paste leftover — rename?
+   handler; keys differ: `api-post-<id>`). Copy-paste leftover — rename? → **Answer (operator 2026-11-07):** Change: rename — #431
 4. The "Missing ID" branch in the detail API returns a 200 with
    `status: false`; route validation makes it unreachable from the page.
-   Keep or remove?
+   Keep or remove? → **Answer (operator 2026-11-07):** Change: remove — #431
 5. Giscus `mapping: pathname` means `/blogs/<id>` and `/en/blogs/<id>` get
-   two separate discussion threads. Intended?
+   two separate discussion threads. Intended? → **Answer (operator 2026-11-07):** Change: one thread per post id — #432
 6. A post content edit can take up to 12 days to show (detail cache maxAge).
-   Intended?
+   Intended? → **Answer (operator 2026-11-07):** Change: ~1h — #421
 7. The detail API's upstream `$fetch` has no `timeout`; with the blog API
    cold, live `/blogs/does-not-exist` and `/api/blogs/detail/does-not-exist`
    returned Vercel's raw `504 FUNCTION_INVOCATION_TIMEOUT` (404 once warm).
-   Add a bounded timeout like the posts list (6s)?
+   Add a bounded timeout like the posts list (6s)? → **Answer (operator 2026-11-07):** Bug — #416
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/blog-post-spec.md` | - |

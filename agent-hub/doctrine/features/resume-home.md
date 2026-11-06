@@ -1,8 +1,8 @@
 # Resume home page
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-home-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #417, #419, #420, #421
 - Anchors: `pages/index.vue`, `composables/useResumeData.ts`, `stores/resume.ts`, `server/api/resume.ts`, `server/utils/fetchResume.ts`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hero.vue`, `themes/portfolio-dev/pages/resumeObject/Experiences.vue`, `themes/portfolio-dev/pages/resumeObject/Educations.vue`, `themes/portfolio-dev/pages/resumeObject/Skills.vue`, `themes/portfolio-dev/pages/resumeObject/Languages.vue`, `nuxt.config.ts`
 
 ## Goal
@@ -90,20 +90,21 @@ code-editor look: who he is, what he has done, what he knows.
 ## Open questions
 1. `pages/index.vue` renders an empty page (no message) when the API returns
    200 with an empty `resume` object (`isValid` false). Intended, or should it
-   be an error/empty state?
+   be an error/empty state? → **Answer (operator 2026-11-07):** Bug: show an empty/error state — #419
 2. `certificates`, `awards` and `career` are whitelisted and sent to the
    browser but not shown on the page (the PDF uses certificates/awards).
-   Intended?
+   Intended? → **Answer (operator 2026-11-07):** Change: show them on the page, a section with no data is hidden — #420
 3. `/api/resume` on Vercel ISR allows only the `lang` query (60s); the
    handler itself caches 12 days. Is the 12-day server cache the intended
-   max staleness after a backend edit?
+   max staleness after a backend edit? → **Answer (operator 2026-11-07):** Change: shorten to ~1h — #421 (#379 only fixed the browser cache)
 4. The sidebar `_contact.ts` link in `themes/portfolio-dev/pages/resumeObject/Index.vue`
    is `to="/contact"` (no `localePath`); live `/en` renders `href="/contact"`,
    dropping English readers to the Vietnamese page (the hero "Contact me" uses
-   `localePath`). Bug?
+   `localePath`). Bug? → **Answer (operator 2026-11-07):** Bug — #417
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-home-spec.md` | - |
