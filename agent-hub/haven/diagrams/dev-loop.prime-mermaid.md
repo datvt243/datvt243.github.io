@@ -79,8 +79,6 @@ PM status directly to "undo" an existing SEAL.
 | `visit-local-count` | PENDING | 2026-11-05 — #389. Acceptance: (1) root cause stated, quoted from evidence; (2) local visits counted, or the non-count documented as intended (code comment / CLAUDE.md). App side ruled out: dev server against a mock backend → browser POST /api/visit 204 → relay POST `/api/me/<email>/visit` with `x-forwarded-for: ::1`. Backend v2.6.1 `handlerRecordVisit` + Visit model have no IP filter. Blocked on: seeing what the real backend stored for a local visit (Atlas MCP disabled for the org). Evidence: `evidence/implementer/2026-11-05/visit-local-count-plan.md`. |
 | `pdf-filename-lang` | SEALED | 2026-11-06 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-06/pdf-filename-lang-seal.md`. |
 | `pdf-project-sort` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/pdf-project-sort-seal.md`. |
-| `experience-pug-piped` | SEALED | 2026-11-02 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-02/experience-pug-piped-seal.md`. |
-| `script-csp-enforce` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/script-csp-enforce-seal.md`. |
 | `resume-plain-mappers` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-plain-mappers-seal.md`. |
 | `api-cache-revalidate` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/api-cache-revalidate-seal.md`. |
 | `hero-greeting-whoami` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-greeting-whoami-seal.md`. |
@@ -97,3 +95,5 @@ PM status directly to "undo" an existing SEAL.
 | `resume-hr-icons-exp` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/resume-hr-icons-exp-seal.md`. |
 | `hero-download-shortcut-D` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/hero-download-shortcut-D-seal.md`. |
 | `pdf-cv-filename` | SEALED | 2026-11-05 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-05/pdf-cv-filename-seal.md`. |
+| `skill-icons-390` | SEALED | 2026-11-06 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-06/skill-icons-390-seal.md`. |
+| `hr-exp-past-icon` | SEALED | 2026-11-06 — archived, see `haven/diagrams/dev-loop-archive.md`. Evidence: `evidence/verifier/2026-11-06/hr-exp-past-icon-seal.md`. |
