@@ -27,6 +27,7 @@ the root `CLAUDE.md`'s content.
   receives code from `staging`, via `/release` or a manual
   `staging`→`main` PR — never directly from a `bug/*`/`feature/*` branch.
   (As of 2026-08-30 — see Decisions table below.)
+- Branch naming: `bug/<issue_number>` | `feature/<issue_number>` (kept over kit default)
 - **`bug/*` and `feature/*` branches may both be deleted after merging**
   (as of 2026-08-30 — operator explicitly changed this from the old
   `feature/*`-never-deleted convention, see Decisions table below).

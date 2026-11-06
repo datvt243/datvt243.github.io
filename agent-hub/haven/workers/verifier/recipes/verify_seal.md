@@ -113,6 +113,12 @@ so every hub doesn't reason about it differently.
    Enforcement), even if the node's own criteria don't list it. Also: an open row for the same issue exists on the
    active diagram but the note has no `## Supersedes`/`## Still open`
    line for it → REOPEN (implement step 7b skipped).
+6b. Feature doc: the note has no `## Feature doc` line → REOPEN
+   (`pick_next` 5b skipped). It cites a doc → read that ONE doc: every
+   criterion in its `## Acceptance criteria` (feat) or the cited
+   `Behavior #N` (fix) needs evidence like any node criterion. A
+   `## Feature doc changed` line without the operator's recorded answer
+   → REOPEN.
 7. Scan all 5 forbidden states.
 8. Check the SEAL GATE — was approval recorded in the note if the diff
    was outward-facing?
@@ -131,7 +137,11 @@ so every hub doesn't reason about it differently.
    note lists under `## Supersedes`: append it verbatim to the archive
    under a heading `## Superseded by \`<this node>\` (<date>)`, then
    delete it from the active file — no pointer (this node's row is the
-   trail). Part of SEAL itself,
+   trail); (e) if this node is the `feat` that implements a cited
+   `draft` doc: set its `Status:` line to `verified — verified by <this
+   verdict note path>`, same in its `doctrine/features/INDEX.md` row. A
+   fix SEAL proves one Behavior item, not the whole doc — it leaves a
+   backfilled doc's status as is. Part of SEAL itself,
    not a separate maintenance pass — the acceptance criteria written on
    the node during implementation stop costing boot tokens the moment
    the node is sealed.

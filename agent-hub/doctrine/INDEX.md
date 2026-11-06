@@ -13,13 +13,15 @@
 | `standards/recipes.md` | What a recipe is, when to write one | The 2nd time you repeat a process |
 | `standards/initiative-scoping.md` | Measure exhaustively by rule+file before/after a multi-phase count-based initiative | Before carving up any "clean up X across the codebase" effort into phases |
 | `standards/code-comments.md` | What a source comment may say + its style, plus project opt-ins (file header, object params) | Before writing/changing any comment or function signature |
+| `features/INDEX.md` → 1 `features/<slug>.md` | Intended behavior per feature (`draft` = spec in progress, only `verified` counts as truth) | Before specifying a feature or fixing a bug in one — on demand, never all |
 
-## The three kinds of knowledge here
+## The four kinds of knowledge here
 | Kind | Home | Example |
 |---|---|---|
 | About the hub | `SOUL.md` / `MEMORY.md` | The exact test command |
 | About the domain/project | `domains/<project>.md` | An invariant specific to this project |
 | About how to work | `standards/*.md` | The mandatory recipe format |
+| About what a feature should do | `features/<slug>.md` | "Expired sessions redirect to /login, keeping the return URL" |
 
 A fact living in the wrong drawer is a fact no one trusts.
 

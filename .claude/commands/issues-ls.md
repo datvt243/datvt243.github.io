@@ -45,9 +45,14 @@ a GitHub repo — no writes, no approval gate needed.
      (`[QC]`, `[TEST]`, `[ENHANCEMENT]`…) — it marks a campaign/feature, so
      related issues (e.g. a QC round's findings) sit together. Each group
      gets its own `### <TAG>` heading + table, in order of first appearance;
-     titles without a tag go last under `### Other`. No title has a tag →
-     one plain table, no headings. Strip the group tag and the priority tag
+     titles without a tag go under `### Other`. No title has a tag →
+     one plain table, no headings (besides `done-dev` below). Strip the group tag and the priority tag
      from the Title cell (the heading/Priority column already show them).
+   - **`done-dev` issues (step 4) are pulled out of their tag group** into
+     one `### done-dev` group, placed after every other group (incl.
+     `Other`) — they're finished, not active work. In that group keep the
+     group tag in the Title cell (no heading shows it). Only `done-dev`
+     issues → that one group, still with its heading.
    - **Issue number** is plain `#123` — no URL column, no markdown link.
    - **Priority**, first match wins:
      1. A `priority: <level>` label (case-insensitive) → Jira's levels
