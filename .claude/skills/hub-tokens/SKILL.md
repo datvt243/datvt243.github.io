@@ -31,7 +31,7 @@ ROOT="."
 HUB="$ROOT/agent-hub"
 
 bytes_glob() { find $1 -maxdepth "${2:-99}" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.yml" \) 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' '; }
-bytes_glob_exclude() { find "$1" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.yml" \) ! -iname "*archive*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' '; }
+bytes_glob_exclude() { find "$1" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.yml" \) ! -iname "*archive*" ! -path "*/doctrine/features/*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' '; }
 row() { local label="$1" b="$2"; local t=$(( b / 4 )); printf "  %-40s %9d B  ~%8d tok\n" "$label" "$b" "$t"; }
 check_threshold_bytes() {
   local label="$1" b="$2" threshold="$3" hint="$4"
@@ -57,13 +57,15 @@ DOCTRINE_B=$(bytes_glob_exclude "$HUB/doctrine")
 DIAG_ACTIVE_B=$(bytes_glob_exclude "$HUB/haven/diagrams")
 IMPL_B=$(bytes_glob "$HUB/haven/workers/implementer")
 VERIF_B=$(bytes_glob "$HUB/haven/workers/verifier")
+ANALYST_B=$(bytes_glob "$HUB/haven/workers/analyst")
 row "root files (NORTHSTAR/CLAUDE/etc)" "$ROOT_B"
-row "doctrine/" "$DOCTRINE_B"
+row "doctrine/ (minus features/)" "$DOCTRINE_B"
 row "haven/diagrams/ (active file only)" "$DIAG_ACTIVE_B"
 row "haven/workers/implementer/" "$IMPL_B"
 row "haven/workers/verifier/" "$VERIF_B"
-SESSION_B=$(( ROOT_B + DOCTRINE_B + DIAG_ACTIVE_B + IMPL_B + VERIF_B ))
-row "= per-session total (implementer or verifier boot load)" "$SESSION_B"
+row "haven/workers/analyst/" "$ANALYST_B"
+SESSION_B=$(( ROOT_B + DOCTRINE_B + DIAG_ACTIVE_B + IMPL_B + VERIF_B + ANALYST_B ))
+row "= per-session total (any worker boot load)" "$SESSION_B"
 echo
 echo "COLD STORAGE (opened on demand only, NOT re-read wholesale by"
 echo "pick_next/verify_seal — large size here is not a recurring cost):"
@@ -71,15 +73,19 @@ ARCHIVE_B=$(find "$HUB/haven/diagrams" -type f -iname "*archive*" 2>/dev/null -e
 DOCTRINE_ARCHIVE_B=$(find "$HUB/doctrine" -type f -iname "*archive*" 2>/dev/null -exec cat {} + 2>/dev/null | wc -c | tr -d ' ')
 EVI_I_B=$(bytes_glob "$HUB/evidence/implementer")
 EVI_V_B=$(bytes_glob "$HUB/evidence/verifier")
+EVI_A_B=$(bytes_glob "$HUB/evidence/analyst")
+FEATURES_B=$(bytes_glob "$HUB/doctrine/features")
 TODO_LOG_B=$([ -f "$HUB/evidence/worker-runs.log" ] && wc -c < "$HUB/evidence/worker-runs.log" | tr -d ' ' || echo 0)
 TODO_LOG_ARCHIVE_B=$([ -f "$HUB/evidence/worker-runs-archive.log" ] && wc -c < "$HUB/evidence/worker-runs-archive.log" | tr -d ' ' || echo 0)
 row "haven/diagrams/*archive*" "$ARCHIVE_B"
 row "doctrine/**/*archive*" "$DOCTRINE_ARCHIVE_B"
 row "evidence/implementer/" "$EVI_I_B"
 row "evidence/verifier/" "$EVI_V_B"
+row "evidence/analyst/" "$EVI_A_B"
+row "doctrine/features/ (1 doc per task)" "$FEATURES_B"
 row "evidence/worker-runs.log" "$TODO_LOG_B"
 row "evidence/worker-runs-archive.log" "$TODO_LOG_ARCHIVE_B"
-COLD_B=$(( ARCHIVE_B + DOCTRINE_ARCHIVE_B + EVI_I_B + EVI_V_B + TODO_LOG_B + TODO_LOG_ARCHIVE_B ))
+COLD_B=$(( ARCHIVE_B + DOCTRINE_ARCHIVE_B + EVI_I_B + EVI_V_B + EVI_A_B + FEATURES_B + TODO_LOG_B + TODO_LOG_ARCHIVE_B ))
 row "= cold storage total" "$COLD_B"
 echo
 TOTAL_B=$(( SESSION_B + COLD_B ))
@@ -184,7 +190,8 @@ if you need the real per-session number under sharding, sum
   worker reads before touching any code. This is the number that actually
   compounds: every subagent spawned for a verify pass pays it again, from
   zero, with no cache reuse across separate agent contexts.
-- **Cold storage** — `evidence/` and archived rows from the diagram,
+- **Cold storage** — `evidence/`, `doctrine/features/` (1 doc opened
+  per task via its INDEX), and archived rows from the diagram,
   `PROJECT.md`, and `worker-runs.log`. Large here is normal and not itself
   a problem: `/boot` and `pick_next` only touch a handful of the most
   recent evidence notes, not the whole directory. Only worth worrying

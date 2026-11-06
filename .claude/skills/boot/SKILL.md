@@ -32,8 +32,8 @@ during this step — read and report only.
    ONLY `index.md` + the epic file(s) marked `active: true` in it, not
    every epic. Report node counts from those only; other epics exist but
    are out of scope for this session's status line.
-6. Read `agent-hub/haven/workers/` — confirm there are exactly 2 workers:
-   implementer, verifier.
+6. Read `agent-hub/haven/workers/` — confirm there are exactly 3 workers:
+   analyst, implementer, verifier.
 7. Read at most the 5 most recent evidence notes (newest file by date) in
    `agent-hub/evidence/implementer/` and `agent-hub/evidence/verifier/`. If
    a directory is empty, note "no evidence notes yet". To list them, use
@@ -54,7 +54,7 @@ during this step — read and report only.
 🎯 Northstar: <one sentence from NORTHSTAR.md>
 ✅ Forbidden: <none active | name of the active state, if any>
 📊 Diagrams: <N nodes = X sealed, Y pending, Z in_progress>
-🔧 Workers: implementer, verifier
+🔧 Workers: analyst, implementer, verifier
 📝 Last action: <node — SEAL|REOPEN, date, short quote from the latest evidence note, or "none yet">
 🚧 Blockers: <list of open <<FILL>> in doctrine/MEMORY.md or doctrine/domains/PROJECT.md, or "none">
 ```
@@ -68,7 +68,8 @@ during this step — read and report only.
   `doctrine/domains/PROJECT.md`, `haven/diagrams/dev-loop.prime-mermaid.md`)
   can't be read, stop immediately and report the error instead of guessing
   its content.
-- After the report, be ready to take `/worker implementer "<task>"`,
+- After the report, be ready to take `/worker analyst "<task>"`,
+  `/worker implementer "<task>"`,
   `/worker verifier "<task>"`, `/todo "<task>"` (or `/todo #<issue>`), or
   `/ship`.
 - If step 5 flags the active diagram over ~15KB (or `/hub-tokens` reports

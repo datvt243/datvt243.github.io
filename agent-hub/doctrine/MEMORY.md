@@ -44,7 +44,7 @@ the real `npm test` output, and never as the whole verification.
 | State | Pinia (`stores/`) |
 
 ## The default way to work
-`/boot` → `/worker implementer "<task>"` → `/worker verifier "<task>"` (or
+`/boot` → (`feat`, or a fix with no feature doc: `/worker analyst "<task>"`) → `/worker implementer "<task>"` → `/worker verifier "<task>"` (or
 combined as `/todo "<task>"`). Never skip the `/boot` step in a cold
 session, never skip the real build+lint+typecheck+test step before reporting
 `sealed_pending_verifier`.
@@ -52,6 +52,7 @@ session, never skip the real build+lint+typecheck+test step before reporting
 ## Workers
 | wid | Role | Actions | Seal actions |
 |---|---|---|---|
+| analyst | Business analyst | spec_feature | — |
 | implementer | Implementer | pick_next, implement | — |
 | verifier | Verifier | verify_seal | SEAL, REOPEN |
 

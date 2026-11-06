@@ -1,6 +1,6 @@
 ---
 name: worker
-description: Trở thành implementer hoặc verifier trong agent-hub của datvt243.github.io, làm theo recipe của vai trò đó, dừng ở SEAL gate. Trigger: /worker <implementer|verifier> "<task>"
+description: Trở thành analyst, implementer hoặc verifier trong agent-hub của datvt243.github.io, làm theo recipe của vai trò đó, dừng ở SEAL gate. Trigger: /worker <analyst|implementer|verifier> "<task>"
 ---
 
 # /worker <wid> "<task>"
@@ -26,6 +26,16 @@ không suy luận verdict của node này từ node khác.
 > danh tính subagent riêng của lượt này (khác implementer's), để 1 audit
 > sau này có thể phát hiện nếu bước tách context bị bỏ qua, thay vì phải
 > tin lời tự khai.]
+
+> **`analyst`** (BA, kit 2026-11-06): MUST run as a **separate subagent**
+> (Agent tool, blank context). The subagent loads
+> `agent-hub/haven/workers/analyst/` (`manifest.yaml`, `SOUL.md`,
+> `recipes/spec_feature.md` — no MEMORY.md) and gets the task (issue title
+> + body) plus any operator answers from a previous round. Returns
+> `spec_ready` | `needs_input` (relay its questions to the operator
+> verbatim, never answer them yourself; re-run with the answers) |
+> `no_feature` | `blocked`. Backfill an existing feature by hand:
+> `/worker analyst "document <feature>"`.
 
 ## 1. Load the bundle — all of it
 Đọc TOÀN BỘ `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,

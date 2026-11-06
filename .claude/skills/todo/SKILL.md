@@ -1,6 +1,6 @@
 ---
 name: todo
-description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "<task>"|#<issue-number> [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
+description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker analyst (feature, hoặc bug chưa có feature doc) + /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "<task>"|#<issue-number> [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
 argument-hint: "<task>|#<issue-number> [--ship]"
 ---
 
@@ -56,6 +56,20 @@ lượt tách biệt.
       operator trước khi tiếp tục — đây là báo cáo, KHÔNG phải gate phê
       duyệt thứ 2; gate phê duyệt thật duy nhất trong cả chuỗi `/todo` vẫn
       là bước push của `/ship` ở cuối.
+1b. **Pass 0 — analyst** (kit 2026-11-06): run `/worker analyst "<task>"`
+   (separate subagent) BEFORE pass 1 when:
+   - the issue is a feature (label `enhancement`/`feature`, else title
+     starts with add/implement/support; unclear → ask) — spec mode; skip when resuming and the issue's doc in
+     `agent-hub/doctrine/features/` already exists with no unanswered open
+     question;
+   - the issue is a bug (label `bug`, else title starts with fix/bug) and
+     `agent-hub/doctrine/features/INDEX.md` has no row for the area/issue —
+     backfill mode (`"document the feature touched by: <task>"`);
+   - anything else → skip.
+   `spec_ready`/`no_feature` → continue. `needs_input` → show its
+   questions to the operator verbatim, wait, re-run pass 0 with the
+   answers — never answer them yourself, never start pass 1 with a
+   question open. `blocked` → stop, report.
 2. **Lượt 1 — implementer**: chạy đúng quy trình `/worker implementer
    "<task>"` (load bundle → become → pick_next → implement → build+lint+typecheck+test
    thật → evidence note), đã đứng trên branch từ bước 1. Dừng ở

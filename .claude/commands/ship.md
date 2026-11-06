@@ -58,6 +58,11 @@ Ship the pending changes in this repo, in this order:
    d. Report the PR URL and the merge result (squash commit SHA on
       `staging`). Note that this does NOT touch `main` — run `/release`
       separately to promote `staging` into `main`.
+   e. **Return to working branch** (`ReturnToWorkingBranch`, kit
+      2026-11-06): once the merge is confirmed by real output, `git
+      checkout staging && git pull --ff-only` without asking (local-only)
+      and report `git branch --show-current`. Checkout fails → report the
+      real error, stay put, never force/stash/discard.
 
 If there is nothing to commit (clean working tree), say so and stop after
 step 1.
