@@ -20,6 +20,7 @@ describe('fetchResume', () => {
       data: {
         firstName: 'Dat',
         email: 'me@test',
+        cvFileName: 'Vo Tan Dat CV',
         salary: 1000,
         birthday: 1,
         gender: 'x',
@@ -32,6 +33,7 @@ describe('fetchResume', () => {
     expect(data).toEqual({
       firstName: 'Dat',
       email: 'me@test',
+      cvFileName: 'Vo Tan Dat CV',
       generalInformation: [{ positionDesired: 'Frontend', mainSkills: [{ name: 'Vue' }], familiarSkills: [{ name: 'Go' }] }],
     })
   })

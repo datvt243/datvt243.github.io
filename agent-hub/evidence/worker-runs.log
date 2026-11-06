@@ -129,3 +129,8 @@
 2026-11-05T12:53:39Z role=verifier outcome=SEAL node=resume-hr-icons-exp rerun=none hub_bytes_before=80596 hub_bytes_after=80592
 2026-11-05T15:52:16Z role=implementer outcome=blocked node=visit-local-count hub_bytes_before=80592 verifier_rerun=n/a
 2026-11-05T16:04:37Z role=verifier outcome=SEAL node=hero-download-shortcut-D rerun=none hub_bytes_before=81194 hub_bytes_after=81192
+2026-11-05T16:52:52Z role=verifier outcome=SEAL node=pdf-cv-filename rerun=none hub_bytes_before=81192 hub_bytes_after=81180
+2026-11-05T16:59:03Z role=verifier outcome=SEAL node=pdf-project-sort rerun=full hub_bytes_before=81180 hub_bytes_after=81168
+2026-11-05T17:04:14Z role=verifier outcome=SEAL node=pdf-filename-lang rerun=full hub_bytes_before=81168 hub_bytes_after=81170
+2026-11-05T17:24:51Z role=verifier outcome=SEAL node=skill-icons-390 rerun=none hub_bytes_before=81170 hub_bytes_after=81160
+2026-11-05T21:43:25Z role=verifier outcome=SEAL node=hr-exp-past-icon rerun=none hub_bytes_before=81170 hub_bytes_after=81156

@@ -32,6 +32,7 @@ function careerBreakTitle(type: string) {
           <h3 class="hr-title flex items-start gap-2">
             <UIcon v-if="el.isCareerBreak" name="heroicons:pause-circle" class="hr-title-icon text-theme-muted" aria-hidden="true" />
             <UIcon v-else-if="el.isCurrent" name="heroicons:briefcase" class="hr-title-icon text-theme-accent" aria-hidden="true" />
+            <UIcon v-else name="heroicons:briefcase" class="hr-title-icon text-theme-muted" aria-hidden="true" />
             <span>{{ el.isCareerBreak ? careerBreakTitle(el.careerBreakType) : el.position }}</span>
           </h3>
           <time class="text-sm text-theme-muted shrink-0">{{ el.dateRangeLabel }}</time>

@@ -6,6 +6,7 @@
 import type { Resume, GeneralInformation } from '@/types'
 import type { EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/utils/ResumeAdapter'
 import { toEducation, toExperience, toHero, toLanguage, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
+import { compareProjects } from '@/utils/sortProjects'
 
 export const useResumeStore = defineStore('resume', {
   state: () => ({
@@ -40,8 +41,7 @@ export const useResumeStore = defineStore('resume', {
       return (educations || []).map(toEducation)
     },
     projects({ resume: { projects } }): ProjectModel[] {
-      /** Most recent first, same as `experiences`; entries without a startDate sink to the end. */
-      return [...(projects || [])].sort((a, b) => (b.startDate || 0) - (a.startDate || 0)).map(toProject)
+      return [...(projects || [])].sort(compareProjects).map(toProject)
     },
     foreignLanguages(): LanguageModel[] {
       return ((this.generalInformation as GeneralInformation).foreignLanguages || []).map(toLanguage)

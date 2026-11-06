@@ -85,6 +85,9 @@ export interface Project extends BaseDocument {
   endDate: number
   candidateId: string
   technology: string[]
+  /** Missing on older records → treated as `personal`. */
+  type?: 'company' | 'personal'
+  experienceId?: string | null
 }
 
 export interface Information extends BaseDocument {
@@ -99,6 +102,8 @@ export interface Information extends BaseDocument {
   lastName: string
   marital: boolean
   socialMedia: SocialMedia
+  /** Owner-chosen CV download filename; empty → the PDF falls back to `<Full-Name>-CV`. */
+  cvFileName?: string
 }
 
 export interface Resume extends Information {
