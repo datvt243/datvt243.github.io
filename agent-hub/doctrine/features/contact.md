@@ -1,8 +1,8 @@
 # Contact page
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/contact-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #426, #437
 - Anchors: `pages/contact.vue`, `themes/portfolio-dev/pages/contact/Index.vue`, `app.config.ts`, `nuxt.config.ts`
 
 ## Goal
@@ -46,14 +46,15 @@ form.
 
 ## Open questions
 1. The mail subject is always English ("Portfolio contact from …") even on
-   the Vietnamese page. Intended?
+   the Vietnamese page. Intended? → **Answer (operator 2026-11-07):** Bug — #426
 2. `contact.google_map` exists in `app.config.ts` but nothing renders it.
-   Remove, or should the page show a map?
+   Remove, or should the page show a map? → **Answer (operator 2026-11-07):** Change: remove — #437
 3. Labels `_name:`/`_email:`/`_message:` and the button `submit-message` are
    untranslated (code-metaphor). Confirm that is deliberate like the nav tab
-   names.
+   names. → **Answer (operator 2026-11-07):** Intended (code-metaphor, like nav tab names)
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/contact-spec.md` | - |

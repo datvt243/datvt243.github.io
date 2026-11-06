@@ -1,6 +1,6 @@
 # Light/dark color mode
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/color-mode-spec.md`
 - Source: backfill from code
 - Issues: -
 - Anchors: `nuxt.config.ts`, `themes/portfolio-dev/layout/Header.vue`, `themes/portfolio-dev/tokens.css`, `themes/portfolio-dev/settings-colors-theme/dark.css`, `themes/portfolio-dev/settings-colors-theme/light.css`, `themes/portfolio-dev/settings-colors-theme/editor-dracula.css`, `server/plugins/RenderHTML.ts`, `app.vue`, `themes/portfolio-dev/pages/post/Comments.vue`
@@ -47,11 +47,12 @@ keeps a Dracula-like code look in both.
 
 ## Open questions
 1. The site ignores the OS color preference on first visit (always dark).
-   Intended, or should it follow `prefers-color-scheme`?
+   Intended, or should it follow `prefers-color-scheme`? → **Answer (operator 2026-11-07):** Intended
 2. The toggle has no visible text, only an icon + aria-label. Fine for the
-   design?
+   design? → **Answer (operator 2026-11-07):** Intended
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/color-mode-spec.md` | - |

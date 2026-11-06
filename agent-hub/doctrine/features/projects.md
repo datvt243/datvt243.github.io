@@ -1,8 +1,8 @@
 # Projects page with technology filter
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/projects-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #426, #434, #435
 - Anchors: `pages/projects.vue`, `themes/portfolio-dev/pages/projects/Index.vue`, `themes/portfolio-dev/components/FilterFolder.vue`, `utils/sortProjects.ts`, `stores/resume.ts`, `composables/useResumeData.ts`, `nuxt.config.ts`
 
 ## Goal
@@ -50,15 +50,16 @@ care about.
 ## Open questions
 1. Root `CLAUDE.md` says `/projects` has "none (no routeRule)", but
    `nuxt.config.ts` sets `isr: 60` for `/projects` and `/en/projects`. Which is
-   intended (the doc or the config)?
+   intended (the doc or the config)? → **Answer (operator 2026-11-07):** The config is right; fix CLAUDE.md — #434
 2. "Project <n>" renumbers when filtering (a project's number changes).
-   Intended?
+   Intended? → **Answer (operator 2026-11-07):** Intended
 3. The clear button's aria-label "Clear filters" in `FilterFolder.vue` is
-   hardcoded English, not i18n. Intended?
+   hardcoded English, not i18n. Intended? → **Answer (operator 2026-11-07):** Bug — #426
 4. The filter selection is not kept in the URL, so a filtered view can't be
-   shared. Wanted?
+   shared. Wanted? → **Answer (operator 2026-11-07):** Change: keep it in the URL — #435
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/projects-spec.md` | - |

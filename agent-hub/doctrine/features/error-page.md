@@ -1,8 +1,8 @@
 # Error and 404 page
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/error-page-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #418, #427, #428
 - Anchors: `error.vue`, `layouts/error.vue`, `composables/useResumeData.ts`, `themes/portfolio-dev/pages/github/Index.vue`, `pages/blogs/[id].vue`, `themes/portfolio-dev/pages/blogs/Index.vue`
 
 ## Goal
@@ -40,16 +40,17 @@ and ISR never caches the failure as a good page.
   errors to the console).
 
 ## Open questions
-1. `error.vue` keeps a large commented-out legacy block. Remove?
-2. The 404 page has no "Try again" button by design; confirm.
+1. `error.vue` keeps a large commented-out legacy block. Remove? → **Answer (operator 2026-11-07):** Change: remove — #427
+2. The 404 page has no "Try again" button by design; confirm. → **Answer (operator 2026-11-07):** Change: add it on 404 too — #428
 3. The error page has no site header/footer, so the language, theme and
-   dev/hr toggles and the keyboard shortcuts are unavailable there. Intended?
+   dev/hr toggles and the keyboard shortcuts are unavailable there. Intended? → **Answer (operator 2026-11-07):** Intended
 4. `error.vue` is rendered without `app.vue`, so `useLocaleHead` never runs:
    live `/en/does-not-exist` shows English text but `<html lang="vi">`
-   (the static `nuxt.config.ts` fallback). Bug?
+   (the static `nuxt.config.ts` fallback). Bug? → **Answer (operator 2026-11-07):** Bug — #418
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/error-page-spec.md` | - |

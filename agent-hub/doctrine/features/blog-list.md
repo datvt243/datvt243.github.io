@@ -1,8 +1,8 @@
 # Blog list with categories and pagination
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/blog-list-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #415, #416, #424, #426, #429, #430
 - Anchors: `pages/blogs/index.vue`, `layouts/blog.vue`, `themes/portfolio-dev/pages/blogs/Index.vue`, `themes/portfolio-dev/pages/post/Item.vue`, `themes/portfolio-dev/pages/post/Loading.vue`, `themes/portfolio-dev/components/PostCategories.vue`, `components/ListRender.vue`, `server/api/blogs/posts.ts`, `server/api/blogs/categories.ts`, `server/utils/cacheGetPost.ts`, `server/utils/blogSchemas.ts`, `app.config.ts`
 
 ## Goal
@@ -61,35 +61,36 @@ Readers browse the owner's blog posts, page by page, optionally by category.
 ## Open questions
 1. Pagination and the "Show:" selector change local state only — the URL
    (`?page`, `?per-page`) is not updated, so a page can't be linked and a
-   reload returns to page 1. Intended?
+   reload returns to page 1. Intended? → **Answer (operator 2026-11-07):** Bug: keep ?page and ?per-page in the URL — #429
 2. `fetchKey` in `themes/portfolio-dev/pages/blogs/Index.vue` is computed
    once from the initial values; after paging, the cache key no longer
-   matches the shown page. Intended, or should the key be reactive?
+   matches the shown page. Intended, or should the key be reactive? → **Answer (operator 2026-11-07):** Bug: reactive key — #429
 3. Category links (`/blogs?category=`) don't use `localePath`, so on
    `/en/blogs` a category click drops back to the Vietnamese URL. Bug? (Post
-   links are relative `blogs/<id>` and resolve to `/en/blogs/<id>` there.)
+   links are relative `blogs/<id>` and resolve to `/en/blogs/<id>` there.) → **Answer (operator 2026-11-07):** Bug — #424
 4. On a categories fetch error, both "couldn't load categories" and "No
-   categories" show (the `v-else` belongs to the list, not the error). Bug?
+   categories" show (the `v-else` belongs to the list, not the error). Bug? → **Answer (operator 2026-11-07):** Bug — #430
 5. Category link aria-label "View posts tagged <name>" and ListRender's
-   "No data" / "loading ..." are hardcoded English. Intended?
+   "No data" / "loading ..." are hardcoded English. Intended? → **Answer (operator 2026-11-07):** Bug — #426
 6. ListRender's 500ms delay is set once at mount, not per loading phase, so
-   later loads show skeletons immediately. Intended?
+   later loads show skeletons immediately. Intended? → **Answer (operator 2026-11-07):** Bug: per loading phase — #430
 7. The layout reads `per-page` but the API uses `perPage` / upstream
-   `per_page`. Confirm `?per-page` is the public URL name.
+   `per_page`. Confirm `?per-page` is the public URL name. → **Answer (operator 2026-11-07):** Intended (keep)
 8. Category filtering does not work live (2026-11-06): the upstream ignores
    `category` (`/api/blogs/posts?category=vue|javascript|zzz` all return the
    same 4 posts; every post has `categoryIds: null`), and `/blogs` is ISR
    without `allowQuery` (unlike `/api/resume`), so Vercel serves the cached
    `/blogs` for `/blogs?category=vue` (`x-vercel-cache: STALE`, no category
-   highlighted). Fix the routeRule, the upstream, or both?
+   highlighted). Fix the routeRule, the upstream, or both? → **Answer (operator 2026-11-07):** Bug — #415
 9. `/api/blogs/categories` (and the detail API) `$fetch` has no `timeout`,
    unlike posts (6s). With the blog API cold, live `/blogs`, `/en/blogs` and
    `/api/blogs/categories` returned Vercel's raw `504
    FUNCTION_INVOCATION_TIMEOUT` instead of the controlled 503/5xx. Add a
-   timeout?
+   timeout? → **Answer (operator 2026-11-07):** Bug — #416
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/blog-list-spec.md` | - |

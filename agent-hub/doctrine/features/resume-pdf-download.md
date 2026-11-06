@@ -1,8 +1,8 @@
 # Resume PDF download
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-pdf-download-spec.md`
 - Source: backfill from code
-- Issues: #29, #179, #198, #206
+- Issues: #29, #179, #198, #206, #423
 - Anchors: `composables/useDownloadResume.ts`, `server/api/generate-pdf.ts`, `server/utils/createPDFAts.ts`, `themes/portfolio-dev/pages/resumeObject/Hero.vue`
 
 ## Goal
@@ -61,15 +61,16 @@ PDF in the language they are reading.
 ## Open questions
 1. If Chrome fails during `page.setContent`/`page.pdf`, `browser.close()` is
    never called (no try/finally) — a possible leaked Chrome process per
-   failure. Intended to fix?
-2. The object URL created for the download is never revoked. Acceptable?
+   failure. Intended to fix? → **Answer (operator 2026-11-07):** Bug — #423
+2. The object URL created for the download is never revoked. Acceptable? → **Answer (operator 2026-11-07):** Bug — #423
 3. `useDownloadResume.ts`'s comment mentions an "About tab's own button", but
-   only `Hero.vue` uses the composable now. Is a second button still wanted?
+   only `Hero.vue` uses the composable now. Is a second button still wanted? → **Answer (operator 2026-11-07):** Intended: only one button; fix the comment — #423
 4. The 1-day in-memory cache means a backend resume edit can take up to a day
-   (per warm instance) to reach the PDF. Intended?
+   (per warm instance) to reach the PDF. Intended? → **Answer (operator 2026-11-07):** Intended
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-pdf-download-spec.md` | - |

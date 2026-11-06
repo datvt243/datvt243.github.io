@@ -1,8 +1,8 @@
 # GitHub profile and repositories
 
-- Status: draft
+- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/github-profile-spec.md`
 - Source: backfill from code
-- Issues: -
+- Issues: #436
 - Anchors: `pages/github.vue`, `server/api/github.ts`, `server/utils/fetchGithub.ts`, `themes/portfolio-dev/pages/github/Index.vue`, `themes/portfolio-dev/pages/github/GitUser.vue`, `themes/portfolio-dev/pages/github/GitRepos.vue`, `themes/portfolio-dev/pages/github/part/Item.vue`, `themes/portfolio-dev/components/FilterFolder.vue`, `composables/debounceRef.ts`
 
 ## Goal
@@ -51,15 +51,16 @@ filterable by language and searchable by name.
 ## Open questions
 1. `GitUser.vue` uses `v-if="props.user || Object.keys(props.user).length"` —
    the `||` makes the "no data" branch effectively unreachable (and would
-   throw on `null`). Was `&&` intended?
-2. Name search is case-sensitive (`name.includes(search)`). Intended?
+   throw on `null`). Was `&&` intended? → **Answer (operator 2026-11-07):** Bug: `&&` — #436
+2. Name search is case-sensitive (`name.includes(search)`). Intended? → **Answer (operator 2026-11-07):** Bug: case-insensitive — #436
 3. "Updated on" date is always formatted `en-US` (UTC), even in Vietnamese.
-   Intended?
-4. No empty state when search/filter matches nothing (blank list). Wanted?
+   Intended? → **Answer (operator 2026-11-07):** Bug: format by locale — #436
+4. No empty state when search/filter matches nothing (blank list). Wanted? → **Answer (operator 2026-11-07):** Bug: add one — #436
 5. The profile-name link opens in the same tab while repo links open a new
-   tab. Intended?
+   tab. Intended? → **Answer (operator 2026-11-07):** Change: new tab — #436
 
 ## Changelog
 | Date | Change | Why | Node |
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
+| 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/github-profile-spec.md` | - |
