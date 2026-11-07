@@ -37,6 +37,6 @@ const category = toRef(query?.category || '')
         </NuxtLink>
       </li>
     </ThemeFolder>
-    <p v-else class="text-theme-faint text-sm">{{ t('blogs.noCategories') }}</p>
+    <p v-else-if="!error" class="text-theme-faint text-sm">{{ t('blogs.noCategories') }}</p>
   </div>
 </template>
