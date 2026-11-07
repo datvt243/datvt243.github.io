@@ -1,6 +1,8 @@
 ---
+name: release
 description: "Promote staging into main: build+lint gate, real merge commit (no squash), bump semver + tag vX.Y.Z, deploy if DEPLOY_HOOK_URL is set, sync the version bump back to staging, close shipped issues. Usage: /release [patch|minor|major]. Invoking this command IS the operator's go-ahead — no separate confirmation prompt, the build+lint gate + branch protection are the real safety net."
 argument-hint: "[patch|minor|major]"
+disable-model-invocation: true
 ---
 
 # /release — promote `staging` into `main`

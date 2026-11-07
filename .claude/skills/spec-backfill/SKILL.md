@@ -1,4 +1,5 @@
 ---
+name: spec-backfill
 description: "Bulk-backfill draft feature docs (doctrine/features/) for features that already exist in the code. Writes only agent-hub docs, never code. Docs stay draft until confirmed via /worker analyst."
 argument-hint: "[<area or path to limit the scan>]"
 ---
