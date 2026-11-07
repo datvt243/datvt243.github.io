@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+Always respond in English.
+
 ## Project
 
 Personal portfolio & blog of Võ Tấn Đạt (datvt243). Nuxt 4 SSR app with ISR caching.

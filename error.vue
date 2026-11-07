@@ -7,6 +7,9 @@ const props = defineProps<{
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+// error.vue replaces app.vue, so app.vue's locale <html lang> never runs here.
+const i18nHead = useLocaleHead()
+useHead(() => ({ htmlAttrs: { lang: i18nHead.value.htmlAttrs?.lang } }))
 const isNotFound = computed(() => props.error.statusCode === 404)
 
 function handleError() {

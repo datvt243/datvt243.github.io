@@ -161,8 +161,9 @@ export default defineNuxtConfig({
     '/en/github': { isr: 60 },
     '/contact': { prerender: true },
     '/en/contact': { prerender: true },
-    '/blogs': { isr: 60 },
-    '/en/blogs': { isr: 60 },
+    // Same Vercel ISR query trap as /api/resume: unlisted params all get the plain /blogs page.
+    '/blogs': { isr: { expiration: 60, allowQuery: ['category', 'page', 'per-page'] } },
+    '/en/blogs': { isr: { expiration: 60, allowQuery: ['category', 'page', 'per-page'] } },
     '/blogs/**': { isr: true },
     '/en/blogs/**': { isr: true },
   },

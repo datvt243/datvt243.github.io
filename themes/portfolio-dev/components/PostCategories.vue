@@ -13,6 +13,7 @@ interface Category {
 }
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 // No retry: each retry of a failed call is another call to the rate-limited upstream.
 const { data, error } = await useAsyncData<Category[]>(async () => (await $fetch<Category[]>('/api/blogs/categories', { retry: 0 })) ?? [])
 
@@ -26,8 +27,8 @@ const category = toRef(query?.category || '')
     <ThemeFolder v-if="data?.length" label="categories">
       <li v-for="cate in data" :key="cate._id">
         <NuxtLink
-          :to="`/blogs?category=${cate.slug}`"
-          :aria-label="`View posts tagged ${cate.name}`"
+          :to="localePath(`/blogs?category=${cate.slug}`)"
+          :aria-label="t('blogs.viewCategory', { name: cate.name })"
           class="flex items-center gap-2 w-full px-2 py-1.5 rounded-sm text-sm transition-colors"
           :class="category === cate.slug ? 'bg-theme-panel-subtle text-theme-text' : 'text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50'"
         >
@@ -36,6 +37,6 @@ const category = toRef(query?.category || '')
         </NuxtLink>
       </li>
     </ThemeFolder>
-    <p v-else class="text-theme-faint text-sm">{{ t('blogs.noCategories') }}</p>
+    <p v-else-if="!error" class="text-theme-faint text-sm">{{ t('blogs.noCategories') }}</p>
   </div>
 </template>

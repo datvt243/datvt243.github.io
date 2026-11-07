@@ -14,10 +14,14 @@ const { t } = useI18n()
 
 const isLoading = ref(false)
 const loadingAfterMillisecond = 500
+let loadingTimer: ReturnType<typeof setTimeout> | undefined
+// Restarted on every loading phase, not just the first, so a fast refetch never flashes the skeleton.
 watch(
-  isLoading,
-  () => {
-    setTimeout(() => {
+  () => props.status === 'idle' || props.status === 'pending',
+  (loading) => {
+    clearTimeout(loadingTimer)
+    isLoading.value = false
+    if (loading) loadingTimer = setTimeout(() => {
       isLoading.value = true
     }, loadingAfterMillisecond)
   },
@@ -25,6 +29,7 @@ watch(
     immediate: true,
   },
 )
+onBeforeUnmount(() => clearTimeout(loadingTimer))
 </script>
 
 <template>
@@ -37,14 +42,14 @@ watch(
       <template v-if="$slots.loading">
         <slot v-if="isLoading" name="loading"/>
       </template>
-      <p v-else class="p-8">loading ...</p>
+      <p v-else class="p-8">{{ t('list.loading') }}</p>
     </template>
     <template v-else>
       <ul v-if="props.data?.length" class="list space-y-5">
         <slot/>
       </ul>
       <div v-else class="no-data center p-8 bg-theme-panel-subtle text-theme-muted rounded-sm">
-        <p class="text-xl uppercase text-center font-bold">No data</p>
+        <p class="text-xl uppercase text-center font-bold">{{ t('list.noData') }}</p>
       </div>
     </template>
   </div>

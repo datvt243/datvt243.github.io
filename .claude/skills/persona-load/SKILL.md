@@ -57,7 +57,7 @@ task at hand.
 - `CodeStaysOutOfHaven` — the loader script and persona library live in
   the project's own code tree, never inside `agent-hub/haven/` or
   `agent-hub/doctrine/` (would trip `CODE_IN_HAVEN`, and would silently
-  inflate the recurring per-session token cost `/hub-tokens` tracks).
+  inflate the recurring per-session token cost `/hub-health` tracks).
 - `ReadBackBeforeClaim` — always print the loader's real stdout, never a
   paraphrase of what a persona file "probably says".
 

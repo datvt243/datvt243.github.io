@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
   <channel>
     <title>Đạt Võ - Blog</title>
     <link>${SITE_URL}/blogs</link>
-    <description>Articles, tutorials, snippets, rants, and everything else.</description>
+    <description>Bài viết, hướng dẫn, đoạn code hay ho, và vài thứ lăng nhăng khác.</description>
     <language>vi</language>
 ${items}
   </channel>

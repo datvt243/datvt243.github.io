@@ -7,6 +7,7 @@ import { formatDate } from '~/utils'
 import type { Post } from '@/types/index'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 defineProps<{
 	modelValue: Post
 }>()
@@ -23,7 +24,7 @@ defineProps<{
             <div>
               <dt class="sr-only">{{ t('post.publishedOn') }}</dt>
               <dd class="text-base font-medium leading-6 text-theme-faint">
-                <time datetime="2023-08-05T00:00:00.000Z">
+                <time :datetime="modelValue.createdAt">
                   {{ formatDate(modelValue.createdAt) }}
                 </time>
               </dd>
@@ -64,7 +65,7 @@ defineProps<{
           </div>
           <div class="pt-4 xl:pt-8">
             <NuxtLink
-              to="/blogs"
+              :to="localePath('/blogs')"
               class="inline-block px-4 py-2 tracking-widest font-bold sm:only:text-sm border-theme-accent border rounded-md text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors"
               :aria-label="t('post.backToBlog')"
             >
