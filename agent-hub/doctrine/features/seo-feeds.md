@@ -16,9 +16,12 @@ Search engines and feed readers discover the site's pages and blog posts.
 3. `/sitemap.xml` (`application/xml`): one `<url>` for each of `/`,
    `/projects`, `/github`, `/blogs`, `/contact`, plus one per blog post from
    page 1 of up to 100 posts (`<loc>${SITE_URL}/blogs/<_id>`, `<lastmod>` =
-   updatedAt or createdAt, ISO).
+   updatedAt or createdAt, ISO) — each path twice, Vietnamese and `/en`
+   (`/` → `/en`), every `<url>` listing both as `xhtml:link` alternates
+   (`hreflang` `vi-VN` / `en-US`).
 4. `/rss.xml` (`application/xml`): RSS 2.0 channel "Đạt Võ - Blog", link
-   `<SITE_URL>/blogs`, language `vi`, with the latest 20 posts (title,
+   `<SITE_URL>/blogs`, language `vi`, Vietnamese description (the `vi`
+   `blogs.intro` text), with the latest 20 posts (title,
    link = guid, pubDate = updatedAt or createdAt, description = excerpt),
    XML-escaped.
 5. Both feeds reuse the 1h posts cache (see `blog-list.md`). If the blog API
@@ -53,3 +56,4 @@ Search engines and feed readers discover the site's pages and blog posts.
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/seo-feeds-spec.md` | - |
+| 2026-11-07 | Behavior #3: sitemap lists every path in vi + `/en` with hreflang alternates; Behavior #4: RSS description in Vietnamese | Operator answers OQ1 (Bug — #425) and OQ3 (Bug — #433) | `sitemap-rss-locale` |
