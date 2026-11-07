@@ -71,7 +71,8 @@
     "show": "Show:",
     "readMore": "Read more…",
     "noCategories": "No categories",
-    "categoriesLoadError": "Couldn't load categories."
+    "categoriesLoadError": "Couldn't load categories.",
+    "viewCategory": "View posts tagged {name}"
   },
   "post": {
     "publishedOn": "Published on",
@@ -86,7 +87,9 @@
     "formHint": "# fills your mail client - no server involved :)",
     "mailFallback": "If this doesn't open your mail app, reach me directly at {email}.",
     "namePlaceholder": "Your name",
-    "messagePlaceholder": "What's on your mind?"
+    "messagePlaceholder": "What's on your mind?",
+    "mailSubject": "Portfolio contact from {name}",
+    "mailSomeone": "someone"
   },
   "github": {
     "seoTitle": "Github",
@@ -100,7 +103,8 @@
     "repoSource": "{name} on GitHub"
   },
   "a11y": {
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "clearFilters": "Clear filters"
   },
   "error": {
     "loadError": "Couldn't load this content.",
@@ -110,5 +114,9 @@
     "serverTitle": "Something went wrong on our side",
     "serverText": "The data source may be waking up or briefly unavailable. Please try again in a moment.",
     "home": "Go to the homepage"
+  },
+  "list": {
+    "loading": "loading ...",
+    "noData": "No data"
   }
 }

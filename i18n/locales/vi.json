@@ -71,7 +71,8 @@
     "show": "Hiển thị:",
     "readMore": "Đọc thêm…",
     "noCategories": "Không có chuyên mục nào",
-    "categoriesLoadError": "Không tải được danh sách chuyên mục."
+    "categoriesLoadError": "Không tải được danh sách chuyên mục.",
+    "viewCategory": "Xem bài viết gắn thẻ {name}"
   },
   "post": {
     "publishedOn": "Đăng vào",
@@ -86,7 +87,9 @@
     "formHint": "# điền sẵn vào ứng dụng email của bạn - không qua máy chủ nào cả :)",
     "mailFallback": "Nếu không tự mở được ứng dụng email, bạn có thể liên hệ trực tiếp qua {email}.",
     "namePlaceholder": "Tên của bạn",
-    "messagePlaceholder": "Bạn đang nghĩ gì?"
+    "messagePlaceholder": "Bạn đang nghĩ gì?",
+    "mailSubject": "Liên hệ từ portfolio: {name}",
+    "mailSomeone": "một người bạn"
   },
   "github": {
     "seoTitle": "Github",
@@ -100,7 +103,8 @@
     "repoSource": "{name} trên GitHub"
   },
   "a11y": {
-    "skipToContent": "Bỏ qua tới nội dung chính"
+    "skipToContent": "Bỏ qua tới nội dung chính",
+    "clearFilters": "Xóa bộ lọc"
   },
   "error": {
     "loadError": "Không tải được nội dung này.",
@@ -110,5 +114,9 @@
     "serverTitle": "Đã có lỗi phía máy chủ",
     "serverText": "Nguồn dữ liệu có thể đang khởi động hoặc tạm thời gián đoạn. Vui lòng thử lại sau giây lát.",
     "home": "Về trang chủ"
+  },
+  "list": {
+    "loading": "đang tải ...",
+    "noData": "Không có dữ liệu"
   }
 }

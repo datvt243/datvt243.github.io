@@ -7,6 +7,7 @@ import { formatDate } from '~/utils'
 import type { Post } from '@/types/index'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 defineProps<{
 	modelValue: Post
 }>()
@@ -64,7 +65,7 @@ defineProps<{
           </div>
           <div class="pt-4 xl:pt-8">
             <NuxtLink
-              to="/blogs"
+              :to="localePath('/blogs')"
               class="inline-block px-4 py-2 tracking-widest font-bold sm:only:text-sm border-theme-accent border rounded-md text-theme-accent hover:bg-theme-accent hover:text-theme-accent-contrast transition-colors"
               :aria-label="t('post.backToBlog')"
             >

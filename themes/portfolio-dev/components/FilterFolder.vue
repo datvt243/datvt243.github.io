@@ -13,6 +13,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   'update:modelValue': [value: string[]]
 }>()
+const { t } = useI18n()
 
 function toggle(item: string) {
   const next = props.modelValue.includes(item)
@@ -43,7 +44,7 @@ function toggle(item: string) {
       <button
         type="button"
         class="shrink-0 text-theme-faint hover:text-theme-accent transition-colors"
-        aria-label="Clear filters"
+        :aria-label="t('a11y.clearFilters')"
         @click="emit('update:modelValue', [])"
       >
         <UIcon name="fe:close" class="w-3.5 h-3.5" />
