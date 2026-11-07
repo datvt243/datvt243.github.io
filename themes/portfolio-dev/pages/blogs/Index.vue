@@ -12,9 +12,21 @@ const category = toRef(query?.category || '')
 const page = toRef(query?.page || 1)
 const perPage = toRef(query?.perPage || 20)
 
-const fetchKey = `blogs-posts:${category.value}:${page.value}:${perPage.value}`
+const route = useRoute()
+const router = useRouter()
+/** The URL is the source of truth (blog layout reads it back), so a page/per-page change is linkable and survives a reload. */
+const currentPage = computed({
+  get: () => Number(page.value) || 1,
+  set: (value: number) => router.push({ query: { ...route.query, page: value > 1 ? value : undefined } }),
+})
+const currentPerPage = computed({
+  get: () => Number(perPage.value) || 20,
+  // A new page size starts again at page 1; the old page number may not exist anymore.
+  set: (value: number) => router.push({ query: { ...route.query, 'per-page': value, page: undefined } }),
+})
+
 const postsFetch = useFetch<APIFormatResponse<PaginatedPosts>>(`/api/blogs/posts`, {
-  key: fetchKey,
+  key: () => `blogs-posts:${category.value}:${page.value}:${perPage.value}`,
   retry: 0,
   query: {
     page: page,
@@ -76,7 +88,7 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
       <div class="">
         <div class="flex items-center space-x-4 border border-theme-border-subtle rounded-sm pl-3">
           <div id="blogs-per-page" class="leading-none text-sm">{{ t('blogs.show') }}</div>
-          <USelect v-model="perPage" :items="[10, 20, 30, 40, 50]" variant="none" aria-labelledby="blogs-per-page" />
+          <USelect v-model="currentPerPage" :items="[10, 20, 30, 40, 50]" variant="none" aria-labelledby="blogs-per-page" />
         </div>
       </div>
     </div>
@@ -97,8 +109,8 @@ const listStatus = computed(() => (blogs.value ? 'success' : status.value))
     <div class="mt-4 flex justify-center">
       <!-- v4's solid-button focus outline is 25% opacity; keep v3's solid one on the active page -->
       <UPagination
-        v-model:page="page"
-        :items-per-page="perPage"
+        v-model:page="currentPage"
+        :items-per-page="currentPerPage"
         :total="total"
         active-color="secondary"
         :ui="{ item: 'aria-[current=page]:focus-visible:outline-2 aria-[current=page]:focus-visible:outline-offset-2 aria-[current=page]:focus-visible:outline-secondary' }"

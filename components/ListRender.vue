@@ -14,10 +14,14 @@ const { t } = useI18n()
 
 const isLoading = ref(false)
 const loadingAfterMillisecond = 500
+let loadingTimer: ReturnType<typeof setTimeout> | undefined
+// Restarted on every loading phase, not just the first, so a fast refetch never flashes the skeleton.
 watch(
-  isLoading,
-  () => {
-    setTimeout(() => {
+  () => props.status === 'idle' || props.status === 'pending',
+  (loading) => {
+    clearTimeout(loadingTimer)
+    isLoading.value = false
+    if (loading) loadingTimer = setTimeout(() => {
       isLoading.value = true
     }, loadingAfterMillisecond)
   },
@@ -25,6 +29,7 @@ watch(
     immediate: true,
   },
 )
+onBeforeUnmount(() => clearTimeout(loadingTimer))
 </script>
 
 <template>
