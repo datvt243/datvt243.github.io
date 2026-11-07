@@ -135,3 +135,4 @@
 2026-11-05T17:24:51Z role=verifier outcome=SEAL node=skill-icons-390 rerun=none hub_bytes_before=81170 hub_bytes_after=81160
 2026-11-05T21:43:25Z role=verifier outcome=SEAL node=hr-exp-past-icon rerun=none hub_bytes_before=81170 hub_bytes_after=81156
 2026-11-07T09:17:39Z role=verifier outcome=SEAL node=i18n-locale-cleanup rerun=partial spawn=fresh hub_bytes_before=94008 hub_bytes_after=94012
+2026-11-07T09:28:15Z role=verifier outcome=SEAL node=sitemap-rss-locale rerun=partial spawn=fresh hub_bytes_before=94012 hub_bytes_after=94016
