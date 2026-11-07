@@ -138,3 +138,4 @@
 2026-11-07T09:28:15Z role=verifier outcome=SEAL node=sitemap-rss-locale rerun=partial spawn=fresh hub_bytes_before=94012 hub_bytes_after=94016
 2026-11-07T09:38:08Z role=verifier outcome=REOPEN node=blog-list-url-state rerun=none spawn=fresh hub_bytes_before=94016 hub_bytes_after=95406
 2026-11-07T09:40:22Z role=verifier outcome=SEAL node=blog-list-url-state rerun=none spawn=resumed hub_bytes_before=94016 hub_bytes_after=94014
+2026-11-07T09:53:55Z role=verifier outcome=SEAL node=blog-fetch-timeout rerun=full spawn=fresh hub_bytes_before=94014 hub_bytes_after=94010

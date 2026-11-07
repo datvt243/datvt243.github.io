@@ -6,8 +6,13 @@ import { categoriesResponseSchema, parseBlogApiResponse } from '~/server/utils/b
 
 export default defineCachedEventHandler(
   async () => {
-    // No retry: a retried 429 is one more call against the upstream's limit.
-    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`, { retry: 0 })
+    let raw: unknown
+    try {
+      // No retry: a retried 429 is one more call against the upstream's limit. Timeout: see cacheGetPost.ts.
+      raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/categories`, { timeout: 6000, retry: 0 })
+    } catch (cause) {
+      throw createError({ statusCode: 503, statusMessage: 'Unable to load categories', cause })
+    }
 
     const { status, data } = parseBlogApiResponse({ schema: categoriesResponseSchema, raw, context: 'categories' })
 
