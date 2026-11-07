@@ -79,14 +79,25 @@ lượt tách biệt.
 3. **Lượt 2 — verifier**: chạy đúng quy trình `/worker verifier "<task>"`
    như một lượt HOÀN TOÀN RIÊNG — không mang theo suy luận/context của lượt
    1 vào phán quyết, chỉ đọc evidence note vừa ghi (`NeverVerifyOwnWork`
-   vẫn áp dụng dù cùng 1 lệnh `/todo` gọi cả hai).
+   vẫn áp dụng dù cùng 1 lệnh `/todo` gọi cả hai). [sync 2026-11-07]
+   Keep the verifier's agent id from the Agent tool result — step 4 reuses it.
 4. **Nếu REOPEN**: tự động quay lại bước 2 với đúng lý do REOPEN từ evidence
    note của verifier, tối đa **3 lần lặp**. Issue/branch từ bước 1 giữ
-   nguyên xuyên suốt các lần REOPEN, không resolve lại. Chạm giới hạn →
+   nguyên xuyên suốt các lần REOPEN, không resolve lại. [sync 2026-11-07]
+   Lượt 2 của vòng REOPEN: resume CÙNG verifier qua `SendMessage` tới agent
+   id của nó — "round <N>: re-read `<note path>` from disk, re-run
+   `verify_seal` steps 2-12, write a new verdict note + log line" — thay vì
+   spawn mới. Nó chưa từng thấy suy luận của implementer nên isolation vẫn
+   giữ; bỏ được bước reload bundle. Resume lỗi (không có id, agent mất, lỗi)
+   → spawn mới như bước 3. Chạm giới hạn →
    dừng, báo cáo toàn bộ lịch sử REOPEN cho operator tự quyết, không lặp vô
    hạn. `--ship` không kích hoạt (chưa SEAL).
 5. **Nếu SEAL**: báo kết quả (node, evidence path, issue + branch từ bước
-   1, PM status mới).
+   1, PM status mới) kèm 1 dòng spawn đọc lại từ
+   `grep "role=verifier.*node=<slug> " evidence/worker-runs.log`:
+   `spawns: verifier <N> (<F> fresh, <R> resumed), REOPEN <k>`. Vòng REOPEN
+   log `fresh` nghĩa là resume ở bước 4 đã fallback — nói lý do. Cùng dòng
+   này khi dừng vì hết retry (bước 4).
    - **Không có `--ship`** (mặc định): dừng ở đây. KHÔNG tự
      `git commit`/`git push`/mở PR — đó là việc của `/ship`, một bước riêng
      operator tự chạy.
@@ -119,6 +130,7 @@ không tự triển khai lại ở đây) — `/todo` không có hard rule riên
 | `gh issue develop`/checkout lỗi (dirty tree, base ref không tồn tại...) | Dừng, báo lỗi thật verbatim — không tự force/stash/discard thay operator |
 | Lượt 1 báo `blocked` (thiếu env var, task mơ hồ...) | Dừng ngay, không chạy lượt 2, báo operator |
 | REOPEN 3 lần liên tiếp cùng lý do | Dừng, nghi ngờ acceptance criteria hoặc recipe sai — báo operator xem lại node/task, không tự đoán thêm lần 4 |
+| Resume verifier qua `SendMessage` lỗi ở vòng REOPEN | Spawn verifier mới như bước 3 — không bao giờ verify inline |
 | Verifier không tìm thấy evidence note của lượt 1 | Dừng, báo lỗi — không tự đoán lượt 1 đã làm gì |
 | Task đòi hỏi outward-facing action ngay giữa lượt 1 | SEAL GATE trong recipe `implement.md` vẫn dừng lại chờ approval như bình thường, `/todo` không bỏ qua bước này |
 | Có `--ship` nhưng vòng lặp dừng ở `blocked`/`failed`/hết retry (chưa SEAL) | Không gọi `/ship` — chưa có gì để ship |

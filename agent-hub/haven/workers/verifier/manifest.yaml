@@ -18,5 +18,6 @@ reads: [evidence/implementer/, haven/diagrams/, doctrine/MEMORY.md, CLAUDE.md]
 # + the ONE doctrine/features/<slug>.md the note's `## Feature doc` line cites.
 writes: [evidence/verifier/, evidence/worker-runs.log]   # and PM status on the diagram
 # + that feature doc's Status line + its INDEX.md row, on SEAL only (step 11e)
+# + a confirmed command row in doctrine/MEMORY.md + an implementer Corrections row, on SEAL only (step 11f)
 # Project extensions (kept verbatim by /sys)
 project_reads: [CLAUDE.md (root project)]
