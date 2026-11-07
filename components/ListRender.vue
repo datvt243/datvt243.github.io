@@ -37,14 +37,14 @@ watch(
       <template v-if="$slots.loading">
         <slot v-if="isLoading" name="loading"/>
       </template>
-      <p v-else class="p-8">loading ...</p>
+      <p v-else class="p-8">{{ t('list.loading') }}</p>
     </template>
     <template v-else>
       <ul v-if="props.data?.length" class="list space-y-5">
         <slot/>
       </ul>
       <div v-else class="no-data center p-8 bg-theme-panel-subtle text-theme-muted rounded-sm">
-        <p class="text-xl uppercase text-center font-bold">No data</p>
+        <p class="text-xl uppercase text-center font-bold">{{ t('list.noData') }}</p>
       </div>
     </template>
   </div>

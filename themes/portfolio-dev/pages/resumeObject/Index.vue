@@ -14,6 +14,7 @@ const sections = [
 const resumeView = useResumeView()
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const active = ref(sections[0]!.key)
 const activeLabel = computed(() => sections.find((s) => s.key === active.value)?.label ?? active.value)
 // The skills section is split into two editor tabs; the group enum is secondary, so skills.ts opens first.
@@ -90,7 +91,7 @@ onMounted(() => {
             <ThemeFolder label="search">
               <li>
                 <NuxtLink
-                  to="/contact"
+                  :to="localePath('/contact')"
                   class="flex items-center gap-2 w-full px-2 py-1.5 rounded-sm text-sm transition-colors text-theme-muted hover:text-theme-text-strong hover:bg-theme-panel-subtle/50"
                 >
                   <UIcon name="heroicons:code-bracket-square" class="w-3.5 h-3.5 opacity-50 shrink-0" />

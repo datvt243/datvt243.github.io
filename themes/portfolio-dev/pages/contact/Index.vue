@@ -13,7 +13,7 @@ const address = computed(() => (locale.value === 'en' ? removeVietnameseTones(co
 const form = reactive({ name: '', email: '', message: '' })
 
 function submitMessage() {
-  const subject = `Portfolio contact from ${form.name || 'someone'}`
+  const subject = t('contact.mailSubject', { name: form.name || t('contact.mailSomeone') })
   const body = `${form.message}\n\n— ${form.name} (${form.email})`
   window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
