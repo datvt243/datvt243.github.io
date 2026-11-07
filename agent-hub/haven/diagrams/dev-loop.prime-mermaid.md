@@ -47,7 +47,7 @@ flowchart TD
 > has each row's full original text verbatim. The compact rows below
 > point to it; open the archive only when you need the full story
 > behind an old node. `pick_next` only needs non-archived rows. Run
-> `/hub-tokens` periodically — if this file flags >15KB again, repeat
+> `/hub-health` periodically — if this file flags >15KB again, repeat
 > this archiving pass for nodes older than the current work session.
 
 | Node | State | Notes |

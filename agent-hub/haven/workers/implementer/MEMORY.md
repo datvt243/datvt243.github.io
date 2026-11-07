@@ -11,7 +11,8 @@
   (`/Users/_david/Workspace/Project/datvt243.github.io`).
 - When a build fails TWICE for the same reason, I stop and re-read
   `doctrine/domains/` before trying a third time — two failures means my
-  mental model of the project is wrong, not the code.
+  mental model of the project is wrong, not the code. A third identical failure
+  ends the pass (`implement` step 6b).
 - If a build breaks after a change that looked "unrelated" (e.g. a shared
   config), I suspect cache/tree-shaking before I suspect the code — see the
   related trap in `doctrine/domains/PROJECT.md`.
