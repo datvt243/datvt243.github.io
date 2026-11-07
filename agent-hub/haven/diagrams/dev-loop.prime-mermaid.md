@@ -3,9 +3,10 @@
 DNA: 'smallest_diff / edit_x_read_back_proof_x_independent_verdict'
 Auth: 65537 | Version: 1.0.0
 Law: LAI-13 - monotonic ratchet (PENDING -> IN_PROGRESS -> SEALED, never demote)
+States: PENDING, IN_PROGRESS, BLOCKED_<reason> (<-> IN_PROGRESS), SEALED (verifier only, final). REOPEN is a verdict (row stays IN_PROGRESS); DRAFT is creating a row (lands PENDING).
 
-> Every change to the repo's code enters here and leaves as SEALED or
-> REOPENED — no state in between.
+> Every change to the repo's code enters here and exits as SEALED; a
+> REOPEN verdict sends it back to implement, still IN_PROGRESS.
 
 ```mermaid
 flowchart TD
@@ -49,31 +50,16 @@ flowchart TD
 > behind an old node. `pick_next` only needs non-archived rows. Run
 > `/hub-health` periodically — if this file flags >15KB again, repeat
 > this archiving pass for nodes older than the current work session.
+>
+> Any regression must be a **new node** (LAI-13) — never edit an old node's
+> PM status directly to "undo" an existing SEAL.
+>
+> The table below is the LAST block of this file: a new row is appended
+> at end-of-file (`AppendOnly`), a removed row is deleted with its line —
+> no blank lines, no text after the table.
 
 | Node | State | Notes |
 |---|---|---|
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Any regression must be a **new node** (LAI-13) — never edit an old node's
-PM status directly to "undo" an existing SEAL.
 | `resume-isr-allow-lang-live` | PENDING | 2026-11-01 — #361 follow-up, split from `resume-isr-allow-lang` (its acceptance 4 can't be proven before a deploy). Acceptance: on the Vercel preview of `bug/361` (or live after release), `/api/resume?lang=en` returns an introduction starting `Frontend Developer with 4+ years` and `?lang=vi` the VI one, with different etags — both quoted verbatim. Blocked on: push `bug/361` (operator-approved `/ship`). |
 | `visit-ip-geo-check` | PENDING | 2026-11-05 — #398. Acceptance: (1) ≥2 real prod visits from different networks store the visitor's public IP + matching location, quoted from the backend's Visit records; (2) root cause located (relay vs backend), fixed here or linked backend issue; (3) `/api/visit` still returns 204. (2) done: relay correct (h3 1.15.11 `getRequestIP` takes the leftmost XFF entry = client on Vercel); backend `src/candidate_me/index.ts:258` stores `req.ip` with no `trust proxy` → proxy IP — tracked as datvt243/resume-nodejs-api#371. No diff in this repo. #371 fixed (backend PR #372, released v2.6.1 2026-11-05T11:59Z; reads leftmost XFF = what the relay sends). Blocked on: operator's 2 real visits from different networks + the stored Visit records. Evidence: `evidence/implementer/2026-11-05/visit-ip-geo-check-plan.md`. |
 | `visit-local-count` | PENDING | 2026-11-05 — #389. Acceptance: (1) root cause stated, quoted from evidence; (2) local visits counted, or the non-count documented as intended (code comment / CLAUDE.md). App side ruled out: dev server against a mock backend → browser POST /api/visit 204 → relay POST `/api/me/<email>/visit` with `x-forwarded-for: ::1`. Backend v2.6.1 `handlerRecordVisit` + Visit model have no IP filter. Blocked on: seeing what the real backend stored for a local visit (Atlas MCP disabled for the org). Evidence: `evidence/implementer/2026-11-05/visit-local-count-plan.md`. |

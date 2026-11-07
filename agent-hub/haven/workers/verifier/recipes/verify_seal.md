@@ -142,7 +142,9 @@ so every hub doesn't reason about it differently.
    `| node | SEALED | <date> — archived, see dev-loop-archive.md.
    Evidence: <this verdict note path> |`; (c) if the active PM status
    now holds more than 20 such pointer rows, delete the oldest ones
-   (their full row already lives in the archive); (d) for each row the
+   (their full row already lives in the archive) — delete the whole
+   line, leave no blank line; the table stays the file's last block
+   (diagram PM status note); (d) for each row the
    note lists under `## Supersedes`: append it verbatim to the archive
    under a heading `## Superseded by \`<this node>\` (<date>)`, then
    delete it from the active file — no pointer (this node's row is the
@@ -152,7 +154,8 @@ so every hub doesn't reason about it differently.
    fix SEAL proves one Behavior item, not the whole doc — it leaves a
    backfilled doc's status as is; (f) a `confirmed` doctrine proposal
    (step 6c): replace that command in `doctrine/MEMORY.md` and append a
-   Corrections row (`<old>` / `<new>`, citing this verdict note) to
+   Corrections row (`<old>` / `see doctrine/MEMORY.md`, citing this
+   verdict note — never the new value itself) to
    `haven/workers/implementer/MEMORY.md`. Part of SEAL itself,
    not a separate maintenance pass — the acceptance criteria written on
    the node during implementation stop costing boot tokens the moment
