@@ -21,9 +21,9 @@ export default defineCachedEventHandler(
     /**
      * The upstream API only looks posts up by _id and answers 404 for
      * anything else (unknown id, or a slug) - surface that as our own
-     * clean 404 instead of an unhandled FetchError.
+     * clean 404 instead of an unhandled FetchError. Timeout: see cacheGetPost.ts.
      */
-    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`, { retry: 0 }).catch((e) => {
+    const raw = await $fetch(`https://blog-api-nodejs-express.onrender.com/api/v1/post/detail/${id}`, { timeout: 6000, retry: 0 }).catch((e) => {
       if (e?.statusCode === 404) throw createError({ statusCode: 404, statusMessage: 'Post not found' })
       throw e
     })
