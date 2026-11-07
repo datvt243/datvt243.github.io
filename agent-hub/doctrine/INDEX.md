@@ -34,7 +34,10 @@ echoes the code will silently go stale and mislead the reader.
 ## Correcting the doctrine
 Fix the file, AND record "what I used to believe / what's actually true"
 in the Corrections table in the related worker's `MEMORY.md`. Silently
-deleting a wrong fact also erases the lesson behind it.
+deleting a wrong fact also erases the lesson behind it. Replacing a
+value (command, baseline, path): any other prose in doctrine still
+stating the old value gets `[superseded <date>: see <row>]` in the same
+edit — one current value per fact.
 
 ## Deliberately absent
 No `laws/`, `architecture/`, `uplifts/`, `training/`. Only add these once

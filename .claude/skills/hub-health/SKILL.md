@@ -111,7 +111,12 @@ if [ -f "$DIAG_FILE" ]; then
     grep -E '\| SEALED \|' "$DIAG_FILE" 2>/dev/null | grep -vE '— archived, see' | sed 's/^/      /'
   else
     echo "    ($REAL_SEALED full SEALED entries, $POINTER_SEALED archived pointers)"
+    [ "$REAL_SEALED" -gt 0 ] && echo "  ⚠ dev-loop.prime-mermaid.md: $REAL_SEALED full SEALED rows not archived — verify_seal step 11 was skipped; collapse them by hand"
   fi
+  [ "$POINTER_SEALED" -gt 20 ] && echo "  ⚠ dev-loop.prime-mermaid.md: $POINTER_SEALED pointer rows (cap 20, verify_seal 11c) — delete the oldest lines"
+  # a blank/text line after the PM header followed by more rows = rows fell outside the markdown table
+  STRAY=$(awk '/^\| Node \| State/{t=1;next} t&&/^\|/{if(gap)n++;next} t{gap=1} END{print n+0}' "$DIAG_FILE")
+  [ "$STRAY" -gt 0 ] && echo "  ⚠ dev-loop.prime-mermaid.md: $STRAY rows sit after a blank/text line, outside the PM table — move them back under the header, drop the blank lines, keep the table as the file's last block"
 fi
 check_threshold "$HUB/doctrine/domains/PROJECT.md" 15360 \
   "consider moving Traps/Decisions rows older than the current work session to doctrine/domains/PROJECT-archive.md"

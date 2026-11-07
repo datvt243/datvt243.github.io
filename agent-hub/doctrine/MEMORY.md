@@ -39,7 +39,7 @@ the real `npm test` output, and never as the whole verification.
 |---|---|
 | Language/runtime | TypeScript, Node — Nuxt 4 / Vue 3 SSR |
 | Package manager | npm (`package-lock.json` present) |
-| Test runner | None |
+| Test runner | Vitest (command: Commands table above) |
 | CSS | TailwindCSS v4 + `@nuxt/ui` v4 + sass |
 | State | Pinia (`stores/`) |
 
@@ -64,7 +64,8 @@ every other skill's text.
 - No LLM API key anywhere in the hub — Claude Code IS the runtime.
 - `haven/` is memory, not code.
 - `evidence/` is committed; "bad" notes are kept too.
-- Monotonic ratchet: PENDING → IN_PROGRESS → SEALED, never backwards.
+- Monotonic ratchet: PENDING → IN_PROGRESS → SEALED, never backward;
+  `BLOCKED_<reason>` ↔ IN_PROGRESS. REOPEN is a verdict, not a state.
 - The verifier owns PM status; the implementer never sets it themselves.
 - The repo has its own root `CLAUDE.md` (the real project: stack/
   architecture/env vars) — read that file BEFORE
