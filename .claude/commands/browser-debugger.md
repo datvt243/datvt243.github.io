@@ -6,7 +6,7 @@ argument-hint: "[--browser=chrome|firefox|edge] [--run-dev]"
 # /browser-debugger — open a browser with CDP debugging on port 9888
 
 Local dev-environment utility only — never touches project source code,
-never commits/pushes/deploys. `gate: none`, same class as `/hub-tokens`: no
+never commits/pushes/deploys. `gate: none`, same class as `/hub-health`: no
 seal gate, no evidence note, no worker identity needed.
 
 ## Steps

@@ -79,8 +79,10 @@ Date in `YYYY-mm-dd` format, slug in kebab-case taken from the task name.
     hub_bytes_before=<N> verifier_rerun=n/a`
   - Verifier log (every time there's a verdict — SEAL or REOPEN):
     `<ISO timestamp> role=verifier outcome=SEAL|REOPEN node=<slug>
-    rerun=none|partial|full hub_bytes_before=<N> hub_bytes_after=<N>`
-  `hub_bytes_*` = `/hub-tokens`' "per-session total" (root files +
+    rerun=none|partial|full spawn=fresh|resumed hub_bytes_before=<N> hub_bytes_after=<N>`
+    (`spawn=` added 2026-11-07 — older lines have none, count them as
+    `fresh`.)
+  `hub_bytes_*` = `/hub-health`' "per-session total" (root files +
   doctrine/ minus features/ + the active diagram + every worker bundle;
   no archives, no evidence/). Measure with exactly this, from the repo root — never `du`
   or a whole-tree count:
@@ -94,7 +96,7 @@ Date in `YYYY-mm-dd` format, slug in kebab-case taken from the task name.
   the default policy being audit-only, an abnormal jump in hub size
   between two consecutive runs. Not a real token count (there's no API
   that reads that number) — it's an observable proxy, the same
-  philosophy as `/hub-tokens`.
+  philosophy as `/hub-health`.
 - Cold storage — not re-read in full every worker session (unlike
   `doctrine/`, the active `haven/diagrams/`), only opened when someone
   deliberately checks for a pattern. NEVER delete an old line, even one
@@ -105,7 +107,7 @@ Date in `YYYY-mm-dd` format, slug in kebab-case taken from the task name.
   move lines older than the current work session to
   `evidence/worker-runs-archive.log` (same directory, plain append,
   create it lazily on first use) — copy each line VERBATIM, never
-  reformat/summarize. Checked by `/hub-tokens`. Same "delete nothing"
+  reformat/summarize. Checked by `/hub-health`. Same "delete nothing"
   rule as the active file — this is a move, not a cleanup.
 
 ## Format — ship note

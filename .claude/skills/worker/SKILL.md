@@ -25,7 +25,9 @@ không suy luận verdict của node này từ node khác.
 > `verify_seal.md`'s `## Isolation proof` field: verifier phải ghi lại
 > danh tính subagent riêng của lượt này (khác implementer's), để 1 audit
 > sau này có thể phát hiện nếu bước tách context bị bỏ qua, thay vì phải
-> tin lời tự khai.]
+> tin lời tự khai.] Only exception to a fresh spawn: `/todo`'s REOPEN
+> rounds resume the same verifier subagent (`todo` step 4) — still never
+> the implementer's context.
 
 > **`analyst`** (BA, kit 2026-11-06): MUST run as a **separate subagent**
 > (Agent tool, blank context). The subagent loads
