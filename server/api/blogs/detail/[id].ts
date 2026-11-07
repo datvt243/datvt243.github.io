@@ -10,14 +10,6 @@ export default defineCachedEventHandler(
   async (event) => {
     const id = getRouterParam(event, 'id')
 
-    if (!id)
-      return {
-        status: false,
-        data: null,
-        errors: [],
-        message: 'Missing ID',
-      }
-
     /**
      * The upstream API only looks posts up by _id and answers 404 for
      * anything else (unknown id, or a slug) - surface that as our own
@@ -39,7 +31,7 @@ export default defineCachedEventHandler(
   },
   {
     base: 'PostDetail',
-    name: 'api-resume',
+    name: 'api-post-detail',
     getKey(event) {
       const id = getRouterParam(event, 'id')
       return `api-post-${id}`
