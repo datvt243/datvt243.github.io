@@ -1,4 +1,5 @@
 ---
+name: issues-ls
 description: "List open GitHub issues for this repo, if it's hosted on GitHub. Read-only, no side effects."
 argument-hint: "[--state open|closed|all] [gh issue list flags...]"
 ---

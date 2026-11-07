@@ -1,4 +1,5 @@
 ---
+name: browser-debugger
 description: "Open a browser (Chrome/Firefox/Edge) with remote-debugging port 9888 so Claude can inspect/control it — optionally starting `npm run dev` first and pointing the browser at it. Usage: /browser-debugger [--browser=chrome|firefox|edge] [--run-dev]. Read-only dev utility, no code changes, no seal gate."
 argument-hint: "[--browser=chrome|firefox|edge] [--run-dev]"
 ---
