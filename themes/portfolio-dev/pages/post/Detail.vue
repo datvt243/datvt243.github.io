@@ -24,7 +24,7 @@ defineProps<{
             <div>
               <dt class="sr-only">{{ t('post.publishedOn') }}</dt>
               <dd class="text-base font-medium leading-6 text-theme-faint">
-                <time datetime="2023-08-05T00:00:00.000Z">
+                <time :datetime="modelValue.createdAt">
                   {{ formatDate(modelValue.createdAt) }}
                 </time>
               </dd>
