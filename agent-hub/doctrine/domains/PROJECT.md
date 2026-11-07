@@ -64,7 +64,7 @@ See `agent-hub/CLAUDE.md` — `ADHOC_WORK`, `NO_EVIDENCE`, `EDIT_UNVERIFIED`,
 
 ## Archiving convention
 > Older Traps/Decisions rows move to `doctrine/domains/PROJECT-archive.md`
-> once this file crosses the 15KB threshold (checked by `/hub-tokens`, same
+> once this file crosses the 15KB threshold (checked by `/hub-health`, same
 > threshold/mechanism as `haven/diagrams/dev-loop.prime-mermaid.md` uses
 > for its PM status table) — every worker session reads this file in full.
 > Nothing deleted: the archive keeps each row's full original text
