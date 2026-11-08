@@ -2,7 +2,7 @@
 import type { GitRepos } from '@/types/github'
 import { accentBadgeUi } from '~/utils'
 
-const { t } = useI18n()
+const { t, localeProperties } = useI18n()
 const props = defineProps<{
   modelValue: GitRepos
 }>()
@@ -31,7 +31,7 @@ const getFieldValue = (field: LinkField): string | null => {
 }
 
 /**
- * toLocaleDateString() with no options resolves the calendar date in the
+ * toLocaleDateString() without a timeZone resolves the calendar date in the
  * RUNTIME's local timezone - the SSR server (Vercel, UTC) and a real
  * browser client (e.g. UTC+7) can compute a different date for the same
  * instant when it falls near a UTC day boundary, causing a Vue hydration
@@ -43,7 +43,7 @@ const getFieldValue = (field: LinkField): string | null => {
  * would be out of order.
  */
 const updatedOnLabel = computed(() =>
-  new Date(props.modelValue.pushed_at).toLocaleDateString('en-US', { timeZone: 'UTC' }),
+  new Date(props.modelValue.pushed_at).toLocaleDateString(localeProperties.value.language, { timeZone: 'UTC' }),
 )
 </script>
 
