@@ -18,7 +18,7 @@ export default defineCachedEventHandler(
       const { MY_EMAIL } = useRuntimeConfig().public
       return `api-resume-${MY_EMAIL}-${langOf(event)}`
     },
-    maxAge: 60 * 60 * 24 * 12,
+    maxAge: 60 * 60,
     // Dev always refetches so backend data edits show up without clearing the cache.
     shouldBypassCache: () => import.meta.dev,
   },

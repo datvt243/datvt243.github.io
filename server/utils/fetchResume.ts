@@ -40,8 +40,9 @@ const pick = <T extends object>(obj: T, keys: string[]): T =>
 /**
  * Fetches the owner's resume from the backend, its localized text in `lang`
  * (the backend falls back to `vi` without it). Any failure (non-2xx, which
- * `$fetch` throws on, or a 2xx with `success: false`) becomes a controlled
- * 502 - thrown, not returned, so `defineCachedEventHandler` never caches it.
+ * `$fetch` throws on, a 2xx with `success: false`, or no public field at all)
+ * becomes a controlled 502 - thrown, not returned, so `defineCachedEventHandler`
+ * never caches it and the page fails instead of rendering blank.
  */
 export async function fetchResume(lang: AtsLang = 'vi'): Promise<ResumeAPIResponse['data']> {
   const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
@@ -62,7 +63,7 @@ export async function fetchResume(lang: AtsLang = 'vi'): Promise<ResumeAPIRespon
     throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
   }
   const { generalInformation } = res.data
-  return pick(
+  const resume = pick(
     {
       ...res.data,
       generalInformation: Array.isArray(generalInformation)
@@ -71,4 +72,8 @@ export async function fetchResume(lang: AtsLang = 'vi'): Promise<ResumeAPIRespon
     },
     PUBLIC_FIELDS,
   )
+  if (Object.values(resume).every((value) => value === undefined)) {
+    throw createError({ statusCode: 502, statusMessage: 'Unable to load resume data' })
+  }
+  return resume
 }

@@ -39,10 +39,17 @@ describe('fetchResume', () => {
   })
 
   it('asks the upstream for the requested language, vi by default', async () => {
-    fetchMock.mockResolvedValue({ success: true, data: {} })
+    fetchMock.mockResolvedValue({ success: true, data: { firstName: 'Dat' } })
     await fetchResume('en')
     await fetchResume()
     expect(fetchMock.mock.calls.map((call) => call[1].query)).toEqual([{ lang: 'en' }, { lang: 'vi' }])
+  })
+
+  it('fails as a 502 when the upstream sends no public field', async () => {
+    for (const data of [{}, { salary: 1000 }]) {
+      fetchMock.mockResolvedValue({ success: true, data })
+      await expect(fetchResume()).rejects.toMatchObject({ statusCode: 502 })
+    }
   })
 
   it('never retries the rate-limited upstream and fails as a 502', async () => {
