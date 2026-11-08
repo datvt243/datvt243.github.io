@@ -80,18 +80,20 @@ export default defineEventHandler(async (event) => {
   const { executablePath, args } = await resolveLaunchOptions()
 
   const browser = await puppeteer.launch({ executablePath, args })
-  const page = await browser.newPage()
-
-  await page.setContent(contentHTML)
-
-  const pdfBuffer = await page.pdf({
-    format: 'A4',
-    printBackground: false,
-    margin: { top: '12mm', right: '12mm', bottom: '12mm', left: '12mm' },
-    tagged: true,
-  })
-
-  await browser.close()
+  let pdfBuffer: Uint8Array
+  // A render failure must still close Chrome, or each failed request leaks a process.
+  try {
+    const page = await browser.newPage()
+    await page.setContent(contentHTML)
+    pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: false,
+      margin: { top: '12mm', right: '12mm', bottom: '12mm', left: '12mm' },
+      tagged: true,
+    })
+  } finally {
+    await browser.close()
+  }
 
   cache.set(cacheKey, { buffer: pdfBuffer, filename: fileName, generatedAt: Date.now() })
 
