@@ -15,7 +15,7 @@ code-editor look: who he is, what he has done, what he knows.
    `api-resume-<locale>`); switching language refetches instead of reusing
    the other language's text.
 3. `/api/resume` calls `${NODE_API}/api/me/${MY_EMAIL}?lang=<vi|en>` with an
-   8s timeout and no retry, and caches the result 12 days per email+lang
+   8s timeout and no retry, and caches the result 1 hour per email+lang
    (bypassed in dev). Any `lang` other than `en` is treated as `vi`.
 4. Only whitelisted fields leave the server: top-level `firstName`,
    `lastName`, `email`, `phone`, `address`, `introduction`, `socialMedia`,
@@ -25,7 +25,8 @@ code-editor look: who he is, what he has done, what he knows.
    `professionalSkills`, `professionalSkillsGroup`, `personalSkills`,
    `mainSkills`, `familiarSkills`, `foreignLanguages`. Salary, birthday,
    marital status and gender never reach the browser.
-5. If the upstream fails (network error, non-2xx, or `success: false`), the
+5. If the upstream fails (network error, non-2xx, `success: false`, or a
+   resume with no whitelisted field), the
    API throws 502 "Unable to load resume data" (not cached), and the page
    throws a fatal error (upstream status or 502) so ISR keeps serving the last
    good render instead of caching a broken 200.
@@ -108,3 +109,4 @@ code-editor look: who he is, what he has done, what he knows.
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-home-spec.md` | - |
+| 2026-11-08 | Behavior #3: server cache 12 days → 1 hour; #5: an empty resume fails like an upstream error (fatal, not a blank page) | operator answers to Open questions 3 + 1 (fatal chosen 2026-11-08) | `resume-cache-empty` |

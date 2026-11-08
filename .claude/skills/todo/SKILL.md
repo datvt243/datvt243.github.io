@@ -1,7 +1,8 @@
 ---
 name: todo
-description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker analyst (feature, hoặc bug chưa có feature doc) + /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "<task>"|#<issue-number> [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
+description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker analyst (feature, hoặc bug chưa có feature doc) + /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "[task]"|#[issue-number] [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
 argument-hint: "<task>|#<issue-number> [--ship]"
+disable-model-invocation: true
 ---
 
 # /todo "<task>"|#<issue-number> [--ship]

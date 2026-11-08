@@ -98,6 +98,7 @@
     "followers": "người theo dõi",
     "following": "đang theo dõi",
     "noData": "Không có dữ liệu",
+    "noMatch": "Không có repository nào khớp",
     "updatedOn": "Cập nhật vào",
     "repoWebsite": "Website {name}",
     "repoSource": "{name} trên GitHub"

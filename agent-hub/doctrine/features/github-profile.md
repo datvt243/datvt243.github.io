@@ -19,18 +19,20 @@ filterable by language and searchable by name.
    403 that is not a rate limit (`x-ratelimit-remaining` ≠ `0`), it retries
    once without the token. A real rate-limit 403 or any other error is
    thrown. Without a token it calls unauthenticated.
-4. Sidebar: avatar, name linking to the GitHub profile, login, bio (line
+4. Sidebar: avatar, name linking to the GitHub profile (new tab), login, bio (line
    breaks normalized), location when present, followers · following counts.
 5. Sidebar filter: languages of the shown repos, unique and sorted. Selected
    languages filter repos to those whose language is one of them (OR); repos
    without a language are hidden while a filter is active.
-6. Search box (shortcut `/`) filters repo names by substring, 500ms debounced,
-   applied after the language filter.
+6. Search box (shortcut `/`) filters repo names by case-insensitive substring,
+   500ms debounced, applied after the language filter. No repo left → a
+   localized "no repositories match" message.
 7. Each repo row: name (new tab), visibility badge, website link (when
    `homepage`) and source link icons, description, topic badges, language
    with a color dot (known colors for Vue/JavaScript/TypeScript/Python/CSS/
    SCSS/HTML/Lua/Pug, else grey), stars and forks when non-zero, and
-   "updated on <date>" from `pushed_at`.
+   "updated on <date>" from `pushed_at`, formatted in the current locale
+   (`vi-VN` / `en-US`, UTC calendar date).
 
 ## Acceptance criteria
 - `npm test` passes, including `tests/fetchGithub.test.ts`.
@@ -64,3 +66,4 @@ filterable by language and searchable by name.
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/github-profile-spec.md` | - |
+| 2026-11-08 | Behavior #4 profile link new tab; #6 case-insensitive search + empty state; #7 date by locale (also fixes the `||` no-data guard) | operator answers to Open questions 1-5 (2026-11-07) | `github-page-fixes` |

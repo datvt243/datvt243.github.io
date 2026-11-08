@@ -17,7 +17,8 @@ const getRepos = computed(() => {
   let resule = toValue(props.repos)
 
   if (search.value) {
-    resule = resule.filter((e: GitRepos) => e?.name.includes(search.value))
+    const query = search.value.toLowerCase()
+    resule = resule.filter((e: GitRepos) => e?.name.toLowerCase().includes(query))
   }
 
   return resule
@@ -52,6 +53,7 @@ const getRepos = computed(() => {
           <ThemeGithubPartItem :model-value="res" />
         </li>
       </TransitionGroup>
+      <p v-if="!getRepos.length" class="py-4 text-theme-faint">{{ t('github.noMatch') }}</p>
     </div>
   </div>
 </template>

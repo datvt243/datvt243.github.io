@@ -1,6 +1,6 @@
 ---
 name: worker
-description: Trở thành analyst, implementer hoặc verifier trong agent-hub của datvt243.github.io, làm theo recipe của vai trò đó, dừng ở SEAL gate. Trigger: /worker <analyst|implementer|verifier> "<task>"
+description: Trở thành analyst, implementer hoặc verifier trong agent-hub của datvt243.github.io, làm theo recipe của vai trò đó, dừng ở SEAL gate. Trigger: /worker [analyst|implementer|verifier] "[task]"
 ---
 
 # /worker <wid> "<task>"

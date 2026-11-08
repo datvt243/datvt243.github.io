@@ -1,6 +1,6 @@
 ---
 name: hub-health
-description: "Health check of agent-hub/: size (read every session vs cold storage, archive flags), real billed tokens per main session / verifier / analyst from Claude Code transcripts, spawn cost, and token waste (re-reads, failing-command loops, oversized tool output). Usage: /hub-health [days] [--report <agent-hub-init path>]. Read-only on this project; --report writes one report file into agent-hub-init's improvements/report/."
+description: "Health check of agent-hub/: size (read every session vs cold storage, archive flags), real billed tokens per main session / verifier / analyst from Claude Code transcripts, spawn cost, and token waste (re-reads, failing-command loops, oversized tool output). Use when the user asks about hub size, token cost or token waste. Usage: /hub-health [days] [--report agent-hub-init-path]. Read-only on this project; --report writes one report file into agent-hub-init's improvements/report/."
 ---
 
 # /hub-health — agent-hub health and token cost

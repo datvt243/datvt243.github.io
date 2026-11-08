@@ -22,13 +22,15 @@ const bioText = computed(() => props.user.bio?.replace(/\r\n?/g, '\n'))
 </script>
 <template>
   <div class="git-user font-theme-mono">
-    <div v-if="props.user || Object.keys(props.user).length">
+    <div v-if="props.user && Object.keys(props.user).length">
       <template v-if="props.user.avatar_url">
         <NuxtImg :src="props.user.avatar_url" :alt="props.user.login" class="w-24 h-24 rounded-lg mb-4 border border-theme-border-subtle" />
       </template>
       <p class="space-x-1 flex items-center">
         <a
           :href="props.user.html_url"
+          target="_blank"
+          rel="noopener noreferrer"
           class="font-bold text-theme-accent hover:text-theme-accent-soft hover:underline transition-colors"
         >{{ props.user.name }}</a
         >
