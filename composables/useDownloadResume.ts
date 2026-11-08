@@ -1,11 +1,9 @@
 /**
- * @file Shared CV-download logic, extracted so both the Hero (top
- * of the page) and the About tab's own button can trigger the same fetch/
- * blob/download flow without duplicating it (issue #179). Also drives a
- * toast (issue #198) so a slow/cold Puppeteer launch on the server doesn't
- * look like a silently broken button. Always fetches the single-column
- * ATS-parser-friendly CV (issue #206) in the current locale - the only
- * template left.
+ * @file CV-download logic behind the Hero's "Download CV" button: fetch,
+ * blob, download. Also drives a toast so a slow/cold Puppeteer launch on
+ * the server doesn't look like a silently broken button. Always fetches
+ * the single-column ATS-parser-friendly CV in the current locale - the
+ * only template left.
  * @author Đạt Võ <votan.it@gmail.com>
  * @see https://github.com/datvt243
  */
@@ -45,6 +43,8 @@ export function useDownloadResume() {
       // The server names the file (person's name, ASCII); reuse it instead of a second naming rule.
       link.download = response.headers.get('content-disposition')?.match(/filename="(.+)"/)?.[1] || 'resume.pdf'
       link.click()
+      // Deferred: revoking synchronously can cancel the download before the browser has read the blob.
+      setTimeout(() => URL.revokeObjectURL(link.href), 0)
 
       toast.update(notification.id, {
         title: t('resume.downloadCvSuccess'),
