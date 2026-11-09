@@ -93,12 +93,29 @@ lượt tách biệt.
    → spawn mới như bước 3. Chạm giới hạn →
    dừng, báo cáo toàn bộ lịch sử REOPEN cho operator tự quyết, không lặp vô
    hạn. `--ship` không kích hoạt (chưa SEAL).
-5. **Nếu SEAL**: báo kết quả (node, evidence path, issue + branch từ bước
-   1, PM status mới) kèm 1 dòng spawn đọc lại từ
-   `grep "role=verifier.*node=<slug> " evidence/worker-runs.log`:
-   `spawns: verifier <N> (<F> fresh, <R> resumed), REOPEN <k>`. Vòng REOPEN
-   log `fresh` nghĩa là resume ở bước 4 đã fallback — nói lý do. Cùng dòng
-   này khi dừng vì hết retry (bước 4).
+5. **Nếu SEAL**: (kit 2026-11-09) print exactly this report, nothing else
+   (no diff, no recap of the work — the evidence note has it):
+   ```
+   ✅ SEALED <slug> — <task>
+   issue #<n> <url> · branch <branch>
+   evidence: <note path>[, <note path>…]
+   spawns: verifier <N> (<F> fresh, <R> resumed), REOPEN <k>
+   next: /ship "<task>"
+   ```
+   `spawns:` is read back from
+   `grep "role=verifier.*node=<slug> " evidence/worker-runs.log`, never
+   counted from memory. A REOPEN round logged `fresh` means step 4's
+   resume fell back — append ` (fresh: <why>)` to that line. With
+   `--ship`, `next:` becomes `next: running /ship "<task>"`.
+   Every non-SEAL stop (bước 1 failure, `blocked`, `failed`, retry limit)
+   uses the same shape:
+   ```
+   ⛔ STOPPED <slug|-> — <task> (<blocked|failed|retry-limit|issue/branch>)
+   issue #<n> <url> · branch <branch>   (omit if bước 1 failed)
+   reason: <blocker | latest REOPEN reason | real error, verbatim>
+   spawns: verifier <N> (<F> fresh, <R> resumed), REOPEN <k>   (omit if no verifier ran)
+   next: <the one decision the user must make>
+   ```
    - **Không có `--ship`** (mặc định): dừng ở đây. KHÔNG tự
      `git commit`/`git push`/mở PR — đó là việc của `/ship`, một bước riêng
      operator tự chạy.

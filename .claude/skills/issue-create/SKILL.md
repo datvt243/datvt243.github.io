@@ -44,7 +44,7 @@ still show everything, but create without waiting.
    issue number + URL from `gh`'s output. Failure → report the exact
    error, don't retry with different flags on your own.
 7. **No other writes.** Never edit/close/comment/label existing issues,
-   and never touch code or commit from this command.
+   and never touch code or commit from this skill.
 
 ## Runtime
 Requires `gh` CLI authenticated against the project's GitHub remote. Not
