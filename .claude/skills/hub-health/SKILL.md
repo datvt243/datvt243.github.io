@@ -15,7 +15,7 @@ verifier, and every subagent spawned for a `/todo` verify pass re-loads
 them from scratch). Left unchecked either grows forever and becomes the
 single biggest recurring token cost in the hub — this is what the
 `dev-loop-archive.md` / `PROJECT-archive.md` conventions (see each file's
-own header note) exist to bound. This command measures whether that's
+own header note) exist to bound. This skill measures whether that's
 actually happening, instead of guessing.
 
 There's no exact tokenizer available here — the report uses `bytes / 4` as
@@ -266,7 +266,7 @@ PY
    `worker-runs.log`, that's a real signal to do an archive pass (see
    `dev-loop-archive.md` / `PROJECT-archive.md` / `worker-runs-archive.log`'s
    own convention notes, or the equivalent header sections in the active
-   files) — but this command itself never edits anything. Archiving is a
+   files) — but this skill itself never edits anything. Archiving is a
    separate, explicit action. [amended 2026-09-02] The diagram flag prints
    the exact rows to move (not just "consider moving nodes") — copy-paste
    is the whole remaining effort, so there's no excuse to defer it past the

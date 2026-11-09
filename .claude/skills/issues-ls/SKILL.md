@@ -74,7 +74,7 @@ a GitHub repo — no writes, no approval gate needed.
 6. **No writes.** Never close/comment/edit/label an issue from this
    command — that's a separate manual `gh issue` call (or `/release`'s
    own issue-closing step), out of scope here. Step 4's `done-dev` is a
-   relabel in THIS command's output only, not a GitHub mutation.
+   relabel in THIS skill's output only, not a GitHub mutation.
 
 ## Runtime
 Requires `gh` CLI authenticated against the project's GitHub remote. If

@@ -116,8 +116,8 @@ Date in `YYYY-mm-dd` format, slug in kebab-case taken from the task name.
 - `## Commands` — the exact commands run: 3 commands (`git add`,
   `git commit`, `git push`), or 4 more (`git checkout`, `git pull`,
   `git merge --no-ff`, `git push`) if ship ran with `--merge`; plus the
-  `git checkout -b fix/<node-slug>` if step 2b auto-created a branch, and
-  the `git branch -d`/`git push origin --delete` cleanup if step 9 ran
+  `git checkout -b fix/<node-slug>` if `BranchBeforeCommit` auto-created a branch, and
+  the `git branch -d`/`git push origin --delete` cleanup if `CleanupFixBranch` ran
 - `## Output` — the verbatim commit hash + push result (and merge if
   any), never paraphrased into a bare "pushed successfully"
 - `## Seal gate` — clearly record the approval received before running
