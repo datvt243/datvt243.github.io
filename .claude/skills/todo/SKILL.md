@@ -1,6 +1,6 @@
 ---
 name: todo
-description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker analyst (feature, hoặc bug chưa có feature doc) + /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "[task]"|#[issue-number] [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (vẫn qua đúng seal gate của /ship, giống hệt gọi tay).
+description: Resolve/tạo GitHub issue + checkout branch riêng, rồi gộp /worker analyst (feature, hoặc bug chưa có feature doc) + /worker implementer + /worker verifier thành 1 lệnh cho agent-hub của datvt243.github.io — vẫn chạy 2 lượt tách biệt bên trong (không phá vỡ NeverVerifyOwnWork), tự lặp lại lượt implementer khi REOPEN tới giới hạn retry. Trigger: /todo "[task]"|#[issue-number] [--ship]. Dừng ở SEAL hoặc hết giới hạn retry, không tự commit — trừ khi có --ship, khi đó gọi tiếp /ship (truyền --ship chính là approval — /ship chạy luôn, AutoCommitNoGate).
 argument-hint: "<task>|#<issue-number> [--ship]"
 disable-model-invocation: true
 ---
@@ -122,10 +122,10 @@ lượt tách biệt.
    - **Có `--ship`**: gọi ngay `/ship "<task>"` đúng như skill đó định
      nghĩa — KHÔNG tự triển khai lại logic của `/ship` ở đây. `/ship` vẫn
      chạy đầy đủ hợp đồng riêng của nó: `SealedOnly` (đã thỏa vì SEAL vừa
-     xảy ra), hiển thị đúng lệnh `git add`/`git commit`/`git push` thật và
-     chờ operator approve, `NoForce`, `ReadBackBeforeClaim`, evidence note
-     riêng. `--ship` trên `/todo` chỉ bỏ bớt việc gõ `/ship` thành lệnh thứ
-     2 — KHÔNG bỏ qua seal gate của `/ship`.
+     xảy ra), hiển thị đúng lệnh `git add`/`git commit`/`git push` thật rồi
+     chạy luôn (`AutoCommitNoGate` — truyền `--ship` chính là approval),
+     `NoForce`, `ReadBackBeforeClaim`, evidence note riêng. `--ship` trên
+     `/todo` chỉ bỏ bớt việc gõ `/ship` thành lệnh thứ 2.
 
 ## Hard rules honored
 `IssueBranchFirst` (resolve/tạo GitHub issue + checkout branch riêng trước

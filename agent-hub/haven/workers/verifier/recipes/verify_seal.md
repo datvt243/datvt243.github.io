@@ -124,6 +124,11 @@ so every hub doesn't reason about it differently.
    `Behavior #N` (fix) needs evidence like any node criterion. A
    `## Feature doc changed` line without the operator's recorded answer
    → REOPEN.
+6b2. Review: the note has no `## Review` → REOPEN (implement step 6c
+   skipped). `skipped — docs` on a non-`docs` task, a `security`-labeled
+   issue without a `/security-review` entry, or a correctness/security
+   finding with neither a fix nor a stated false-positive reason →
+   REOPEN.
 6c. `## Doctrine proposal` in the note: the cited outputs prove `<old>`
    fails and `<new>` passes, from the same `Run from` → `confirmed`,
    otherwise `rejected` (not a REOPEN reason on its own). Record it in
