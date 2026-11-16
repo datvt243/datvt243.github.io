@@ -1,103 +1,103 @@
 # datvt243.github.io
 
-Portfolio và blog cá nhân của **Võ Tấn Đạt** — trang CV, dự án, GitHub và blog song ngữ Việt/Anh, giao diện kiểu "code editor", điều hướng bằng phím tắt Vim.
+Personal portfolio and blog of **Võ Tấn Đạt** — resume, projects, GitHub and a bilingual Vietnamese/English blog, with a "code editor" style UI and Vim-style keyboard navigation.
 
-Bản chạy thật: https://resume-nuxt-vert.vercel.app
+Live site: https://resume-nuxt-vert.vercel.app
 
-## Mục lục
+## Contents
 
-- [Bắt đầu nhanh](#bắt-đầu-nhanh)
-- [Biến môi trường](#biến-môi-trường)
-- [Các trang](#các-trang)
-- [Phím tắt](#phím-tắt)
-- [Công nghệ](#công-nghệ)
-- [Đóng góp & quy trình git](#đóng-góp--quy-trình-git)
-- [Ghi công](#ghi-công)
+- [Quick start](#quick-start)
+- [Environment variables](#environment-variables)
+- [Pages](#pages)
+- [Keyboard shortcuts](#keyboard-shortcuts)
+- [Tech stack](#tech-stack)
+- [Contributing & git workflow](#contributing--git-workflow)
+- [Credits](#credits)
 - [License](#license)
 
-## Bắt đầu nhanh
+## Quick start
 
 ```bash
 npm install
-cp .env.example .env   # rồi điền giá trị, xem mục bên dưới
+cp .env.example .env   # then fill in the values, see the section below
 npm run dev            # dev server
 ```
 
-Các lệnh khác:
+Other commands:
 
 ```bash
-npm run build      # build SSR
-npm run generate   # build static
-npm run preview    # xem thử bản build
-npm run lint       # eslint (npm run lint:fix để tự sửa)
+npm run build      # SSR build
+npm run generate   # static build
+npm run preview    # preview the build
+npm run lint       # eslint (npm run lint:fix to autofix)
 ```
 
-## Biến môi trường
+## Environment variables
 
 ```env
-MY_EMAIL=                    # Email dùng để lấy dữ liệu CV
-NODE_API=                    # Base URL của resume API
-GITHUB_TOKEN=                # GitHub token (không có thì gọi API ẩn danh)
+MY_EMAIL=                    # Email used to fetch the resume data
+NODE_API=                    # Base URL of the resume API
+GITHUB_TOKEN=                # GitHub token (unset → unauthenticated API calls)
 GITHUB_USER=                 # GitHub username
-PUPPETEER_EXECUTABLE_PATH=   # Đường dẫn Chrome/Chromium để xuất PDF (bắt buộc ở production)
-GISCUS_CATEGORY=             # Tên category GitHub Discussions cho bình luận blog
-GISCUS_CATEGORY_ID=          # Lấy từ https://giscus.app
-GISCUS_REPO_ID=              # Lấy từ https://giscus.app
-DEPLOY_HOOK_URL=             # Tuỳ chọn: /release gọi URL này sau khi tag main
-SITE_URL=                    # Tuỳ chọn: domain chuẩn cho sitemap/rss/hreflang (mặc định https://resume-nuxt-vert.vercel.app)
+PUPPETEER_EXECUTABLE_PATH=   # Chrome/Chromium path for PDF export (required in production)
+GISCUS_CATEGORY=             # GitHub Discussions category name for blog comments
+GISCUS_CATEGORY_ID=          # From https://giscus.app
+GISCUS_REPO_ID=              # From https://giscus.app
+DEPLOY_HOOK_URL=             # Optional: /release calls this URL after tagging main
+SITE_URL=                    # Optional: canonical domain for sitemap/rss/hreflang (default https://resume-nuxt-vert.vercel.app)
 ```
 
-`GISCUS_*` là tuỳ chọn — chưa điền thì khung bình luận hiện thông báo "chưa cấu hình" thay vì bị lỗi.
+`GISCUS_*` are optional — when unset, the comment box shows a "not configured" notice instead of breaking.
 
-Dữ liệu lấy từ 3 API ngoài: resume API (`${NODE_API}/api/me/${MY_EMAIL}`), blog API (`https://blog-api-nodejs-express.onrender.com/api/v1/`) và GitHub API.
+Data comes from 3 external APIs: the resume API (`${NODE_API}/api/me/${MY_EMAIL}`), the blog API (`https://blog-api-nodejs-express.onrender.com/api/v1/`) and the GitHub API.
 
-## Các trang
+## Pages
 
-| Route | Nội dung |
+| Route | Content |
 |---|---|
-| `/` | CV |
-| `/projects` | Dự án, lọc theo công nghệ |
-| `/github` | Hồ sơ & repo GitHub |
-| `/contact` | Thông tin liên hệ |
-| `/blogs` | Danh sách bài viết, lọc theo category |
-| `/blogs/[id]` | Chi tiết bài viết, bình luận qua Giscus |
-| `/rss.xml` | RSS 2.0 — 20 bài mới nhất |
-| `/sitemap.xml` | Sitemap các trang tĩnh + từng bài viết |
+| `/` | Resume |
+| `/projects` | Projects, filterable by technology |
+| `/github` | GitHub profile & repos |
+| `/contact` | Contact info |
+| `/blogs` | Post list, filterable by category |
+| `/blogs/[id]` | Post detail, comments via Giscus |
+| `/rss.xml` | RSS 2.0 — the 20 latest posts |
+| `/sitemap.xml` | Sitemap of the static pages + every post |
 
-Song ngữ qua `@nuxtjs/i18n`: tiếng Việt là mặc định, URL không có tiền tố (`/blogs`); tiếng Anh nằm dưới `/en/*` (`/en/blogs`).
+Bilingual via `@nuxtjs/i18n`: Vietnamese is the default, with unprefixed URLs (`/blogs`); English lives under `/en/*` (`/en/blogs`).
 
-## Phím tắt
+## Keyboard shortcuts
 
-Nhấn `?` (hoặc nút `?` trên header) để xem toàn bộ phím tắt của trang hiện tại.
+Press `?` (or the `?` button in the header) to see every shortcut for the current page.
 
-| Phím | Tác dụng |
+| Key | Action |
 |---|---|
-| `gr` `gp` `gh` `gc` | Sang Resume / Projects / GitHub / Contact |
-| `j` / `k` | Cuộn xuống / lên |
-| `gg` / `G` | Lên đầu / xuống cuối trang |
-| `c` / `d` | Trang CV: liên hệ / tải CV |
-| `1`–`5` | Trang CV: đổi tab thông tin cá nhân |
-| `/` / `Esc` | Trang GitHub: vào / thoát ô tìm repo |
-| `?` | Bật/tắt bảng phím tắt |
+| `gr` `gp` `gh` `gc` | Go to Resume / Projects / GitHub / Contact |
+| `j` / `k` | Scroll down / up |
+| `gg` / `G` | Jump to top / bottom of the page |
+| `c` / `d` | Resume page: contact / download resume |
+| `1`–`5` | Resume page: switch personal-info tab |
+| `/` / `Esc` | GitHub page: focus / leave the repo search box |
+| `?` | Toggle the shortcuts panel |
 
-Phím tắt tạm tắt khi đang gõ trong ô nhập. Nếu extension như Vimium chiếm phím, nhấn `i` để chuyển phím cho trang, hoặc loại trừ trang này trong cài đặt extension.
+Shortcuts are paused while typing in an input. If an extension like Vimium grabs the keys, press `i` to pass keys to the page, or exclude this site in the extension's settings.
 
-## Công nghệ
+## Tech stack
 
-Nuxt 4 (SSR + ISR) · Vue 3 + TypeScript · TailwindCSS v4 + @nuxt/ui v4 · Pinia · puppeteer-core (xuất PDF) · @nuxtjs/i18n
+Nuxt 4 (SSR + ISR) · Vue 3 + TypeScript · TailwindCSS v4 + @nuxt/ui v4 · Pinia · puppeteer-core (PDF export) · @nuxtjs/i18n
 
-## Đóng góp & quy trình git
+## Contributing & git workflow
 
-- `main` và `staging` đều được GitHub bảo vệ: không push thẳng, bắt buộc qua PR.
-- Tạo branch `bug/<số-issue>` hoặc `feature/<số-issue>` từ `staging`, mở PR vào `staging`.
-- `main` là production, chỉ nhận code từ `staging` qua `/release` (merge commit, tag `vX.Y.Z`, chạy build + lint trước).
-- Thay đổi code đi qua quy trình agent-hub (implementer → verifier độc lập → ship) — xem [`agent-hub/README.md`](agent-hub/README.md) và [`CLAUDE.md`](CLAUDE.md).
-- Báo lỗi / đề xuất: [GitHub Issues](https://github.com/datvt243/datvt243.github.io/issues).
+- `main` and `staging` are both GitHub-protected: no direct pushes, PRs only.
+- Create a `bug/<issue-number>` or `feature/<issue-number>` branch off `staging`, open the PR into `staging`.
+- `main` is production and only receives code from `staging` via `/release` (merge commit, tag `vX.Y.Z`, runs build + lint first).
+- Code changes go through the agent-hub workflow (implementer → independent verifier → ship) — see [`agent-hub/README.md`](agent-hub/README.md) and [`CLAUDE.md`](CLAUDE.md).
+- Bug reports / suggestions: [GitHub Issues](https://github.com/datvt243/datvt243.github.io/issues).
 
-## Ghi công
+## Credits
 
-Giao diện "code editor" (tab bar, file tree, status bar) lấy cảm hứng từ [developer-portfolio-v2](https://github.com/alexdeploy/developer-portfolio-v2) — thiết kế bởi [@darelova](https://www.behance.net/darelova), phát triển bởi [@alexdeploy](https://github.com/alexdeploy). Dự án này tự viết lại toàn bộ trên lớp dữ liệu/API riêng, không sao chép code từ repo gốc.
+The "code editor" UI (tab bar, file tree, status bar) is inspired by [developer-portfolio-v2](https://github.com/alexdeploy/developer-portfolio-v2) — designed by [@darelova](https://www.behance.net/darelova), developed by [@alexdeploy](https://github.com/alexdeploy). This project is a full rewrite on its own data/API layer, with no code copied from the original repo.
 
 ## License
 
-Chưa chọn license — mọi quyền thuộc tác giả.
+No license chosen yet — all rights reserved by the author.
