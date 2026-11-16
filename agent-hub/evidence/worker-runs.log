@@ -144,3 +144,5 @@
 2026-11-08T13:25:55Z role=verifier outcome=SEAL node=github-page-fixes rerun=full spawn=fresh hub_bytes_before=94004 hub_bytes_after=94001
 2026-11-08T13:31:56Z role=verifier outcome=REOPEN node=pdf-download-cleanup rerun=partial spawn=fresh hub_bytes_before=94001 hub_bytes_after=94876
 2026-11-08T13:36:26Z role=verifier outcome=SEAL node=pdf-download-cleanup rerun=partial spawn=resumed hub_bytes_before=94001 hub_bytes_after=93988
+2026-11-16T07:55:50Z role=verifier outcome=REOPEN node=vi-docs-to-english rerun=none spawn=fresh hub_bytes_before=95193 hub_bytes_after=95752
+2026-11-16T07:57:59Z role=verifier outcome=SEAL node=vi-docs-to-english rerun=none spawn=resumed hub_bytes_before=95193 hub_bytes_after=95190
