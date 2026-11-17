@@ -40,7 +40,7 @@ UI changes (run `/browser` first).
 | `/` | ISR 60s | `/api/resume` |
 | `/github` | ISR 60s | `/api/github` |
 | `/contact` | prerender | `app.config.ts` |
-| `/projects` | none (no routeRule) | `useResumeStore` |
+| `/projects` | ISR 60s | `useResumeStore` |
 | `/blogs` | ISR 60s | `/api/blogs/posts` |
 | `/blogs/[id]` | ISR true | `/api/blogs/detail/[id]` |
 
