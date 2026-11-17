@@ -23,6 +23,7 @@
 | Keyboard navigation and shortcut help | keyboard-navigation.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/keyboard-navigation-spec.md` | site-wide: `themes/portfolio-dev/components/KeyNav.vue`, `app.config.ts` menuPrimary | #438 |
 | SEO feeds: RSS, sitemap, robots | seo-feeds.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/seo-feeds-spec.md` | `server/routes/rss.xml.ts`, `server/routes/sitemap.xml.ts`, `server/routes/robots.txt.ts`, `server/utils/siteUrl.ts` | #425, #433 |
 | Error and 404 page | error-page.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/error-page-spec.md` | `error.vue`, `layouts/error.vue` | #418, #427, #428 |
+| Visit tracking | visit-tracking.md | draft | site-wide: `plugins/VisitTracker.client.ts`, `server/api/visit.post.ts` | #389, #398 |
 
 ## Doc format — `doctrine/features/<slug>.md`
 ~~~markdown

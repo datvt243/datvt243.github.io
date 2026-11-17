@@ -51,7 +51,9 @@ UI changes (run `/browser` first).
   - `/api/generate-pdf` — plain handler + module-level in-memory cache (1 day);
     `defineCachedEventHandler` doesn't correctly cache its binary PDF body.
   - `/api/visit` (POST) — uncached relay for `VisitTracker.client.ts`; the
-    backend has no CORS for a direct browser call.
+    backend has no CORS for a direct browser call. Local runs (dev/preview)
+    never record visits: the relay only forwards when `VERCEL` is set
+    (Vercel's runtime), otherwise it just answers 204.
 - External APIs:
   - Resume: `${NODE_API}/api/me/${MY_EMAIL}`
   - Blog: `https://blog-api-nodejs-express.onrender.com/api/v1/`

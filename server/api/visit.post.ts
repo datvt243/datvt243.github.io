@@ -9,13 +9,16 @@ export default defineEventHandler(async (event) => {
   const { NODE_API, MY_EMAIL } = useRuntimeConfig().public
   const ip = getRequestIP(event, { xForwardedFor: true })
 
-  // No retry: every call counts against the backend's shared rate limit.
-  await $fetch(`${NODE_API}/api/me/${MY_EMAIL}/visit`, {
-    method: 'POST',
-    headers: ip ? { 'x-forwarded-for': ip } : {},
-    timeout: 5000,
-    retry: 0,
-  }).catch((error) => console.error('VISIT:TRACK -----', error))
+  // Only the deployed (Vercel) runtime records: local runs (dev/preview) would land in production stats.
+  if (process.env.VERCEL) {
+    // No retry: every call counts against the backend's shared rate limit.
+    await $fetch(`${NODE_API}/api/me/${MY_EMAIL}/visit`, {
+      method: 'POST',
+      headers: ip ? { 'x-forwarded-for': ip } : {},
+      timeout: 5000,
+      retry: 0,
+    }).catch((error) => console.error('VISIT:TRACK -----', error))
+  }
 
   setResponseStatus(event, 204)
   return null
