@@ -1,0 +1,146 @@
+2026-09-02T11:36:18Z role=verifier outcome=SEAL node=dependency-upgrade-phase1 rerun=full hub_bytes_before=66068 hub_bytes_after=68286
+2026-09-05T12:17:32Z role=verifier outcome=SEAL node=dependency-upgrade-phase2 rerun=full hub_bytes_before=68286 hub_bytes_after=70089
+2026-09-05T19:20:30Z role=verifier outcome=SEAL node=editor-dracula-badge-label-fix rerun=full hub_bytes_before=73187 hub_bytes_after=75160
+2026-09-05T22:23:20Z role=verifier outcome=SEAL node=editor-dracula-github-item-fix rerun=partial hub_bytes_before=75160 hub_bytes_after=77553
+2026-09-06T05:19:23Z role=verifier outcome=SEAL node=enforce-node-engines rerun=partial hub_bytes_before=77553 hub_bytes_after=79419
+2026-09-06T16:41:55Z role=implementer outcome=blocked node=light-mode-elevation-contrast hub_bytes_before=79297 verifier_rerun=n/a
+2026-09-06T17:19:56Z role=verifier outcome=SEAL node=blog-api-runtime-validation rerun=partial hub_bytes_before=79297 hub_bytes_after=83191
+2026-09-06T17:37:10Z role=verifier outcome=SEAL node=cleanup-pdf-only-types rerun=partial hub_bytes_before=83191 hub_bytes_after=85914
+2026-09-11T18:34:25Z role=verifier outcome=SEAL node=error-vue-theme-colors rerun=none hub_bytes_before=85834 hub_bytes_after=89149
+2026-09-20T07:47:08Z role=verifier outcome=SEAL node=fix-blog-author-tag rerun=full hub_bytes_before=105848 hub_bytes_after=107955
+2026-09-20T08:29:22Z role=verifier outcome=SEAL node=p1-portfolio-review-fixes rerun=full hub_bytes_before=107955 hub_bytes_after=111789
+2026-09-20T11:00:38Z role=verifier outcome=SEAL node=p2-polish-fixes-round2 rerun=full hub_bytes_before=111789 hub_bytes_after=115870
+2026-09-20T11:20:53Z role=verifier outcome=SEAL node=p3-nice-to-have-fixes rerun=full hub_bytes_before=115870 hub_bytes_after=119218
+2026-09-20T13:47:41Z role=verifier outcome=SEAL node=revert-sanitize-html-outage rerun=full hub_bytes_before=119218 hub_bytes_after=122475
+2026-09-23T15:56:02Z role=verifier outcome=SEAL node=fix-generate-pdf-vercel-chromium rerun=full hub_bytes_before=122475 hub_bytes_after=126229
+2026-09-23T17:17:14Z role=verifier outcome=SEAL node=cv-download-toast rerun=full hub_bytes_before=126821 hub_bytes_after=130064
+2026-09-23T18:12:10Z role=verifier outcome=SEAL node=github-updated-date-tz rerun=full hub_bytes_before=130064 hub_bytes_after=132989
+2026-10-03T18:44:34Z role=verifier outcome=SEAL node=ats-cv-template-local rerun=partial hub_bytes_before=132989 hub_bytes_after=134641
+2026-10-04T00:11:11Z role=verifier outcome=SEAL node=comment-cleanup-standardize rerun=partial hub_bytes_before=134641 hub_bytes_after=136310
+2026-10-04T11:03:33Z role=verifier outcome=SEAL node=comment-style-followup rerun=partial hub_bytes_before=136310 hub_bytes_after=137859
+2026-10-04T11:07:24Z role=verifier outcome=SEAL node=author-github-see-line rerun=partial hub_bytes_before=138445 hub_bytes_after=138920
+2026-10-04T12:05:42Z role=verifier outcome=REOPEN node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=139629
+2026-10-04T12:08:42Z role=verifier outcome=SEAL node=object-parameter-rule rerun=partial hub_bytes_before=138920 hub_bytes_after=140218
+2026-10-18T13:51:41Z role=verifier outcome=SEAL node=vim-key-nav rerun=partial hub_bytes_before=149019 hub_bytes_after=150217
+2026-10-18T14:04:17Z role=verifier outcome=SEAL node=vim-key-nav-hint rerun=partial hub_bytes_before=150789 hub_bytes_after=150784
+2026-10-18T14:08:29Z role=verifier outcome=SEAL node=vim-key-nav-extension-note rerun=partial hub_bytes_before=150784 hub_bytes_after=151501
+2026-10-18T14:27:31Z role=verifier outcome=SEAL node=vim-key-nav-tab-badges rerun=partial hub_bytes_before=152157 hub_bytes_after=152152
+2026-10-18T14:39:01Z role=verifier outcome=SEAL node=vim-key-nav-page-shortcuts rerun=partial hub_bytes_before=152152 hub_bytes_after=153378
+2026-10-18T18:27:47Z role=implementer outcome=sealed_pending_verifier node=vim-key-nav-github-search hub_bytes_before=153378 hub_bytes_after=154111
+2026-10-18T18:31:21Z role=verifier outcome=SEAL node=vim-key-nav-github-search rerun=partial hub_bytes_before=154111 hub_bytes_after=154106
+2026-10-18T18:35:26Z role=implementer outcome=sealed_pending_verifier node=header-drop-brand-desktop hub_bytes_before=154106
+2026-10-18T18:38:13Z role=verifier outcome=SEAL node=header-drop-brand-desktop rerun=partial hub_bytes_before=154106 hub_bytes_after=154650
+2026-10-18T18:43:28Z role=implementer outcome=sealed_pending_verifier node=resume-tab-autoscroll hub_bytes_before=154650
+2026-10-18T18:48:55Z role=verifier outcome=SEAL node=resume-tab-autoscroll rerun=partial hub_bytes_before=154650 hub_bytes_after=155407
+2026-10-18T19:30:00Z role=implementer outcome=sealed_pending_verifier node=ui-review-239 hub_bytes_before=155407
+2026-10-18T19:37:46Z role=verifier outcome=REOPEN node=ui-review-239 rerun=partial hub_bytes_before=155407 hub_bytes_after=156292
+2026-10-18T19:42:25Z role=implementer outcome=sealed_pending_verifier node=ui-review-239 iteration=2 hub_bytes_before=156292
+2026-10-18T19:42:25Z role=implementer outcome=sealed_pending_verifier node=hero-contact-to-page hub_bytes_before=156292
+2026-10-18T19:50:20Z role=verifier outcome=SEAL node=ui-review-239 rerun=partial hub_bytes_before=156292 hub_bytes_after=156912
+2026-10-18T19:50:20Z role=verifier outcome=SEAL node=hero-contact-to-page rerun=partial hub_bytes_before=156292 hub_bytes_after=156912
+2026-10-20T17:39:28Z role=verifier outcome=SEAL node=experience-career-break rerun=none hub_bytes_before=156912 hub_bytes_after=157755
+2026-10-21T13:15:23Z role=verifier outcome=SEAL node=resume-api-error-standard rerun=none hub_bytes_before=157755 hub_bytes_after=158497
+2026-10-24T12:36:44Z role=verifier outcome=SEAL node=claude-md-refactor rerun=partial hub_bytes_before=76704 hub_bytes_after=76703
+2026-10-24T15:07:50Z role=verifier outcome=REOPEN node=deps-pinia-4 rerun=none hub_bytes_before=76703 hub_bytes_after=77293
+2026-10-24T15:11:07Z role=verifier outcome=SEAL node=deps-pinia-4 rerun=none hub_bytes_before=76703 hub_bytes_after=76693
+2026-10-24T15:17:57Z role=verifier outcome=SEAL node=deps-nuxt-image-2 rerun=none hub_bytes_before=76703 hub_bytes_after=76703
+2026-10-24T15:24:20Z role=verifier outcome=SEAL node=deps-puppeteer-25 rerun=partial hub_bytes_before=76703 hub_bytes_after=77456
+2026-10-24T15:31:40Z role=verifier outcome=SEAL node=hero-actions-align rerun=partial hub_bytes_before=76703 hub_bytes_after=76705
+2026-10-24T15:55:49Z role=verifier outcome=REOPEN node=deps-i18n-10 rerun=none hub_bytes_before=77958 hub_bytes_after=78811
+2026-10-24T19:23:06Z role=verifier outcome=SEAL node=deps-i18n-10 rerun=none hub_bytes_before=77958 hub_bytes_after=77390
+2026-10-24T20:21:24Z role=verifier outcome=REOPEN node=deps-nuxt-ui-3-tw4 rerun=full hub_bytes_before=78833 hub_bytes_after=79372
+2026-10-24T20:43:31Z role=verifier outcome=REOPEN node=deps-nuxt-ui-3-tw4 rerun=partial hub_bytes_before=78833 hub_bytes_after=79372
+2026-10-24T20:57:51Z role=verifier outcome=SEAL node=deps-nuxt-ui-3-tw4 rerun=partial hub_bytes_before=78833 hub_bytes_after=77941
+2026-10-25T05:09:23Z role=verifier outcome=REOPEN node=deps-nuxt-4 rerun=partial hub_bytes_before=77921 hub_bytes_after=79296
+2026-10-25T05:29:44Z role=verifier outcome=SEAL node=deps-nuxt-4 rerun=partial hub_bytes_before=77921 hub_bytes_after=77992
+2026-10-25T06:12:29Z role=verifier outcome=SEAL node=deps-nuxt-ui-4-icon-2 rerun=partial hub_bytes_before=77992 hub_bytes_after=78002
+2026-10-26T12:10:27Z role=verifier outcome=SEAL node=resume-pii-whitelist rerun=partial hub_bytes_before=78002 hub_bytes_after=78000
+2026-10-26T12:16:34Z role=verifier outcome=SEAL node=skills-tab-all-groups rerun=none hub_bytes_before=78000 hub_bytes_after=77980
+2026-10-26T12:27:55Z role=verifier outcome=SEAL node=resume-isr-fallback rerun=partial hub_bytes_before=77980 hub_bytes_after=77964
+2026-10-26T12:58:52Z role=verifier outcome=SEAL node=visit-tracker-proxy rerun=partial hub_bytes_before=77964 hub_bytes_after=77940
+2026-10-26T13:05:50Z role=verifier outcome=SEAL node=error-states-retry rerun=full hub_bytes_before=77940 hub_bytes_after=77923
+2026-10-26T13:12:03Z role=verifier outcome=SEAL node=blog-isr-fallback rerun=full hub_bytes_before=77923 hub_bytes_after=77904
+2026-10-26T13:17:21Z role=verifier outcome=REOPEN node=resume-experience-first rerun=full hub_bytes_before=77904 hub_bytes_after=78081
+2026-10-26T13:18:28Z role=verifier outcome=SEAL node=resume-experience-first rerun=partial hub_bytes_before=77904 hub_bytes_after=77905
+2026-10-26T13:25:17Z role=verifier outcome=REOPEN node=pdf-ats-polish rerun=full hub_bytes_before=77905 hub_bytes_after=78125
+2026-10-26T13:26:46Z role=verifier outcome=SEAL node=pdf-ats-polish rerun=partial hub_bytes_before=77905 hub_bytes_after=77904
+2026-10-26T13:28:03Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=full hub_bytes_before=77905 hub_bytes_after=78097
+2026-10-26T13:31:25Z role=verifier outcome=REOPEN node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=78097
+2026-10-26T13:37:32Z role=verifier outcome=SEAL node=content-lang-en-routes rerun=partial hub_bytes_before=77905 hub_bytes_after=77920
+2026-10-26T13:38:25Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=full hub_bytes_before=77904 hub_bytes_after=79329
+2026-10-26T13:40:49Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80054
+2026-10-26T13:44:01Z role=verifier outcome=REOPEN node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80271
+2026-10-26T18:05:52Z role=verifier outcome=SEAL node=ci-typecheck-vitest rerun=partial hub_bytes_before=77904 hub_bytes_after=80038
+2026-10-26T18:03:05Z role=verifier outcome=REOPEN node=security-headers-baseline rerun=full hub_bytes_before=77920 hub_bytes_after=78120
+2026-10-26T18:06:09Z role=verifier outcome=SEAL node=security-headers-baseline rerun=partial hub_bytes_before=77920 hub_bytes_after=77899
+2026-10-26T18:03:41Z role=verifier outcome=REOPEN node=github-own-repos-recent rerun=partial hub_bytes_before=77920 hub_bytes_after=78093
+2026-10-26T18:06:32Z role=verifier outcome=SEAL node=github-own-repos-recent rerun=partial hub_bytes_before=77920 hub_bytes_after=77895
+2026-10-26T18:22:07Z role=verifier outcome=REOPEN node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80377
+2026-10-26T18:26:22Z role=verifier outcome=SEAL node=mobile-experience-touch-kbd rerun=partial hub_bytes_before=80026 hub_bytes_after=80044
+2026-10-26T18:44:54Z role=verifier outcome=SEAL node=a11y-axe-serious rerun=full hub_bytes_before=80026 hub_bytes_after=80022
+2026-10-26T23:07:17Z role=verifier outcome=SEAL node=light-hover-footer-targets rerun=full hub_bytes_before=80042 hub_bytes_after=80060
+2026-10-27T11:26:24Z role=verifier outcome=SEAL node=vue-pin-no-override rerun=full hub_bytes_before=80060 hub_bytes_after=80074
+2026-10-27T11:31:28Z role=verifier outcome=SEAL node=github-no-retry-5xx rerun=full hub_bytes_before=80060 hub_bytes_after=80074
+2026-10-27T11:32:59Z role=verifier outcome=REOPEN node=blog-off-nav rerun=full hub_bytes_before=80060 hub_bytes_after=80318
+2026-10-27T11:35:58Z role=verifier outcome=SEAL node=blog-off-nav rerun=partial hub_bytes_before=80060 hub_bytes_after=80060
+2026-10-27T12:12:06Z role=verifier outcome=SEAL node=font-self-host-cls rerun=full hub_bytes_before=80076 hub_bytes_after=80090
+2026-10-27T12:48:23Z role=verifier outcome=SEAL node=experience-skills-inline rerun=partial hub_bytes_before=80090 hub_bytes_after=80096
+2026-10-27T12:53:05Z role=verifier outcome=SEAL node=experience-skills-text rerun=partial hub_bytes_before=80096 hub_bytes_after=80100
+2026-10-27T12:55:26Z role=verifier outcome=SEAL node=experience-skills-after-desc rerun=partial hub_bytes_before=80100 hub_bytes_after=80114
+2026-10-27T13:08:00Z role=verifier outcome=SEAL node=resume-content-locale rerun=partial hub_bytes_before=80246 hub_bytes_after=80118
+2026-10-27T13:21:58Z role=verifier outcome=SEAL node=vi-glyph-fallback rerun=none hub_bytes_before=80254 hub_bytes_after=80114
+2026-10-31T13:14:41Z role=verifier outcome=SEAL node=pages-nojekyll rerun=none hub_bytes_before=80114 hub_bytes_after=80106
+2026-10-31T13:20:41Z role=verifier outcome=REOPEN node=skills-typo-map-drop rerun=none hub_bytes_before=80106 hub_bytes_after=80748
+2026-10-31T13:22:16Z role=verifier outcome=SEAL node=skills-typo-map-drop rerun=none hub_bytes_before=80106 hub_bytes_after=80112
+2026-10-31T14:37:24Z role=verifier outcome=SEAL node=pdf-two-pages rerun=none hub_bytes_before=80112 hub_bytes_after=80092
+2026-10-31T14:47:09Z role=verifier outcome=SEAL node=blog-content-sanitize rerun=partial hub_bytes_before=80092 hub_bytes_after=80106
+2026-10-31T15:02:36Z role=verifier outcome=SEAL node=script-csp-report-only rerun=partial hub_bytes_before=80106 hub_bytes_after=80106
+2026-11-01T06:32:32Z role=verifier outcome=REOPEN node=projects-readable-mobile rerun=none hub_bytes_before=80106 hub_bytes_after=80435
+2026-11-01T06:34:26Z role=verifier outcome=SEAL node=projects-readable-mobile rerun=none hub_bytes_before=80106 hub_bytes_after=80116
+2026-11-01T06:45:35Z role=verifier outcome=SEAL node=seo-titles-og-image rerun=none hub_bytes_before=80116 hub_bytes_after=80104
+2026-11-01T06:52:27Z role=verifier outcome=SEAL node=remove-unused-deps-helpers rerun=none hub_bytes_before=80104 hub_bytes_after=80110
+2026-11-01T07:04:47Z role=verifier outcome=SEAL node=upstream-no-retry-429 rerun=partial hub_bytes_before=80110 hub_bytes_after=80098
+2026-11-01T08:56:09Z role=verifier outcome=SEAL node=sanitize-html-require-esm rerun=partial hub_bytes_before=80098 hub_bytes_after=80116
+2026-11-01T09:17:55Z role=verifier outcome=REOPEN node=resume-isr-allow-lang rerun=none hub_bytes_before=80340 hub_bytes_after=81173
+2026-11-01T09:20:41Z role=verifier outcome=SEAL node=resume-isr-allow-lang rerun=none hub_bytes_before=80340 hub_bytes_after=80785
+2026-11-02T00:23:54Z role=verifier outcome=SEAL node=main-familiar-skills rerun=none hub_bytes_before=79735 hub_bytes_after=79737
+2026-11-02T00:27:13Z role=verifier outcome=SEAL node=hero-main-familiar-api rerun=none hub_bytes_before=79737 hub_bytes_after=79741
+2026-11-02T00:42:54Z role=verifier outcome=REOPEN node=skills-file-tabs rerun=none hub_bytes_before=79741 hub_bytes_after=80455
+2026-11-02T00:44:34Z role=verifier outcome=SEAL node=skills-file-tabs rerun=none hub_bytes_before=79741 hub_bytes_after=79735
+2026-11-02T01:02:39Z role=verifier outcome=SEAL node=experience-pug-piped rerun=none hub_bytes_before=79735 hub_bytes_after=79751
+2026-11-04T17:51:05Z role=verifier outcome=REOPEN node=script-csp-enforce rerun=none hub_bytes_before=79751 hub_bytes_after=80609
+2026-11-04T17:58:00Z role=verifier outcome=SEAL node=script-csp-enforce rerun=partial hub_bytes_before=79751 hub_bytes_after=79751
+2026-11-04T18:09:49Z role=verifier outcome=SEAL node=resume-plain-mappers rerun=partial hub_bytes_before=79751 hub_bytes_after=79743
+2026-11-04T18:35:26Z role=verifier outcome=SEAL node=api-cache-revalidate rerun=partial hub_bytes_before=79743 hub_bytes_after=79739
+2026-11-05T02:08:29Z role=verifier outcome=SEAL node=hero-greeting-whoami rerun=partial hub_bytes_before=79739 hub_bytes_after=79723
+2026-11-05T02:23:17Z role=verifier outcome=REOPEN node=hero-about-me-intro rerun=none hub_bytes_before=79739 hub_bytes_after=80671
+2026-11-05T02:26:48Z role=verifier outcome=SEAL node=hero-about-me-intro rerun=partial hub_bytes_before=79739 hub_bytes_after=79721
+2026-11-05T02:41:43Z role=verifier outcome=SEAL node=hero-avatar-inline rerun=none hub_bytes_before=79721 hub_bytes_after=79715
+2026-11-05T02:45:26Z role=verifier outcome=SEAL node=hero-intro-full-avatar-128 rerun=none hub_bytes_before=79715 hub_bytes_after=79733
+2026-11-05T02:49:00Z role=verifier outcome=SEAL node=hero-avatar-img-tag rerun=none hub_bytes_before=79733 hub_bytes_after=79743
+2026-11-05T02:52:09Z role=verifier outcome=SEAL node=hero-avatar-img-tag-revert rerun=none hub_bytes_before=79743 hub_bytes_after=79755
+2026-11-05T11:33:32Z role=verifier outcome=SEAL node=ats-pdf-address-label rerun=partial hub_bytes_before=80619 hub_bytes_after=79769
+2026-11-05T11:36:59Z role=verifier outcome=SEAL node=ats-pdf-skills-heading rerun=partial hub_bytes_before=80619 hub_bytes_after=79771
+2026-11-05T11:48:28Z role=implementer outcome=blocked node=visit-ip-geo-check hub_bytes_before=79769 verifier_rerun=n/a
+2026-11-05T12:36:06Z role=verifier outcome=SEAL node=resume-hr-view rerun=partial hub_bytes_before=80626 hub_bytes_after=80606
+2026-11-05T12:46:12Z role=verifier outcome=REOPEN node=resume-hr-emphasis rerun=none hub_bytes_before=80606 hub_bytes_after=81374
+2026-11-05T12:49:39Z role=verifier outcome=SEAL node=resume-hr-emphasis rerun=none hub_bytes_before=80606 hub_bytes_after=80596
+2026-11-05T12:49:39Z role=verifier outcome=SEAL node=resume-hr-skills-table rerun=none hub_bytes_before=81374 hub_bytes_after=80596
+2026-11-05T12:53:39Z role=verifier outcome=SEAL node=resume-hr-icons-exp rerun=none hub_bytes_before=80596 hub_bytes_after=80592
+2026-11-05T15:52:16Z role=implementer outcome=blocked node=visit-local-count hub_bytes_before=80592 verifier_rerun=n/a
+2026-11-05T16:04:37Z role=verifier outcome=SEAL node=hero-download-shortcut-D rerun=none hub_bytes_before=81194 hub_bytes_after=81192
+2026-11-05T16:52:52Z role=verifier outcome=SEAL node=pdf-cv-filename rerun=none hub_bytes_before=81192 hub_bytes_after=81180
+2026-11-05T16:59:03Z role=verifier outcome=SEAL node=pdf-project-sort rerun=full hub_bytes_before=81180 hub_bytes_after=81168
+2026-11-05T17:04:14Z role=verifier outcome=SEAL node=pdf-filename-lang rerun=full hub_bytes_before=81168 hub_bytes_after=81170
+2026-11-05T17:24:51Z role=verifier outcome=SEAL node=skill-icons-390 rerun=none hub_bytes_before=81170 hub_bytes_after=81160
+2026-11-05T21:43:25Z role=verifier outcome=SEAL node=hr-exp-past-icon rerun=none hub_bytes_before=81170 hub_bytes_after=81156
+2026-11-07T09:17:39Z role=verifier outcome=SEAL node=i18n-locale-cleanup rerun=partial spawn=fresh hub_bytes_before=94008 hub_bytes_after=94012
+2026-11-07T09:28:15Z role=verifier outcome=SEAL node=sitemap-rss-locale rerun=partial spawn=fresh hub_bytes_before=94012 hub_bytes_after=94016
+2026-11-07T09:38:08Z role=verifier outcome=REOPEN node=blog-list-url-state rerun=none spawn=fresh hub_bytes_before=94016 hub_bytes_after=95406
+2026-11-07T09:40:22Z role=verifier outcome=SEAL node=blog-list-url-state rerun=none spawn=resumed hub_bytes_before=94016 hub_bytes_after=94014
+2026-11-07T09:53:55Z role=verifier outcome=SEAL node=blog-fetch-timeout rerun=full spawn=fresh hub_bytes_before=94014 hub_bytes_after=94010
+2026-11-07T10:00:57Z role=verifier outcome=SEAL node=post-detail-cleanup rerun=full spawn=fresh hub_bytes_before=94010 hub_bytes_after=94007
+2026-11-08T12:59:06Z role=verifier outcome=SEAL node=resume-cache-empty rerun=full spawn=fresh hub_bytes_before=94007 hub_bytes_after=94004
+2026-11-08T13:25:55Z role=verifier outcome=SEAL node=github-page-fixes rerun=full spawn=fresh hub_bytes_before=94004 hub_bytes_after=94001
+2026-11-08T13:31:56Z role=verifier outcome=REOPEN node=pdf-download-cleanup rerun=partial spawn=fresh hub_bytes_before=94001 hub_bytes_after=94876
+2026-11-08T13:36:26Z role=verifier outcome=SEAL node=pdf-download-cleanup rerun=partial spawn=resumed hub_bytes_before=94001 hub_bytes_after=93988
