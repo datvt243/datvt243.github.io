@@ -147,3 +147,4 @@
 2026-11-16T07:55:50Z role=verifier outcome=REOPEN node=vi-docs-to-english rerun=none spawn=fresh hub_bytes_before=95193 hub_bytes_after=95752
 2026-11-16T07:57:59Z role=verifier outcome=SEAL node=vi-docs-to-english rerun=none spawn=resumed hub_bytes_before=95193 hub_bytes_after=95190
 2026-11-17T08:38:44Z role=verifier outcome=SEAL node=claude-md-projects-isr rerun=none spawn=fresh hub_bytes_before=95190 hub_bytes_after=95181
+2026-11-17T08:54:54Z role=verifier outcome=SEAL node=visit-local-count rerun=partial spawn=fresh hub_bytes_before=95181 hub_bytes_after=94749
