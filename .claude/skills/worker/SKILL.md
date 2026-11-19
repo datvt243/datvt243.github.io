@@ -1,6 +1,6 @@
 ---
 name: worker
-description: Become the analyst, implementer or verifier in the datvt243.github.io agent-hub, follow that role's recipe, stop at the SEAL gate. Trigger: /worker [analyst|implementer|verifier] "[task]"
+description: Become the analyst, implementer or verifier in the datvt243.github.io agent-hub, follow that role's recipe, stop at the SEAL gate. Trigger: /worker [analyst|implementer|verifier] "[task] Use when running one loop role by hand instead of /todo."
 ---
 
 # /worker <wid> "<task>"
@@ -26,6 +26,12 @@ INDEPENDENTLY for each node — never infer one node's verdict from another.
 > `## Isolation proof` field: the verifier must record the identity of this pass's own
 > subagent (different from the implementer's), so a later audit can detect
 > if the context-separation step was skipped, instead of having to trust
+> Spawn it with `model: "sonnet"` (it checks cited evidence against
+> criteria, doesn't design). The spawn prompt names the absolute hub
+> path, the note path(s) and node slug(s) — never make the subagent `ls`
+> around to find its inputs, and never add re-run instructions ("re-run
+> the checks yourself") — `verify_seal.md`'s "Re-run scope" alone
+> decides. (kit 2026-11-18)
 > a self-report.] Only exception to a fresh spawn: `/todo`'s REOPEN
 > rounds resume the same verifier subagent (`todo` step 4) — still never
 > the implementer's context.
