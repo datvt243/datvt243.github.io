@@ -1,6 +1,6 @@
 ---
 name: todo
-description: Resolve/create a GitHub issue + check out its own branch, then combine /worker analyst (feature, or a bug with no feature doc yet) + /worker implementer + /worker verifier into 1 command for the datvt243.github.io agent-hub — still runs 2 separate passes inside (doesn't break NeverVerifyOwnWork), automatically re-runs the implementer pass on REOPEN up to the retry limit. Trigger: /todo "[task]"|#[issue-number] [--ship]. Stops at SEAL or when the retry limit is hit, never commits on its own — unless --ship is given, in which case it goes on to call /ship (passing --ship IS the approval — /ship runs straight away, AutoCommitNoGate).
+description: Resolve/create a GitHub issue + check out its own branch, then combine /worker analyst (feature, or a bug with no feature doc yet) + /worker implementer + /worker verifier into 1 command for the datvt243.github.io agent-hub — still runs 2 separate passes inside (doesn't break NeverVerifyOwnWork), automatically re-runs the implementer pass on REOPEN up to the retry limit. Trigger: /todo "[task]"|#[issue-number] [--ship]. Stops at SEAL or when the retry limit is hit, never commits on its own — unless --ship is given, in which case it goes on to call /ship (passing --ship IS the approval — /ship runs straight away, AutoCommitNoGate). Use when running any feat or fix task end-to-end.
 argument-hint: "<task>|#<issue-number> [--ship]"
 disable-model-invocation: true
 ---

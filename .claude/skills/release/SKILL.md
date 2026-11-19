@@ -1,6 +1,6 @@
 ---
 name: release
-description: "Promote staging into main by running the bundled release.sh: build/test gate, real merge commit (no squash), semver bump + tag vX.Y.Z, deploy via DEPLOY_HOOK_URL or report the deploy workflow run, sync the bump back to staging, close shipped issues (Closes #n in the release PR, read from the merged PRs). Usage: /release [patch|minor|major]. Invoking this skill IS the operator's go-ahead — no separate confirmation prompt."
+description: "Promote staging into main by running the bundled release.sh: build/test gate, real merge commit (no squash), semver bump + tag vX.Y.Z, deploy via DEPLOY_HOOK_URL or report the deploy workflow run, sync the bump back to staging, close shipped issues (Closes #n in the release PR, read from the merged PRs). Usage: /release [patch|minor|major]. Invoking this skill IS the operator's go-ahead — no separate confirmation prompt. Use when staging is ready to go to production."
 argument-hint: "[patch|minor|major]"
 disable-model-invocation: true
 ---

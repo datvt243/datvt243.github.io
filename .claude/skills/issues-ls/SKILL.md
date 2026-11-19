@@ -1,6 +1,6 @@
 ---
 name: issues-ls
-description: "List open GitHub issues for this repo, if it's hosted on GitHub. Read-only, no side effects."
+description: "List open GitHub issues for this repo, if it's hosted on GitHub. Read-only, no side effects. Use when picking the next task or reviewing the backlog."
 argument-hint: "[--group] [--state open|closed|all] [gh issue list flags...]"
 ---
 
