@@ -42,7 +42,6 @@ form.
 
 ## Out of scope
 - Server-side sending, storing messages, spam protection.
-- The `google_map` value in `app.config.ts` (not rendered anywhere).
 
 ## Open questions
 1. The mail subject is always English ("Portfolio contact from …") even on
@@ -58,3 +57,4 @@ form.
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/contact-spec.md` | - |
+| 2026-11-22 | Removed the unused `contact.google_map` config; dropped its Out-of-scope line | operator answer to OQ2 | `contact-google-map` |
