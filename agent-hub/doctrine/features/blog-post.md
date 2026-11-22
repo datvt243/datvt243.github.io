@@ -29,7 +29,8 @@ Discussions (Giscus).
 7. Comments (client-only): a "Comments" heading. When `GISCUS_REPO_ID` and
    `GISCUS_CATEGORY_ID` are set, the Giscus script loads with repo
    `datvt243/datvt243.github.io`, category `GISCUS_CATEGORY` (default
-   `Comments`), mapping `pathname`, reactions on, input at bottom, theme
+   `Comments`), mapping `specific` with term `blogs/<post _id>` (one thread
+   per post shared by `/blogs/<id>` and `/en/blogs/<id>`), reactions on, input at bottom, theme
    `dark`/`light` from the color mode, and `lang` = current locale. Without
    them, a localized "Giscus is not configured yet." placeholder.
 8. Toggling color mode or language updates the Giscus iframe's theme/lang via
@@ -79,3 +80,4 @@ Discussions (Giscus).
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/blog-post-spec.md` | - |
+| 2026-11-22 | Behavior 7: Giscus mapping `pathname` → `specific`, term `blogs/<_id>` | operator answer to open question 5 (2026-11-07) | `giscus-one-thread` |

@@ -77,7 +77,7 @@ defineProps<{
           </div>
         </footer>
       </div>
-      <ThemePostComments />
+      <ThemePostComments :post-id="modelValue._id" />
     </article>
   </div>
 </template>
