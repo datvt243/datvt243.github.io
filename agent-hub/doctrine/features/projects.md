@@ -31,12 +31,20 @@ care about.
    present.
 7. SEO title/description come from i18n keys `projects.seoTitle`/
    `projects.seoDescription`; a visually hidden `<h1>` repeats the title.
+8. The selection lives in the URL as `?tech=a,b` (comma-joined, written with
+   `router.replace`, removed when nothing is selected) and is applied after
+   mount only — the server always renders the unfiltered list, so the ISR
+   rule has no `allowQuery`. Names not in the technology list stay selected
+   (no project matches them) so × still clears them from the URL.
 
 ## Acceptance criteria
 - `npm test` passes, including `tests/sortProjects.test.ts`.
 - On `/projects`, selecting two technologies shows exactly the projects that
   use either one; clicking × shows all projects again.
 - A project with `link` renders an `<a target="_blank" rel="noopener noreferrer">`.
+- Selecting techs sets `?tech=a,b`; × removes it; loading `/projects?tech=a`
+  shows the a-filtered list after mount, while `curl` of that URL returns the
+  unfiltered SSR list.
 - `curl -sI <host>/projects` on production shows an ISR/cache response (not a
   fresh render every time).
 
@@ -45,7 +53,7 @@ care about.
 - Project with no technology → never matches a non-empty filter.
 
 ## Out of scope
-- Search by name, AND-filtering, filter in the URL.
+- Search by name, AND-filtering.
 
 ## Open questions
 1. Root `CLAUDE.md` says `/projects` has "none (no routeRule)", but
@@ -63,3 +71,4 @@ care about.
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/projects-spec.md` | - |
+| 2026-11-22 | Behavior 8 (filter in `?tech=`, client-only, no `allowQuery`) + acceptance row; "filter in the URL" dropped from Out of scope | #435 per open question 4; operator chose client-only over allowQuery (AskUserQuestion 2026-11-22) | `projects-tech-url` |
