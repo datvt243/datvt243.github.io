@@ -52,6 +52,8 @@
       "skills": "Skills",
       "education": "Education",
       "languages": "Languages",
+      "certificates": "Certificates",
+      "awards": "Awards",
       "other": "Other",
       "years": "{n}+ yrs"
     }

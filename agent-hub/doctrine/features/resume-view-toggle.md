@@ -1,8 +1,8 @@
 # Dev / HR resume view toggle
 
-- Status: verified — verified by agent-hub/evidence/verifier/2026-11-22/resume-view-url-seal.md (Behavior 1, 4–7 also confirmed by operator 2026-11-07)
+- Status: verified — verified by agent-hub/evidence/verifier/2026-11-22/resume-certificates-awards-seal.md (Behavior 1–11 earlier verified by resume-view-url-seal.md)
 - Source: backfill from code
-- Issues: #422
+- Issues: #422, #420
 - Anchors: `composables/useResumeView.ts`, `themes/portfolio-dev/layout/Header.vue`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hr.vue`
 
 ## Goal
@@ -22,7 +22,7 @@ to a plain, conventional resume layout.
    fresh load of `/` without `?view=hr` (new tab or reload) shows `dev`. (#422)
 4. In `hr` view the home page keeps the hero and replaces the editor panel
    with one card containing, in order: Experience, Skills, Education,
-   Languages. Empty sections are hidden.
+   (Certificates, Awards — Behavior 12), Languages. Empty sections are hidden.
 5. HR Experience: per job a title (position, or "Career break — <type>"), the
    date range, the company (not for career breaks), bullet points, and the
    job's skills comma-joined. A briefcase icon (accent color for the current
@@ -46,6 +46,14 @@ to a plain, conventional resume layout.
     a language switch that drops the query, Back/Forward — from another page
     or on `/` itself), the page stays HR and re-adds `?view=hr` to the URL
     (replace). (#422, operator answers Q3 + Q4 2026-11-22)
+12. (#420) The HR card also has a Certificates section (per item: name,
+    organization, date range, description) and an Awards section (per item:
+    name, organization, issue date, description), each hidden when empty,
+    with localized headings (`resume.hr.*`, vi + en). Card order becomes
+    Experience, Skills, Education, Certificates, Awards, Languages (the
+    PDF's order; operator answer 2026-11-22). Item format and empty rules:
+    `resume-home.md` Behavior 13, 14, 17; `career` is in the hero, which
+    the HR view keeps (`resume-home.md` Behavior 16).
 
 ## Acceptance criteria
 - On `/`, clicking `dev/hr` shows the HR card (headings Experience, Skills,
@@ -65,6 +73,11 @@ to a plain, conventional resume layout.
 - On `/projects`, clicking `dev/hr` lands on `/?view=hr` in HR view.
 - `/?tab=skills&view=hr`: HR card shown, and toggling back to Dev keeps
   `tab=skills` in the URL and opens the skills tab.
+- (#420) In HR view with the `base` mock fixture (see `resume-home.md`
+  acceptance), the card's headings read, in order, Experience, Skills,
+  Education, Certificates, Awards, Languages (vi: localized), `Cert2` shows
+  `- present`, and the hero career line is visible; with the third fixture
+  (empty lists) neither Certificates nor Awards heading is in the DOM.
 - `npm run build`, `npm run lint`, `npx nuxi typecheck` clean.
 - `npm test` passes (`tests/groupSkills.test.ts` covers the grouping used by
   the HR skills table).
@@ -73,6 +86,7 @@ to a plain, conventional resume layout.
 - HR view active, user switches language → stays HR (state is per tab, not
   per locale).
 - Resume with no skills groups → all skills under "Other".
+- (#420) Only one of certificates/awards has data → only that section.
 - `?view=dev`, `?view=HR`, `?view=foo` → Dev view, URL left unchanged (same
   as `?tab=unknown`).
 - `?view=hr` on a page other than `/` (e.g. `/projects?view=hr`) → ignored.
@@ -116,3 +130,4 @@ to a plain, conventional resume layout.
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-view-toggle-spec.md` | - |
 | 2026-11-22 | #422 spec: `?view=hr` deep link (Behavior 2, 3 changed; 8–11 added); Status → draft until SEAL | operator answer to open question 1, see `evidence/analyst/2026-11-22/resume-view-toggle-spec.md` | - |
 | 2026-11-22 | Behavior 10/11 + edge case: no `?view` keeps the current view on any navigation incl. Back/Forward | operator answer to open question 4 during implementation | `resume-view-url` |
+| 2026-11-22 | #420 spec: Behavior 12 (HR Certificates/Awards); Status → draft until SEAL | `evidence/analyst/2026-11-22/resume-home-certificates-spec.md` | - |

@@ -1,9 +1,9 @@
 # Resume home page
 
-- Status: verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-home-spec.md`
+- Status: verified — verified by agent-hub/evidence/verifier/2026-11-22/resume-certificates-awards-seal.md (Behavior 1–12 earlier confirmed/verified, see prior notes)
 - Source: backfill from code
 - Issues: #417, #419, #420, #421
-- Anchors: `pages/index.vue`, `composables/useResumeData.ts`, `stores/resume.ts`, `server/api/resume.ts`, `server/utils/fetchResume.ts`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hero.vue`, `themes/portfolio-dev/pages/resumeObject/Experiences.vue`, `themes/portfolio-dev/pages/resumeObject/Educations.vue`, `themes/portfolio-dev/pages/resumeObject/Skills.vue`, `themes/portfolio-dev/pages/resumeObject/Languages.vue`, `nuxt.config.ts`
+- Anchors: `pages/index.vue`, `composables/useResumeData.ts`, `stores/resume.ts`, `server/api/resume.ts`, `server/utils/fetchResume.ts`, `themes/portfolio-dev/pages/resumeObject/Index.vue`, `themes/portfolio-dev/pages/resumeObject/Hero.vue`, `themes/portfolio-dev/pages/resumeObject/Experiences.vue`, `themes/portfolio-dev/pages/resumeObject/Educations.vue`, `themes/portfolio-dev/pages/resumeObject/Skills.vue`, `themes/portfolio-dev/pages/resumeObject/Languages.vue`, `themes/portfolio-dev/pages/resumeObject/Hr.vue`, `utils/ResumeAdapter.ts`, `types/resume-document.ts`, `i18n/locales/vi.json`, `i18n/locales/en.json`, `nuxt.config.ts`
 
 ## Goal
 Recruiters and visitors open `/` (or `/en`) to read the owner's resume in a
@@ -37,8 +37,8 @@ code-editor look: who he is, what he has done, what he knows.
    desired position, the introduction (only `<strong>`/`<b>` kept as bold,
    every other tag stripped, rendered without `v-html`), the main-skills chips
    and a "familiar with" chip row, each with an icon when the name matches one.
-7. Below the hero (Dev view) an editor panel has 4 sidebar tabs, in this
-   order, with number shortcuts `1`–`4`: `experiences.pug` (default),
+7. Below the hero (Dev view) an editor panel has 4 sidebar tabs (plus up
+   to 2 more, Behavior 15), in this order, with number shortcuts `1`–`4`: `experiences.pug` (default),
    `skills.ts`, `educations.json`, `languages.json`. The sidebar also links
    `_contact.ts` to the literal `/contact` (no `localePath`, so `/en` also
    goes to `/contact` — see Open question 4).
@@ -60,6 +60,35 @@ code-editor look: who he is, what he has done, what he knows.
     Twitter image `${SITE_URL}/og-image.png` 1200×630, and a schema.org
     `Person` JSON-LD (name from `AppHeading`, jobTitle = positionDesired,
     url = SITE_URL, sameAs = GitHub + LinkedIn).
+13. (#420) The home page shows the resume's `certificates`, `awards` and
+    `generalInformation.career` in both the Dev and the HR view
+    (`resume-view-toggle.md` Behavior 12). A section/tab/line with no data
+    is not rendered at all (no heading, no empty code block, no sidebar
+    entry). "No data": `certificates`/`awards` missing or an empty array;
+    `career` missing, empty or whitespace only.
+14. (#420) Each certificate shows name, organization, a date range and the
+    description; each award shows name, organization, the issue date and
+    the description. Dates are `MM/YYYY` (same formatter as education);
+    descriptions are plain text with HTML tags stripped (same as education
+    `descriptionText`), never `v-html`. Items keep the API order (the PDF
+    does not sort them either). A missing date shows `--/--` like education.
+    A certificate with `isNoExpiration` follows Behavior 17.
+15. (#420) Dev view: two new sidebar tabs after `languages.json`, in this
+    order: `certificates.json` (keys `name`, `organization`, `startDate`,
+    `endDate`, `description`) and `awards.json` (keys `name`,
+    `organization`, `issueDate`, `description`), rendered as JSON code
+    blocks like `educations.json`. `?tab=certificates` / `?tab=awards`
+    select them (Behavior 8 rules apply). A tab whose list is empty is not
+    in the sidebar, and the number shortcuts stay consecutive over the tabs
+    shown (both present: `5` certificates, `6` awards; only awards: `5`
+    awards).
+16. (#420) `career` is shown in the hero (so in both views) as one line
+    under the desired position, as plain text (free text, content unknown;
+    no `v-html`). Hidden when empty/whitespace or equal (trimmed) to the
+    shown `positionDesired`.
+17. (#420) A certificate's date range is `<startDate> - <endDate>`, or
+    `<startDate> - present` when `isNoExpiration` is true (the PDF's
+    wording); an award shows its `issueDate` alone.
 
 ## Acceptance criteria
 - `npm test` passes, including `tests/fetchResume.test.ts`,
@@ -76,6 +105,28 @@ code-editor look: who he is, what he has done, what he knows.
   an English version.
 - Page source of `/` contains one `<script type="application/ld+json">` with
   `"@type":"Person"`.
+- (#420) With a mock `NODE_API` (never the real backend: set `NODE_API`
+  and `NUXT_PUBLIC_NODE_API` to the mock at build and start, and
+  `grep -c onrender <server log>` = 0) returning the `base` fixture of
+  `evidence/implementer/2026-10-04/object-parameter-rule-assets/fixtures.cjs`
+  (2 certificates, 1 award) plus `generalInformation.career: 'Career X'`
+  and `positionDesired: 'Dev'`:
+  - the Dev sidebar shows `certificates.json` with shortcut `5` and
+    `awards.json` with shortcut `6`; pressing `5` shows a code block
+    containing `"Cert"`, `"Org"`, `"Cert2"`; pressing `6` shows `"Award"`;
+  - the `Cert2` entry (`isNoExpiration: true`) shows its end as `present`;
+  - opening `/?tab=awards` selects `awards.json` after load;
+  - the hero shows the line `Career X` under `Dev`.
+- (#420) Same mock with the third fixture (`certificates: []`,
+  `awards: []`) and `career: ''`: no `certificates.json`/`awards.json` in
+  the sidebar, no element with `data-shortcut="5"`, `/?tab=certificates`
+  shows `experiences.pug` with the URL unchanged, and no career line.
+- (#420) `career` equal to `positionDesired` → no career line.
+- (#420) Certificate/award descriptions containing `<b>x</b>` render the
+  text `x` with no `<b>` element.
+- (#420) `npm run build`, `npm run lint`, `npx nuxi typecheck`, `npm test`
+  clean; if a new adapter function is added for certificates/awards it has
+  a case in `tests/resumeAdapter.test.ts`.
 
 ## Edge cases
 - Upstream down → 5xx error page (see `error-page.md`), last good ISR copy
@@ -83,6 +134,13 @@ code-editor look: who he is, what he has done, what he knows.
 - `generalInformation` is an array → the first item is used; missing → `{}`.
 - `?tab=unknown` → default tab, URL unchanged.
 - No `openToWork` → no badge; empty main/familiar skills → that row hidden.
+- (#420) Only one of certificates/awards has data → only that one is shown.
+- (#420) `?tab=certificates|awards` while that list is empty → default tab,
+  URL unchanged (same as `?tab=unknown`).
+- (#420) Only awards present → `awards.json` gets shortcut `5`.
+- (#420) `career` with HTML-looking text → shown as literal text.
+- (#420) Certificate/award with an empty `organization` → name only, no
+  dangling " — ".
 
 ## Out of scope
 - Editing resume data (lives in the external backend).
@@ -102,6 +160,43 @@ code-editor look: who he is, what he has done, what he knows.
    is `to="/contact"` (no `localePath`); live `/en` renders `href="/contact"`,
    dropping English readers to the Vietnamese page (the hero "Contact me" uses
    `localePath`). Bug? → **Answer (operator 2026-11-07):** Bug — #417
+5. (#420) Where do certificates and awards go in the **Dev view** editor panel?
+   (a) Two new sidebar tabs after `languages.json`: `certificates.json` and
+   `awards.json`, rendered as JSON code blocks like `educations.json`, with
+   `?tab=certificates|awards` and shortcuts `5`/`6`; an empty one is left
+   out of the sidebar and the shortcuts of the remaining tabs stay
+   consecutive.
+   (b) One new tab `achievements.json` holding `{ certificates: [...],
+   awards: [...] }` (an empty key omitted, the tab hidden when both empty),
+   shortcut `5`, `?tab=achievements`.
+   (c) No new tab: append them to the existing `educations.json` tab as
+   extra JSON blocks.
+   → **Answer (operator 2026-11-22):** (a) Two new tabs → Behavior 15
+6. (#420) `generalInformation.career` is one string (the PDF uses it only as
+   the headline fallback when `positionDesired` is empty). The live API
+   returned 502 on 2026-11-22, so its real value is unknown here — what
+   does it hold (e.g. an industry like "Information Technology", or a
+   career summary)? And where should it show?
+   (a) In the hero (shared by both views): one line under the desired
+   position; hidden when empty or equal to `positionDesired`.
+   (b) Only as the hero fallback when `positionDesired` is empty (replacing
+   today's hardcoded "A frontend developer"), like the PDF.
+   (c) Separately per view: Dev = a `career` field in a code tab (which
+   one?), HR = a labelled line at the top of the HR card.
+   → **Answer (operator 2026-11-22):** (a) Hero line; no note on what
+   `career` holds → treated as unknown free text → Behavior 16
+7. (#420) Order of the new sections in the **HR card**?
+   (a) Experience, Skills, Education, Certificates, Awards, Languages (the
+   PDF's order).
+   (b) Experience, Skills, Education, Languages, Certificates, Awards
+   (appended at the end).
+   → **Answer (operator 2026-11-22):** (a) PDF order →
+   `resume-view-toggle.md` Behavior 12
+8. (#420) A certificate with `isNoExpiration: true` — what date label?
+   (a) `<start> - present` (what the PDF prints today).
+   (b) `<start> - <localized "no expiration">` (new i18n string vi/en).
+   (c) Only `<start>`.
+   → **Answer (operator 2026-11-22):** (a) `<start> - present` → Behavior 17
 
 ## Changelog
 | Date | Change | Why | Node |
@@ -111,3 +206,4 @@ code-editor look: who he is, what he has done, what he knows.
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-home-spec.md` | - |
 | 2026-11-08 | Behavior #3: server cache 12 days → 1 hour; #5: an empty resume fails like an upstream error (fatal, not a blank page) | operator answers to Open questions 3 + 1 (fatal chosen 2026-11-08) | `resume-cache-empty` |
 | 2026-11-22 | Behavior #6: Contact me link has no `c` shortcut (contact is global `gc`) | #438, operator answer in `keyboard-navigation.md` Q2 | `keyboard-drop-c-shortcut` |
+| 2026-11-22 | #420 spec: Behavior 13–17, acceptance + edge cases, Open questions 5–8 (answered by operator 2026-11-22); Status → draft until SEAL | operator answer to Open question 2, see `evidence/analyst/2026-11-22/resume-home-certificates-spec.md` | - |
