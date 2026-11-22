@@ -35,7 +35,23 @@ function thumbnail(p: { name: string; images: string[] }): string | undefined {
   return Object.entries(PLACEHOLDER_THUMBS).find(([key]) => name.startsWith(key))?.[1]
 }
 
+const route = useRoute()
+const router = useRouter()
 const selected = ref<string[]>([])
+// Mirrored to ?tech=vue,pinia; `selected` is set first so a 2nd quick click doesn't toggle from the pre-navigation state.
+const techModel = computed({
+  get: () => selected.value,
+  set: (value: string[]) => {
+    selected.value = value
+    router.replace({ query: { ...route.query, tech: value.length ? value.join(',') : undefined } })
+  },
+})
+// String() also joins a repeated ?tech=a&tech=b; unknown names are kept so the × can still clear them from the URL.
+const techFromUrl = () => String(route.query.tech ?? '').split(',').filter(Boolean)
+// Client-only, not in setup: `/projects` is ISR-cached, so the server HTML can't depend on the query.
+onMounted(() => {
+  watch(() => route.query.tech, () => (selected.value = techFromUrl()), { immediate: true })
+})
 
 const filtered = computed(() => {
   if (!selected.value.length) return projects.value
@@ -49,7 +65,7 @@ const filtered = computed(() => {
     <h1 class="sr-only">{{ t('projects.seoTitle') }}</h1>
     <ThemePanel>
       <template #sidebar>
-        <ThemeFilterFolder v-model="selected" label="projects" :items="allTech" collapse-below-lg />
+        <ThemeFilterFolder v-model="techModel" label="projects" :items="allTech" collapse-below-lg />
       </template>
 
       <p v-if="!filtered.length" class="text-theme-faint font-theme-mono">{{ t('projects.noMatch') }}</p>
