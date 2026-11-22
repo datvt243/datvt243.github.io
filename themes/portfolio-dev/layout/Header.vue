@@ -18,10 +18,12 @@ const toggleColorMode = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 const resumeView = useResumeView()
-// The HR view only exists on `/`, so switching from another page goes there.
+// The HR view only exists on `/`, so switching from another page goes there; on `/` the URL is replaced in place, keeping `?tab`.
 const toggleResumeView = () => {
   resumeView.value = resumeView.value === 'dev' ? 'hr' : 'dev'
-  if (!isActive('/')) navigateTo(localePath('/'))
+  const view = resumeView.value === 'hr' ? 'hr' : undefined
+  const onHome = isActive('/')
+  navigateTo({ path: localePath('/'), query: onHome ? { ...route.query, view } : { view } }, { replace: onHome })
 }
 const otherLocale = computed(() => locales.value.find((l) => (typeof l === 'string' ? l : l.code) !== locale.value))
 const toggleLocale = () => {

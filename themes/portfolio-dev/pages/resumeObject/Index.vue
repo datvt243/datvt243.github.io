@@ -34,12 +34,22 @@ const select = async (key: string) => {
 }
 
 const tabFromUrl = () => sections.find((s) => s.key === route.query.tab)?.key
+// No `?view` keeps the current view (an HR choice made elsewhere in this tab wins over a plain link to `/`); any other value than `hr` means Dev.
+const applyViewQuery = async () => {
+  const view = route.query.view
+  if (view !== undefined) resumeView.value = view === 'hr' ? 'hr' : 'dev'
+  else if (resumeView.value === 'hr') await router.replace({ query: { ...route.query, view: 'hr' } })
+}
 // Client-only, not in setup: `/` is ISR-cached, so the server HTML can't depend on the query.
-onMounted(() => {
-  const deepLinked = tabFromUrl()
-  if (deepLinked) select(deepLinked)
+onMounted(async () => {
+  // Registered before the await: a watcher created after it isn't stopped on unmount.
+  watch(() => route.query.view, applyViewQuery)
   // Keeps the tab in sync when the query changes without a remount (Back/Forward, `gr` clearing ?tab).
   watch(() => route.query.tab, () => (active.value = tabFromUrl() ?? sections[0]!.key))
+  // Awaited so the tab deep link below reads the updated query.
+  await applyViewQuery()
+  const deepLinked = tabFromUrl()
+  if (deepLinked) select(deepLinked)
 })
 </script>
 
