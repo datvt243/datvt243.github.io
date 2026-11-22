@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toEducation, toExperience, toHero, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
+import { toAward, toCertificate, toEducation, toExperience, toHero, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
 
 // Mid-month, so the local-time month label is the same in every timezone.
 const jan2024 = Date.UTC(2024, 0, 15)
@@ -29,6 +29,24 @@ describe('ResumeAdapter mappers', () => {
     expect([project.slug, project.dateRangeLabel, project.descriptionText]).toEqual(['my-cool-app', '01/2024 - 03/2025', 'Text'])
 
     expect(toHero({ firstName: 'Dat', lastName: 'Vo' }, {}).fullName).toBe('Dat Vo')
+  })
+
+  it('labels certificates and awards, with "present" for a certificate that never expires', () => {
+    expect(toCertificate({ name: 'C', startDate: jan2024, endDate: mar2025, description: '<b>x</b>' })).toEqual({
+      name: 'C',
+      organization: '',
+      startDateLabel: '01/2024',
+      endDateLabel: '03/2025',
+      descriptionText: 'x',
+    })
+    expect(toCertificate({ startDate: jan2024, endDate: mar2025, isNoExpiration: true }).endDateLabel).toBe('present')
+    expect(toAward({ name: 'A', issueDate: mar2025 })).toEqual({ name: 'A', organization: '', issueDateLabel: '03/2025', descriptionText: '' })
+  })
+
+  it('hides a blank career or one that repeats the position', () => {
+    expect(toHero({}, { positionDesired: 'Dev', career: ' IT ' }).career).toBe('IT')
+    expect(toHero({}, { positionDesired: 'Dev', career: ' Dev ' }).career).toBe('')
+    expect(toHero({}, { career: '   ' }).career).toBe('')
   })
 
   it('lists only the non-empty social links, in field order', () => {

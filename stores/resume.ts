@@ -4,8 +4,8 @@
  */
 
 import type { Resume, GeneralInformation } from '@/types'
-import type { EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/utils/ResumeAdapter'
-import { toEducation, toExperience, toHero, toLanguage, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
+import type { AwardModel, CertificateModel, EducationModel, ExperienceModel, HeroModel, LanguageModel, ProjectModel, SkillModel, SocialMediaModel } from '@/utils/ResumeAdapter'
+import { toAward, toCertificate, toEducation, toExperience, toHero, toLanguage, toProject, toSkill, toSocialMedia } from '@/utils/ResumeAdapter'
 import { compareProjects } from '@/utils/sortProjects'
 
 export const useResumeStore = defineStore('resume', {
@@ -39,6 +39,12 @@ export const useResumeStore = defineStore('resume', {
     },
     educations({ resume: { educations } }): EducationModel[] {
       return (educations || []).map(toEducation)
+    },
+    certificates({ resume: { certificates } }): CertificateModel[] {
+      return (certificates || []).map(toCertificate)
+    },
+    awards({ resume: { awards } }): AwardModel[] {
+      return (awards || []).map(toAward)
     },
     projects({ resume: { projects } }): ProjectModel[] {
       return [...(projects || [])].sort(compareProjects).map(toProject)

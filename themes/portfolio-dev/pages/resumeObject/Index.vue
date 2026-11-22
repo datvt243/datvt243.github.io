@@ -5,18 +5,23 @@
  */
 
 // First = default tab: experience is what a recruiter looks for; the hero carries the about-me introduction.
-const sections = [
+const allSections = [
   { key: 'experience', label: 'experiences.pug', icon: 'heroicons:code-bracket' },
   { key: 'skills', label: 'skills.ts', icon: 'heroicons:code-bracket-square' },
   { key: 'education', label: 'educations.json', icon: 'heroicons:queue-list' },
   { key: 'languages', label: 'languages.json', icon: 'heroicons:queue-list' },
+  { key: 'certificates', label: 'certificates.json', icon: 'heroicons:queue-list' },
+  { key: 'awards', label: 'awards.json', icon: 'heroicons:queue-list' },
 ]
+const store = useResumeStore()
+// Tabs with no data are left out, so the number shortcuts stay consecutive and `?tab=` to one falls back to the default.
+const sections = computed(() => allSections.filter((s) => (s.key === 'certificates' || s.key === 'awards' ? store[s.key].length > 0 : true)))
 const resumeView = useResumeView()
 const route = useRoute()
 const router = useRouter()
 const localePath = useLocalePath()
-const active = ref(sections[0]!.key)
-const activeLabel = computed(() => sections.find((s) => s.key === active.value)?.label ?? active.value)
+const active = ref(allSections[0]!.key)
+const activeLabel = computed(() => sections.value.find((s) => s.key === active.value)?.label ?? active.value)
 // The skills section is split into two editor tabs; the group enum is secondary, so skills.ts opens first.
 const skillFiles = ['skills.ts', 'skill-group.ts'] as const
 const skillFile = ref<(typeof skillFiles)[number]>(skillFiles[0])
@@ -26,20 +31,34 @@ const fileTab = ref<HTMLElement>()
 const select = async (key: string) => {
   active.value = key
   // Tab lives in the URL (?tab=skills) so a section can be linked to; the default tab keeps the clean URL.
-  await router.replace({ query: { ...route.query, tab: key === sections[0]!.key ? undefined : key } })
+  await router.replace({ query: { ...route.query, tab: key === allSections[0]!.key ? undefined : key } })
   // Wait for the new tab to render, else the scroll is clamped to the old (shorter) page height.
   await nextTick()
   const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   fileTab.value?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' })
 }
 
-const tabFromUrl = () => sections.find((s) => s.key === route.query.tab)?.key
+const tabFromUrl = () => sections.value.find((s) => s.key === route.query.tab)?.key
+// No `?view` keeps the current view (an HR choice made elsewhere in this tab wins over a plain link to `/`); any other value than `hr` means Dev.
+const applyViewQuery = async () => {
+  const view = route.query.view
+  if (view !== undefined) resumeView.value = view === 'hr' ? 'hr' : 'dev'
+  else if (resumeView.value === 'hr') await router.replace({ query: { ...route.query, view: 'hr' } })
+}
 // Client-only, not in setup: `/` is ISR-cached, so the server HTML can't depend on the query.
-onMounted(() => {
+onMounted(async () => {
+  // Registered before the await: a watcher created after it isn't stopped on unmount.
+  watch(() => route.query.view, applyViewQuery)
+  // Keeps the tab in sync when the query changes without a remount (Back/Forward, `gr` clearing ?tab).
+  watch(() => route.query.tab, () => (active.value = tabFromUrl() ?? allSections[0]!.key))
+  // A refetch (e.g. locale switch) can drop the open tab; fall back instead of showing an empty panel.
+  watch(sections, (list) => {
+    if (!list.some((s) => s.key === active.value)) active.value = allSections[0]!.key
+  })
+  // Awaited so the tab deep link below reads the updated query.
+  await applyViewQuery()
   const deepLinked = tabFromUrl()
   if (deepLinked) select(deepLinked)
-  // Keeps the tab in sync when the query changes without a remount (Back/Forward, `gr` clearing ?tab).
-  watch(() => route.query.tab, () => (active.value = tabFromUrl() ?? sections[0]!.key))
 })
 </script>
 
@@ -106,6 +125,8 @@ onMounted(() => {
         <ThemeResumeObjectExperiences v-show="active === 'experience'" />
         <ThemeResumeObjectEducations v-show="active === 'education'" />
         <ThemeResumeObjectLanguages v-show="active === 'languages'" />
+        <ThemeResumeObjectCertificates v-show="active === 'certificates'" />
+        <ThemeResumeObjectAwards v-show="active === 'awards'" />
       </ThemePanel>
     </div>
   </div>

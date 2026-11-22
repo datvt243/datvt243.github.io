@@ -1,6 +1,6 @@
 ---
 name: issue-create
-description: "Create a GitHub issue in this repo. Drafts title/body, shows the exact gh command, waits for approval before creating."
+description: "Create a GitHub issue in this repo. Drafts title/body, shows the exact gh command, waits for approval before creating. Use when the user wants a new issue filed."
 argument-hint: "\"<what the issue is about>\" [--label x] [--assignee @me] [--yes]"
 disable-model-invocation: true
 ---
@@ -44,7 +44,7 @@ still show everything, but create without waiting.
    issue number + URL from `gh`'s output. Failure → report the exact
    error, don't retry with different flags on your own.
 7. **No other writes.** Never edit/close/comment/label existing issues,
-   and never touch code or commit from this command.
+   and never touch code or commit from this skill.
 
 ## Runtime
 Requires `gh` CLI authenticated against the project's GitHub remote. Not

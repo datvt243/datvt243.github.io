@@ -16,6 +16,8 @@
  */
 const GISCUS_REPO = 'datvt243/datvt243.github.io'
 
+const props = defineProps<{ postId: string }>()
+
 const { t, locale } = useI18n()
 const { GISCUS_CATEGORY, GISCUS_CATEGORY_ID, GISCUS_REPO_ID } = useRuntimeConfig().public
 const isConfigured = Boolean(GISCUS_REPO_ID && GISCUS_CATEGORY_ID)
@@ -38,7 +40,13 @@ function loadGiscus() {
   script.setAttribute('data-repo-id', GISCUS_REPO_ID)
   script.setAttribute('data-category', GISCUS_CATEGORY || 'Comments')
   script.setAttribute('data-category-id', GISCUS_CATEGORY_ID)
-  script.setAttribute('data-mapping', 'pathname')
+  /**
+   * One thread per post for every locale: `pathname` would split /blogs/<id>
+   * and /en/blogs/<id>. The term equals the title `pathname` used to give
+   * the VI page, so threads created before this keep matching.
+   */
+  script.setAttribute('data-mapping', 'specific')
+  script.setAttribute('data-term', `blogs/${props.postId}`)
   script.setAttribute('data-strict', '0')
   script.setAttribute('data-reactions-enabled', '1')
   script.setAttribute('data-emit-metadata', '0')

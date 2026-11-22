@@ -1,6 +1,6 @@
 ---
 name: persona-load
-description: "Load an on-demand expert-persona or a named panel from this project's own persona library (outside agent-hub/), printing the loader's SEALED output for the current worker session to read. Advisory only, read-only, no side effects."
+description: "Load an on-demand expert-persona or a named panel from this project's own persona library (outside agent-hub/), printing the loader's SEALED output for the current worker session to read. Advisory only, read-only, no side effects. Use when a worker needs domain-expert guidance for the current task."
 argument-hint: "<category>/<name> | -p <panel> | -l [category]"
 ---
 
@@ -18,7 +18,7 @@ A persona is a high-precision pointer into the model's latent space:
 naming a real expert activates a cluster of domain knowledge that would
 otherwise take paragraphs to restate. Loading ALL personas up front gives
 zero lift and wastes tokens (empirically, per the persona-system brief
-this skill implements) — this command is the on-demand hook so a worker
+this skill implements) — this skill is the on-demand hook so a worker
 only pays for the 1 persona (or panel of 2-4) actually relevant to the
 task at hand.
 
@@ -77,4 +77,4 @@ library in its own code tree — see `doctrine/domains/PROJECT.md` for this
 project's `<<root>>`/safety-file names if declared there). Building that
 system the first time is a normal code change — run it through
 `/worker implementer "build the on-demand expert-persona system"` like
-any other task, not through this command.
+any other task, not through this skill.

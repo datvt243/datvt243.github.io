@@ -10,8 +10,8 @@
 
 | Feature | Doc | Status | Area / anchors | Issues |
 |---|---|---|---|---|
-| Resume home page | resume-home.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-home-spec.md` | home `/`: `pages/index.vue`, `server/api/resume.ts`, `server/utils/fetchResume.ts`, `stores/resume.ts`, `themes/portfolio-dev/pages/resumeObject/` | #417, #419, #420, #421 |
-| Dev / HR resume view toggle | resume-view-toggle.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-view-toggle-spec.md` | home: `composables/useResumeView.ts`, `themes/portfolio-dev/pages/resumeObject/Hr.vue`, `themes/portfolio-dev/layout/Header.vue` | #422 |
+| Resume home page | resume-home.md | verified — verified by agent-hub/evidence/verifier/2026-11-22/resume-certificates-awards-seal.md | home `/`: `pages/index.vue`, `server/api/resume.ts`, `server/utils/fetchResume.ts`, `stores/resume.ts`, `themes/portfolio-dev/pages/resumeObject/` | #417, #419, #420, #421 |
+| Dev / HR resume view toggle | resume-view-toggle.md | verified — verified by agent-hub/evidence/verifier/2026-11-22/resume-certificates-awards-seal.md | home: `composables/useResumeView.ts`, `themes/portfolio-dev/pages/resumeObject/Hr.vue`, `themes/portfolio-dev/layout/Header.vue` | #422, #420 |
 | Resume PDF download | resume-pdf-download.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/resume-pdf-download-spec.md` | home: `composables/useDownloadResume.ts`, `server/api/generate-pdf.ts`, `server/utils/createPDFAts.ts` | #29, #179, #198, #206, #423 |
 | Projects page with technology filter | projects.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/projects-spec.md` | `/projects`: `themes/portfolio-dev/pages/projects/Index.vue`, `themes/portfolio-dev/components/FilterFolder.vue`, `utils/sortProjects.ts` | #426, #434, #435 |
 | GitHub profile and repositories | github-profile.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/github-profile-spec.md` | `/github`: `server/api/github.ts`, `server/utils/fetchGithub.ts`, `themes/portfolio-dev/pages/github/` | #436 |
@@ -23,6 +23,7 @@
 | Keyboard navigation and shortcut help | keyboard-navigation.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/keyboard-navigation-spec.md` | site-wide: `themes/portfolio-dev/components/KeyNav.vue`, `app.config.ts` menuPrimary | #438 |
 | SEO feeds: RSS, sitemap, robots | seo-feeds.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/seo-feeds-spec.md` | `server/routes/rss.xml.ts`, `server/routes/sitemap.xml.ts`, `server/routes/robots.txt.ts`, `server/utils/siteUrl.ts` | #425, #433 |
 | Error and 404 page | error-page.md | verified — confirmed by operator 2026-11-07, see `evidence/analyst/2026-11-07/error-page-spec.md` | `error.vue`, `layouts/error.vue` | #418, #427, #428 |
+| Visit tracking | visit-tracking.md | draft | site-wide: `plugins/VisitTracker.client.ts`, `server/api/visit.post.ts` | #389, #398 |
 
 ## Doc format — `doctrine/features/<slug>.md`
 ~~~markdown

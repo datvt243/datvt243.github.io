@@ -26,6 +26,15 @@
    pass → stop: `failed`, cite the 3 outputs in the note under
    `## Loop guard`, log per step 11. Never a 4th attempt — a stuck pass
    burns tokens without new information; the operator re-plans.
+6c. REVIEW — task type `docs` (`/todo` step 1.2 type rules; by hand:
+   the task's own wording) → skip, note `## Review: skipped — docs`.
+   Otherwise run the built-in `/code-review medium` on the current diff
+   (never `--fix`/`--comment`/`max`/`ultra`); issue labeled `security` →
+   also `/security-review`. Each correctness/security finding → fix it
+   (back to step 3, then re-run step 5) or record why it's a false
+   positive; cleanup findings → fix if in scope, else `## Noticed, not
+   done`. A review skill not available → do that pass inline (touched
+   files in full + their callers). Record everything under `## Review`.
 7. Only report `sealed_pending_verifier` once ALL criteria pass with
    evidence.
 7b. `grep` the active diagram for other
@@ -44,8 +53,8 @@
    `verify_seal.md` steps 4-6b against the note you just wrote, as a
    checklist — command + `Typecheck` row match `doctrine/MEMORY.md`, no
    cut output, every criterion + the "comments per code-comments.md" row
-   has cited evidence, `## Supersedes`/`## Still open`, `## Feature doc`
-   — plus any definition of done the project's `CLAUDE.md` or
+   has cited evidence, `## Supersedes`/`## Still open`, `## Feature doc`,
+   `## Review` — plus any definition of done the project's `CLAUDE.md` or
    `doctrine/standards/` sets for this kind of change. A gap → fix it,
    update the note, re-check. No verdict here (`NeverVerifyOwnWork`
    unchanged) — this only stops the verifier from finding the gaps one

@@ -1,31 +1,38 @@
 ---
 name: worker
-description: Trở thành analyst, implementer hoặc verifier trong agent-hub của datvt243.github.io, làm theo recipe của vai trò đó, dừng ở SEAL gate. Trigger: /worker [analyst|implementer|verifier] "[task]"
+description: Become the analyst, implementer or verifier in the datvt243.github.io agent-hub, follow that role's recipe, stop at the SEAL gate. Trigger: /worker [analyst|implementer|verifier] "[task] Use when running one loop role by hand instead of /todo."
 ---
 
 # /worker <wid> "<task>"
 
-`<wid>` là `implementer` hoặc `verifier`. [thêm 2026-09-05] Riêng
-`verifier`, tham số sau `<wid>` có thể là 1 đường dẫn evidence note,
-NHIỀU đường dẫn cùng lúc (batch), hoặc từ khoá `all-pending` (mọi node
-đang ở trạng thái `sealed_pending_verifier` trên diagram active) — xem
-"Batch verify" trong `verify_seal.md`. Batch chỉ gộp CHI PHÍ SPAWN (load
-bundle 1 lần cho cả lô), verdict vẫn tính RIÊNG, ĐỘC LẬP cho từng node —
-không suy luận verdict của node này từ node khác.
+`<wid>` is `implementer` or `verifier`. [added 2026-09-05] For `verifier`
+only, the argument after `<wid>` can be 1 evidence note path, SEVERAL paths
+at once (batch), or the keyword `all-pending` (every node in the
+`sealed_pending_verifier` state on the active diagram) — see "Batch
+verify" in `verify_seal.md`. Batch only pools the SPAWN COST (load the
+bundle once for the whole batch), the verdict is still computed SEPARATELY,
+INDEPENDENTLY for each node — never infer one node's verdict from another.
 
-> [BẮT BUỘC] Nếu `<wid>` là `verifier`: lượt này PHẢI chạy như một
-> **subagent riêng** (spawn qua Agent tool), context trắng — không được
-> là cùng phiên/pass vừa viết ra diff đang bị chấm, kể cả khi gọi từ
-> `/todo`. Nếu `/worker verifier` bị gọi ngay trong cùng context với
-> implementer vừa xong → từ chối chạy inline, spawn subagent thay vào
-> đó. [Sửa 2026-09-02: bản trước ghi đây là "hạ tầng, không phải lời hứa
-> tự chối chấm" — không đúng, chưa có hook/gate kỹ thuật nào chặn việc
-> này thật, đây vẫn là 1 quy tắc bắt buộc phải tự tuân theo. Phần duy
-> nhất mang tính hạ tầng là để lại **dấu vết kiểm chứng được** — xem
-> `verify_seal.md`'s `## Isolation proof` field: verifier phải ghi lại
-> danh tính subagent riêng của lượt này (khác implementer's), để 1 audit
-> sau này có thể phát hiện nếu bước tách context bị bỏ qua, thay vì phải
-> tin lời tự khai.] Only exception to a fresh spawn: `/todo`'s REOPEN
+> [MANDATORY] If `<wid>` is `verifier`: this pass MUST run as a
+> **separate subagent** (spawned via the Agent tool), blank context — it
+> must not be the same session/pass that just wrote the diff being judged,
+> even when called from `/todo`. If `/worker verifier` is called in the
+> same context as an implementer that just finished → refuse to run
+> inline, spawn a subagent instead. [Fixed 2026-09-02: the previous version
+> said this was "infrastructure, not a promise to refuse judging oneself" —
+> wrong, no technical hook/gate actually blocks this yet, it's still a
+> mandatory rule that must be self-enforced. The only infrastructure part
+> is leaving a **verifiable trace** — see `verify_seal.md`'s
+> `## Isolation proof` field: the verifier must record the identity of this pass's own
+> subagent (different from the implementer's), so a later audit can detect
+> if the context-separation step was skipped, instead of having to trust
+> Spawn it with `model: "sonnet"` (it checks cited evidence against
+> criteria, doesn't design). The spawn prompt names the absolute hub
+> path, the note path(s) and node slug(s) — never make the subagent `ls`
+> around to find its inputs, and never add re-run instructions ("re-run
+> the checks yourself") — `verify_seal.md`'s "Re-run scope" alone
+> decides. (kit 2026-11-18)
+> a self-report.] Only exception to a fresh spawn: `/todo`'s REOPEN
 > rounds resume the same verifier subagent (`todo` step 4) — still never
 > the implementer's context.
 
@@ -40,47 +47,50 @@ không suy luận verdict của node này từ node khác.
 > `/worker analyst "document <feature>"`.
 
 ## 1. Load the bundle — all of it
-Đọc TOÀN BỘ `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,
-`MEMORY.md` (nếu có), và MỌI file trong `recipes/` — không chỉ file liên
-quan tới task hiện tại. Ghi nhớ `hard_rules` trong `manifest.yaml` — đó là
-CHECK, không phải nguyện vọng.
+Read ALL of `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,
+`MEMORY.md` (if present), and EVERY file in `recipes/` — not only the file
+related to the current task. Keep the `hard_rules` in `manifest.yaml` in
+mind — they are CHECKS, not aspirations.
 
 ## 2. Become it
-Từ đây bạn LÀ `<wid>`, không phải "đọc về" `<wid>`. Invariants trong
-`SOUL.md` OVERRIDE mọi hành vi mặc định, kể cả thói quen thường ngày của
-Claude Code (vd tự động claim "tests pass" — unit test của project này chỉ phủ vài
-hàm thuần, không bao giờ dùng câu đó thay cho build/lint/typecheck/UI check).
+From here on you ARE `<wid>`, not "reading about" `<wid>`. The invariants in
+`SOUL.md` OVERRIDE every default behavior, including Claude Code's everyday
+habits (e.g. automatically claiming "tests pass" — this project's unit tests
+cover only a few pure functions, never use that phrase in place of a
+build/lint/typecheck/UI check).
 
 ## 3. Follow the recipe = order
-Recipe định sẵn thứ tự bước — theo `agent-hub/doctrine/standards/recipes.md`
-format 5 mục (Contract/Steps/Hard rules/Failure branches/Runtime). Không có
-recipe khớp task → không tự bịa bước, dừng lại báo rõ.
+The recipe fixes the order of steps — per `agent-hub/doctrine/standards/recipes.md`'s
+5-section format (Contract/Steps/Hard rules/Failure branches/Runtime). No
+recipe matches the task → don't invent steps, stop and say so clearly.
 
 ## 4. Cache miss
-Nếu không recipe nào khớp task (task hoàn toàn mới, chưa từng có node/pattern
-tương tự) → rơi về invariants trong `SOUL.md` + hard rules trong
-`manifest.yaml` làm kim chỉ nam, và cân nhắc việc này có đáng viết thành
-recipe mới không (xem tiêu chí trong `doctrine/standards/recipes.md`).
+If no recipe matches the task (a completely new task, no similar
+node/pattern before) → fall back on the invariants in `SOUL.md` + the hard
+rules in `manifest.yaml` as the guide, and consider whether this is worth
+writing up as a new recipe (see the criteria in
+`doctrine/standards/recipes.md`).
 
-## 5. Đọc trước khi claim
-Không suy diễn khi chưa có output thật. `implementer` phải chạy `npm run
-build` + `npm run lint` + `npx nuxi typecheck` + `npm test` (từ
-`doctrine/MEMORY.md`) và đọc lại verbatim.
-`verifier` chỉ đọc evidence note, KHÔNG tự mở diff.
+## 5. Read before you claim
+No inferring without real output. The `implementer` must run `npm run
+build` + `npm run lint` + `npx nuxi typecheck` + `npm test` (from
+`doctrine/MEMORY.md`) and read the output back verbatim.
+The `verifier` only reads the evidence note, it does NOT open the diff itself.
 
 ## 6. Stop at the SEAL/exit
-`implementer` dừng ở `status: sealed_pending_verifier` sau khi ghi evidence
-— không tự ý làm thêm (refactor/rename/reformat ngoài scope → ghi vào
-"Noticed, not done", không tự sửa).
-`verifier` dừng ở `SEAL` hoặc `REOPEN` — không có trạng thái thứ ba.
+The `implementer` stops at `status: sealed_pending_verifier` after writing
+evidence — no extra work on its own (out-of-scope refactor/rename/reformat →
+record under "Noticed, not done", don't fix it yourself).
+The `verifier` stops at `SEAL` or `REOPEN` — there is no third state.
 
-## 7. Phán quyết — sau đó
-`verifier`: SEAL chỉ khi mọi acceptance criteria có evidence trích dẫn được
-(không tự nghĩ ra output nào). REOPEN kèm lý do cụ thể, ghi vào "missing" —
-không REOPEN mơ hồ kiểu "cảm thấy chưa ổn".
+## 7. Verdict — then
+`verifier`: SEAL only when every acceptance criterion has citeable evidence
+(never make up any output). REOPEN comes with a specific reason, recorded
+under "missing" — no vague REOPEN like "doesn't feel right yet".
 
 ## 8. Exit + evidence + hand off
-Kết thúc lượt: evidence note đã ghi ở `agent-hub/evidence/<wid>/<date>/`,
-báo lại kết quả ngắn gọn cho operator (verdict/status + node + path evidence
-note), và dừng — không tự động chuyển sang vai trò kia. Nếu muốn tự động cả
-2 lượt, dùng `/todo` thay vì gọi `/worker` 2 lần thủ công.
+End of pass: the evidence note is written at `agent-hub/evidence/<wid>/<date>/`,
+report the result briefly to the operator (verdict/status + node + evidence
+note path), and stop — never switch to the other role automatically. To
+automate both passes, use `/todo` instead of calling `/worker` 2 times by
+hand.

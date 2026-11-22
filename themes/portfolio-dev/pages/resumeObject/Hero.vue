@@ -51,13 +51,10 @@ const introParts = computed(() =>
         </span>
         <NuxtLink
           :to="localePath('/contact')"
-          data-shortcut="c"
-          :data-shortcut-label="t('resume.contactMe')"
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
         >
           <UIcon name="fe:mail" class="w-4 h-4" />
           {{ t('resume.contactMe') }}
-          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
         </NuxtLink>
         <button
           type="button"
@@ -75,6 +72,7 @@ const introParts = computed(() =>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>
+      <p v-if="hero.career" class="text-sm text-theme-text-soft mt-1">{{ hero.career }}</p>
       <p v-if="hero.introduction" class="text-sm leading-relaxed text-theme-muted mt-2">
         <template v-for="(part, i) in introParts" :key="i">
           <strong v-if="i % 2" class="font-bold text-theme-text">{{ part }}</strong>
