@@ -40,7 +40,6 @@ function retry() {
               <h1 class="my-2 font-bold text-2xl">{{ isNotFound ? t('error.notFoundTitle') : t('error.serverTitle') }}</h1>
               <p class="my-3">{{ isNotFound ? t('error.notFoundText') : t('error.serverText') }}</p>
               <button
-                v-if="!isNotFound"
                 class="sm:w-full lg:w-auto my-2 mr-2 border rounded-sm md py-3 px-8 text-center bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-soft focus:outline-hidden focus:ring-2 focus:ring-theme-accent/50"
                 @click="retry"
               >
