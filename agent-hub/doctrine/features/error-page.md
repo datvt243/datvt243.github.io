@@ -13,7 +13,8 @@ and ISR never caches the failure as a good page.
 1. Any fatal error renders `error.vue` in the `error` layout instead of `app.vue` (no site header or
    footer), with the status code in large text and an illustration.
 2. 404: localized "This page doesn't exist" title and "link may be broken"
-   text, and a "Go to the homepage" button.
+   text, a "Try again" button (full page reload, as in #3) and a "Go to the
+   homepage" button.
 3. Any other code: localized "Something went wrong on our side" / "data
    source may be waking up" text, a "Try again" button that does a full page
    reload (so the page is server-rendered again), and the homepage button.
@@ -27,7 +28,8 @@ and ISR never caches the failure as a good page.
 - `curl -s -o /dev/null -w '%{http_code}' <host>/does-not-exist` prints
   `404`; `curl -s -H 'Accept: text/html' <host>/does-not-exist` contains
   "Trang này không tồn tại" (without `Accept: text/html` Nuxt answers a
-  JSON error body, not the page).
+  JSON error body, not the page). It also contains "Thử lại" (Try again)
+  and "Về trang chủ" (#428).
 - `/en/does-not-exist` shows the English 404 text; its homepage button goes
   to `/en`.
 - With `NODE_API` unreachable, `/` returns a 5xx and shows "Try again".
@@ -54,3 +56,4 @@ and ISR never caches the failure as a good page.
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/error-page-spec.md` | - |
+| 2026-11-22 | Behavior #2: 404 also shows "Try again" | operator OQ2 answer (2026-11-07) — #428 | `error-retry-on-404` |
