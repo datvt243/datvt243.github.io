@@ -60,15 +60,5 @@ function retry() {
         <NuxtImg src="error.png" alt="" />
       </div>
     </div>
-    <!-- <div class="error-page w-[400px] mx-auto">
-            <h2 class="text-8xl">{{ props.error.statusCode }}</h2>
-            <p>Something wrong here</p>
-            <button
-                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-sm"
-                @click="handleError"
-            >
-                Clear errors
-            </button>
-        </div> -->
   </NuxtLayout>
 </template>
