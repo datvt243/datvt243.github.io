@@ -1,4 +1,4 @@
-import type { Education, Experience, ForeignLanguage, GeneralInformation, Information, Project, ProfessionalSkill, SocialMedia } from '@/types'
+import type { Award, Certificate, Education, Experience, ForeignLanguage, GeneralInformation, Information, Project, ProfessionalSkill, SocialMedia } from '@/types'
 import { convertNumberToDate, extractListItems, removeHtmlTags } from '@/utils'
 
 /**
@@ -56,6 +56,26 @@ export const toEducation = (raw: Partial<Education>) => {
   }
 }
 
+export const toCertificate = (raw: Partial<Certificate>) => {
+  const isNoExpiration = Boolean(raw.isNoExpiration)
+  return {
+    name: raw.name ?? '',
+    organization: raw.organization ?? '',
+    startDateLabel: dateLabel(toDate(raw.startDate)),
+    endDateLabel: isNoExpiration ? 'present' : dateLabel(toDate(raw.endDate)),
+    /** Plain text, HTML tags stripped. */
+    descriptionText: removeHtmlTags(raw.description ?? '').trim(),
+  }
+}
+
+export const toAward = (raw: Partial<Award>) => ({
+  name: raw.name ?? '',
+  organization: raw.organization ?? '',
+  issueDateLabel: dateLabel(toDate(raw.issueDate)),
+  /** Plain text, HTML tags stripped. */
+  descriptionText: removeHtmlTags(raw.description ?? '').trim(),
+})
+
 /**
  * The raw API sometimes omits `group` from the object entirely (not
  * just `undefined`) rather than always including it - normalized here
@@ -100,11 +120,15 @@ export const toProject = (raw: Partial<Project>) => {
 export const toHero = (information: Partial<Information>, generalInformation: Partial<GeneralInformation>) => {
   const firstName = information.firstName ?? ''
   const lastName = information.lastName ?? ''
+  const positionDesired = generalInformation.positionDesired || 'A frontend developer'
+  const career = (generalInformation.career ?? '').trim()
   return {
     firstName,
     lastName,
     fullName: `${firstName} ${lastName}`.trim(),
-    positionDesired: generalInformation.positionDesired || 'A frontend developer',
+    positionDesired,
+    /** Free-text line under the position; `''` when blank or a repeat of the position. */
+    career: career === positionDesired.trim() ? '' : career,
     introduction: information.introduction ?? '',
     email: information.email ?? '',
     openToWork: Boolean(generalInformation.openToWork),
@@ -124,6 +148,8 @@ export const toSocialMedia = (raw: Partial<SocialMedia>) => {
 
 export type ExperienceModel = ReturnType<typeof toExperience>
 export type EducationModel = ReturnType<typeof toEducation>
+export type CertificateModel = ReturnType<typeof toCertificate>
+export type AwardModel = ReturnType<typeof toAward>
 export type SkillModel = ReturnType<typeof toSkill>
 export type LanguageModel = ReturnType<typeof toLanguage>
 export type ProjectModel = ReturnType<typeof toProject>

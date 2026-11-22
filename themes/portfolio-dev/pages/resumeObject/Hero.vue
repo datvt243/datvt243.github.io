@@ -72,6 +72,7 @@ const introParts = computed(() =>
       <p class="text-2xl text-theme-code-keyword mt-6">
         <span class="text-theme-faint">&gt;</span> {{ hero?.positionDesired }}
       </p>
+      <p v-if="hero.career" class="text-sm text-theme-text-soft mt-1">{{ hero.career }}</p>
       <p v-if="hero.introduction" class="text-sm leading-relaxed text-theme-muted mt-2">
         <template v-for="(part, i) in introParts" :key="i">
           <strong v-if="i % 2" class="font-bold text-theme-text">{{ part }}</strong>

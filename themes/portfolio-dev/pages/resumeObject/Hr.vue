@@ -80,6 +80,30 @@ function careerBreakTitle(type: string) {
       </article>
     </section>
 
+    <section v-if="store.certificates.length">
+      <h2 class="hr-heading">{{ t('resume.hr.certificates') }}</h2>
+      <article v-for="(el, index) in store.certificates" :key="index" class="py-3">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+          <h3 class="hr-title">{{ el.name }}</h3>
+          <span class="text-sm text-theme-muted shrink-0">{{ el.startDateLabel }} – {{ el.endDateLabel }}</span>
+        </div>
+        <p v-if="el.organization" class="text-sm text-theme-text-soft">{{ el.organization }}</p>
+        <p v-if="el.descriptionText" class="mt-1 text-sm">{{ el.descriptionText }}</p>
+      </article>
+    </section>
+
+    <section v-if="store.awards.length">
+      <h2 class="hr-heading">{{ t('resume.hr.awards') }}</h2>
+      <article v-for="(el, index) in store.awards" :key="index" class="py-3">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+          <h3 class="hr-title">{{ el.name }}</h3>
+          <span class="text-sm text-theme-muted shrink-0">{{ el.issueDateLabel }}</span>
+        </div>
+        <p v-if="el.organization" class="text-sm text-theme-text-soft">{{ el.organization }}</p>
+        <p v-if="el.descriptionText" class="mt-1 text-sm">{{ el.descriptionText }}</p>
+      </article>
+    </section>
+
     <section v-if="store.foreignLanguages.length">
       <h2 class="hr-heading">{{ t('resume.hr.languages') }}</h2>
       <ul class="mt-3 space-y-1 text-sm">

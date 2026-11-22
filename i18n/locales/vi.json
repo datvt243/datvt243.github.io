@@ -52,6 +52,8 @@
       "skills": "Kỹ năng",
       "education": "Học vấn",
       "languages": "Ngoại ngữ",
+      "certificates": "Chứng chỉ",
+      "awards": "Giải thưởng",
       "other": "Khác",
       "years": "{n}+ năm"
     }
