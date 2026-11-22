@@ -51,13 +51,10 @@ const introParts = computed(() =>
         </span>
         <NuxtLink
           :to="localePath('/contact')"
-          data-shortcut="c"
-          :data-shortcut-label="t('resume.contactMe')"
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme-border-subtle text-sm text-theme-muted hover:text-theme-accent hover:border-theme-accent/50 transition-colors"
         >
           <UIcon name="fe:mail" class="w-4 h-4" />
           {{ t('resume.contactMe') }}
-          <ThemeKbd aria-hidden="true" class="px-1 text-[10px] leading-4">c</ThemeKbd>
         </NuxtLink>
         <button
           type="button"

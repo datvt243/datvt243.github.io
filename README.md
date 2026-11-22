@@ -75,7 +75,7 @@ Press `?` (or the `?` button in the header) to see every shortcut for the curren
 | `gr` `gp` `gh` `gc` | Go to Resume / Projects / GitHub / Contact |
 | `j` / `k` | Scroll down / up |
 | `gg` / `G` | Jump to top / bottom of the page |
-| `c` / `d` | Resume page: contact / download resume |
+| `D` | Resume page: download resume |
 | `1`–`5` | Resume page: switch personal-info tab |
 | `/` / `Esc` | GitHub page: focus / leave the repo search box |
 | `?` | Toggle the shortcuts panel |
