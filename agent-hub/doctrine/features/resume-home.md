@@ -33,7 +33,7 @@ code-editor look: who he is, what he has done, what he knows.
 6. The hero shows: avatar (hidden below `sm`), a greeting, the full name (in
    `lang="vi"` from `app.config.ts` `resumeContentLang`), an "open to work"
    badge when `openToWork` is true, a "Contact me" link to `/contact`
-   (shortcut `c`), the CV download button (see `resume-pdf-download.md`), the
+   (no page shortcut; global `gc`), the CV download button (see `resume-pdf-download.md`), the
    desired position, the introduction (only `<strong>`/`<b>` kept as bold,
    every other tag stripped, rendered without `v-html`), the main-skills chips
    and a "familiar with" chip row, each with an icon when the name matches one.
@@ -110,3 +110,4 @@ code-editor look: who he is, what he has done, what he knows.
 | 2026-11-06 | Reviewer corrections (code + live) | `evidence/spec-backfill/2026-11-06/review.md` | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/resume-home-spec.md` | - |
 | 2026-11-08 | Behavior #3: server cache 12 days → 1 hour; #5: an empty resume fails like an upstream error (fatal, not a blank page) | operator answers to Open questions 3 + 1 (fatal chosen 2026-11-08) | `resume-cache-empty` |
+| 2026-11-22 | Behavior #6: Contact me link has no `c` shortcut (contact is global `gc`) | #438, operator answer in `keyboard-navigation.md` Q2 | `keyboard-drop-c-shortcut` |

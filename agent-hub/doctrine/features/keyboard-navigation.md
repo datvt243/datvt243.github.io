@@ -22,8 +22,8 @@ without a mouse.
 5. `j` / `k` scroll down/up by 80px; `G` scrolls to the bottom.
 6. Page shortcuts are declared in markup with `data-shortcut` +
    `data-shortcut-label`; a key matching a visible element focuses and clicks
-   it (default prevented). Current ones: `1`–`4` resume tabs and `c` Contact
-   me, `D` download CV (home); `/` repo search (github).
+   it (default prevented). Current ones: `1`–`4` resume tabs and `D` download
+   CV (home); contact is only `gc` (no page-level `c`); `/` repo search (github).
 7. The help dialog lists the `g` routes, the motions (j, k, gg, G, ?), an
    "On this page" section built from the visible `data-shortcut` elements
    when opened, and a note about Vimium-like extensions.
@@ -57,3 +57,4 @@ without a mouse.
 |---|---|---|---|
 | 2026-11-06 | Backfilled from code | /spec-backfill | - |
 | 2026-11-07 | Operator confirmed Behavior + answered all open questions; Status → verified | analyst backfill re-check, see `evidence/analyst/2026-11-07/keyboard-navigation-spec.md` | - |
+| 2026-11-22 | Behavior #6: dropped the `c` Contact me shortcut, contact is `gc` only | operator answer to open question 2 | `keyboard-drop-c-shortcut` |
