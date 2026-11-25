@@ -51,6 +51,7 @@ Read ALL of `agent-hub/haven/workers/<wid>/`: `manifest.yaml`, `SOUL.md`,
 `MEMORY.md` (if present), and EVERY file in `recipes/` — not only the file
 related to the current task. Keep the `hard_rules` in `manifest.yaml` in
 mind — they are CHECKS, not aspirations.
+`analyst`/`verifier`: only check the bundle exists (`ls`) — the subagent loads it; reading it here only grows the calling session's context.
 
 ## 2. Become it
 From here on you ARE `<wid>`, not "reading about" `<wid>`. The invariants in
