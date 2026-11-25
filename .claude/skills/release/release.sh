@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Promote staging into main. Usage: release.sh [patch|minor|major]
 # Gate commands come from release.env next to this script (generated from
-# agent-hub/doctrine/MEMORY.md). Exit: 0 released/nothing to do, 1 failed,
-# 2 bump type needed.
+# agent-hub/doctrine/MEMORY.md). Exit: 0 released/nothing to do, 1 failed.
+# No bump arg = minor (or inferred when RELEASE_AUTO_BUMP=true).
 set -euo pipefail
 
 die() { echo "release: $*" >&2; exit 1; }
@@ -46,11 +46,8 @@ if $first; then
   version=$current
   echo "first-ever release: v$version as-is (bump ignored)"
 else
-  if [[ ! $bump =~ ^(patch|minor|major)$ ]]; then
-    [ -t 0 ] || { echo "release: bump type needed: patch|minor|major" >&2; exit 2; }
-    read -rp "bump (patch/minor/major): " bump
-    [[ $bump =~ ^(patch|minor|major)$ ]] || die "invalid bump: $bump"
-  fi
+  bump=${bump:-minor}
+  [[ $bump =~ ^(patch|minor|major)$ ]] || die "invalid bump: $bump (patch|minor|major)"
   # shortcut: plain X.Y.Z only, prerelease/build suffixes are not handled; use npm's semver if one appears
   [[ $current =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]] || die "unsupported version on main: $current"
   ma=${BASH_REMATCH[1]} mi=${BASH_REMATCH[2]} pa=${BASH_REMATCH[3]}
